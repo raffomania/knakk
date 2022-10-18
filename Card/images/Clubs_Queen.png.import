@@ -2,7 +2,7 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c8yiryvv4lnfu"
+uid="uid://bpud6csqb7453"
 path="res://.godot/imported/Clubs_Queen.png-3a1466b6d07b1757ed2bfe01ef50ba31.ctex"
 metadata={
 "vram_texture": false
@@ -21,7 +21,7 @@ compress/hdr_compression=1
 compress/bptc_ldr=0
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=true
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""

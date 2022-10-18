@@ -2,7 +2,7 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bd8bucsg1x7mq"
+uid="uid://t4l1euidg8he"
 path="res://.godot/imported/Hearts_07.png-652dd87104f211efe7f00e380bc6b95e.ctex"
 metadata={
 "vram_texture": false
@@ -21,7 +21,7 @@ compress/hdr_compression=1
 compress/bptc_ldr=0
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=true
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""

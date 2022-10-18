@@ -2,7 +2,7 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dt1hhfixxhxw3"
+uid="uid://c1ypqms4p7ynv"
 path="res://.godot/imported/Clubs_08.png-f9c5bbb8822bbed8b6402655e7f2b829.ctex"
 metadata={
 "vram_texture": false
@@ -21,7 +21,7 @@ compress/hdr_compression=1
 compress/bptc_ldr=0
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=true
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""

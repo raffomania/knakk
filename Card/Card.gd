@@ -34,7 +34,7 @@ func area_input(_viewport, event, _shape_index):
 			self.dragging = true
 			self.drag_offset = self.global_position - event.position
 			self.target_drag_position = self.drag_offset + event.position
-			create_tween().tween_property(self, "scale", original_scale * 1.1, SCALE_TWEEN_DURATION)
+			create_tween().tween_property(self, "scale", Vector2.ONE, SCALE_TWEEN_DURATION)
 		else:
 			# The user stopped dragging this card
 			self.dragging = false

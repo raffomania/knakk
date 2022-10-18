@@ -8,6 +8,16 @@
 
 config_version=5
 
+_global_script_classes=[{
+"base": "RefCounted",
+"class": &"Cards",
+"language": &"GDScript",
+"path": "res://Cards/Cards.gd"
+}]
+_global_script_class_icons={
+"Cards": ""
+}
+
 [application]
 
 config/name="Clever Solitaire"

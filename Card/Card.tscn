@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://djqgrtk1tdpea"]
+
+[ext_resource type="Texture2D" uid="uid://corbqqejnvgdj" path="res://Card/images/Clubs_Jack.png" id="1_yx4i4"]
+[ext_resource type="Script" path="res://Card/Card.gd" id="2_q01xd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m3hrd"]
+size = Vector2(990, 1380)
+
+[node name="Card" type="Sprite2D"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_yx4i4")
+script = ExtResource("2_q01xd")
+
+[node name="TouchDetectionArea" type="Area2D" parent="."]
+
+[node name="TouchDetectionShape" type="CollisionShape2D" parent="TouchDetectionArea"]
+position = Vector2(5.72204e-05, 0)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_m3hrd")

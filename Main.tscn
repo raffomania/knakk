@@ -1,8 +1,28 @@
-[gd_scene load_steps=2 format=3 uid="uid://cnrwb2eimoqmj"]
+[gd_scene load_steps=3 format=3 uid="uid://cnrwb2eimoqmj"]
 
-[ext_resource type="PackedScene" uid="uid://dis5anqi7fbhl" path="res://Cards/Card.tscn" id="1_2qsaa"]
+[ext_resource type="PackedScene" uid="uid://csxepv0yylg0m" path="res://Hand.tscn" id="2_52hhe"]
+[ext_resource type="Script" path="res://Deck.gd" id="2_hbhdv"]
 
-[node name="Main" type="Node2D"]
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="Card" parent="." instance=ExtResource("1_2qsaa")]
-position = Vector2(541, 573)
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(540, 1204)
+current = true
+
+[node name="Hand" parent="." instance=ExtResource("2_52hhe")]
+position = Vector2(540, 2408)
+
+[node name="Deck" type="Label" parent="."]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 30
+text = "50 Cards in Deck"
+script = ExtResource("2_hbhdv")

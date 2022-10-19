@@ -23,12 +23,11 @@ var drag_offset := Vector2.ZERO
 ## in _process(), we interpolate the card position towards this position
 @onready var target_drag_position := self.global_position
 
-var suite = Cards.Suite.Hearts
-var number = Cards.Number.Queen
+var suite: Cards.Suite
+var number: Cards.Number
 
 func _ready():
 	touch_area.connect("input_event", self.area_input)
-	self.texture = Cards.textures[self.suite][self.number]
 
 ## Called when a user starts or stops touching this card
 func area_input(_viewport, event, _shape_index):
@@ -37,7 +36,6 @@ func area_input(_viewport, event, _shape_index):
 			# The user wants to drag this card somewhere
 			self.dragging = true
 			self.drag_offset = self.global_position - event.position
-			self.target_drag_position = self.drag_offset + event.position
 			create_tween().tween_property(self, "scale", Vector2.ONE, SCALE_TWEEN_DURATION)
 		else:
 			# The user stopped dragging this card
@@ -48,6 +46,18 @@ func area_input(_viewport, event, _shape_index):
 func _unhandled_input(event):
 	if self.dragging and event is InputEventScreenDrag:
 		self.target_drag_position = self.drag_offset + event.position
+
+## Tell this card to transition to a new position.
+## The transition is animated.
+func move_to(new_global_position: Vector2):
+	self.target_drag_position = new_global_position
+
+## Set the card type for this card.
+## Will automatically set the new texture for that card type.
+func set_card_type(new_suite: Cards.Suite, new_number: Cards.Number):
+	self.suite = new_suite
+	self.number = new_number
+	self.texture = Cards.textures[self.suite][self.number]
 
 func _process(delta):
 	# improved lerp smoothing to make drag motion less jittery

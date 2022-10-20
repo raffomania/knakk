@@ -9,13 +9,25 @@
 config_version=5
 
 _global_script_classes=[{
+"base": "Control",
+"class": &"Arrow",
+"language": &"GDScript",
+"path": "res://Arrow.gd"
+}, {
 "base": "RefCounted",
 "class": &"Cards",
 "language": &"GDScript",
 "path": "res://Cards/Cards.gd"
+}, {
+"base": "Node2D",
+"class": &"Slot",
+"language": &"GDScript",
+"path": "res://Slot.gd"
 }]
 _global_script_class_icons={
-"Cards": ""
+"Arrow": "",
+"Cards": "",
+"Slot": ""
 }
 
 [application]

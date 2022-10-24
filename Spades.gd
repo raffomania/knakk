@@ -20,7 +20,7 @@ func _ready():
 		# 1
 		var column_count = COLUMNS - row_index
 		for col_index in range(column_count):
-			var slot: Slot = SLOT_SCENE.instantiate()
+			var slot = SLOT_SCENE.instantiate()
 			slot.size = Vector2.ONE * SLOT_SIZE
 			slot.position.x = col_index * (SLOT_SIZE + X_PADDING)
 			slot.position.y = row_index * (SLOT_SIZE + Y_PADDING)

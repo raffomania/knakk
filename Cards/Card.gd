@@ -1,5 +1,8 @@
 extends Sprite2D
 
+## Emitted when the player chooses to play this card.
+signal choose
+
 ## The duration of the scaling animation in seconds
 const SCALE_TWEEN_DURATION := 0.07
 ## The higher this number is, the faster the card follows the user's finger
@@ -17,6 +20,12 @@ const ANIMATE_SMOOTH_SPEED := 15.0
 ## Once users touch this card, this is set to `true`
 ## and subsequent drag events will move this card on the screen
 var dragging := false
+
+## Once users move the card into the confirmation zone,
+## the card will light up. If the player drops the card while
+## in that zone, the card is chosen and the "choose" signal
+## is emitted.
+var is_confirming := false
 
 ## Where on the card the user started dragging
 var drag_offset := Vector2.ZERO
@@ -48,13 +57,23 @@ func area_input(_viewport, event, _shape_index):
 		else:
 			# The user stopped dragging this card
 			self.dragging = false
-			self.move_to(self.starting_position)
-			create_tween().tween_property(self, "scale", original_scale, SCALE_TWEEN_DURATION)
+			if is_confirming:
+				emit_signal("choose")
+			else:
+				self.move_to(self.starting_position)
+				create_tween().tween_property(self, "scale", original_scale, SCALE_TWEEN_DURATION)
 
 ## Called for all input events, regardless of the area they're touching
 func _unhandled_input(event):
-	if self.dragging and event is InputEventScreenDrag:
-		self.target_drag_position = self.drag_offset + event.position
+	if dragging and event is InputEventScreenDrag:
+		target_drag_position = drag_offset + event.position
+
+		if target_drag_position.y < 1300:
+			is_confirming = true
+			queue_redraw()
+		else:
+			is_confirming = false
+			queue_redraw()
 
 ## Tell this card to transition to a new position.
 ## The transition is animated.
@@ -63,10 +82,16 @@ func move_to(new_global_position: Vector2):
 
 ## Set the card type for this card.
 ## Will automatically set the new texture for that card type.
-func set_card_type(new_suite: Cards.Suite, new_number: Cards.Number):
-	self.suite = new_suite
-	self.number = new_number
+## Expects an array of [suite, number] as the card_type argument
+func set_card_type(card_type: Array):
+	self.suite = card_type[0]
+	self.number = card_type[1]
 	self.texture = Cards.textures[self.suite][self.number]
+
+func _draw():
+	if is_confirming:
+		var size = self.texture.get_size() * 1.05
+		draw_rect(Rect2(-size/2, size), ColorPalette.PURPLE, false, 5.0)
 
 func _process(delta):
 	var smooth_speed = DRAG_SMOOTH_SPEED if self.dragging else ANIMATE_SMOOTH_SPEED

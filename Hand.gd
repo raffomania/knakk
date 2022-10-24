@@ -15,8 +15,17 @@ func _ready():
 	# position
 	for card_index in range(-1,2):
 		var card_type = self.deck.draw_card()
-		var card = card_scene.instantiate()
-		card.set_card_type(card_type[0], card_type[1])
-		card.position = Vector2(card_size.x * card_index, -card_size.y/2)
+		spawn_card(card_type, Vector2(card_size.x * card_index, -card_size.y/2))
 		card_index += 1
-		add_child(card)
+
+func _choose_card(card):
+	card.queue_free()
+	var next_card_type = deck.draw_card()
+	spawn_card(next_card_type, to_local(card.starting_position))
+
+func spawn_card(card_type, card_position):
+	var card = card_scene.instantiate()
+	card.set_card_type(card_type)
+	card.position = card_position
+	card.choose.connect(_choose_card.bind(card))
+	add_child(card)

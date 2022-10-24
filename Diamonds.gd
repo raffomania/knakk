@@ -10,7 +10,7 @@ var Y_PADDING := 80
 const SLOT_SCENE = preload("res://Slot.tscn")
 const ARROW_SCENE = preload("res://Arrow.tscn")
 
-@export var color: Color
+var color := ColorPalette.RED
 
 func _ready():
 	for row_index in range(ROWS):
@@ -45,3 +45,5 @@ func _ready():
 					y_arrow.color = color
 					add_child(y_arrow)
 
+func can_play(card_type):
+	return card_type[0] == Cards.Suite.Diamonds

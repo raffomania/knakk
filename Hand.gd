@@ -6,6 +6,7 @@ extends Node2D
 @onready var cards: Array[Node]
 ## The deck provides us with new cards when a card is played
 @onready var deck = $"../Deck"
+@onready var field = $"../Field"
 
 var card_scene = preload("res://Cards/Card.tscn")
 
@@ -21,11 +22,17 @@ func _ready():
 func _choose_card(card):
 	card.queue_free()
 	var next_card_type = deck.draw_card()
+	# update playability of other cards
 	spawn_card(next_card_type, to_local(card.starting_position))
+
+func _consider_card(card):
+	card.can_play = field.can_play(card.card_type)
 
 func spawn_card(card_type, card_position):
 	var card = card_scene.instantiate()
 	card.set_card_type(card_type)
 	card.position = card_position
 	card.choose.connect(_choose_card.bind(card))
+	cards.append(card)
+	card.consider.connect(_consider_card.bind(card))
 	add_child(card)

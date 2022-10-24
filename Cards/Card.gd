@@ -1,5 +1,9 @@
 extends Sprite2D
 
+## Emitted when the player is hovering this card over the 
+## confirmation area, considering to choose it.
+signal consider
+
 ## Emitted when the player chooses to play this card.
 signal choose
 
@@ -21,11 +25,16 @@ const ANIMATE_SMOOTH_SPEED := 15.0
 ## and subsequent drag events will move this card on the screen
 var dragging := false
 
-## Once users move the card into the confirmation zone,
+## Once users move the card into the confirmation area,
 ## the card will light up. If the player drops the card while
 ## in that zone, the card is chosen and the "choose" signal
 ## is emitted.
-var is_confirming := false
+var is_considering := false
+
+## When players are considering this card,
+## The playing field will set this value depending on
+## whether the player can play this card or not
+var can_play := false
 
 ## Where on the card the user started dragging
 var drag_offset := Vector2.ZERO
@@ -38,8 +47,10 @@ var drag_offset := Vector2.ZERO
 ## in _process(), we interpolate the card position towards this position
 @onready var target_drag_position := self.global_position
 
-var suite: Cards.Suite
-var number: Cards.Number
+## The value of this card.
+## Stored as a [suite, number] array.
+# todo rename to card_value everywhere?
+var card_type: Array
 
 func _ready():
 	touch_area.connect("input_event", self.area_input)
@@ -57,7 +68,7 @@ func area_input(_viewport, event, _shape_index):
 		else:
 			# The user stopped dragging this card
 			self.dragging = false
-			if is_confirming:
+			if is_considering and can_play:
 				emit_signal("choose")
 			else:
 				self.move_to(self.starting_position)
@@ -69,10 +80,11 @@ func _unhandled_input(event):
 		target_drag_position = drag_offset + event.position
 
 		if target_drag_position.y < 1300:
-			is_confirming = true
+			is_considering = true
+			emit_signal("consider")
 			queue_redraw()
 		else:
-			is_confirming = false
+			is_considering = false
 			queue_redraw()
 
 ## Tell this card to transition to a new position.
@@ -83,13 +95,12 @@ func move_to(new_global_position: Vector2):
 ## Set the card type for this card.
 ## Will automatically set the new texture for that card type.
 ## Expects an array of [suite, number] as the card_type argument
-func set_card_type(card_type: Array):
-	self.suite = card_type[0]
-	self.number = card_type[1]
-	self.texture = Cards.textures[self.suite][self.number]
+func set_card_type(new_card_type: Array):
+	self.card_type = new_card_type
+	self.texture = Cards.textures[self.card_type[0]][self.card_type[1]]
 
 func _draw():
-	if is_confirming:
+	if is_considering and can_play:
 		var size = self.texture.get_size() * 1.05
 		draw_rect(Rect2(-size/2, size), ColorPalette.PURPLE, false, 5.0)
 

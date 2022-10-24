@@ -23,6 +23,24 @@ enum Number {
     King
 }
 
+
+static func get_number_sigil(number):
+	match number:
+		Number.Ace: return "A"
+		Number.Two: return "2"
+		Number.Three: return "3"
+		Number.Four: return "4"
+		Number.Five: return "5"
+		Number.Six: return "6"
+		Number.Seven: return "7"
+		Number.Eight: return "8"
+		Number.Nine: return "9"
+		Number.Ten: return "10"
+		Number.Jack: return "J"
+		Number.Queen: return "Q"
+		Number.King: return "K"
+		_: return "?"
+
 # todo remove or use this everywhere
 enum Card {
     HeartsAce,

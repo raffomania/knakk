@@ -2,6 +2,13 @@ extends Node2D
 
 class_name Slot
 
+## Which slots can be reached from this slot
+var next_slots := []
+
+## Which kind of Diamond cards this slot will accept.
+## Array of Cards.Number values
+var playable_card_numbers := []
+
 @onready var label := $Label
 
 @export var size := Vector2(50, 50):

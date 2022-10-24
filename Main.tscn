@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://cnrwb2eimoqmj"]
+[gd_scene load_steps=5 format=3 uid="uid://uq2jjwreg81c"]
 
 [ext_resource type="PackedScene" uid="uid://csxepv0yylg0m" path="res://Hand.tscn" id="2_52hhe"]
 [ext_resource type="Script" path="res://Deck.gd" id="2_hbhdv"]
 [ext_resource type="Script" path="res://Field.gd" id="3_rxndw"]
-[ext_resource type="Script" path="res://Diamonds.gd" id="4_q6txs"]
+[ext_resource type="Script" path="res://Diamonds/Diamonds.gd" id="4_q6txs"]
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -22,7 +22,6 @@ position = Vector2(540, 2408)
 
 [node name="Deck" type="Label" parent="."]
 modulate = Color(0, 0, 0, 1)
-layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 theme_override_font_sizes/font_size = 30

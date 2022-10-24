@@ -16,4 +16,8 @@ func _ready():
 	label.size = size
 
 func _draw():
-	draw_rect(Rect2(Vector2.ZERO, size), color, false, 2.0)
+	# use draw_line instead of draw_box to get antialiasing
+	draw_line(Vector2(0, 0), Vector2(0, size.y), color, 2.0, true)
+	draw_line(Vector2(0, 0), Vector2(size.x, 0), color, 2.0, true)
+	draw_line(Vector2(size.x, 0), size, color, 2.0, true)
+	draw_line(Vector2(0, size.y), size, color, 2.0, true)

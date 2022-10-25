@@ -41,6 +41,9 @@ static func get_number_sigil(number):
 		Number.King: return "K"
 		_: return "?"
 
+static func is_in_range(value: Number, lower_bound: Number, upper_bound: Number):
+	return value >= lower_bound and value <= upper_bound	
+
 # todo remove or use this everywhere
 enum Card {
     HeartsAce,

@@ -1,3 +1,4 @@
+# todo change this into control?
 extends Node2D
 
 class_name Slot

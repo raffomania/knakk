@@ -41,8 +41,10 @@ static func get_number_sigil(number):
 		Number.King: return "K"
 		_: return "?"
 
-static func is_in_range(value: Number, lower_bound: Number, upper_bound: Number):
-	return value >= lower_bound and value <= upper_bound	
+## Check if the given `value` is in the given bounds (inclusive).
+## `bounds` should be a two-element [lower_bound, upper_bound] array.
+static func is_in_range(value: Number, bounds: Array):
+	return value >= bounds[0] and value <= bounds[1]	
 
 # todo remove or use this everywhere
 enum Card {

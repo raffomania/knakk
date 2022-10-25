@@ -130,11 +130,11 @@ func can_play(card_type):
 	if suite != Cards.Suite.Diamonds:
 		return false
 
-	for position in played_slots:
-		var x_allowed_range = SLOTS[position.y][position.x].get("right_arrow")
-		var y_allowed_range = SLOTS[position.y][position.x].get("down_arrow")
-		if Cards.is_in_range(number, x_allowed_range[0], x_allowed_range[1]) \
-			or Cards.is_in_range(number, y_allowed_range[0], y_allowed_range[1]):
+	for card_position in played_slots:
+		var right_range = SLOTS[card_position.y][card_position.x].get("right_arrow")
+		var down_range = SLOTS[card_position.y][card_position.x].get("down_arrow")
+		if Cards.is_in_range(number, right_range) \
+			or Cards.is_in_range(number, down_range):
 			return true
 	
 	return false

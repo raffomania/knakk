@@ -101,6 +101,7 @@ func _ready():
 			node.position.x = col_index * (SLOT_SIZE + X_PADDING)
 			node.position.y = row_index * (SLOT_SIZE + Y_PADDING)
 			node.color = color
+			node.text = str(slot_spec.reward)
 			add_child(node)
 			slot_spec.node = node
 

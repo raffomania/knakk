@@ -3,13 +3,10 @@ extends Node2D
 
 class_name Slot
 
-@onready var label := $Label
-
 @export var size := Vector2(50, 50):
 	set(value):
 		size = value
-		if is_instance_valid(label):
-			label.size = size
+		$Label.size = size
 
 @export var color := Color.BLACK
 
@@ -22,8 +19,11 @@ var is_played := false:
 		is_played = val
 		queue_redraw()
 
-func _ready():
-	label.size = size
+var text: String:
+	set(val):
+		$Label.text = val
+	get:
+		return $Label.text
 
 func _draw():
 	# use draw_line instead of draw_box to get antialiasing

@@ -10,7 +10,7 @@ var Y_PADDING := 80
 const SLOT_SCENE = preload("res://Diamonds/Slot.tscn")
 const ARROW_SCENE = preload("res://Arrow.tscn")
 
-const SLOTS = [
+var slots = [
 	[
 		{
 			reward = 0,
@@ -84,7 +84,7 @@ const SLOTS = [
 	],
 ]
 
-## An array of [row, column] indexes in the SLOTS grid that represent which 
+## An array of [row, column] indexes in the slots grid that represent which 
 ## slots have been filled
 var played_slots: Array[Vector2i] = [Vector2i(0, 0)]
 
@@ -92,24 +92,25 @@ var color := ColorPalette.RED
 
 func _ready():
 	var row_index = 0
-	for row in SLOTS:
+	for row in slots:
 		var col_index = 0
 
 		for slot_spec in row:
-			var slot = SLOT_SCENE.instantiate()
-			slot.size = Vector2.ONE * SLOT_SIZE
-			slot.position.x = col_index * (SLOT_SIZE + X_PADDING)
-			slot.position.y = row_index * (SLOT_SIZE + Y_PADDING)
-			slot.color = color
-			add_child(slot)
+			var node = SLOT_SCENE.instantiate()
+			node.size = Vector2.ONE * SLOT_SIZE
+			node.position.x = col_index * (SLOT_SIZE + X_PADDING)
+			node.position.y = row_index * (SLOT_SIZE + Y_PADDING)
+			node.color = color
+			add_child(node)
+			slot_spec.node = node
 
 			if slot_spec.has("right_arrow"):
 				var x_number_range = slot_spec.right_arrow
-				spawn_arrow(Rect2(slot.position + Vector2(SLOT_SIZE, 0), Vector2(X_PADDING, SLOT_SIZE)), false, x_number_range)
+				spawn_arrow(Rect2(node.position + Vector2(SLOT_SIZE, 0), Vector2(X_PADDING, SLOT_SIZE)), false, x_number_range)
 
 				if slot_spec.has("down_arrow"):
 					var y_number_range = slot_spec.down_arrow
-					spawn_arrow(Rect2(slot.position + Vector2(0, SLOT_SIZE), Vector2(SLOT_SIZE, Y_PADDING)), true, y_number_range)
+					spawn_arrow(Rect2(node.position + Vector2(0, SLOT_SIZE), Vector2(SLOT_SIZE, Y_PADDING)), true, y_number_range)
 		
 			col_index += 1
 		row_index += 1
@@ -130,11 +131,34 @@ func can_play(card_type):
 	if suite != Cards.Suite.Diamonds:
 		return false
 
-	for card_position in played_slots:
-		var right_range = SLOTS[card_position.y][card_position.x].get("right_arrow")
-		var down_range = SLOTS[card_position.y][card_position.x].get("down_arrow")
-		if Cards.is_in_range(number, right_range) \
-			or Cards.is_in_range(number, down_range):
-			return true
+	var playable_slots = find_slots_to_play(number)
 	
-	return false
+	return not playable_slots.is_empty()
+
+func play_card(number: Cards.Number):
+	var playable_slots = find_slots_to_play(number)
+	assert(not playable_slots.is_empty(), "Player managed to play a card that cannot be played")
+	var slot_position = playable_slots[0]
+	played_slots.append(slot_position)
+	slots[slot_position.y][slot_position.x].node.is_played = true
+
+func find_slots_to_play(number: Cards.Number) -> Array[Vector2i]:
+	var playable_slots: Array[Vector2i] = []
+	for slot_position in played_slots:
+		var right_range = slots[slot_position.y][slot_position.x].get("right_arrow")
+		var down_range = slots[slot_position.y][slot_position.x].get("down_arrow")
+
+		var right_position = Vector2i(slot_position.x + 1, slot_position.y) 
+		if right_range != null and \
+				Cards.is_in_range(number, right_range) and \
+				not right_position in played_slots:
+			playable_slots.append(right_position)
+
+		var down_position = Vector2i(slot_position.x, slot_position.y + 1)
+		if down_range != null and \
+				Cards.is_in_range(number, down_range) and \
+				not down_position in played_slots:
+			playable_slots.append(down_position)
+
+	return playable_slots
+	

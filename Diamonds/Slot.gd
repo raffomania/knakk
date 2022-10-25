@@ -3,13 +3,6 @@ extends Node2D
 
 class_name Slot
 
-## Which slots can be reached from this slot
-var next_slots := []
-
-## Which kind of Diamond cards this slot will accept.
-## Array of Cards.Number values
-var playable_card_numbers := []
-
 @onready var label := $Label
 
 @export var size := Vector2(50, 50):
@@ -20,6 +13,15 @@ var playable_card_numbers := []
 
 @export var color := Color.BLACK
 
+## When the player fills this slot by choosing a matching card,
+## we'll set this to true.
+## This is for the visual indicator only. The logic around filling slots
+## is handled in the `Diamonds` node.
+var is_played := false:
+	set(val):
+		is_played = val
+		queue_redraw()
+
 func _ready():
 	label.size = size
 
@@ -29,3 +31,7 @@ func _draw():
 	draw_line(Vector2(0, 0), Vector2(size.x, 0), color, 2.0, true)
 	draw_line(Vector2(size.x, 0), size, color, 2.0, true)
 	draw_line(Vector2(0, size.y), size, color, 2.0, true)
+
+	if is_played:
+		draw_line(Vector2(0, 0), size, color, 4.0, true)
+		draw_line(Vector2(size.x, 0), Vector2(0, size.y), color, 4.0, true)

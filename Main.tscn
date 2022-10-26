@@ -24,14 +24,12 @@ current = true
 position = Vector2(540, 2408)
 
 [node name="Deck" type="Label" parent="."]
-layout_mode = 1
 offset_right = 40.0
 offset_bottom = 23.0
 text = "50 Cards in Deck"
 script = ExtResource("2_hbhdv")
 
 [node name="Score" type="Label" parent="."]
-layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0

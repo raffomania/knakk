@@ -48,6 +48,7 @@ config/icon="res://icon.svg"
 
 window/size/viewport_width=1080
 window/size/viewport_height=2408
+window/energy_saving/keep_screen_on=false
 window/handheld/orientation=1
 window/vsync/vsync_mode=0
 window/stretch/mode="canvas_items"
@@ -55,7 +56,7 @@ window/stretch/aspect="expand"
 
 [gui]
 
-theme/default_font_generate_mipmaps=true
+theme/custom="res://default_theme.tres"
 
 [input]
 

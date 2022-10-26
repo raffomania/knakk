@@ -21,11 +21,9 @@ current = true
 position = Vector2(540, 2408)
 
 [node name="Deck" type="Label" parent="."]
-modulate = Color(0, 0, 0, 1)
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
-theme_override_font_sizes/font_size = 30
 text = "50 Cards in Deck"
 script = ExtResource("2_hbhdv")
 

@@ -4,7 +4,11 @@
 
 ### Camera
 
+- Used to center the field on the screen
+
 ### UI
+
+- default_theme set in project settings
 
 ### Animations
 
@@ -16,9 +20,17 @@
 
 ### Particles
 
-## Small Stuff
+### Responsiveness
+
+- Generate font mipmaps for various screen sizes
+- todo Which settings in display/window to use
+
+### Touch Input
 
 - Set "emulate touch input using mouse" in the project settings to work with the mouse as well
+- Use motion smoothing in `Card.gd` to make card dragging feel more natural
+
+### Other tweaks
 
 ## Considerations
 

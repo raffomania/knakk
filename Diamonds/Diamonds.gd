@@ -140,12 +140,15 @@ func can_play(card_type):
 	
 	return not playable_slots.is_empty()
 
-func play_card(number: Cards.Number):
+## Returns the reward gained by playing this card
+func play_card(number: Cards.Number) -> int:
 	var playable_slots = find_slots_to_play(number)
 	assert(not playable_slots.is_empty(), "Player managed to play a card that cannot be played")
 	var slot_position = playable_slots[0]
 	played_slots.append(slot_position)
-	slots[slot_position.y][slot_position.x].node.is_played = true
+	var slot = slots[slot_position.y][slot_position.x]
+	slot.node.is_played = true
+	return slot.reward
 
 func find_slots_to_play(number: Cards.Number) -> Array[Vector2i]:
 	var playable_slots: Array[Vector2i] = []

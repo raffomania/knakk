@@ -5,4 +5,4 @@
 [resource]
 default_font = ExtResource("1_guvjk")
 default_font_size = 30
-Label/colors/font_color = Color(0.0431373, 0.0431373, 0.0431373, 1)
+Label/colors/font_color = Color(0.0627451, 0.0627451, 0.0627451, 1)

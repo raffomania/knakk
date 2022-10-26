@@ -1,17 +1,19 @@
-[gd_scene load_steps=5 format=3 uid="uid://uq2jjwreg81c"]
+[gd_scene load_steps=6 format=3 uid="uid://uq2jjwreg81c"]
 
 [ext_resource type="PackedScene" uid="uid://csxepv0yylg0m" path="res://Hand.tscn" id="2_52hhe"]
 [ext_resource type="Script" path="res://Deck.gd" id="2_hbhdv"]
+[ext_resource type="Script" path="res://Score.gd" id="3_77xjo"]
 [ext_resource type="Script" path="res://Field.gd" id="3_rxndw"]
 [ext_resource type="Script" path="res://Diamonds/Diamonds.gd" id="4_q6txs"]
 
 [node name="Main" type="Control"]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
+offset_right = 1080.0
+offset_bottom = 2408.0
+grow_horizontal = 0
 grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(540, 1204)
@@ -26,6 +28,17 @@ offset_right = 40.0
 offset_bottom = 23.0
 text = "50 Cards in Deck"
 script = ExtResource("2_hbhdv")
+
+[node name="Score" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 23.0
+grow_horizontal = 0
+text = "Score"
+script = ExtResource("3_77xjo")
 
 [node name="Field" type="Node2D" parent="."]
 script = ExtResource("3_rxndw")

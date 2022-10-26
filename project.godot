@@ -12,7 +12,7 @@ _global_script_classes=[{
 "base": "Control",
 "class": &"Arrow",
 "language": &"GDScript",
-"path": "res://Arrow.gd"
+"path": "res://Diamonds/Arrow.gd"
 }, {
 "base": "RefCounted",
 "class": &"Cards",
@@ -27,7 +27,7 @@ _global_script_classes=[{
 "base": "Node2D",
 "class": &"Slot",
 "language": &"GDScript",
-"path": "res://Diamonds/Slot.gd"
+"path": "res://Slot.gd"
 }]
 _global_script_class_icons={
 "Arrow": "",

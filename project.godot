@@ -27,7 +27,7 @@ _global_script_classes=[{
 "base": "Node2D",
 "class": &"Slot",
 "language": &"GDScript",
-"path": "res://Slot.gd"
+"path": "res://Slot/Slot.gd"
 }]
 _global_script_class_icons={
 "Arrow": "",

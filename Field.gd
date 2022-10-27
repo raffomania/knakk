@@ -2,12 +2,18 @@ extends Node2D
 
 @onready var score = $"../Score"
 
+## Either `null` or `Cards.Suite`
+## If `null`, no suite has been chosen for this turn
+var chosen_suite: Variant
+
 func _ready():
 	Events.choose_card.connect(self._choose_card)
+	Events.consider_card.connect(self._consider_card)
+	Events.cancel_consider_card.connect(self._cancel_consider_card)
 
 ## Check if `card_type` can be chosen by the player right now.
 func can_play(card_type: Array, other_cards: Array[Array]) -> bool:
-	if Events.chosen_suite == null:
+	if chosen_suite == null:
 		return can_play_suite(card_type[0], other_cards)
 
 	return can_play_number(card_type[1])
@@ -23,28 +29,56 @@ func can_play_suite(suite: Cards.Suite, other_cards: Array[Array]) -> bool:
 	return false
 
 func can_play_number(number: Cards.Number) -> bool:
-	return child_node_for_suite(Events.chosen_suite as Cards.Suite).can_play(number)
+	return child_node_for_suite(chosen_suite as Cards.Suite).can_play(number)
 
-func child_node_for_suite(suite: Cards.Suite) -> Node2D:
+func child_node_for_suite(suite: Cards.Suite) -> Variant:
 	match suite:
 		Cards.Suite.Diamonds: return $Diamonds
 		_: return null
 
+func _consider_card(card_type) -> void:
+	# First, reset all slot highlights
+	$Diamonds.highlight_options([])
+
+	# A suite is already chosen, highlight that suite's 
+	# slots for the number of the considered card
+	if chosen_suite != null:
+		var node = child_node_for_suite(chosen_suite)
+		if node != null: 
+			node.highlight_options([card_type as Array])
+		return
+	
+	# User is choosing a suite, highlight slots for all other
+	# numbers in the user's hand, using the suite of the card
+	# the user is considering
+	var card_suite_node = child_node_for_suite(card_type[0])
+	if card_suite_node != null:
+		var other_card_types = Events.card_types_in_hand.filter(func(other_card_type): 
+			return other_card_type != card_type
+		)
+		card_suite_node.highlight_options(other_card_types)
+		return
+
+func _cancel_consider_card() -> void:
+	if chosen_suite != null:
+		$Diamonds.highlight_options(Events.card_types_in_hand)
+	else:
+		$Diamonds.highlight_options([])
+
 func _choose_card(card_type) -> void:
-	if Events.chosen_suite == null:
+	if chosen_suite == null:
 		play_suite(card_type[0])
 	else:	
 		play_number(card_type[1])
 		Events.turn_complete.emit()
 
-
 func play_suite(suite) -> void:
-	Events.chosen_suite = suite
+	chosen_suite = suite
 
 func play_number(number) -> void:
-	match Events.chosen_suite:
+	match chosen_suite:
 		Cards.Suite.Diamonds:
 			var reward = $Diamonds.play_card(number)
 			score.add(reward)
 		
-	Events.chosen_suite = null
+	chosen_suite = null

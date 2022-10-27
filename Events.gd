@@ -1,10 +1,6 @@
 # todo rename this file
 extends Node
 
-## Either `null` or `Cards.Suite`
-## If `null`, no suite has been chosen for this turn
-var chosen_suite: Variant
-
 ## All the card types currently available to play
 ## This is not optimal because we have to take care to update this
 ## when something changes in `Card.gd`, which is error prone.

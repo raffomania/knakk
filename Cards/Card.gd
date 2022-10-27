@@ -67,6 +67,8 @@ func area_input(_viewport, event, _shape_index):
 				Events.card_types_in_hand.erase(card_type)
 				queue_free()
 			else:
+				if is_considering:
+					Events.cancel_consider_card.emit()
 				self.move_to(self.starting_position)
 				create_tween().tween_property(self, "scale", original_scale, SCALE_TWEEN_DURATION)
 
@@ -76,8 +78,9 @@ func _unhandled_input(event):
 		target_drag_position = drag_offset + event.position
 
 		if target_drag_position.y < 1300:
+			if not is_considering:
+				Events.consider_card.emit(card_type)
 			is_considering = true
-			Events.consider_card.emit(card_type)
 			queue_redraw()
 		else:
 			if is_considering:

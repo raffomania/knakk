@@ -91,6 +91,13 @@ var played_slots: Array[Vector2i] = []
 var color := ColorPalette.RED
 
 func _ready():
+	spawn_slots()
+
+	# The top-left slot is always filled when the game starts
+	slots[0][0].node.is_played = true
+	played_slots.append(Vector2i(0, 0))
+
+func spawn_slots() -> void:
 	var row_index = 0
 	for row in slots:
 		var col_index = 0
@@ -116,10 +123,6 @@ func _ready():
 			col_index += 1
 		row_index += 1
 
-	# The top-left slot is always filled when the game starts
-	slots[0][0].node.is_played = true
-	played_slots.append(Vector2i(0, 0))
-
 func spawn_arrow(rect: Rect2, is_vertical, number_range):
 	var arrow = ARROW_SCENE.instantiate()
 	arrow.size = rect.size
@@ -144,6 +147,15 @@ func play_card(number: Cards.Number) -> int:
 	var slot = slots[slot_position.y][slot_position.x]
 	slot.node.is_played = true
 	return slot.reward
+
+func highlight_options(card_types: Array[Array]) -> void:
+	for row in slots:
+		for slot in row:
+			slot.node.is_highlighted = false
+
+	for card_type in card_types:
+		for slot_position in find_slots_to_play(card_type[1]):
+			slots[slot_position.y][slot_position.x].node.is_highlighted = true
 
 func find_slots_to_play(number: Cards.Number) -> Array[Vector2i]:
 	var playable_slots: Array[Vector2i] = []

@@ -25,6 +25,14 @@ var text: String:
 	get:
 		return $Label.text
 
+var is_highlighted: bool = false:
+	set(val):
+		is_highlighted = val
+		if is_highlighted:
+			scale = Vector2.ONE * 1.1
+		else:
+			scale = Vector2.ONE
+
 func _draw():
 	# use draw_line instead of draw_box to get antialiasing
 	draw_line(Vector2(0, 0), Vector2(0, size.y), color, 2.0, true)

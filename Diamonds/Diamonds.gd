@@ -130,12 +130,7 @@ func spawn_arrow(rect: Rect2, is_vertical, number_range):
 	arrow.text = "%s-%s" % [Cards.get_number_sigil(number_range[0]), Cards.get_number_sigil(number_range[1])]
 	add_child(arrow)
 
-func can_play(card_type):
-	var suite = card_type[0]
-	var number = card_type[1]
-	if suite != Cards.Suite.Diamonds:
-		return false
-
+func can_play(number: Cards.Number):
 	var playable_slots = find_slots_to_play(number)
 	
 	return not playable_slots.is_empty()

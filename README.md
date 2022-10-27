@@ -16,6 +16,8 @@
 
 ### Static Types
 
+- can't use them for nullable variables yet
+
 ### Coroutines
 
 ### Particles

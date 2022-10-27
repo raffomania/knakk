@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://nreid60v6rph"]
-
-[ext_resource type="Script" path="res://PlayedMarker.gd" id="1_hjysj"]
-
-[node name="PlayedMarker" type="Control"]
-layout_mode = 3
-anchors_preset = 0
-script = ExtResource("1_hjysj")

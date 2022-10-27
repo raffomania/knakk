@@ -1,8 +1,5 @@
 extends Sprite2D
 
-## Emitted when the player chooses to play this card.
-signal choose
-
 ## The duration of the scaling animation in seconds
 const SCALE_TWEEN_DURATION := 0.07
 ## The higher this number is, the faster the card follows the user's finger
@@ -50,6 +47,7 @@ var card_type: Array
 
 func _ready():
 	touch_area.connect("input_event", self.area_input)
+	Events.card_types_in_hand.append(card_type)
 
 ## Called when a user starts or stops touching this card
 func area_input(_viewport, event, _shape_index):
@@ -65,7 +63,9 @@ func area_input(_viewport, event, _shape_index):
 			# The user stopped dragging this card
 			self.dragging = false
 			if is_considering and can_play:
-				choose.emit()
+				Events.choose_card.emit(card_type)
+				Events.card_types_in_hand.erase(card_type)
+				queue_free()
 			else:
 				self.move_to(self.starting_position)
 				create_tween().tween_property(self, "scale", original_scale, SCALE_TWEEN_DURATION)

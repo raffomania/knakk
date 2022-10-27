@@ -15,6 +15,7 @@ func _ready():
 	redraw_hand()
 
 	Events.consider_card.connect(self._consider_card)
+	Events.turn_complete.connect(self._turn_complete)
 
 ## Discard the current hand and draw a new one
 func redraw_hand() -> void:
@@ -29,39 +30,28 @@ func redraw_hand() -> void:
 	for _i in range(0,3):
 		draw_card()
 
-## The player has chosen this card, discard it and mark it on the field
-## This function assumes that playability checks have already passed
-## in _consider_card
-func _choose_card(card) -> void:
-	field.play_card(card.card_type)
-	Events.card_types_in_hand.erase(card.card_type)
-	card.queue_free()
-	# todo this is unclean
-	# When the chosen suite is reset to null, we know that we 
-	# can draw a new hand because the last move was a number
-	if Events.chosen_suite == null:
-		redraw_hand()
+func _turn_complete() -> void:
+	redraw_hand()
 
-## Connected in `draw_card` when a new card is created
-func _consider_card(card_type: Array) -> void:
-	var node = get_children().filter(func(child): 
+func node_for_card_type(card_type: Array) -> Node:
+	return get_children().filter(func(child): 
 		return child.card_type == card_type
 	)[0]
 
+## Connected in `draw_card` when a new card is created
+func _consider_card(card_type: Array) -> void:
 	var other_card_types = Events.card_types_in_hand.filter(func(other_card_type): 
 		return other_card_type != card_type
 	)
 
-	node.can_play = field.can_play(card_type, other_card_types)
+	node_for_card_type(card_type).can_play = field.can_play(card_type, other_card_types)
 
 ## Draw a new card from the deck and insert it into the hand
 func draw_card() -> void:
 	var card_type = deck.draw_card()
 	var card = card_scene.instantiate()
 	card.set_card_type(card_type)
-	card.choose.connect(_choose_card.bind(card))
 	add_child(card)
-	Events.card_types_in_hand.append(card_type)
 	position_cards()
 
 ## Look at all cards and evenly distribute their position across the

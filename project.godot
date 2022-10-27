@@ -44,6 +44,10 @@ config/features=PackedStringArray("4.0", "Mobile")
 run/max_fps=60
 config/icon="res://icon.svg"
 
+[autoload]
+
+Events="*res://Events.gd"
+
 [display]
 
 window/size/viewport_width=1080

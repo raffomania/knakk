@@ -1,9 +1,5 @@
 extends Sprite2D
 
-## Emitted when the player is hovering this card over the 
-## confirmation area, considering to choose it.
-signal consider
-
 ## Emitted when the player chooses to play this card.
 signal choose
 
@@ -69,7 +65,7 @@ func area_input(_viewport, event, _shape_index):
 			# The user stopped dragging this card
 			self.dragging = false
 			if is_considering and can_play:
-				emit_signal("choose")
+				choose.emit()
 			else:
 				self.move_to(self.starting_position)
 				create_tween().tween_property(self, "scale", original_scale, SCALE_TWEEN_DURATION)
@@ -81,9 +77,11 @@ func _unhandled_input(event):
 
 		if target_drag_position.y < 1300:
 			is_considering = true
-			emit_signal("consider")
+			Events.consider_card.emit(card_type)
 			queue_redraw()
 		else:
+			if is_considering:
+				Events.cancel_consider_card.emit()
 			is_considering = false
 			queue_redraw()
 

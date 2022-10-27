@@ -97,6 +97,9 @@ func _ready():
 	slots[0][0].node.is_played = true
 	played_slots.append(Vector2i(0, 0))
 
+	Events.consider_card.connect(self._consider_card)
+	Events.cancel_consider_card.connect(self._cancel_consider_card)
+
 func spawn_slots() -> void:
 	var row_index = 0
 	for row in slots:
@@ -146,7 +149,26 @@ func play_card(number: Cards.Number) -> int:
 	played_slots.append(slot_position)
 	var slot = slots[slot_position.y][slot_position.x]
 	slot.node.is_played = true
+	highlight_options([])
 	return slot.reward
+
+func _consider_card(card_type):
+	var other_card_types = Events.card_types_in_hand.filter(func(other_card_type): 
+		return other_card_type != card_type
+	)
+
+	if Events.chosen_suite != null:
+		highlight_options([card_type as Array[Variant]])	
+	elif card_type[0] == Cards.Suite.Diamonds:
+		highlight_options(other_card_types)	
+	else:
+		highlight_options([])
+
+func _cancel_consider_card() -> void:
+	if Events.chosen_suite != null:
+		highlight_options(Events.card_types_in_hand)
+	else:
+		highlight_options([])
 
 func highlight_options(card_types: Array[Array]) -> void:
 	for row in slots:

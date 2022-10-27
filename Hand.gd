@@ -3,18 +3,25 @@
 extends Node2D
 
 ## The deck provides us with new cards when a card is played
-@onready var deck = $"../Deck"
-@onready var field = $"../Field"
+@onready var deck := $"../Deck"
 
-var card_scene = preload("res://Cards/Card.tscn")
+## The field is where we place marks depending on the cards
+## chosen by the player
+@onready var field := $"../Field"
+
+var card_scene := preload("res://Cards/Card.tscn")
 
 func _ready():
 	redraw_hand()
+
+	Events.consider_card.connect(self._consider_card)
 
 ## Discard the current hand and draw a new one
 func redraw_hand() -> void:
 	for child in get_children():
 		child.queue_free()
+	
+	Events.card_types_in_hand = []
 
 	# wait for `queue_free()` to take effect
 	await get_tree().process_frame
@@ -27,33 +34,39 @@ func redraw_hand() -> void:
 ## in _consider_card
 func _choose_card(card) -> void:
 	field.play_card(card.card_type)
+	Events.card_types_in_hand.erase(card.card_type)
 	card.queue_free()
 	# todo this is unclean
 	# When the chosen suite is reset to null, we know that we 
 	# can draw a new hand because the last move was a number
-	if field.chosen_suite == null:
+	if Events.chosen_suite == null:
 		redraw_hand()
 
-func _consider_card(card) -> void:
-	var other_cards: Array[Array] = get_children() \
-		.map(func(other_card): return other_card.card_type) \
-		.filter(func(card_type): return card_type != card.card_type)
+## Connected in `draw_card` when a new card is created
+func _consider_card(card_type: Array) -> void:
+	var node = get_children().filter(func(child): 
+		return child.card_type == card_type
+	)[0]
 
-	card.can_play = field.can_play(card.card_type, other_cards)
+	var other_card_types = Events.card_types_in_hand.filter(func(other_card_type): 
+		return other_card_type != card_type
+	)
+
+	node.can_play = field.can_play(card_type, other_card_types)
 
 ## Draw a new card from the deck and insert it into the hand
-func draw_card():
+func draw_card() -> void:
 	var card_type = deck.draw_card()
 	var card = card_scene.instantiate()
 	card.set_card_type(card_type)
 	card.choose.connect(_choose_card.bind(card))
-	card.consider.connect(_consider_card.bind(card))
 	add_child(card)
+	Events.card_types_in_hand.append(card_type)
 	position_cards()
 
 ## Look at all cards and evenly distribute their position across the
 ## available screen space
-func position_cards():
+func position_cards() -> void:
 	var children = get_children()
 	var total_cards = len(children)
 	var card_size = Cards.textures[0][0].get_size()
@@ -69,7 +82,7 @@ func position_cards():
 		card_index += 1
 
 ## For debugging: redraw the current hand when R is pressed
-func _unhandled_input(event):
+func _unhandled_input(event: InputEvent):
 	if event.is_action_released("reset_hand") and OS.is_debug_build():
 		await redraw_hand()
 

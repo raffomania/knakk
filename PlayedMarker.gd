@@ -1,4 +1,10 @@
 extends Control
 
+var color: Variant = null:
+	set(val):
+		color = val
+		queue_redraw()
+
 func _draw():
-	draw_rect(Rect2(size / 2, size), ColorPalette.GREY)
+	if color != null:
+		draw_rect(Rect2(size / 2, size), color)

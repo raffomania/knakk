@@ -5,22 +5,23 @@ extends Label
 var cards_in_deck: Array[Array]
 
 func _init():
-	self.reset()
+	reset()
 
 ## Refill the deck with all possible cards and shuffle them
 func reset():
-	self.cards_in_deck = []
+	cards_in_deck = []
 	for suite in Cards.Suite:
 		for number in Cards.Number:
-			self.cards_in_deck.push_back([Cards.Suite[suite], Cards.Number[number]])
-	self.cards_in_deck.shuffle()
+			cards_in_deck.push_back([Cards.Suite[suite], Cards.Number[number]])
+	cards_in_deck.shuffle()
+	update_count()
 
 ## Remove the top card from the deck and return it as a [suite, number] array
 func draw_card() -> Array:
-	var card = self.cards_in_deck.pop_back()
-	self.update_count()
+	var card = cards_in_deck.pop_back()
+	update_count()
 	return card
 
 ## Update the text showing how many cards are left in the deck
 func update_count():
-	self.text = "%d cards in deck" % len(self.cards_in_deck)
+	text = "%d cards in deck" % len(cards_in_deck)

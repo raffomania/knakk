@@ -9,7 +9,13 @@ extends Node
 # the Hand everywhere we need it
 var card_types_in_hand: Array[Array]
 
-signal consider_card(card_type)
-signal cancel_consider_card
-signal choose_card(card_type)
+enum Action {
+	CHOOSE,
+	REDRAW,
+	NOTHING
+}
+
+signal consider_action(card_type: Array, action: Action, mark_playable: Callable)
+signal cancel_consider_action
+signal choose_card(card_type: Array, action: Action)
 signal turn_complete

@@ -8,13 +8,16 @@ var chosen_suite: Variant
 
 func _ready():
 	Events.choose_card.connect(self._choose_card)
-	Events.consider_card.connect(self._consider_card)
-	Events.cancel_consider_card.connect(self._cancel_consider_card)
+	Events.consider_action.connect(self._consider_action)
+	Events.cancel_consider_action.connect(self._cancel_consider_action)
 
 ## Check if `card_type` can be chosen by the player right now.
-func can_play(card_type: Array, other_cards: Array[Array]) -> bool:
+func can_play(card_type: Array) -> bool:
+	var other_card_types = Events.card_types_in_hand.filter(func(other_card_type): 
+		return other_card_type != card_type
+	)
 	if chosen_suite == null:
-		return can_play_suite(card_type[0], other_cards)
+		return can_play_suite(card_type[0], other_card_types)
 
 	return can_play_number(card_type[1])
 
@@ -36,7 +39,11 @@ func child_node_for_suite(suite: Cards.Suite) -> Variant:
 		Cards.Suite.Diamonds: return $Diamonds
 		_: return null
 
-func _consider_card(card_type) -> void:
+func _consider_action(card_type: Array, action: Events.Action, mark_playable: Callable) -> void:
+	if action != Events.Action.CHOOSE:
+		return
+
+	mark_playable.call(can_play(card_type))
 	# First, reset all slot highlights
 	$Diamonds.highlight_options([])
 
@@ -59,13 +66,16 @@ func _consider_card(card_type) -> void:
 		card_suite_node.highlight_options(other_card_types)
 		return
 
-func _cancel_consider_card() -> void:
+func _cancel_consider_action() -> void:
 	if chosen_suite != null:
 		$Diamonds.highlight_options(Events.card_types_in_hand)
 	else:
 		$Diamonds.highlight_options([])
 
-func _choose_card(card_type) -> void:
+func _choose_card(card_type: Array, action: Events.Action) -> void:
+	if action != Events.Action.CHOOSE:
+		return
+
 	if chosen_suite == null:
 		play_suite(card_type[0])
 	else:	
@@ -82,6 +92,6 @@ func play_number(number) -> void:
 			if reward is Reward.Points:
 				score.add(reward.points)
 			elif reward is Reward.RedrawCard:
-				$"../RedrawCardArea".add_one()
+				$"../RedrawCardArea".redraw_count += 1
 		
 	chosen_suite = null

@@ -24,7 +24,7 @@ var dragging := false
 ## the card will light up. If the player drops the card while
 ## in that zone, the card is chosen and the "choose" signal
 ## is emitted.
-var is_considering := false
+var considering_action := Events.Action.NOTHING
 
 ## When players are considering this card,
 ## The playing field will set this value depending on
@@ -51,6 +51,9 @@ func _ready():
 	touch_area.connect("input_event", self.area_input)
 	Events.card_types_in_hand.append(card_type)
 
+func _exit_tree():
+	Events.card_types_in_hand.erase(card_type)
+
 ## Called when a user starts or stops touching this card
 func area_input(_viewport, event, _shape_index):
 	if event is InputEventScreenTouch:
@@ -64,13 +67,12 @@ func area_input(_viewport, event, _shape_index):
 		else:
 			# The user stopped dragging this card
 			self.dragging = false
-			if is_considering and can_play:
-				Events.choose_card.emit(card_type)
-				Events.card_types_in_hand.erase(card_type)
+			if considering_action != Events.Action.NOTHING and can_play:
+				Events.choose_card.emit(card_type, considering_action)
 				queue_free()
 			else:
-				if is_considering:
-					Events.cancel_consider_card.emit()
+				if considering_action != Events.Action.NOTHING:
+					Events.cancel_consider_action.emit()
 				self.move_to(self.starting_position)
 				create_tween().tween_property(self, "scale", original_scale, SCALE_TWEEN_DURATION)
 
@@ -80,15 +82,20 @@ func _unhandled_input(event):
 		target_drag_position = drag_offset + event.position
 
 		if target_drag_position.y < 1300:
-			if not is_considering:
-				Events.consider_card.emit(card_type)
-			is_considering = true
-			queue_redraw()
+			if considering_action != Events.Action.CHOOSE:
+				considering_action = Events.Action.CHOOSE
+				Events.consider_action.emit(card_type, considering_action, func(can_play): self.can_play = can_play)
+		elif target_drag_position.x < 200 and target_drag_position.y > 1600 and target_drag_position.y < 1900:
+			if considering_action != Events.Action.REDRAW:
+				considering_action = Events.Action.REDRAW
+				Events.consider_action.emit(card_type, considering_action, func(can_play): self.can_play = can_play)
 		else:
-			if is_considering:
-				Events.cancel_consider_card.emit()
-			is_considering = false
-			queue_redraw()
+			if considering_action != Events.Action.NOTHING:
+				Events.cancel_consider_action.emit()
+				considering_action = Events.Action.NOTHING
+				can_play = false
+
+		queue_redraw()
 
 ## Tell this card to transition to a new position.
 ## The transition is animated.
@@ -103,7 +110,7 @@ func set_card_type(new_card_type: Array):
 	self.texture = Cards.textures[self.card_type[0]][self.card_type[1]]
 
 func _draw():
-	if is_considering and can_play:
+	if considering_action != Events.Action.NOTHING and can_play:
 		var size = self.texture.get_size() * 1.05
 		draw_rect(Rect2(-size/2, size), ColorPalette.PURPLE, false, 5.0)
 

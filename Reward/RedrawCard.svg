@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="53.992245"
+   height="50.459717"
+   viewBox="0 0 3.599483 3.3639811"
+   version="1.1"
+   id="svg697"
+   inkscape:version="1.2.1 (9c6d41e410, 2022-07-14, custom)"
+   sodipodi:docname="PlayAgain.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview699"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="2.3786088"
+     inkscape:cx="29.428967"
+     inkscape:cy="44.353657"
+     inkscape:window-width="1234"
+     inkscape:window-height="1382"
+     inkscape:window-x="1292"
+     inkscape:window-y="24"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs694" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-36.084273,-20.981902)">
+    <path
+       d="m 36.691084,21.963332 c -0.810262,1.124692 -0.05786,2.117967 0.837175,2.117967 0.895034,0 1.804412,-0.998318 0.808768,-2.834814 m 0,0 -0.505354,0.926041 m 0.505354,-0.926041 1.082146,0.529166"
+       stroke="#000000"
+       stroke-opacity="0.75"
+       stroke-width="0.529167"
+       stroke-linecap="round"
+       stroke-linejoin="round"
+       id="path404"
+       style="fill:none;stroke:#000000;stroke-opacity:1"
+       sodipodi:nodetypes="czccccc" />
+  </g>
+</svg>

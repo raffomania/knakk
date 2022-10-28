@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://uq2jjwreg81c"]
+[gd_scene load_steps=7 format=3 uid="uid://oj8lgws878tj"]
 
 [ext_resource type="PackedScene" uid="uid://csxepv0yylg0m" path="res://Hand.tscn" id="2_52hhe"]
 [ext_resource type="Script" path="res://Deck.gd" id="2_hbhdv"]
 [ext_resource type="Script" path="res://Score.gd" id="3_77xjo"]
 [ext_resource type="Script" path="res://Field.gd" id="3_rxndw"]
 [ext_resource type="Script" path="res://Diamonds/Diamonds.gd" id="4_q6txs"]
+[ext_resource type="Script" path="res://Reward/RedrawCardArea.gd" id="6_8tf7c"]
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -47,3 +48,13 @@ script = ExtResource("3_rxndw")
 [node name="Diamonds" type="Node2D" parent="Field"]
 position = Vector2(0, 80)
 script = ExtResource("4_q6txs")
+
+[node name="RedrawCardArea" type="Control" parent="."]
+layout_mode = 1
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -700.0
+offset_right = 300.0
+offset_bottom = -600.0
+grow_vertical = 0
+script = ExtResource("6_8tf7c")

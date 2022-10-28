@@ -81,5 +81,7 @@ func play_number(number) -> void:
 			var reward = $Diamonds.play_card(number)
 			if reward is Reward.Points:
 				score.add(reward.points)
+			elif reward is Reward.RedrawCard:
+				$"../RedrawCardArea".add_one()
 		
 	chosen_suite = null

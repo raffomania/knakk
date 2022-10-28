@@ -1,8 +1,6 @@
 # todo change this into control?
 extends Node2D
 
-class_name Slot
-
 const MARKER_SCALE = 0.5
 
 @export var size := Vector2(50, 50):

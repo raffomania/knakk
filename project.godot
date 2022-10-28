@@ -9,11 +9,6 @@
 config_version=5
 
 _global_script_classes=[{
-"base": "Control",
-"class": &"Arrow",
-"language": &"GDScript",
-"path": "res://Diamonds/Arrow.gd"
-}, {
 "base": "RefCounted",
 "class": &"Cards",
 "language": &"GDScript",
@@ -24,16 +19,15 @@ _global_script_classes=[{
 "language": &"GDScript",
 "path": "res://ColorPalette.gd"
 }, {
-"base": "Node2D",
-"class": &"Slot",
+"base": "RefCounted",
+"class": &"Reward",
 "language": &"GDScript",
-"path": "res://Slot/Slot.gd"
+"path": "res://Reward/Reward.gd"
 }]
 _global_script_class_icons={
-"Arrow": "",
 "Cards": "",
 "ColorPalette": "",
-"Slot": ""
+"Reward": ""
 }
 
 [application]

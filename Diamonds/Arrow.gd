@@ -1,7 +1,5 @@
 extends Control
 
-class_name Arrow
-
 @onready var label = $Label
 
 var text: String

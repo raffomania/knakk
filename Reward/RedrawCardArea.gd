@@ -33,4 +33,4 @@ func _draw():
 
 	var center_y = (size.y - TEXTURE.get_size().y) / 2
 	for index in range(0, redraw_count):
-		draw_texture(TEXTURE, Vector2(index * TEXTURE.get_size().x, center_y))
+		draw_texture(TEXTURE, Vector2(index * TEXTURE.get_size().x, center_y), ColorPalette.GREY)

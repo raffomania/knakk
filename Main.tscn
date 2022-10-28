@@ -26,14 +26,12 @@ current = true
 position = Vector2(540, 2408)
 
 [node name="Deck" type="Label" parent="."]
-layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 text = "50 Cards in Deck"
 script = ExtResource("2_hbhdv")
 
 [node name="Score" type="Label" parent="."]
-layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -51,7 +49,7 @@ script = ExtResource("3_rxndw")
 script = ExtResource("4_q6txs")
 
 [node name="RedrawCardArea" type="Control" parent="."]
-layout_mode = 1
+layout_mode = 3
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -62,7 +60,6 @@ grow_vertical = 0
 script = ExtResource("6_8tf7c")
 
 [node name="ActionIndicator" type="Label" parent="."]
-layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
 anchor_top = 1.0

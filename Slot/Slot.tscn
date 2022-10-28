@@ -6,7 +6,7 @@
 [node name="Slot" type="Node2D"]
 script = ExtResource("1_s8io1")
 
-[node name="Label" type="Label" parent="."]
+[node name="RewardLabel" type="Label" parent="."]
 offset_right = 17.0
 offset_bottom = 45.0
 horizontal_alignment = 1

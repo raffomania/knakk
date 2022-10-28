@@ -108,8 +108,7 @@ func spawn_slots() -> void:
 			node.position.x = col_index * (SLOT_SIZE + X_PADDING)
 			node.position.y = row_index * (SLOT_SIZE + Y_PADDING)
 			node.color = color
-			if slot_spec.reward is Reward.Points:
-				node.text = str(slot_spec.reward.points)
+			node.reward = slot_spec.reward
 			add_child(node)
 			slot_spec.node = node
 

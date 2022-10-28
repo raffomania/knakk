@@ -8,7 +8,7 @@
    version="1.1"
    id="svg697"
    inkscape:version="1.2.1 (9c6d41e410, 2022-07-14, custom)"
-   sodipodi:docname="PlayAgain.svg"
+   sodipodi:docname="RedrawCard.svg"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -24,12 +24,12 @@
      inkscape:deskcolor="#505050"
      inkscape:document-units="mm"
      showgrid="false"
-     inkscape:zoom="2.3786088"
-     inkscape:cx="29.428967"
-     inkscape:cy="44.353657"
-     inkscape:window-width="1234"
-     inkscape:window-height="1382"
-     inkscape:window-x="1292"
+     inkscape:zoom="13.455443"
+     inkscape:cx="28.612956"
+     inkscape:cy="24.265273"
+     inkscape:window-width="2512"
+     inkscape:window-height="1392"
+     inkscape:window-x="24"
      inkscape:window-y="24"
      inkscape:window-maximized="1"
      inkscape:current-layer="layer1" />
@@ -41,14 +41,14 @@
      id="layer1"
      transform="translate(-36.084273,-20.981902)">
     <path
-       d="m 36.691084,21.963332 c -0.810262,1.124692 -0.05786,2.117967 0.837175,2.117967 0.895034,0 1.804412,-0.998318 0.808768,-2.834814 m 0,0 -0.505354,0.926041 m 0.505354,-0.926041 1.082146,0.529166"
+       d="m 36.897654,22.086108 c -0.669966,0.927585 -0.04784,1.746786 0.692219,1.746786 0.74006,0 1.49198,-0.82336 0.668731,-2.338004 m 0,0 -0.417853,0.76375 m 0.417853,-0.76375 0.894773,0.436428"
        stroke="#000000"
        stroke-opacity="0.75"
        stroke-width="0.529167"
        stroke-linecap="round"
        stroke-linejoin="round"
        id="path404"
-       style="fill:none;stroke:#000000;stroke-opacity:1"
+       style="fill:none;stroke:#ffffff;stroke-opacity:1"
        sodipodi:nodetypes="czccccc" />
   </g>
 </svg>

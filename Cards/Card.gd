@@ -1,5 +1,7 @@
 extends Sprite2D
 
+# todo dragging fast while releasing doesn't return the card to its original position
+
 ## The duration of the scaling animation in seconds
 const SCALE_TWEEN_DURATION := 0.07
 ## The higher this number is, the faster the card follows the user's finger

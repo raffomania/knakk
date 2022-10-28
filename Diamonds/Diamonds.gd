@@ -13,73 +13,73 @@ const ARROW_SCENE = preload("res://Diamonds/Arrow.tscn")
 var slots = [
 	[
 		{
-			reward = 0,
+			reward = Reward.Nothing.new(),
 			right_arrow = [Cards.Number.Eight, Cards.Number.King],
 			down_arrow = [Cards.Number.Ace, Cards.Number.Seven]
 		},
 		{
-			reward = 1,
+			reward = Reward.Nothing.new(),
 			right_arrow = [Cards.Number.Jack, Cards.Number.King],
 			down_arrow = [Cards.Number.Eight, Cards.Number.Ten]
 		},
 		{
-			reward = 1,
+			reward = Reward.Points.new(3),
 			right_arrow = [Cards.Number.Queen, Cards.Number.King],
 			down_arrow = [Cards.Number.Ten, Cards.Number.Jack]
 		},
 		{
-			reward = 1,
+			reward = Reward.Points.new(5),
 			right_arrow = [Cards.Number.Queen, Cards.Number.King],
 			down_arrow = [Cards.Number.Jack, Cards.Number.Queen]
 		},
 		{
-			reward = 1,
+			reward = Reward.Points.new(8),
 		},
 	], [
 		{
-			reward = 1,
+			reward = Reward.Points.new(1),
 			right_arrow = [Cards.Number.Five, Cards.Number.Seven],
 			down_arrow = [Cards.Number.Ace, Cards.Number.Four]
 		},
 		{
-			reward = 1,
+			reward = Reward.Points.new(2),
 			right_arrow = [Cards.Number.Eight, Cards.Number.Nine],
 			down_arrow = [Cards.Number.Six, Cards.Number.Seven]
 		},
 		{
-			reward = 1,
+			reward = Reward.Points.new(1),
 			right_arrow = [Cards.Number.Ten, Cards.Number.Jack],
 			down_arrow = [Cards.Number.Nine, Cards.Number.Ten]
 		},
 		{
-			reward = 1,
+			reward = Reward.Points.new(8),
 		},
 	], [
 		{
-			reward = 1,
+			reward = Reward.Points.new(3),
 			right_arrow = [Cards.Number.Four, Cards.Number.Five],
 			down_arrow = [Cards.Number.Ace, Cards.Number.Three]
 		},
 		{
-			reward = 1,
+			reward = Reward.Points.new(1),
 			right_arrow = [Cards.Number.Seven, Cards.Number.Eight],
 			down_arrow = [Cards.Number.Five, Cards.Number.Six]
 		},
 		{
-			reward = 1,
+			reward = Reward.Points.new(1),
 		},
 	], [
 		{
-			reward = 1,
+			reward = Reward.Points.new(8),
 			right_arrow = [Cards.Number.Three, Cards.Number.Four],
 			down_arrow = [Cards.Number.Ace, Cards.Number.Two]
 		},
 		{
-			reward = 1,
+			reward = Reward.Points.new(8),
 		},
 	], [
 		{
-			reward = 1
+			reward = Reward.Points.new(8),
 		},
 	],
 ]
@@ -108,7 +108,8 @@ func spawn_slots() -> void:
 			node.position.x = col_index * (SLOT_SIZE + X_PADDING)
 			node.position.y = row_index * (SLOT_SIZE + Y_PADDING)
 			node.color = color
-			node.text = str(slot_spec.reward)
+			if slot_spec.reward is Reward.Points:
+				node.text = str(slot_spec.reward.points)
 			add_child(node)
 			slot_spec.node = node
 
@@ -123,7 +124,7 @@ func spawn_slots() -> void:
 			col_index += 1
 		row_index += 1
 
-func spawn_arrow(rect: Rect2, is_vertical, number_range):
+func spawn_arrow(rect: Rect2, is_vertical: bool, number_range) -> void:
 	var arrow = ARROW_SCENE.instantiate()
 	arrow.size = rect.size
 	arrow.position = rect.position
@@ -133,13 +134,13 @@ func spawn_arrow(rect: Rect2, is_vertical, number_range):
 	arrow.text = "%s-%s" % [Cards.get_number_sigil(number_range[0]), Cards.get_number_sigil(number_range[1])]
 	add_child(arrow)
 
-func can_play(number: Cards.Number):
+func can_play(number: Cards.Number) -> bool:
 	var playable_slots = find_slots_to_play(number)
 	
 	return not playable_slots.is_empty()
 
 ## Returns the reward gained by playing this card
-func play_card(number: Cards.Number) -> int:
+func play_card(number: Cards.Number) -> Reward:
 	var playable_slots = find_slots_to_play(number)
 	assert(not playable_slots.is_empty(), "Player managed to play a card that cannot be played")
 	var slot_position = playable_slots[0]

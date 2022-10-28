@@ -79,6 +79,7 @@ func play_number(number) -> void:
 	match chosen_suite:
 		Cards.Suite.Diamonds:
 			var reward = $Diamonds.play_card(number)
-			score.add(reward)
+			if reward is Reward.Points:
+				score.add(reward.points)
 		
 	chosen_suite = null

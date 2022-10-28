@@ -30,15 +30,17 @@ var text: String:
 var is_highlighted: bool = false:
 	set(val):
 		is_highlighted = val
+		queue_redraw()
 		if is_highlighted:
-			$Marker.color = self.color
+			$Marker.color = ColorPalette.GREY
 			$Marker.color.a = 0.2
 		elif not is_played:
 			$Marker.color = null
 
 func _draw():
+	var thickness = 5.0 if is_highlighted else 3.0
 	# use draw_line instead of draw_rect to get antialiasing
-	draw_line(Vector2(0, 0), Vector2(0, size.y), color, 2.0, true)
-	draw_line(Vector2(0, 0), Vector2(size.x, 0), color, 2.0, true)
-	draw_line(Vector2(size.x, 0), size, color, 2.0, true)
-	draw_line(Vector2(0, size.y), size, color, 2.0, true)
+	draw_line(Vector2(0, 0), Vector2(0, size.y), color, thickness, true)
+	draw_line(Vector2(0, 0), Vector2(size.x, 0), color, thickness, true)
+	draw_line(Vector2(size.x, 0), size, color, thickness, true)
+	draw_line(Vector2(0, size.y), size, color, thickness, true)

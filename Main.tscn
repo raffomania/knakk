@@ -44,10 +44,10 @@ text = "Score"
 script = ExtResource("3_77xjo")
 
 [node name="Field" type="Node2D" parent="."]
+position = Vector2(20, 70)
 script = ExtResource("3_rxndw")
 
 [node name="Diamonds" type="Node2D" parent="Field"]
-position = Vector2(0, 80)
 script = ExtResource("4_q6txs")
 
 [node name="RedrawCardArea" type="Control" parent="."]

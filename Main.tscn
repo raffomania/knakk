@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://oj8lgws878tj"]
+[gd_scene load_steps=8 format=3 uid="uid://oj8lgws878tj"]
 
 [ext_resource type="PackedScene" uid="uid://csxepv0yylg0m" path="res://Hand.tscn" id="2_52hhe"]
 [ext_resource type="Script" path="res://Deck.gd" id="2_hbhdv"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://Field.gd" id="3_rxndw"]
 [ext_resource type="Script" path="res://Diamonds/Diamonds.gd" id="4_q6txs"]
 [ext_resource type="Script" path="res://Reward/RedrawCardArea.gd" id="6_8tf7c"]
+[ext_resource type="Script" path="res://ActionIndicator.gd" id="7_ovbug"]
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -59,3 +60,22 @@ offset_right = 300.0
 offset_bottom = -600.0
 grow_vertical = 0
 script = ExtResource("6_8tf7c")
+
+[node name="ActionIndicator" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -150.0
+offset_top = -624.0
+offset_right = 150.0
+offset_bottom = -576.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Action Indicator"
+horizontal_alignment = 1
+vertical_alignment = 2
+autowrap_mode = 3
+script = ExtResource("7_ovbug")

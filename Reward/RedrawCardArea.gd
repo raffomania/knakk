@@ -10,8 +10,8 @@ var redraw_count := 0:
 var TEXTURE = preload("res://Reward/RedrawCard.svg")
 
 func _ready():
-	Events.consider_action.connect(self._consider_action)
-	Events.choose_card.connect(self._choose_card)
+	Events.consider_action.connect(_consider_action)
+	Events.choose_card.connect(_choose_card)
 
 func _consider_action(_card_type: Array, action: Events.Action, mark_playable: Callable) -> void:
 	if action != Events.Action.REDRAW:

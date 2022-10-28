@@ -23,8 +23,13 @@ enum Number {
     King
 }
 
+static func get_suite_label(suite: Cards.Suite) -> String:
+	return Suite.find_key(suite)
 
-static func get_number_sigil(number):
+static func get_number_label(number: Cards.Number) -> String:
+	return Number.find_key(number)
+
+static func get_number_sigil(number: Cards.Number) -> String:
 	match number:
 		Number.Ace: return "A"
 		Number.Two: return "2"

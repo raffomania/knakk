@@ -10,8 +10,12 @@ var card_scene := preload("res://Cards/Card.tscn")
 func _ready():
 	redraw_hand()
 
-	Events.turn_complete.connect(self._turn_complete)
+	Events.turn_complete.connect(self.redraw_hand)
 	Events.choose_card.connect(self._choose_card)
+
+	## After a round is complete, the deck resets. When that happens, we want to draw
+	## a fresh hand from the newly shuffled deck
+	deck.reset_complete.connect(self.redraw_hand)
 
 ## Discard the current hand and draw a new one
 func redraw_hand() -> void:
@@ -27,9 +31,6 @@ func _choose_card(_card_type: Array, action: Events.Action) -> void:
 
 	# user chose to redraw, draw a new card now
 	draw_card()
-
-func _turn_complete() -> void:
-	redraw_hand()
 
 func node_for_card_type(card_type: Array) -> Node:
 	return get_children().filter(func(child): 

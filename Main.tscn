@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://oj8lgws878tj"]
+[gd_scene load_steps=9 format=3 uid="uid://oj8lgws878tj"]
 
 [ext_resource type="PackedScene" uid="uid://csxepv0yylg0m" path="res://Hand.tscn" id="2_52hhe"]
+[ext_resource type="PackedScene" uid="uid://iqa80l616fa4" path="res://Turns/Turns.tscn" id="2_225rr"]
 [ext_resource type="Script" path="res://Deck.gd" id="2_hbhdv"]
 [ext_resource type="Script" path="res://Score.gd" id="3_77xjo"]
 [ext_resource type="Script" path="res://Field.gd" id="3_rxndw"]
@@ -25,24 +26,27 @@ current = true
 [node name="Hand" parent="." instance=ExtResource("2_52hhe")]
 position = Vector2(540, 2408)
 
-[node name="Deck" type="Label" parent="."]
-offset_right = 40.0
-offset_bottom = 23.0
-text = "50 Cards in Deck"
-script = ExtResource("2_hbhdv")
+[node name="Turns" parent="." instance=ExtResource("2_225rr")]
+anchors_preset = -1
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 113.0
+offset_bottom = 59.0
 
 [node name="Score" type="Label" parent="."]
-anchors_preset = 1
+anchors_preset = -1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -40.0
-offset_bottom = 23.0
+offset_left = -76.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = 59.0
 grow_horizontal = 0
 text = "Score"
 script = ExtResource("3_77xjo")
 
 [node name="Field" type="Node2D" parent="."]
-position = Vector2(20, 70)
+position = Vector2(20, 80)
 script = ExtResource("3_rxndw")
 
 [node name="Diamonds" type="Node2D" parent="Field"]
@@ -58,6 +62,13 @@ offset_right = 300.0
 offset_bottom = -600.0
 grow_vertical = 0
 script = ExtResource("6_8tf7c")
+
+[node name="Deck" type="Label" parent="."]
+offset_top = 1822.0
+offset_right = 226.0
+offset_bottom = 1870.0
+text = "50 Cards in Deck"
+script = ExtResource("2_hbhdv")
 
 [node name="ActionIndicator" type="Label" parent="."]
 anchors_preset = -1

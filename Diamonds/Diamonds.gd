@@ -18,12 +18,12 @@ var slots = [
 			down_arrow = [Cards.Number.Ace, Cards.Number.Seven]
 		},
 		{
-			reward = Reward.RedrawCard.new(),
+			reward = Reward.PlayAgain.new(),
 			right_arrow = [Cards.Number.Jack, Cards.Number.King],
 			down_arrow = [Cards.Number.Eight, Cards.Number.Ten]
 		},
 		{
-			reward = Reward.RedrawCard.new(),
+			reward = Reward.PlayAgain.new(),
 			right_arrow = [Cards.Number.Queen, Cards.Number.King],
 			down_arrow = [Cards.Number.Ten, Cards.Number.Jack]
 		},

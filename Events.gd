@@ -18,4 +18,9 @@ enum Action {
 signal consider_action(card_type: Array, action: Action, mark_playable: Callable)
 signal cancel_consider_action
 signal choose_card(card_type: Array, action: Action)
+
+## Each time the player marks a slot and obtains a reward, a turn is completed.
+## After 5 turns, all cards are returned to the deck and it is shuffled, beginning a new round
 signal turn_complete
+## After three rounds, the game is over
+signal round_complete

@@ -4,8 +4,12 @@ extends Label
 ## Cards on top of the deck are at the end of the array
 var cards_in_deck: Array[Array]
 
+signal reset_complete
+
+# todo why use init here?
 func _init():
 	reset()
+	Events.round_complete.connect(reset)
 
 ## Refill the deck with all possible cards and shuffle them
 func reset():
@@ -15,6 +19,7 @@ func reset():
 			cards_in_deck.push_back([Cards.Suite[suite], Cards.Number[number]])
 	cards_in_deck.shuffle()
 	update_count()
+	reset_complete.emit()
 
 ## Remove the top card from the deck and return it as a [suite, number] array
 func draw_card() -> Array:

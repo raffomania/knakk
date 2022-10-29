@@ -82,23 +82,23 @@ func _unhandled_input(event):
 	if dragging and event is InputEventScreenDrag:
 		target_drag_position = drag_offset + event.position
 
+		var previously_considering_action = considering_action
+
 		if target_drag_position.y < 1300:
-			if considering_action != Events.Action.CHOOSE:
-				considering_action = Events.Action.CHOOSE
-				Events.consider_action.emit(card_type, considering_action, func(can_play): self.can_play = can_play)
+			considering_action = Events.Action.CHOOSE
 		elif target_drag_position.x < 200 and target_drag_position.y > 1600 and target_drag_position.y < 1900:
-			if considering_action != Events.Action.REDRAW:
-				considering_action = Events.Action.REDRAW
-				Events.consider_action.emit(card_type, considering_action, func(can_play): self.can_play = can_play)
+			considering_action = Events.Action.REDRAW
 		elif target_drag_position.x > 800 and target_drag_position.y > 1600 and target_drag_position.y < 1900:
-			if considering_action != Events.Action.PLAY_AGAIN:
-				considering_action = Events.Action.PLAY_AGAIN
-				Events.consider_action.emit(card_type, considering_action, func(can_play): self.can_play = can_play)
+			considering_action = Events.Action.PLAY_AGAIN
 		else:
+			considering_action = Events.Action.NOTHING
+			can_play = false
+
+		if previously_considering_action != considering_action:
 			if considering_action != Events.Action.NOTHING:
+				Events.consider_action.emit(card_type, considering_action, func(can_play): self.can_play = can_play)
+			else:
 				Events.cancel_consider_action.emit()
-				considering_action = Events.Action.NOTHING
-				can_play = false
 
 		queue_redraw()
 

@@ -5,7 +5,7 @@ extends Node2D
 ## The deck provides us with new cards when a card is played
 @onready var deck := $"../Deck"
 
-var card_scene := preload("res://Cards/Card.tscn")
+var card_scene := preload("res://Card/Card.tscn")
 
 func _ready():
 	redraw_hand()

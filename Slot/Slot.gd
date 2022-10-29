@@ -2,7 +2,7 @@
 extends Node2D
 
 const MARKER_SCALE = 0.5
-const REDRAW_TEXTURE = preload("res://Reward/RedrawCard.svg")
+const REDRAW_TEXTURE = preload("res://Action/RedrawCard.svg")
 
 @export var size := Vector2(50, 50):
 	set(value):

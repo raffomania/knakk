@@ -12,6 +12,7 @@ var card_types_in_hand: Array[Array]
 enum Action {
 	CHOOSE,
 	REDRAW,
+	PLAY_AGAIN,
 	NOTHING
 }
 

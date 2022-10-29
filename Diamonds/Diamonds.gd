@@ -37,7 +37,7 @@ var slots = [
 		},
 	], [
 		{
-			reward = Reward.Points.new(1),
+			reward = Reward.RedrawCard.new(),
 			right_arrow = [Cards.Number.Five, Cards.Number.Seven],
 			down_arrow = [Cards.Number.Ace, Cards.Number.Four]
 		},

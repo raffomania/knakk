@@ -87,11 +87,14 @@ func play_suite(suite) -> void:
 
 func play_number(number) -> void:
 	match chosen_suite:
+		# todo replace this with a global event, ez
 		Cards.Suite.Diamonds:
 			var reward = $Diamonds.play_card(number)
 			if reward is Reward.Points:
 				score.add(reward.points)
 			elif reward is Reward.RedrawCard:
-				$"../RedrawCardArea".redraw_count += 1
+				$"../RedrawCardArea".redraw_tokens += 1
+			elif reward is Reward.PlayAgain:
+				$"../PlayAgainArea".play_again_tokens += 1
 		
 	chosen_suite = null

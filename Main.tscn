@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://c1f837rf6j63h"]
+[gd_scene load_steps=10 format=3 uid="uid://c1f837rf6j63h"]
 
 [ext_resource type="PackedScene" uid="uid://csxepv0yylg0m" path="res://Hand.tscn" id="2_52hhe"]
 [ext_resource type="PackedScene" uid="uid://iqa80l616fa4" path="res://Turns/Turns.tscn" id="2_225rr"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://Field.gd" id="3_rxndw"]
 [ext_resource type="Script" path="res://Diamonds/Diamonds.gd" id="4_q6txs"]
 [ext_resource type="Script" path="res://Action/RedrawCardArea.gd" id="6_8tf7c"]
+[ext_resource type="Script" path="res://Action/PlayAgainArea.gd" id="7_nmmy4"]
 [ext_resource type="Script" path="res://Action/ActionIndicator.gd" id="7_ovbug"]
 
 [node name="Main" type="Control"]
@@ -64,6 +65,18 @@ offset_right = 300.0
 offset_bottom = -600.0
 grow_vertical = 0
 script = ExtResource("6_8tf7c")
+
+[node name="PlayAgainArea" type="Control" parent="."]
+layout_mode = 1
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -300.0
+offset_top = -700.0
+offset_bottom = -600.0
+grow_vertical = 0
+script = ExtResource("7_nmmy4")
 
 [node name="Deck" type="Label" parent="."]
 layout_mode = 0

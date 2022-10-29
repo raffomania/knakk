@@ -17,11 +17,15 @@ const NORMAL_SCALE := Vector2(0.85, 0.85)
 
 ## The card's scale while being dragged
 const DRAGGING_SCALE := Vector2(0.9, 0.9)
+
 ## The card's rotation while being dragged
 const DRAGGING_ROTATION := PI / 35
 
 ## The card's scale while the player is hovering over an action area
 const ACTION_SCALE := Vector2(1, 1)
+
+## The card's scale while the player is hovering over an action area
+const PLAYED_SCALE := Vector2(0.8, 0.8)
 
 ## Once users touch this card, this is set to `true`
 ## and subsequent drag events will move this card on the screen
@@ -75,6 +79,9 @@ func area_input(_viewport, event, _shape_index):
 			# The user stopped dragging this card
 			self.dragging = false
 			if considering_action != Events.Action.NOTHING and can_play:
+				create_tween().tween_property(self, "scale", PLAYED_SCALE, SCALE_TWEEN_DURATION)
+				create_tween().tween_property(self, "rotation", 0, SCALE_TWEEN_DURATION)
+				await get_tree().create_timer(0.5).timeout
 				Events.choose_card.emit(card_type, considering_action)
 			elif considering_action != Events.Action.NOTHING:
 				Events.cancel_consider_action.emit()

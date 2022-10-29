@@ -80,7 +80,6 @@ func _choose_card(card_type: Array, action: Events.Action) -> void:
 		play_suite(card_type[0])
 	else:	
 		play_number(card_type[1])
-		Events.turn_complete.emit()
 
 func play_suite(suite) -> void:
 	chosen_suite = suite

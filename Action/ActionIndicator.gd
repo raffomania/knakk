@@ -1,6 +1,5 @@
 extends Label
 
-
 func _ready():
 	Events.consider_action.connect(_consider_action)
 	Events.choose_card.connect(_choose_card)
@@ -15,8 +14,10 @@ func _consider_action(card_type: Array, action: Events.Action, _mark_playable: C
 			text = "Play %s" % card_label
 		Events.Action.REDRAW:
 			text = "Replace %s with a new card" % card_label
+		Events.Action.PLAY_AGAIN:
+			text = "Play an extra turn with your current cards"
 		_:
-			text = "Take unknown action" % card_label
+			text = "Take unknown action"
 
 func _choose_card(_card_type: Array, _action: Events.Action) -> void:
 	text = ""

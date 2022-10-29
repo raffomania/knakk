@@ -69,12 +69,13 @@ func area_input(_viewport, event, _shape_index):
 			self.dragging = false
 			if considering_action != Events.Action.NOTHING and can_play:
 				Events.choose_card.emit(card_type, considering_action)
-				queue_free()
-			else:
-				if considering_action != Events.Action.NOTHING:
-					Events.cancel_consider_action.emit()
-				self.move_to(self.starting_position)
-				create_tween().tween_property(self, "scale", original_scale, SCALE_TWEEN_DURATION)
+			elif considering_action != Events.Action.NOTHING:
+				Events.cancel_consider_action.emit()
+
+			considering_action = Events.Action.NOTHING
+			self.move_to(self.starting_position)
+			create_tween().tween_property(self, "scale", original_scale, SCALE_TWEEN_DURATION)
+			queue_redraw()
 
 ## Called for all input events, regardless of the area they're touching
 func _unhandled_input(event):
@@ -88,6 +89,10 @@ func _unhandled_input(event):
 		elif target_drag_position.x < 200 and target_drag_position.y > 1600 and target_drag_position.y < 1900:
 			if considering_action != Events.Action.REDRAW:
 				considering_action = Events.Action.REDRAW
+				Events.consider_action.emit(card_type, considering_action, func(can_play): self.can_play = can_play)
+		elif target_drag_position.x > 800 and target_drag_position.y > 1600 and target_drag_position.y < 1900:
+			if considering_action != Events.Action.PLAY_AGAIN:
+				considering_action = Events.Action.PLAY_AGAIN
 				Events.consider_action.emit(card_type, considering_action, func(can_play): self.can_play = can_play)
 		else:
 			if considering_action != Events.Action.NOTHING:

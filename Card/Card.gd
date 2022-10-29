@@ -12,9 +12,16 @@ const ANIMATE_SMOOTH_SPEED := 15.0
 ## Used to detect when users touch this card
 @onready var touch_area: Area2D = $TouchDetectionArea
 
-## Remember the original scale so we can reset to it after
-## dragging stops
-@onready var original_scale := self.scale
+## The card's normal scale when it's not being dragged
+const NORMAL_SCALE := Vector2(0.85, 0.85)
+
+## The card's scale while being dragged
+const DRAGGING_SCALE := Vector2(0.9, 0.9)
+## The card's rotation while being dragged
+const DRAGGING_ROTATION := PI / 35
+
+## The card's scale while the player is hovering over an action area
+const ACTION_SCALE := Vector2(1, 1)
 
 ## Once users touch this card, this is set to `true`
 ## and subsequent drag events will move this card on the screen
@@ -50,6 +57,7 @@ var card_type: Array
 func _ready():
 	touch_area.connect("input_event", self.area_input)
 	Events.card_types_in_hand.append(card_type)
+	visualize_interaction_state()
 
 func _exit_tree():
 	Events.card_types_in_hand.erase(card_type)
@@ -63,7 +71,6 @@ func area_input(_viewport, event, _shape_index):
 			self.drag_offset = self.global_position - event.position
 			# If the card is just returning to the hand, cancel that motion immediately
 			self.move_to(self.global_position)
-			create_tween().tween_property(self, "scale", Vector2.ONE, SCALE_TWEEN_DURATION)
 		else:
 			# The user stopped dragging this card
 			self.dragging = false
@@ -74,8 +81,9 @@ func area_input(_viewport, event, _shape_index):
 
 			considering_action = Events.Action.NOTHING
 			self.move_to(self.starting_position)
-			create_tween().tween_property(self, "scale", original_scale, SCALE_TWEEN_DURATION)
 			queue_redraw()
+
+		visualize_interaction_state()
 
 ## Called for all input events, regardless of the area they're touching
 func _unhandled_input(event):
@@ -99,8 +107,19 @@ func _unhandled_input(event):
 				Events.consider_action.emit(card_type, considering_action, func(can_play): self.can_play = can_play)
 			else:
 				Events.cancel_consider_action.emit()
+			visualize_interaction_state()
 
 		queue_redraw()
+
+func visualize_interaction_state() -> void:
+	if considering_action != Events.Action.NOTHING:
+		create_tween().tween_property(self, "scale", ACTION_SCALE, SCALE_TWEEN_DURATION)
+	elif dragging:
+		create_tween().tween_property(self, "scale", DRAGGING_SCALE, SCALE_TWEEN_DURATION)
+		create_tween().tween_property(self, "rotation", DRAGGING_ROTATION, SCALE_TWEEN_DURATION)
+	else:
+		create_tween().tween_property(self, "scale", NORMAL_SCALE, SCALE_TWEEN_DURATION)
+		create_tween().tween_property(self, "rotation", 0, SCALE_TWEEN_DURATION)
 
 ## Tell this card to transition to a new position.
 ## The transition is animated.

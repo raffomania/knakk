@@ -34,6 +34,7 @@ func redraw_hand() -> void:
 func _choose_card(card_type: Array, action: Events.Action) -> void:
 	if action == Events.Action.REDRAW:
 		# user chose to redraw, draw a new card now
+		node_for_card_type(card_type).queue_free()
 		draw_card()
 
 	if action == Events.Action.PLAY_AGAIN:

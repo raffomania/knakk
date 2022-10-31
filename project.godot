@@ -9,11 +9,6 @@
 config_version=5
 
 _global_script_classes=[{
-"base": "Control",
-"class": &"Arrow",
-"language": &"GDScript",
-"path": "res://Diamonds/Arrow.gd"
-}, {
 "base": "RefCounted",
 "class": &"Cards",
 "language": &"GDScript",
@@ -30,7 +25,6 @@ _global_script_classes=[{
 "path": "res://Reward.gd"
 }]
 _global_script_class_icons={
-"Arrow": "",
 "Cards": "",
 "ColorPalette": "",
 "Reward": ""

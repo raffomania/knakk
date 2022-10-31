@@ -37,6 +37,7 @@ func can_play_number(number: Cards.Number) -> bool:
 func child_node_for_suite(suite: Cards.Suite) -> Variant:
 	match suite:
 		Cards.Suite.Diamonds: return $Diamonds
+		Cards.Suite.Spades: return $Spades
 		_: return null
 
 func _consider_action(card_type: Array, action: Events.Action, mark_playable: Callable) -> void:
@@ -46,6 +47,7 @@ func _consider_action(card_type: Array, action: Events.Action, mark_playable: Ca
 	mark_playable.call(can_play(card_type))
 	# First, reset all slot highlights
 	$Diamonds.highlight_options([])
+	$Spades.highlight_options([])
 
 	# A suite is already chosen, highlight that suite's 
 	# slots for the number of the considered card
@@ -68,9 +70,10 @@ func _consider_action(card_type: Array, action: Events.Action, mark_playable: Ca
 
 func _cancel_consider_action() -> void:
 	if chosen_suite != null:
-		$Diamonds.highlight_options(Events.card_types_in_hand)
+		child_node_for_suite(chosen_suite).highlight_options(Events.card_types_in_hand)
 	else:
 		$Diamonds.highlight_options([])
+		$Spades.highlight_options([])
 
 func _choose_card(card_type: Array, action: Events.Action) -> void:
 	if action != Events.Action.CHOOSE:
@@ -85,15 +88,19 @@ func play_suite(suite) -> void:
 	chosen_suite = suite
 
 func play_number(number) -> void:
+	var reward = Reward.Nothing.new()
 	match chosen_suite:
-		# todo replace this with a global event, ez
 		Cards.Suite.Diamonds:
-			var reward = $Diamonds.play_card(number)
-			if reward is Reward.Points:
-				score.add(reward.points)
-			elif reward is Reward.RedrawCard:
-				$"../RedrawCardArea".redraw_tokens += 1
-			elif reward is Reward.PlayAgain:
-				$"../PlayAgainArea".play_again_tokens += 1
+			reward = $Diamonds.play_card(number)
+		Cards.Suite.Spades:
+			reward = $Spades.play_card(number)
+
+	# todo replace this with a global event, ez
+	if reward is Reward.Points:
+		score.add(reward.points)
+	elif reward is Reward.RedrawCard:
+		$"../RedrawCardArea".redraw_tokens += 1
+	elif reward is Reward.PlayAgain:
+		$"../PlayAgainArea".play_again_tokens += 1
 		
 	chosen_suite = null

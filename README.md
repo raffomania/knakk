@@ -1,5 +1,7 @@
 # Clever Solitaire
 
+todo: reorder functions in all scripts for readability
+
 ## Topics
 
 ### Camera

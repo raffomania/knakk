@@ -14,8 +14,6 @@ const REDRAW_TEXTURE = preload("res://Action/RedrawCard.svg")
 
 ## When the player fills this slot by choosing a matching card,
 ## we'll set this to true.
-## This is for the visual indicator only. The logic around filling slots
-## is handled in the `Diamonds` node.
 var is_played := false:
 	set(val):
 		is_played = val

@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 @onready var score = $"../Score"
 
@@ -38,6 +38,7 @@ func child_node_for_suite(suite: Cards.Suite) -> Variant:
 	match suite:
 		Cards.Suite.Diamonds: return $Diamonds
 		Cards.Suite.Spades: return $Spades
+		Cards.Suite.Hearts: return $Hearts
 		_: return null
 
 func _consider_action(card_type: Array, action: Events.Action, mark_playable: Callable) -> void:
@@ -48,6 +49,7 @@ func _consider_action(card_type: Array, action: Events.Action, mark_playable: Ca
 	# First, reset all slot highlights
 	$Diamonds.highlight_options([])
 	$Spades.highlight_options([])
+	$Hearts.highlight_options([])
 
 	# A suite is already chosen, highlight that suite's 
 	# slots for the number of the considered card
@@ -74,6 +76,7 @@ func _cancel_consider_action() -> void:
 	else:
 		$Diamonds.highlight_options([])
 		$Spades.highlight_options([])
+		$Hearts.highlight_options([])
 
 func _choose_card(card_type: Array, action: Events.Action) -> void:
 	if action != Events.Action.CHOOSE:
@@ -94,6 +97,8 @@ func play_number(number) -> void:
 			reward = $Diamonds.play_card(number)
 		Cards.Suite.Spades:
 			reward = $Spades.play_card(number)
+		Cards.Suite.Hearts:
+			reward = $Hearts.play_card(number)
 
 	# todo replace this with a global event, ez
 	if reward is Reward.Points:

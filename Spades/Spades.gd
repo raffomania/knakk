@@ -67,7 +67,6 @@ func spawn_slots() -> void:
 			node.size = Vector2.ONE * SLOT_SIZE
 			node.position = get_slot_position(column_index, row_index)
 			node.color = COLOR
-			# todo replace this with a different format
 			node.text = Cards.get_number_sigil(slot_spec.number)
 
 			add_child(node)

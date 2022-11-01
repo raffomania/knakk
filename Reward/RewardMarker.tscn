@@ -11,7 +11,6 @@ offset_bottom = 40.0
 script = ExtResource("1_go8lb")
 
 [node name="Label" type="Label" parent="."]
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

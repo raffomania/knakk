@@ -29,7 +29,7 @@ jobs:
             - name: get tag from version
               id: tag_version
               run: |
-                  echo ::set-output name=TAG_VERSION::${GITHUB_REF#refs/tags/v}
+                  echo name=TAG_VERSION::${GITHUB_REF#refs/tags/v} >> $GITHUB_OUTPUT
 
             - name: Deploy to pages
               uses: peaceiris/actions-gh-pages@v3

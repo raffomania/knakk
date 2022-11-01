@@ -81,7 +81,9 @@ func area_input(_viewport, event, _shape_index):
 			if considering_action != Events.Action.NOTHING and can_play:
 				create_tween().tween_property(self, "scale", PLAYED_SCALE, SCALE_TWEEN_DURATION)
 				create_tween().tween_property(self, "rotation", 0, SCALE_TWEEN_DURATION)
-				await get_tree().create_timer(0.5).timeout
+				$Particles.emitting = true
+				$Particles2.emitting = true
+				await get_tree().create_timer(0.6).timeout
 				Events.choose_card.emit(card_type, considering_action)
 			elif considering_action != Events.Action.NOTHING:
 				Events.cancel_consider_action.emit()

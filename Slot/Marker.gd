@@ -7,4 +7,4 @@ var color: Variant = null:
 
 func _draw():
 	if color != null:
-		draw_rect(Rect2(size / 2, size), color)
+		draw_rect(Rect2(Vector2.ZERO, size), color)

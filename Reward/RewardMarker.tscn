@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3 uid="uid://dlytt6vu2k6q2"]
+
+[ext_resource type="Texture2D" uid="uid://bqdli112hohhc" path="res://Reward/Reward.svg" id="1_bbv6s"]
+[ext_resource type="Script" path="res://Reward/RewardMarker.gd" id="1_go8lb"]
+
+[node name="Reward" type="Control"]
+custom_minimum_size = Vector2i(40, 40)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_go8lb")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color(0, 0, 0, 1)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_bbv6s")
+ignore_texture_size = true
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.980392, 0.980392, 0.980392, 1)
+text = "10"
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -36,6 +36,10 @@ todo: reorder functions in all scripts for readability
 
 ### Other tweaks
 
+### Code style
+
+- function ordering
+
 ## Considerations
 
 - How to handle propagation and capturing of click events?

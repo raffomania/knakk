@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dura2r4dvyrc6"]
+[gd_scene load_steps=14 format=3 uid="uid://dura2r4dvyrc6"]
 
 [ext_resource type="PackedScene" uid="uid://csxepv0yylg0m" path="res://Hand.tscn" id="2_52hhe"]
 [ext_resource type="PackedScene" uid="uid://iqa80l616fa4" path="res://Turns/Turns.tscn" id="2_225rr"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" path="res://Action/PlayAgainArea.gd" id="7_nmmy4"]
 [ext_resource type="Script" path="res://Action/ActionIndicator.gd" id="7_ovbug"]
 [ext_resource type="Script" path="res://Field/Hearts.gd" id="8_r5mru"]
+[ext_resource type="Script" path="res://Field/Clubs.gd" id="9_ifqaq"]
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -89,6 +90,16 @@ offset_top = 971.0
 offset_bottom = 1011.0
 theme_override_constants/separation = 25
 script = ExtResource("8_r5mru")
+
+[node name="Clubs" type="HBoxContainer" parent="Field"]
+custom_minimum_size = Vector2i(0, 90)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+offset_top = 1094.0
+offset_bottom = 1184.0
+theme_override_constants/separation = 25
+script = ExtResource("9_ifqaq")
 
 [node name="RedrawCardArea" type="Control" parent="."]
 layout_mode = 1

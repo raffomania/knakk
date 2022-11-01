@@ -83,6 +83,7 @@ func area_input(_viewport, event, _shape_index):
 				create_tween().tween_property(self, "rotation", 0, SCALE_TWEEN_DURATION)
 				$Particles.emitting = true
 				$Particles2.emitting = true
+				# todo this creates race conditions with fast-dragging players
 				await get_tree().create_timer(0.6).timeout
 				Events.choose_card.emit(card_type, considering_action)
 			elif considering_action != Events.Action.NOTHING:

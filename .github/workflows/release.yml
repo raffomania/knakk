@@ -1,0 +1,65 @@
+env:
+    GODOT_VERSION: 4.0
+    GODOT_BUILD: beta4
+
+on:
+    push:
+        tags:
+            - "v*"
+
+jobs:
+    build:
+        name: Export game
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v3
+
+            - name: export game
+              uses: firebelley/godot-export@v4
+              with:
+                  godot_executable_download_url: https://downloads.tuxfamily.org/godotengine/${{ env.GODOT_VERSION }}/${{ env.GODOT_BUILD }}/Godot_v${{ env.GODOT_VERSION }}-${{ env.GODOT_BUILD }}_linux.x86_64.zip
+                  godot_export_templates_download_url: https://downloads.tuxfamily.org/godotengine/${{ env.GODOT_VERSION }}/${{ env.GODOT_BUILD }}/Godot_v${{ env.GODOT_VERSION }}-${{ env.GODOT_BUILD }}_export_templates.tpz
+                  relative_project_path: ./
+                  use_preset_export_path: true
+                  use_godot_4: true
+
+            - name: get tag from version
+              id: tag_version
+              run: |
+                  echo ::set-output name=TAG_VERSION::${GITHUB_REF#refs/tags/v}
+
+            - name: Deploy to pages
+              uses: peaceiris/actions-gh-pages@v3
+              with:
+                  github_token: ${{ secrets.GITHUB_TOKEN }}
+                  publish_dir: ./export/web
+
+            # - name: Upload windows build to itch.io
+            #   uses: josephbmanley/butler-publish-itchio-action@v1.0.2
+            #   env:
+            #       BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
+            #       CHANNEL: windows
+            #       ITCH_GAME: 2planets
+            #       ITCH_USER: pomme-grenade
+            #       PACKAGE: export/windows
+
+            # - name: Upload linux build to itch.io
+            #   uses: josephbmanley/butler-publish-itchio-action@v1.0.2
+            #   env:
+            #       BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
+            #       CHANNEL: linux
+            #       ITCH_GAME: 2planets
+            #       ITCH_USER: pomme-grenade
+            #       PACKAGE: export/linux
+
+            # OSX headless export is broken until godot 4.0 is released:
+            # https://github.com/godotengine/godot/issues/39931
+            # - name: Upload OSX build to itch.io
+            #   uses: josephbmanley/butler-publish-itchio-action@v1.0.2
+            #   env:
+            #     BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
+            #     CHANNEL: osx
+            #     ITCH_GAME: 2planets
+            #     ITCH_USER: pomme-grenade
+            #     PACKAGE: export/osx

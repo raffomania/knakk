@@ -52,6 +52,10 @@ window/vsync/vsync_mode=0
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
+[editor]
+
+movie_writer/movie_file="movie.avi"
+
 [gui]
 
 theme/custom="res://default_theme.tres"

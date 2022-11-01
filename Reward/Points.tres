@@ -1,0 +1,6 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://b7uaj7rlxl7l8"]
+
+[ext_resource type="Script" path="res://Reward/Reward.gd" id="1_phby8"]
+
+[resource]
+script = ExtResource("1_phby8")

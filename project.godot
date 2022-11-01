@@ -22,7 +22,7 @@ _global_script_classes=[{
 "base": "RefCounted",
 "class": &"Reward",
 "language": &"GDScript",
-"path": "res://Reward.gd"
+"path": "res://Reward/Reward.gd"
 }]
 _global_script_class_icons={
 "Cards": "",

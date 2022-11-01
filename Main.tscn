@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c1f837rf6j63h"]
+[gd_scene load_steps=12 format=3 uid="uid://c1f837rf6j63h"]
 
 [ext_resource type="PackedScene" uid="uid://csxepv0yylg0m" path="res://Hand.tscn" id="2_52hhe"]
 [ext_resource type="PackedScene" uid="uid://iqa80l616fa4" path="res://Turns/Turns.tscn" id="2_225rr"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://Score.gd" id="3_77xjo"]
 [ext_resource type="Script" path="res://Field.gd" id="3_rxndw"]
 [ext_resource type="Script" path="res://Diamonds/Diamonds.gd" id="4_q6txs"]
+[ext_resource type="PackedScene" uid="uid://dlytt6vu2k6q2" path="res://Reward/RewardMarker.tscn" id="4_ru2mo"]
 [ext_resource type="Script" path="res://Spades/Spades.gd" id="6_8srab"]
 [ext_resource type="Script" path="res://Action/RedrawCardArea.gd" id="6_8tf7c"]
 [ext_resource type="Script" path="res://Action/PlayAgainArea.gd" id="7_nmmy4"]
@@ -29,23 +30,33 @@ current = true
 position = Vector2(540, 2408)
 
 [node name="Turns" parent="." instance=ExtResource("2_225rr")]
+layout_mode = 1
 anchors_preset = -1
 offset_left = 10.0
 offset_top = 10.0
 offset_right = 113.0
 offset_bottom = 59.0
 
-[node name="Score" type="Label" parent="."]
-anchors_preset = -1
+[node name="Score" type="Control" parent="."]
+layout_mode = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -76.0
+offset_left = -59.0
 offset_top = 10.0
 offset_right = -10.0
 offset_bottom = 59.0
 grow_horizontal = 0
-text = "Score"
 script = ExtResource("3_77xjo")
+
+[node name="Reward" parent="Score" instance=ExtResource("4_ru2mo")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Field" type="Node2D" parent="."]
 position = Vector2(20, 80)
@@ -59,7 +70,7 @@ position = Vector2(0, 30)
 script = ExtResource("6_8srab")
 
 [node name="RedrawCardArea" type="Control" parent="."]
-layout_mode = 3
+layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -70,7 +81,7 @@ grow_vertical = 0
 script = ExtResource("6_8tf7c")
 
 [node name="PlayAgainArea" type="Control" parent="."]
-layout_mode = 3
+layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
@@ -84,6 +95,7 @@ grow_vertical = 0
 script = ExtResource("7_nmmy4")
 
 [node name="Deck" type="Label" parent="."]
+layout_mode = 0
 offset_top = 1822.0
 offset_right = 226.0
 offset_bottom = 1870.0
@@ -91,6 +103,7 @@ text = "50 Cards in Deck"
 script = ExtResource("2_hbhdv")
 
 [node name="ActionIndicator" type="Label" parent="."]
+layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
 anchor_top = 1.0

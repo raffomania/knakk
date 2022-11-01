@@ -13,7 +13,7 @@ offset_bottom = 90.0
 script = ExtResource("1_s8io1")
 
 [node name="Marker" type="Control" parent="."]
-layout_mode = 1
+layout_mode = 3
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 20.0
@@ -26,7 +26,6 @@ script = ExtResource("2_yvqn3")
 
 [node name="Reward" parent="." instance=ExtResource("3_6w4dj")]
 custom_minimum_size = Vector2i(60, 60)
-layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
 anchor_top = 1.0

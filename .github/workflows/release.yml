@@ -1,6 +1,6 @@
 env:
-    GODOT_VERSION: 4.0
-    GODOT_BUILD: beta4
+    GODOT_VERSION: "4.0"
+    GODOT_BUILD: "beta4"
 
 on:
     push:

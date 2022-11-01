@@ -5,7 +5,7 @@ var X_PADDING := 90
 var Y_PADDING := 80
 
 const SLOT_SCENE = preload("res://Slot/Slot.tscn")
-const ARROW_SCENE = preload("res://Diamonds/Arrow.tscn")
+const ARROW_SCENE = preload("res://Field/Arrow.tscn")
 
 # todo convert to x,y coordinates
 var slots = [

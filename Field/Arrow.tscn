@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://b5dajvrmg1ril"]
+[gd_scene load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://Diamonds/Arrow.gd" id="1_ucqqb"]
+[ext_resource type="Script" path="res://Field/Arrow.gd" id="1_ucqqb"]
 
 [node name="Arrow" type="Control"]
 layout_mode = 3

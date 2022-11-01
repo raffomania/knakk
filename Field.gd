@@ -1,6 +1,6 @@
 extends Control
 
-@onready var score = $"../Score"
+@onready var score = $"../TopBar/Score"
 
 ## Either `null` or `Cards.Suite`
 ## If `null`, no suite has been chosen for this turn

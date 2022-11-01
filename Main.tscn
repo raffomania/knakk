@@ -31,28 +31,34 @@ current = true
 [node name="Hand" parent="." instance=ExtResource("2_52hhe")]
 position = Vector2(540, 2408)
 
-[node name="Turns" parent="." instance=ExtResource("2_225rr")]
+[node name="TopBar" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 20.0
+offset_top = 40.0
+offset_right = -20.0
+grow_horizontal = 2
+
+[node name="Turns" parent="TopBar" instance=ExtResource("2_225rr")]
+layout_mode = 1
 anchors_preset = -1
-offset_left = 10.0
-offset_top = 10.0
-offset_right = 113.0
+offset_right = 138.0
 offset_bottom = 59.0
 
-[node name="Score" type="Control" parent="."]
-layout_mode = 3
+[node name="Score" type="Control" parent="TopBar"]
+layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -59.0
-offset_top = 10.0
-offset_right = -10.0
-offset_bottom = 59.0
+offset_left = -49.0
+offset_bottom = 49.0
 grow_horizontal = 0
 script = ExtResource("3_77xjo")
 
-[node name="Reward" parent="Score" instance=ExtResource("4_ru2mo")]
-custom_minimum_size = Vector2(60, 60)
-anchors_preset = 15
+[node name="Reward" parent="TopBar/Score" instance=ExtResource("4_ru2mo")]
+layout_mode = 1
+anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_right = 0.0
@@ -61,14 +67,14 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Field" type="Control" parent="."]
-layout_mode = 3
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 20.0
-offset_top = 80.0
+offset_top = 152.0
 offset_right = -20.0
-offset_bottom = -800.0
+offset_bottom = -824.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("3_rxndw")
@@ -77,29 +83,31 @@ script = ExtResource("3_rxndw")
 script = ExtResource("4_q6txs")
 
 [node name="Spades" type="Node2D" parent="Field"]
-position = Vector2(0, 30)
+position = Vector2(0, 50)
 script = ExtResource("6_8srab")
 
 [node name="Hearts" type="HBoxContainer" parent="Field"]
 custom_minimum_size = Vector2(0, 90)
+layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
-offset_top = 971.0
-offset_bottom = 1011.0
+offset_top = 1112.0
+offset_bottom = 1202.0
 theme_override_constants/separation = 25
 script = ExtResource("8_r5mru")
 
 [node name="Clubs" type="HBoxContainer" parent="Field"]
 custom_minimum_size = Vector2(0, 90)
+layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
-offset_top = 1094.0
-offset_bottom = 1184.0
+offset_top = 1319.0
+offset_bottom = 1409.0
 theme_override_constants/separation = 25
 script = ExtResource("9_ifqaq")
 
 [node name="RedrawCardArea" type="Control" parent="."]
-layout_mode = 3
+layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -110,7 +118,7 @@ grow_vertical = 0
 script = ExtResource("6_8tf7c")
 
 [node name="PlayAgainArea" type="Control" parent="."]
-layout_mode = 3
+layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
@@ -124,6 +132,7 @@ grow_vertical = 0
 script = ExtResource("7_nmmy4")
 
 [node name="Deck" type="Label" parent="."]
+layout_mode = 0
 offset_top = 1822.0
 offset_right = 226.0
 offset_bottom = 1870.0
@@ -131,6 +140,7 @@ text = "50 Cards in Deck"
 script = ExtResource("2_hbhdv")
 
 [node name="ActionIndicator" type="Label" parent="."]
+layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
 anchor_top = 1.0

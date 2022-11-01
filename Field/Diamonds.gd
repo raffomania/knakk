@@ -1,8 +1,8 @@
 extends Node2D
 
 const SLOT_SIZE := 90
-var X_PADDING := 90
-var Y_PADDING := 80
+var X_PADDING := 146
+var Y_PADDING := 110
 
 const SLOT_SCENE = preload("res://Slot/Slot.tscn")
 const ARROW_SCENE = preload("res://Field/Arrow.tscn")

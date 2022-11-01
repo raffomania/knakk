@@ -67,7 +67,6 @@ func play_card(number: Cards.Number) -> Reward:
 	var slot_spec = slots[slot_column]
 	slot_spec.played_number = number
 	slot_spec.node.text = Cards.get_number_sigil(number)
-	slot_spec.node.reward = Reward.Nothing.new()
 
 	# Reset highlights
 	highlight_options([])

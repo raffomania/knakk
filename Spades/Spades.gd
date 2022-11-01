@@ -68,7 +68,7 @@ func spawn_slots() -> void:
 			node.position = get_slot_position(column_index, row_index)
 			node.color = COLOR
 			# todo replace this with a different format
-			node.reward = Reward.Points.new(slot_spec.number)
+			node.text = Cards.get_number_sigil(slot_spec.number)
 
 			add_child(node)
 			slot_spec.node = node

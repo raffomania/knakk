@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Reward/RewardMarker.gd" id="1_go8lb"]
 
 [node name="Reward" type="Control"]
-custom_minimum_size = Vector2i(40, 40)
+custom_minimum_size = Vector2i(60, 60)
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0

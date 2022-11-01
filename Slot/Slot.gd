@@ -1,3 +1,4 @@
+@tool
 extends Control
 
 const MARKER_SCALE = 0.5
@@ -6,6 +7,7 @@ var color := Color.BLACK:
 	set(val):
 		color = val
 		$Reward.color = color
+		($Label as Label).add_theme_color_override("font_color", color)
 
 ## When the player fills this slot by choosing a matching card,
 ## we'll set this to true.
@@ -15,11 +17,17 @@ var is_played := false:
 		if is_played:
 			$Marker.color = ColorPalette.GREY
 
-var reward = null:
+var reward:
 	set(val):
 		$Reward.reward = val
 	get:
 		return $Reward.reward
+
+var text: String:
+	set(val):
+		$Label.text = val
+	get:
+		return $Label.text
 
 var is_highlighted: bool = false:
 	set(val):

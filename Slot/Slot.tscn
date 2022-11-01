@@ -12,8 +12,20 @@ offset_right = 90.0
 offset_bottom = 90.0
 script = ExtResource("1_s8io1")
 
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = ">Q"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Marker" type="Control" parent="."]
-layout_mode = 3
+layout_mode = 1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 20.0
@@ -25,14 +37,15 @@ grow_vertical = 2
 script = ExtResource("2_yvqn3")
 
 [node name="Reward" parent="." instance=ExtResource("3_6w4dj")]
-custom_minimum_size = Vector2i(60, 60)
+layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -15.0
-offset_right = 0.0
-offset_bottom = 0.0
+offset_left = -37.5
+offset_top = -30.0
+offset_right = 22.5
+offset_bottom = 30.0
 grow_horizontal = 2
 grow_vertical = 2

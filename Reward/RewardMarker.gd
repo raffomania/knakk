@@ -8,7 +8,7 @@ var color := Color.BLACK:
 		color = val
 		$TextureRect.modulate = color
 
-var reward = null:
+var reward:
 	set(val):
 		reward = val
 		$TextureRect.visible = true

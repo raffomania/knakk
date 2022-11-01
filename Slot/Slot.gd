@@ -1,4 +1,3 @@
-@tool
 extends Control
 
 const MARKER_SCALE = 0.5
@@ -17,17 +16,19 @@ var is_played := false:
 		if is_played:
 			$Marker.color = ColorPalette.GREY
 
-var reward:
+var reward: Reward = Reward.Nothing.new():
 	set(val):
+		reward = val
 		$Reward.reward = val
 	get:
-		return $Reward.reward
+		return reward
 
-var text: String:
+var text: String = "":
 	set(val):
+		text = val
 		$Label.text = val
 	get:
-		return $Label.text
+		return text
 
 var is_highlighted: bool = false:
 	set(val):
@@ -38,6 +39,10 @@ var is_highlighted: bool = false:
 			$Marker.color.a = 0.2
 		elif not is_played:
 			$Marker.color = null
+
+func _ready():
+	$Label.text = text
+	$Reward.reward = reward
 
 func _draw():
 	var thickness = 5.0 if is_highlighted else 3.0

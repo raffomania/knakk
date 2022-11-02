@@ -1,59 +1,59 @@
-# This file is currently disabled as godot 4's headless export is broken.
+env:
+    GODOT_VERSION: "4.0"
+    GODOT_BUILD: "beta4"
 
-# env:
-#     GODOT_VERSION: "4.0"
-#     GODOT_BUILD: "beta4"
+on:
+    push:
+        branches:
+            - main
+jobs:
+    build:
+        name: Export game
+        runs-on: ubuntu-latest
+        # This job is currently disabled as godot 4's headless export is broken.
+        if: ${{ false }}
 
-# on:
-#     push:
-#         branches:
-#             - main
-# jobs:
-#     build:
-#         name: Export game
-#         runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
 
-#         steps:
-#             - uses: actions/checkout@v3
+            - name: export game
+              uses: firebelley/godot-export@v4.2.0
+              with:
+                  godot_executable_download_url: https://downloads.tuxfamily.org/godotengine/${{ env.GODOT_VERSION }}/${{ env.GODOT_BUILD }}/Godot_v${{ env.GODOT_VERSION }}-${{ env.GODOT_BUILD }}_linux.x86_64.zip
+                  godot_export_templates_download_url: https://downloads.tuxfamily.org/godotengine/${{ env.GODOT_VERSION }}/${{ env.GODOT_BUILD }}/Godot_v${{ env.GODOT_VERSION }}-${{ env.GODOT_BUILD }}_export_templates.tpz
+                  relative_project_path: ./
+                  use_preset_export_path: true
+                  use_godot_4: true
 
-#             - name: export game
-#               uses: firebelley/godot-export@v4.2.0
-#               with:
-#                   godot_executable_download_url: https://downloads.tuxfamily.org/godotengine/${{ env.GODOT_VERSION }}/${{ env.GODOT_BUILD }}/Godot_v${{ env.GODOT_VERSION }}-${{ env.GODOT_BUILD }}_linux.x86_64.zip
-#                   godot_export_templates_download_url: https://downloads.tuxfamily.org/godotengine/${{ env.GODOT_VERSION }}/${{ env.GODOT_BUILD }}/Godot_v${{ env.GODOT_VERSION }}-${{ env.GODOT_BUILD }}_export_templates.tpz
-#                   relative_project_path: ./
-#                   use_preset_export_path: true
-#                   use_godot_4: true
+            - name: get tag from version
+              id: tag_version
+              run: |
+                  echo name=TAG_VERSION::${GITHUB_REF#refs/tags/v} >> $GITHUB_OUTPUT
 
-#             - name: get tag from version
-#               id: tag_version
-#               run: |
-#                   echo name=TAG_VERSION::${GITHUB_REF#refs/tags/v} >> $GITHUB_OUTPUT
+            - name: Publish
+              uses: netlify/actions/cli@master
+              with:
+                  args: deploy --dir=export/web --prod
+              env:
+                  NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+                  NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
 
-#             - name: Publish
-#               uses: netlify/actions/cli@master
-#               with:
-#                   args: deploy --dir=export/web --prod
-#               env:
-#                   NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-#                   NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+            - name: Upload web build to itch.io
+              uses: yeslayla/butler-publish-itchio-action@v1.0.3
+              env:
+                  BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
+                  CHANNEL: web
+                  ITCH_GAME: clever-solitaire
+                  ITCH_USER: raffomania
+                  PACKAGE: export/web
+                  VERSION: ${{ steps.tag_version.outputs.TAG_VERSION }}
 
-#             - name: Upload web build to itch.io
-#               uses: yeslayla/butler-publish-itchio-action@v1.0.3
-#               env:
-#                   BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
-#                   CHANNEL: web
-#                   ITCH_GAME: clever-solitaire
-#                   ITCH_USER: raffomania
-#                   PACKAGE: export/web
-#                   VERSION: ${{ steps.tag_version.outputs.TAG_VERSION }}
-
-#             - name: Upload linux build to itch.io
-#               uses: yeslayla/butler-publish-itchio-action@v1.0.3
-#               env:
-#                   BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
-#                   CHANNEL: linux
-#                   ITCH_GAME: clever-solitaire
-#                   ITCH_USER: raffomania
-#                   PACKAGE: export/linux
-#                   VERSION: ${{ steps.tag_version.outputs.TAG_VERSION }}
+            - name: Upload linux build to itch.io
+              uses: yeslayla/butler-publish-itchio-action@v1.0.3
+              env:
+                  BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
+                  CHANNEL: linux
+                  ITCH_GAME: clever-solitaire
+                  ITCH_USER: raffomania
+                  PACKAGE: export/linux
+                  VERSION: ${{ steps.tag_version.outputs.TAG_VERSION }}

@@ -39,15 +39,6 @@ jobs:
             #       NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
             #       NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
 
-            # - name: Upload windows build to itch.io
-            #   uses: josephbmanley/butler-publish-itchio-action@v1.0.2
-            #   env:
-            #       BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
-            #       CHANNEL: windows
-            #       ITCH_GAME: 2planets
-            #       ITCH_USER: pomme-grenade
-            #       PACKAGE: export/windows
-
             - name: Upload web build to itch.io
               uses: yeslayla/butler-publish-itchio-action@v1.0.3
               env:
@@ -58,13 +49,12 @@ jobs:
                   PACKAGE: export/web
                   #   VERSION: ${{ steps.tag_version.outputs.TAG_VERSION }}
 
-            # OSX headless export is broken until godot 4.0 is released:
-            # https://github.com/godotengine/godot/issues/39931
-            # - name: Upload OSX build to itch.io
-            #   uses: josephbmanley/butler-publish-itchio-action@v1.0.2
-            #   env:
-            #     BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
-            #     CHANNEL: osx
-            #     ITCH_GAME: 2planets
-            #     ITCH_USER: pomme-grenade
-            #     PACKAGE: export/osx
+            - name: Upload linux build to itch.io
+              uses: yeslayla/butler-publish-itchio-action@v1.0.3
+              env:
+                  BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
+                  CHANNEL: linux
+                  ITCH_GAME: clever-solitaire
+                  ITCH_USER: raffomania
+                  PACKAGE: export/linux
+                  #   VERSION: ${{ steps.tag_version.outputs.TAG_VERSION }}

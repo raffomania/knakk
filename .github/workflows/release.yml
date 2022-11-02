@@ -39,22 +39,22 @@ jobs:
             #       NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
             #       NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
 
-            - name: Upload web build to itch.io
-              uses: yeslayla/butler-publish-itchio-action@v1.0.3
-              env:
-                  BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
-                  CHANNEL: web
-                  ITCH_GAME: clever-solitaire
-                  ITCH_USER: raffomania
-                  PACKAGE: export/web
-                  #   VERSION: ${{ steps.tag_version.outputs.TAG_VERSION }}
+            # - name: Upload web build to itch.io
+            #   uses: yeslayla/butler-publish-itchio-action@v1.0.3
+            #   env:
+            #   BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
+            #   CHANNEL: web
+            #   ITCH_GAME: clever-solitaire
+            #   ITCH_USER: raffomania
+            #   PACKAGE: export/web
+            #   VERSION: ${{ steps.tag_version.outputs.TAG_VERSION }}
 
-            - name: Upload linux build to itch.io
-              uses: yeslayla/butler-publish-itchio-action@v1.0.3
-              env:
-                  BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
-                  CHANNEL: linux
-                  ITCH_GAME: clever-solitaire
-                  ITCH_USER: raffomania
-                  PACKAGE: export/linux
-                  #   VERSION: ${{ steps.tag_version.outputs.TAG_VERSION }}
+            # - name: Upload linux build to itch.io
+            #   uses: yeslayla/butler-publish-itchio-action@v1.0.3
+            #   env:
+            #       BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
+            #       CHANNEL: linux
+            #       ITCH_GAME: clever-solitaire
+            #       ITCH_USER: raffomania
+            #       PACKAGE: export/linux
+            #   VERSION: ${{ steps.tag_version.outputs.TAG_VERSION }}

@@ -40,7 +40,8 @@ func child_node_for_suite(suite: Cards.Suite) -> Variant:
 		Cards.Suite.Spades: return $Spades
 		Cards.Suite.Hearts: return $Hearts
 		Cards.Suite.Clubs: return $Clubs
-		_: return null
+
+	return null
 
 func _consider_action(card_type: Array, action: Events.Action, mark_playable: Callable) -> void:
 	if action != Events.Action.CHOOSE:

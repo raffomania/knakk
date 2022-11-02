@@ -44,7 +44,8 @@ static func get_number_sigil(number: Cards.Number) -> String:
 		Number.Jack: return "J"
 		Number.Queen: return "Q"
 		Number.King: return "K"
-		_: return "?"
+
+	return "?"
 
 ## Check if the given `value` is in the given bounds (inclusive).
 ## `bounds` should be a two-element [lower_bound, upper_bound] array.

@@ -49,7 +49,7 @@ jobs:
             #       PACKAGE: export/windows
 
             - name: Upload web build to itch.io
-              uses: yeslaya/butler-publish-itchio-action@v1.0.3
+              uses: yeslayla/butler-publish-itchio-action@v1.0.3
               env:
                   BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
                   CHANNEL: web

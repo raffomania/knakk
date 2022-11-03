@@ -46,7 +46,6 @@ func spawn_slots() -> void:
 		var slot_spec = slots[column_index]
 		var node = SLOT_SCENE.instantiate()
 
-		# todo remove slot_size in other field scripts
 		node.color = COLOR
 		node.reward = slot_spec.reward
 		node.text = "≥ %s" % Cards.get_number_sigil(slot_spec.number)

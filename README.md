@@ -34,6 +34,8 @@ todo: reorder functions in all scripts for readability
 - Set "emulate touch input using mouse" in the project settings to work with the mouse as well
 - Use motion smoothing in `Card.gd` to make card dragging feel more natural
 
+### GitHub Actions
+
 ### Other tweaks
 
 ### Code style

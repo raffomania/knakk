@@ -1,21 +1,9 @@
-[gd_scene load_steps=20 format=3 uid="uid://cu527khk70s73"]
+[gd_scene load_steps=8 format=3 uid="uid://brocv2rlmnpw8"]
 
 [ext_resource type="Script" path="res://Camera.gd" id="1_5jlkv"]
 [ext_resource type="Script" path="res://Main.gd" id="1_os57m"]
-[ext_resource type="PackedScene" uid="uid://csxepv0yylg0m" path="res://Hand.tscn" id="2_52hhe"]
-[ext_resource type="PackedScene" uid="uid://iqa80l616fa4" path="res://Turns/Turns.tscn" id="2_225rr"]
-[ext_resource type="Script" path="res://Deck.gd" id="2_hbhdv"]
-[ext_resource type="Script" path="res://Score.gd" id="3_77xjo"]
-[ext_resource type="Script" path="res://Field.gd" id="3_rxndw"]
-[ext_resource type="Script" path="res://Field/Diamonds.gd" id="4_q6txs"]
-[ext_resource type="PackedScene" uid="uid://dlytt6vu2k6q2" path="res://Reward/RewardMarker.tscn" id="4_ru2mo"]
-[ext_resource type="Script" path="res://Field/Spades.gd" id="6_8srab"]
-[ext_resource type="Script" path="res://Action/RedrawCardArea.gd" id="6_8tf7c"]
-[ext_resource type="Script" path="res://Action/PlayAgainArea.gd" id="7_nmmy4"]
-[ext_resource type="Script" path="res://Action/ActionIndicator.gd" id="7_ovbug"]
-[ext_resource type="Script" path="res://Field/Hearts.gd" id="8_r5mru"]
-[ext_resource type="Script" path="res://Field/Clubs.gd" id="9_ifqaq"]
-[ext_resource type="PackedScene" uid="uid://42kjrvh14x6" path="res://GameOverScreen.tscn" id="15_yok5v"]
+[ext_resource type="PackedScene" uid="uid://cpvkx83kt5emk" path="res://GameScreen.tscn" id="3_w0hn2"]
+[ext_resource type="PackedScene" path="res://GameOverScreen.tscn" id="15_yok5v"]
 
 [sub_resource type="Animation" id="Animation_v032t"]
 length = 0.001
@@ -108,138 +96,9 @@ libraries = {
 "": SubResource("AnimationLibrary_cv8xt")
 }
 
-[node name="Hand" parent="." instance=ExtResource("2_52hhe")]
-position = Vector2(540, 2408)
-
-[node name="TopBar" type="Control" parent="."]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_left = 20.0
-offset_top = 40.0
-offset_right = -20.0
-grow_horizontal = 2
-
-[node name="Turns" parent="TopBar" instance=ExtResource("2_225rr")]
-layout_mode = 1
-anchors_preset = -1
-offset_right = 138.0
-offset_bottom = 59.0
-
-[node name="Score" type="Control" parent="TopBar"]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -49.0
-offset_bottom = 49.0
-grow_horizontal = 0
-script = ExtResource("3_77xjo")
-
-[node name="Reward" parent="TopBar/Score" instance=ExtResource("4_ru2mo")]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = 0.0
-offset_bottom = 0.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Field" type="Control" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 20.0
-offset_top = 152.0
-offset_right = -20.0
-offset_bottom = -824.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("3_rxndw")
-
-[node name="Diamonds" type="Node2D" parent="Field"]
-script = ExtResource("4_q6txs")
-
-[node name="Spades" type="Node2D" parent="Field"]
-position = Vector2(0, 50)
-script = ExtResource("6_8srab")
-
-[node name="Hearts" type="HBoxContainer" parent="Field"]
-custom_minimum_size = Vector2(0, 90)
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-offset_top = 1112.0
-offset_bottom = 1202.0
-theme_override_constants/separation = 25
-script = ExtResource("8_r5mru")
-
-[node name="Clubs" type="HBoxContainer" parent="Field"]
-custom_minimum_size = Vector2(0, 90)
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-offset_top = 1319.0
-offset_bottom = 1409.0
-theme_override_constants/separation = 25
-script = ExtResource("9_ifqaq")
-
-[node name="RedrawCardArea" type="Control" parent="."]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -700.0
-offset_right = 300.0
-offset_bottom = -600.0
-grow_vertical = 0
-script = ExtResource("6_8tf7c")
-
-[node name="PlayAgainArea" type="Control" parent="."]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -300.0
-offset_top = -700.0
-offset_bottom = -600.0
-grow_horizontal = 0
-grow_vertical = 0
-script = ExtResource("7_nmmy4")
-
-[node name="Deck" type="Label" parent="."]
-layout_mode = 0
-offset_top = 1822.0
-offset_right = 226.0
-offset_bottom = 1870.0
-text = "50 Cards in Deck"
-script = ExtResource("2_hbhdv")
-
-[node name="ActionIndicator" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -150.0
-offset_top = -624.0
-offset_right = 150.0
-offset_bottom = -576.0
-grow_horizontal = 2
-grow_vertical = 0
-text = "Action Indicator"
-horizontal_alignment = 1
-vertical_alignment = 2
-autowrap_mode = 3
-script = ExtResource("7_ovbug")
+[node name="GameScreen" parent="." instance=ExtResource("3_w0hn2")]
 
 [node name="GameOverScreen" parent="." instance=ExtResource("15_yok5v")]
-layout_mode = 1
 anchors_preset = -1
 offset_top = 2408.0
 offset_bottom = 2408.0

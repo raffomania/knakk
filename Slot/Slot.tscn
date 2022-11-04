@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=4 format=3 uid="uid://di7hswy7efpgt"]
 
 [ext_resource type="Script" path="res://Slot/Slot.gd" id="1_s8io1"]
 [ext_resource type="Script" path="res://Slot/Marker.gd" id="2_yvqn3"]
@@ -37,7 +37,6 @@ grow_vertical = 2
 script = ExtResource("2_yvqn3")
 
 [node name="Reward" parent="." instance=ExtResource("3_6w4dj")]
-custom_minimum_size = Vector2(60, 60)
 anchors_preset = -1
 anchor_left = 1.0
 anchor_top = 1.0

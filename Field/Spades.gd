@@ -7,6 +7,7 @@ var Y_PADDING := 110
 const COLOR := ColorPalette.BLUE
 
 const SLOT_SCENE = preload("res://Slot/Slot.tscn")
+const REWARD_MARKER_SCENE = preload("res://Reward/RewardMarker.tscn")
 const SPADES_TEXTURE = preload("res://Suite/Spades.png")
 
 ## Slots in a column, row format, from left to right, top to bottom
@@ -77,21 +78,22 @@ func spawn_slots() -> void:
 ## Create a label showing the reward for the given column
 func spawn_reward_labels():
 	for column_index in len(column_rewards):
-		var label = Label.new()
+		var marker = REWARD_MARKER_SCENE.instantiate()
 
 		var reward = column_rewards[column_index]
-		if reward is Reward.Points:
-			label.text = str(reward.points)
+		marker.reward = reward
+
+		add_child(marker)
 		
-		# Place the label below the bottom row
-		label.position = get_slot_position(column_index, column_index) + Vector2(0, SLOT_SIZE)
+		marker.size = Vector2.ONE * SLOT_SIZE * 0.5
+		marker.color = COLOR
 
-		# Size the label like the padding between slots and center its text
-		label.size = Vector2(SLOT_SIZE, Y_PADDING)
-		label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		# Place the marker below the bottom row and center it
+		var center_offset = (Vector2.ONE * SLOT_SIZE - marker.size) * 0.5
+		marker.position = get_slot_position(column_index, column_index) \
+			+ Vector2(0, SLOT_SIZE) + center_offset
 
-		add_child(label)
+
 
 ## Display a Spades symbol to show which suite this area is for
 func spawn_spades_symbol() -> void:

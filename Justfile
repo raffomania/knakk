@@ -1,8 +1,10 @@
 export-web:
+    rm -rf export/web
     mkdir -p export/web
     godot4 --export "Web" export/web/index.html --headless
 
 export-linux:
+    rm -rf export/linux
     mkdir -p export/linux
     godot4 --export "Linux/X11" export/linux/clever-solitaire.x86_64 --headless
 

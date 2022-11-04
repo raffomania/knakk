@@ -14,7 +14,7 @@
 [ext_resource type="Script" path="res://Deck.gd" id="12_54ssd"]
 [ext_resource type="Script" path="res://Action/ActionIndicator.gd" id="13_j0q4n"]
 
-[node name="Game" type="Control"]
+[node name="GameScreen" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -103,6 +103,7 @@ script = ExtResource("9_qy27a")
 
 [node name="RedrawCardArea" type="Control" parent="."]
 layout_mode = 1
+anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_top = -700.0
@@ -112,6 +113,7 @@ script = ExtResource("10_if57e")
 
 [node name="PlayAgainArea" type="Control" parent="."]
 layout_mode = 1
+anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0

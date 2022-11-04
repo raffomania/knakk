@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://42kjrvh14x6"]
+[gd_scene load_steps=3 format=3 uid="uid://q1h3f0r3grhr"]
 
 [ext_resource type="PackedScene" uid="uid://dlytt6vu2k6q2" path="res://Reward/RewardMarker.tscn" id="1_cdunu"]
 [ext_resource type="Script" path="res://GameOverScreen.gd" id="1_r4kx5"]
@@ -16,7 +16,7 @@ theme_override_constants/margin_bottom = 200
 script = ExtResource("1_r4kx5")
 
 [node name="MarginBox" type="Control" parent="."]
-layout_mode = 2
+layout_mode = 3
 anchors_preset = 0
 offset_left = 80.0
 offset_top = 200.0
@@ -24,7 +24,6 @@ offset_right = 1000.0
 offset_bottom = 2208.0
 
 [node name="ScoreBox" type="VBoxContainer" parent="MarginBox"]
-layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
@@ -36,7 +35,6 @@ grow_vertical = 2
 alignment = 1
 
 [node name="Label2" type="Label" parent="MarginBox/ScoreBox"]
-layout_mode = 2
 offset_right = 920.0
 offset_bottom = 105.0
 grow_horizontal = 2
@@ -46,7 +44,6 @@ text = "Game Over!"
 horizontal_alignment = 1
 
 [node name="Label" type="Label" parent="MarginBox/ScoreBox"]
-layout_mode = 2
 offset_top = 109.0
 offset_right = 920.0
 offset_bottom = 265.0
@@ -57,7 +54,6 @@ horizontal_alignment = 1
 
 [node name="Reward" parent="MarginBox/ScoreBox" instance=ExtResource("1_cdunu")]
 custom_minimum_size = Vector2(300, 300)
-layout_mode = 2
 offset_left = 310.0
 offset_top = 269.0
 offset_right = 610.0
@@ -65,9 +61,7 @@ offset_bottom = 569.0
 pivot_offset = Vector2(150, 150)
 
 [node name="Button" type="Button" parent="MarginBox"]
-visible = false
 custom_minimum_size = Vector2(600, 150)
-layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0

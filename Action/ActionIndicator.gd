@@ -1,9 +1,9 @@
 extends Label
 
 func _ready():
-	Events.consider_action.connect(_consider_action)
-	Events.choose_card.connect(_choose_card)
-	Events.cancel_consider_action.connect(_cancel_consider_action)
+	var _err = Events.consider_action.connect(_consider_action)
+	_err = Events.choose_card.connect(_choose_card)
+	_err = Events.cancel_consider_action.connect(_cancel_consider_action)
 
 	text = ""
 

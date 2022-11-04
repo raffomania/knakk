@@ -9,7 +9,7 @@ signal reset_complete
 # todo why use init here?
 func _init():
 	reset()
-	Events.round_complete.connect(reset)
+	var _err = Events.round_complete.connect(reset)
 
 ## Refill the deck with all possible cards and shuffle them
 func reset():

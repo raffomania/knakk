@@ -10,8 +10,8 @@ var redraw_tokens := 0:
 var TEXTURE = preload("res://Action/RedrawCard.svg")
 
 func _ready():
-	Events.consider_action.connect(_consider_action)
-	Events.choose_card.connect(_choose_card)
+	var _err = Events.consider_action.connect(_consider_action)
+	_err = Events.choose_card.connect(_choose_card)
 
 func _consider_action(_card_type: Array, action: Events.Action, mark_playable: Callable) -> void:
 	if action != Events.Action.REDRAW:

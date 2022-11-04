@@ -6,8 +6,8 @@ var play_again_tokens := 0:
 		queue_redraw()
 
 func _ready():
-	Events.consider_action.connect(_consider_action)
-	Events.choose_card.connect(_choose_card)
+	var _err = Events.consider_action.connect(_consider_action)
+	_err = Events.choose_card.connect(_choose_card)
 
 func _consider_action(_card_type: Array, action: Events.Action, mark_playable: Callable) -> void:
 	if action != Events.Action.PLAY_AGAIN:

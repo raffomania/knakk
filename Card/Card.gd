@@ -59,7 +59,7 @@ var drag_offset := Vector2.ZERO
 var card_type: Array
 
 func _ready():
-	touch_area.connect("input_event", self.area_input)
+	var _err = touch_area.connect("input_event", self.area_input)
 	Events.card_types_in_hand.append(card_type)
 	visualize_interaction_state()
 
@@ -79,8 +79,8 @@ func area_input(_viewport, event, _shape_index):
 			# The user stopped dragging this card
 			self.dragging = false
 			if considering_action != Events.Action.NOTHING and can_play:
-				create_tween().tween_property(self, "scale", PLAYED_SCALE, SCALE_TWEEN_DURATION)
-				create_tween().tween_property(self, "rotation", 0, SCALE_TWEEN_DURATION)
+				var _tweener = create_tween().tween_property(self, "scale", PLAYED_SCALE, SCALE_TWEEN_DURATION)
+				_tweener = create_tween().tween_property(self, "rotation", 0, SCALE_TWEEN_DURATION)
 				$Particles.emitting = true
 				$Particles2.emitting = true
 				# todo this creates race conditions with fast-dragging players
@@ -123,13 +123,13 @@ func _unhandled_input(event):
 
 func visualize_interaction_state() -> void:
 	if considering_action != Events.Action.NOTHING:
-		create_tween().tween_property(self, "scale", ACTION_SCALE, SCALE_TWEEN_DURATION)
+		var _tweener = create_tween().tween_property(self, "scale", ACTION_SCALE, SCALE_TWEEN_DURATION)
 	elif dragging:
-		create_tween().tween_property(self, "scale", DRAGGING_SCALE, SCALE_TWEEN_DURATION)
-		create_tween().tween_property(self, "rotation", DRAGGING_ROTATION, SCALE_TWEEN_DURATION)
+		var _tweener = create_tween().tween_property(self, "scale", DRAGGING_SCALE, SCALE_TWEEN_DURATION)
+		_tweener = create_tween().tween_property(self, "rotation", DRAGGING_ROTATION, SCALE_TWEEN_DURATION)
 	else:
-		create_tween().tween_property(self, "scale", NORMAL_SCALE, SCALE_TWEEN_DURATION)
-		create_tween().tween_property(self, "rotation", 0, SCALE_TWEEN_DURATION)
+		var _tweener = create_tween().tween_property(self, "scale", NORMAL_SCALE, SCALE_TWEEN_DURATION)
+		_tweener = create_tween().tween_property(self, "rotation", 0, SCALE_TWEEN_DURATION)
 
 ## Tell this card to transition to a new position.
 ## The transition is animated.

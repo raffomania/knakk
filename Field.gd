@@ -7,9 +7,9 @@ extends Control
 var chosen_suite: Variant
 
 func _ready():
-	Events.choose_card.connect(self._choose_card)
-	Events.consider_action.connect(self._consider_action)
-	Events.cancel_consider_action.connect(self._cancel_consider_action)
+	var _err = Events.choose_card.connect(self._choose_card)
+	_err = Events.consider_action.connect(self._consider_action)
+	_err = Events.cancel_consider_action.connect(self._cancel_consider_action)
 
 ## Check if `card_type` can be chosen by the player right now.
 func can_play(card_type: Array) -> bool:

@@ -17,7 +17,7 @@ var card_scene := preload("res://Card/Card.tscn")
 func _ready():
 	redraw_hand()
 
-	Events.choose_card.connect(self._choose_card)
+	var _err = Events.choose_card.connect(self._choose_card)
 
 	## After a turn is complete, the deck resets. When that happens, we want to draw
 	## a fresh hand from the newly shuffled deck

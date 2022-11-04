@@ -6,6 +6,7 @@ var Y_PADDING := 110
 
 const SLOT_SCENE = preload("res://Slot/Slot.tscn")
 const ARROW_SCENE = preload("res://Field/Arrow.tscn")
+const DIAMONDS_TEXTURE = preload("res://Suite/Diamonds.png")
 
 # todo convert to x,y coordinates
 var slots = [
@@ -96,6 +97,10 @@ func _ready():
 	slots[0][0].node.is_played = true
 	played_slots.append(Vector2i(0, 0))
 
+	# Also, that slot is not visible, instead there's a diamond symbol there
+	slots[0][0].node.visible = false
+	spawn_diamonds_symbol()
+
 func spawn_slots() -> void:
 	var row_index = 0
 	for row in slots:
@@ -133,6 +138,16 @@ func spawn_arrow(rect: Rect2, is_vertical: bool, number_range) -> void:
 
 	arrow.text = "%s-%s" % [Cards.get_number_sigil(number_range[0]), Cards.get_number_sigil(number_range[1])]
 	add_child(arrow)
+
+## Instead of the top-left slot, we display a diamond symbol to show which suite this area is for
+func spawn_diamonds_symbol() -> void:
+	var diamonds_symbol = TextureRect.new()
+	diamonds_symbol.texture = DIAMONDS_TEXTURE
+	diamonds_symbol.position = slots[0][0].node.position
+	diamonds_symbol.ignore_texture_size = true
+	diamonds_symbol.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	add_child(diamonds_symbol)
+	diamonds_symbol.size = Vector2.ONE * SLOT_SIZE
 
 func can_play(number: Cards.Number) -> bool:
 	return not find_playable_slots(number).is_empty()

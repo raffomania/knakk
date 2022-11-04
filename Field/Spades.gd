@@ -1,12 +1,13 @@
 extends Node2D
 
 const SLOT_SIZE := 90
-var X_PADDING := 146
+var X_PADDING := 100
 var Y_PADDING := 110
 
 const COLOR := ColorPalette.BLUE
 
 const SLOT_SCENE = preload("res://Slot/Slot.tscn")
+const SPADES_TEXTURE = preload("res://Suite/Spades.png")
 
 ## Slots in a column, row format, from left to right, top to bottom
 var slots = [
@@ -56,6 +57,7 @@ var played_slots: Array[Vector2i] = []
 func _ready():
 	spawn_slots()
 	spawn_reward_labels()
+	spawn_spades_symbol()
 
 ## Create Slot nodes and position them
 func spawn_slots() -> void:
@@ -91,6 +93,16 @@ func spawn_reward_labels():
 
 		add_child(label)
 
+## Display a Spades symbol to show which suite this area is for
+func spawn_spades_symbol() -> void:
+	var spades_symbol = TextureRect.new()
+	spades_symbol.texture = SPADES_TEXTURE
+	spades_symbol.position = slots[0][0].node.position - Vector2(120, 0)
+	spades_symbol.ignore_texture_size = true
+	spades_symbol.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	add_child(spades_symbol)
+	spades_symbol.size = Vector2.ONE * SLOT_SIZE
+
 func _draw():
 	# Draw the vertical lines between slots
 	for column_index in len(slots):
@@ -99,6 +111,12 @@ func _draw():
 				+ Vector2(SLOT_SIZE * 0.5, SLOT_SIZE)
 			var stop_position = start_position + Vector2(0, Y_PADDING)
 			draw_line(start_position, stop_position, COLOR, 2.0, true)
+
+		# Draw a smaller vertical line to connect the lowest slot with the reward marker
+		var start_position = get_slot_position(column_index, len(slots[column_index]) - 1) \
+			+ Vector2(SLOT_SIZE * 0.5, SLOT_SIZE)
+		var stop_position = start_position + Vector2(0, Y_PADDING * 0.3)
+		draw_line(start_position, stop_position, COLOR, 2.0, true)
 
 ## For a given column and row index, get the position for the corresponding slot
 ## on the screen

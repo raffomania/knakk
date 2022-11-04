@@ -49,6 +49,9 @@ func spawn_slots() -> void:
 func spawn_separator_label() -> void:
 	var label = Label.new()
 	label.text = "<"
+	label.size_flags_horizontal = SIZE_EXPAND_FILL
+	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	label.add_theme_color_override("font_color", COLOR)
 	add_child(label)
 
 

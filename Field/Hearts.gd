@@ -30,9 +30,6 @@ var slots = [
 	}, {
 		number = Cards.Number.Eight,
 		reward = Reward.Points.new(45),
-	}, {
-		number = Cards.Number.Nine,
-		reward = Reward.Points.new(55),
 	},
 ]
 
@@ -49,6 +46,7 @@ func spawn_slots() -> void:
 		node.color = COLOR
 		node.reward = slot_spec.reward
 		node.text = "≥ %s" % Cards.get_number_sigil(slot_spec.number)
+		node.size_flags_horizontal = SIZE_EXPAND_FILL
 
 		add_child(node)
 		slot_spec.node = node

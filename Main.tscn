@@ -97,8 +97,10 @@ libraries = {
 }
 
 [node name="GameScreen" parent="." instance=ExtResource("3_w0hn2")]
+layout_mode = 1
 
 [node name="GameOverScreen" parent="." instance=ExtResource("15_yok5v")]
+layout_mode = 1
 anchors_preset = -1
 offset_top = 2408.0
 offset_bottom = 2408.0

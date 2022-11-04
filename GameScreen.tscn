@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cpvkx83kt5emk"]
+[gd_scene load_steps=17 format=3 uid="uid://cpvkx83kt5emk"]
 
 [ext_resource type="PackedScene" uid="uid://csxepv0yylg0m" path="res://Hand.tscn" id="1_56rkn"]
 [ext_resource type="PackedScene" uid="uid://iqa80l616fa4" path="res://Turns/Turns.tscn" id="2_j64vv"]
@@ -8,11 +8,14 @@
 [ext_resource type="Script" path="res://Field/Diamonds.gd" id="6_58l5m"]
 [ext_resource type="Script" path="res://Field/Spades.gd" id="7_c7t16"]
 [ext_resource type="Script" path="res://Field/Hearts.gd" id="8_fhn0x"]
+[ext_resource type="Texture2D" uid="uid://bv5extw7i2q3s" path="res://Suite/Hearts.png" id="9_k3wye"]
 [ext_resource type="Script" path="res://Field/Clubs.gd" id="9_qy27a"]
 [ext_resource type="Script" path="res://Action/RedrawCardArea.gd" id="10_if57e"]
 [ext_resource type="Script" path="res://Action/PlayAgainArea.gd" id="11_61q87"]
+[ext_resource type="Texture2D" uid="uid://c4s5k1gwq7a5h" path="res://Suite/Clubs.png" id="11_ogyhr"]
 [ext_resource type="Script" path="res://Deck.gd" id="12_54ssd"]
 [ext_resource type="Script" path="res://Action/ActionIndicator.gd" id="13_j0q4n"]
+[ext_resource type="Texture2D" uid="uid://udfg6icv8x20" path="res://Field/AreaSeparator.svg" id="16_sp2ru"]
 
 [node name="GameScreen" type="Control"]
 layout_mode = 3
@@ -30,9 +33,9 @@ layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_left = 20.0
-offset_top = 40.0
+offset_top = 58.0
 offset_right = -20.0
-offset_bottom = 40.0
+offset_bottom = 58.0
 grow_horizontal = 2
 
 [node name="Turns" parent="TopBar" instance=ExtResource("2_j64vv")]
@@ -74,11 +77,30 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("5_3f0wa")
 
+[node name="Clubs" type="HBoxContainer" parent="Field"]
+custom_minimum_size = Vector2(0, 90)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+offset_top = 83.0
+offset_bottom = 173.0
+script = ExtResource("9_qy27a")
+
+[node name="SuiteSymbol" type="TextureRect" parent="Field/Clubs"]
+custom_minimum_size = Vector2(100, 80)
+layout_mode = 2
+offset_right = 100.0
+offset_bottom = 90.0
+texture = ExtResource("11_ogyhr")
+ignore_texture_size = true
+stretch_mode = 4
+
 [node name="Diamonds" type="Node2D" parent="Field"]
+position = Vector2(0, 269)
 script = ExtResource("6_58l5m")
 
 [node name="Spades" type="Node2D" parent="Field"]
-position = Vector2(0, 50)
+position = Vector2(188, 339)
 script = ExtResource("7_c7t16")
 
 [node name="Hearts" type="HBoxContainer" parent="Field"]
@@ -86,29 +108,30 @@ custom_minimum_size = Vector2(0, 90)
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
-offset_top = 1112.0
-offset_bottom = 1202.0
+offset_top = 1359.0
+offset_bottom = 1449.0
 theme_override_constants/separation = 25
 script = ExtResource("8_fhn0x")
 
-[node name="Clubs" type="HBoxContainer" parent="Field"]
-custom_minimum_size = Vector2(0, 90)
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-offset_top = 1319.0
-offset_bottom = 1409.0
-theme_override_constants/separation = 25
-script = ExtResource("9_qy27a")
+[node name="SuiteSymbol" type="TextureRect" parent="Field/Hearts"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+offset_right = 80.0
+offset_bottom = 90.0
+texture = ExtResource("9_k3wye")
+ignore_texture_size = true
+stretch_mode = 5
 
 [node name="RedrawCardArea" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
+offset_left = 28.0
 offset_top = -700.0
-offset_right = 300.0
+offset_right = 328.0
 offset_bottom = -600.0
+grow_vertical = 0
 script = ExtResource("10_if57e")
 
 [node name="PlayAgainArea" type="Control" parent="."]
@@ -118,8 +141,9 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -300.0
+offset_left = -333.0
 offset_top = -700.0
+offset_right = -33.0
 offset_bottom = -600.0
 grow_horizontal = 0
 grow_vertical = 0
@@ -127,8 +151,9 @@ script = ExtResource("11_61q87")
 
 [node name="Deck" type="Label" parent="."]
 layout_mode = 0
+offset_left = 38.0
 offset_top = 1822.0
-offset_right = 226.0
+offset_right = 264.0
 offset_bottom = 1870.0
 text = "50 Cards in Deck"
 script = ExtResource("12_54ssd")
@@ -151,3 +176,8 @@ horizontal_alignment = 1
 vertical_alignment = 2
 autowrap_mode = 3
 script = ExtResource("13_j0q4n")
+
+[node name="AreaSeparator" type="Sprite2D" parent="."]
+position = Vector2(617, 1008)
+rotation = 0.0398547
+texture = ExtResource("16_sp2ru")

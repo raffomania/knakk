@@ -11,6 +11,11 @@ var color := Color.BLACK:
 
 var reward:
 	set(val):
+		var reward_changed = (
+			reward is Reward.Points 
+			and val is Reward.Points 
+			and reward.points != val.points
+		)
 		reward = val
 		queue_redraw()
 
@@ -28,6 +33,17 @@ var reward:
 		elif reward is Reward.RedrawCard:
 			$Label.visible = false
 
+		# When this node is used to show a score, animate it when the score changes.
+		if is_inside_tree() and reward_changed:
+			await create_tween() \
+				.tween_property(self, "scale", Vector2.ONE * 1.05, 0.05) \
+				.finished
+			var _tweener = create_tween() \
+				.tween_property(self, "scale", Vector2.ONE, 0.05)
+
+func _ready():
+	# Always scale and rotate around the center
+	pivot_offset = size / 2
 
 func _draw():
 	draw_texture_rect(BACKGROUND,

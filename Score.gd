@@ -1,6 +1,6 @@
 extends Control
 
-var score: int:
+var score:
 	set(value):
 		score = value
 		$Reward.reward = Reward.Points.new(score)

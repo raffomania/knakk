@@ -25,3 +25,7 @@ signal choose_card(card_type: Array, action: Action)
 signal turn_complete
 ## After three rounds, the game is over
 signal round_complete
+## When the game is over, the game over screen is shown
+signal game_over
+## Start a new game, usually triggered on the game over screen.
+signal new_game

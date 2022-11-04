@@ -2,9 +2,9 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="64"
-   height="64"
-   viewBox="0 0 16.933333 16.933333"
+   width="300"
+   height="300"
+   viewBox="0 0 300 300"
    version="1.1"
    id="svg5"
    inkscape:version="1.2.1 (9c6d41e410, 2022-07-14, custom)"
@@ -24,13 +24,13 @@
      inkscape:deskcolor="#505050"
      inkscape:document-units="mm"
      showgrid="false"
-     inkscape:zoom="9.5144352"
-     inkscape:cx="20.863036"
-     inkscape:cy="33.265243"
-     inkscape:window-width="2512"
-     inkscape:window-height="1392"
-     inkscape:window-x="24"
-     inkscape:window-y="24"
+     inkscape:zoom="1.1918214"
+     inkscape:cx="218.99254"
+     inkscape:cy="221.92923"
+     inkscape:window-width="1910"
+     inkscape:window-height="1049"
+     inkscape:window-x="0"
+     inkscape:window-y="26"
      inkscape:window-maximized="1"
      inkscape:current-layer="layer1" />
   <defs
@@ -39,7 +39,7 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(43.900983,67.700991)">
+     transform="translate(2.4416143,55.527307)">
     <path
        sodipodi:type="star"
        style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:11.2149;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;stop-color:#000000"
@@ -55,6 +55,6 @@
        inkscape:rounded="0"
        inkscape:randomized="0"
        d="M 34.979354,27.390841 9.5644139,42.064163 -15.850526,27.39084 l 0,-29.3466449 L 9.5644142,-16.629128 34.979354,-1.9558047 Z"
-       transform="matrix(0.23568469,0,0,0.23615428,-37.688503,-62.237622)" />
+       transform="matrix(3.7527819,0,0,3.7602592,111.00193,47.515882)" />
   </g>
 </svg>

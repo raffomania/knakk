@@ -4,7 +4,7 @@ extends Control
 const BACKGROUND = preload("res://Reward/Reward.svg")
 const REDRAW_TEXTURE = preload("res://Action/RedrawCard.svg")
 
-var color := Color.BLACK:
+@export var color := Color.BLACK:
 	set(val):
 		color = val
 		queue_redraw()
@@ -44,6 +44,8 @@ var reward:
 func _ready():
 	# Always scale and rotate around the center
 	pivot_offset = size / 2
+
+	($Label as Label).add_theme_font_size_override("font_size", floor(size.x * 0.5))
 
 func _draw():
 	draw_texture_rect(BACKGROUND,

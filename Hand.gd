@@ -14,6 +14,10 @@ var cards_played_this_turn := 0
 
 var card_scene := preload("res://Card/Card.tscn")
 
+## Each time a card is played, increase its z-index so it's displayed above
+## all other cards lying on the table
+var played_cards_z_index = 0
+
 func _ready():
 	redraw_hand()
 
@@ -60,6 +64,8 @@ func _choose_card(_card_type: Array, action: Events.Action, card_node: Card) -> 
 		card_node.global_position = card_position
 
 		card_node.is_played = true
+		card_node.z_index = played_cards_z_index
+		played_cards_z_index += 1
 
 		var slot_was_filled = cards_played_this_turn >= 2
 		if slot_was_filled:
@@ -80,6 +86,8 @@ func node_for_card_type(card_type: Array) -> Node:
 func draw_card(card_type: Array) -> void:
 	var card = card_scene.instantiate()
 	card.set_card_type(card_type)
+	# Display card above all played cards
+	card.z_index = played_cards_z_index + 1
 	add_child(card)
 	position_cards()
 

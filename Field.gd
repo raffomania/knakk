@@ -34,7 +34,7 @@ func can_play_suite(suite: Cards.Suite, other_cards: Array[Array]) -> bool:
 func can_play_number(number: Cards.Number) -> bool:
 	return child_node_for_suite(chosen_suite as Cards.Suite).can_play(number)
 
-func child_node_for_suite(suite: Cards.Suite) -> Variant:
+func child_node_for_suite(suite: Cards.Suite) -> Node:
 	match suite:
 		Cards.Suite.Diamonds: return $Diamonds
 		Cards.Suite.Spades: return $Spades
@@ -49,38 +49,37 @@ func _consider_action(card_type: Array, action: Events.Action, mark_playable: Ca
 
 	mark_playable.call(can_play(card_type))
 	# First, reset all slot highlights
-	$Diamonds.highlight_options([])
-	$Spades.highlight_options([])
-	$Hearts.highlight_options([])
-	$Clubs.highlight_options([])
+	for child in get_children():
+		child.highlight_options([])
+		# De-emphasize all areas by making them transparent
+		child.modulate = Color(1, 1, 1, 0.3)
 
 	# A suite is already chosen, highlight that suite's 
 	# slots for the number of the considered card
 	if chosen_suite != null:
 		var node = child_node_for_suite(chosen_suite)
-		if node != null: 
-			node.highlight_options([card_type as Array])
+		node.highlight_options([card_type as Array])
+		# Highlight this suite by resetting the modulate value
+		node.modulate = Color.WHITE
+
 		return
 	
 	# User is choosing a suite, highlight slots for all other
 	# numbers in the user's hand, using the suite of the card
 	# the user is considering
 	var card_suite_node = child_node_for_suite(card_type[0])
-	if card_suite_node != null:
-		var other_card_types = Events.card_types_in_hand.filter(func(other_card_type): 
-			return other_card_type != card_type
-		)
-		card_suite_node.highlight_options(other_card_types)
-		return
+	var other_card_types = Events.card_types_in_hand.filter(func(other_card_type): 
+		return other_card_type != card_type
+	)
+	card_suite_node.highlight_options(other_card_types)
+	# Highlight this suite by resetting the modulate value
+	card_suite_node.modulate = Color.WHITE
 
 func _cancel_consider_action() -> void:
 	if chosen_suite != null:
 		child_node_for_suite(chosen_suite).highlight_options(Events.card_types_in_hand)
 	else:
-		$Diamonds.highlight_options([])
-		$Spades.highlight_options([])
-		$Hearts.highlight_options([])
-		$Clubs.highlight_options([])
+		reset_slot_highlights()
 
 func _choose_card(card_type: Array, action: Events.Action) -> void:
 	if action != Events.Action.CHOOSE:
@@ -106,3 +105,9 @@ func play_number(number) -> void:
 		$"../PlayAgainArea".play_again_tokens += 1
 		
 	chosen_suite = null
+	reset_slot_highlights()
+
+func reset_slot_highlights() -> void:
+	for child in get_children():
+		child.highlight_options([])
+		child.modulate = Color.WHITE

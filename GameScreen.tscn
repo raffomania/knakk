@@ -178,6 +178,7 @@ autowrap_mode = 3
 script = ExtResource("13_j0q4n")
 
 [node name="AreaSeparator" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.615686)
 position = Vector2(617, 1008)
 rotation = 0.0398547
 texture = ExtResource("16_sp2ru")

@@ -45,7 +45,7 @@ func _draw():
 	for index in range(0, play_again_tokens):
 		draw_string(
 			get_theme_default_font(), 
-			Vector2(20 + index * 40, 70), 
+			Vector2(20 + index * 55, 70), 
 			"++", 0, -1, 
 			round(get_theme_default_font_size() * 1.3), 
 			get_theme_color("Label"))

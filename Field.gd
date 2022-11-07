@@ -127,10 +127,11 @@ func play_suite(suite: Cards.Suite, card_node: Card) -> void:
 
 func play_number(number: Cards.Number, card_node: Card) -> void:
 	var slot = child_node_for_suite(chosen_suite).play_number(number)
-	slot.fill_with_card(card_node)
 
 	Events.receive_reward.emit(slot.reward)
-		
+	slot.fill_with_card(card_node)
+	slot.reward = Reward.Nothing.new()
+
 	chosen_suite = null
 	reset_slot_highlights()
 

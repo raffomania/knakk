@@ -84,6 +84,7 @@ func spawn_reward_labels():
 
 		var reward = column_rewards[column_index]
 		marker.reward = reward
+		marker.name = "ColumnReward%d" % column_index
 
 		add_child(marker)
 		
@@ -94,8 +95,6 @@ func spawn_reward_labels():
 		var center_offset = (Vector2.ONE * SLOT_SIZE - marker.size) * 0.5
 		marker.position = get_slot_position(column_index, column_index) \
 			+ Vector2(0, SLOT_SIZE) + center_offset
-
-
 
 ## Display a Spades symbol to show which suite this area is for
 func spawn_spades_symbol() -> void:
@@ -117,6 +116,10 @@ func _draw():
 			draw_line(start_position, stop_position, COLOR, 2.0, true)
 
 		# Draw a smaller vertical line to connect the lowest slot with the reward marker
+		# But only draw it for columns that are not filled yet
+		if not (get_reward_for_column(column_index) is Reward.Nothing):
+			continue
+
 		var start_position = get_slot_position(column_index, len(slots[column_index]) - 1) \
 			+ Vector2(SLOT_SIZE * 0.5, SLOT_SIZE)
 		var stop_position = start_position + Vector2(0, Y_PADDING * 0.3)
@@ -151,7 +154,12 @@ func play_number(number: Cards.Number) -> Slot:
 	highlight_options([])
 
 	var column_reward = get_reward_for_column(slot_position.x)
-	Events.receive_reward.emit(column_reward)
+	if not (column_reward is Reward.Nothing):
+		Events.receive_reward.emit(column_reward)
+		queue_redraw()
+
+		var marker = get_node("ColumnReward%d" % slot_position.x)
+		marker.queue_free()
 
 	var slot_spec = slots[slot_position.x][slot_position.y]
 	return slot_spec.node

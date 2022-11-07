@@ -26,7 +26,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Hand" parent="." instance=ExtResource("1_56rkn")]
-position = Vector2(540, 2408)
+position = Vector2(540, 2213)
 
 [node name="TopBar" type="Control" parent="."]
 layout_mode = 1
@@ -128,9 +128,9 @@ anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 28.0
-offset_top = -700.0
+offset_top = -187.0
 offset_right = 328.0
-offset_bottom = -600.0
+offset_bottom = -87.0
 grow_vertical = 0
 script = ExtResource("10_if57e")
 
@@ -142,9 +142,9 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -333.0
-offset_top = -700.0
+offset_top = -187.0
 offset_right = -33.0
-offset_bottom = -600.0
+offset_bottom = -87.0
 grow_horizontal = 0
 grow_vertical = 0
 script = ExtResource("11_61q87")
@@ -152,9 +152,9 @@ script = ExtResource("11_61q87")
 [node name="Deck" type="Label" parent="."]
 layout_mode = 0
 offset_left = 38.0
-offset_top = 1822.0
+offset_top = 2335.0
 offset_right = 264.0
-offset_bottom = 1870.0
+offset_bottom = 2383.0
 text = "50 Cards in Deck"
 script = ExtResource("12_54ssd")
 
@@ -166,9 +166,9 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -170.0
-offset_top = -664.0
+offset_top = -151.0
 offset_right = 130.0
-offset_bottom = -616.0
+offset_bottom = -103.0
 grow_horizontal = 2
 grow_vertical = 0
 text = "Action Indicator"

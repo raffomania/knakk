@@ -113,11 +113,11 @@ func _unhandled_input(event):
 
 		var previously_considering_action = considering_action
 
-		if target_drag_position.x < 200 and target_drag_position.y > 1700 and target_drag_position.y < 2000:
+		if target_drag_position.x < 300 and target_drag_position.y > 2200:
 			considering_action = Events.Action.REDRAW
-		elif target_drag_position.x > 800 and target_drag_position.y > 1700 and target_drag_position.y < 2000:
+		elif target_drag_position.x > 800 and target_drag_position.y > 2200:
 			considering_action = Events.Action.PLAY_AGAIN
-		elif target_drag_position.y < 1500:
+		elif target_drag_position.y < 1700:
 			considering_action = Events.Action.CHOOSE
 		else:
 			considering_action = Events.Action.NOTHING

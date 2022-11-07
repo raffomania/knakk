@@ -32,7 +32,7 @@ func _choose_card(_card_type: Array, action: Events.Action, card_node: Card) -> 
 	card_node.global_position = card_position
 
 	card_node.move_to(global_position + Vector2(size.x, size.y / 2))
-	card_node.shrink_to_played_position()
+	card_node.shrink_to_played_size()
 
 func _receive_reward(reward: Reward) -> void:
 	if reward is Reward.PlayAgain:

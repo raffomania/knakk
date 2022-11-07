@@ -6,7 +6,7 @@ extends Sprite2D
 ## The duration of the scaling animation in seconds
 const SCALE_TWEEN_DURATION := 0.07
 ## The higher this number is, the faster the card follows the user's finger
-const DRAG_SMOOTH_SPEED := 55.0
+const DRAG_SMOOTH_SPEED := 65.0
 ## Same as `DRAG_SMOOTH_SPEED`, but used when the user is not actively dragging
 const ANIMATE_SMOOTH_SPEED := 15.0
 

@@ -41,7 +41,10 @@ var considering_action := Events.Action.NOTHING
 ## When players are considering this card,
 ## The playing field will set this value depending on
 ## whether the player can play this card or not
-var can_play := false
+var can_play := false:
+	set(val):
+		can_play = val
+		visualize_interaction_state()
 
 ## Once the card is played, it cannot be played again.
 var is_played := false
@@ -128,7 +131,7 @@ func _unhandled_input(event):
 		queue_redraw()
 
 func visualize_interaction_state() -> void:
-	if considering_action != Events.Action.NOTHING:
+	if considering_action != Events.Action.NOTHING and can_play:
 		var _tweener = create_tween().tween_property(self, "scale", ACTION_SCALE, SCALE_TWEEN_DURATION)
 	elif dragging:
 		var _tweener = create_tween().tween_property(self, "scale", DRAGGING_SCALE, SCALE_TWEEN_DURATION)

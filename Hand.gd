@@ -37,12 +37,20 @@ func redraw_hand() -> void:
 
 func _choose_card(_card_type: Array, action: Events.Action, card_node: Card) -> void:
 	if action == Events.Action.REDRAW:
+		card_node.is_played = true
+
+		# Remove card from hand, but make sure it keeps its global position on screen
+		var card_position = card_node.global_position
+		remove_child(card_node)
+		card_node.global_position = card_position
+
 		# user chose to redraw, draw a new card now
-		card_node.queue_free()
 		draw_card(deck.draw_card())
 
 	if action == Events.Action.PLAY_AGAIN:
 		play_again_count += 1
+
+		card_node.is_played = true
 
 		# Remove card from hand, but make sure it keeps its global position on screen
 		var card_position = card_node.global_position

@@ -23,12 +23,20 @@ func _consider_action(card_type: Array, action: Events.Action, mark_playable: Ca
 	if is_playable:
 		Events.show_help.emit("Replace %s with a new card" % Cards.get_label(card_type))
 
-func _choose_card(_card_type: Array, action: Events.Action, _card_node: Card) -> void:
+func _choose_card(_card_type: Array, action: Events.Action, card_node: Card) -> void:
 	if action != Events.Action.REDRAW:
 		return
 
 	assert(redraw_tokens > 0, "Redraw triggered but user has no redraw tokens")
 	redraw_tokens -= 1
+
+	# Add card as child while keeping its global position
+	var card_position = card_node.global_position
+	add_child(card_node)
+	card_node.global_position = card_position
+
+	card_node.move_to(global_position + Vector2(0, size.y / 2))
+	card_node.shrink_to_played_size()
 
 func _receive_reward(reward: Reward) -> void:
 	if reward is Reward.RedrawCard:
@@ -39,5 +47,6 @@ func _draw():
 	draw_line(Vector2(size.x, 0), Vector2(size.x, size.y), ColorPalette.PURPLE)
 
 	var center_y = (size.y - TEXTURE.get_size().y) / 2
+	var right_edge = size.x - 20 - TEXTURE.get_size().x
 	for index in range(0, redraw_tokens):
-		draw_texture(TEXTURE, Vector2(index * TEXTURE.get_size().x, center_y), ColorPalette.GREY)
+		draw_texture(TEXTURE, Vector2(right_edge - index * TEXTURE.get_size().x, center_y), ColorPalette.GREY)

@@ -106,14 +106,7 @@ func play_number(number: Cards.Number, card_node: Card) -> void:
 	var slot = child_node_for_suite(chosen_suite).play_number(number)
 	slot.fill_with_card(card_node)
 
-	var reward = slot.reward
-	# todo replace this with a global event, ez
-	if reward is Reward.Points:
-		score.add(reward.points)
-	elif reward is Reward.RedrawCard:
-		$"../RedrawCardArea".redraw_tokens += 1
-	elif reward is Reward.PlayAgain:
-		$"../PlayAgainArea".play_again_tokens += 1
+	Events.receive_reward.emit(slot.reward)
 		
 	chosen_suite = null
 	reset_slot_highlights()

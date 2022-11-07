@@ -20,6 +20,8 @@ signal consider_action(card_type: Array, action: Action, mark_playable: Callable
 signal cancel_consider_action
 signal choose_card(card_type: Array, action: Action, card_node: Card)
 
+signal receive_reward(reward: Reward)
+
 ## Each time the player marks a slot and obtains a reward, a turn is completed.
 ## After 5 turns, all cards are returned to the deck and it is shuffled, beginning a new round
 signal turn_complete

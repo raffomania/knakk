@@ -150,7 +150,8 @@ func play_number(number: Cards.Number) -> Slot:
 	# Reset highlights
 	highlight_options([])
 
-	# todo fix column rewards
+	var column_reward = get_reward_for_column(slot_position.x)
+	Events.receive_reward.emit(column_reward)
 
 	var slot_spec = slots[slot_position.x][slot_position.y]
 	return slot_spec.node

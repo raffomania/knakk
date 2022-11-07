@@ -12,6 +12,7 @@ var TEXTURE = preload("res://Action/RedrawCard.svg")
 func _ready():
 	var _err = Events.consider_action.connect(_consider_action)
 	_err = Events.choose_card.connect(_choose_card)
+	_err = Events.receive_reward.connect(_receive_reward)
 
 func _consider_action(_card_type: Array, action: Events.Action, mark_playable: Callable) -> void:
 	if action != Events.Action.REDRAW:
@@ -26,6 +27,10 @@ func _choose_card(_card_type: Array, action: Events.Action, _card_node: Card) ->
 
 	assert(redraw_tokens > 0, "Redraw triggered but user has no redraw tokens")
 	redraw_tokens -= 1
+
+func _receive_reward(reward: Reward) -> void:
+	if reward is Reward.RedrawCard:
+		redraw_tokens += 1
 
 func _draw():
 	draw_line(Vector2.ZERO, Vector2(size.x, 0), ColorPalette.PURPLE)

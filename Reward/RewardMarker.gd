@@ -27,7 +27,7 @@ var reward:
 		if reward is Reward.Points:
 			$Label.text = str(val.points)
 		elif reward is Reward.PlayAgain:
-			$Label.text = "+1"
+			$Label.text = "++"
 		elif reward is Reward.Nothing:
 			visible = false
 		elif reward is Reward.RedrawCard:

@@ -90,11 +90,12 @@ var played_slots: Array[Vector2i] = []
 
 var color := ColorPalette.RED
 
+var suite_symbol
+
 func _ready():
 	spawn_slots()
 
 	# The top-left slot is always filled when the game starts
-	slots[0][0].node.is_played = true
 	played_slots.append(Vector2i(0, 0))
 
 	# Also, that slot is not visible, instead there's a diamond symbol there
@@ -141,32 +142,35 @@ func spawn_arrow(rect: Rect2, is_vertical: bool, number_range) -> void:
 
 ## Instead of the top-left slot, we display a diamond symbol to show which suite this area is for
 func spawn_diamonds_symbol() -> void:
-	var diamonds_symbol = TextureRect.new()
-	diamonds_symbol.texture = DIAMONDS_TEXTURE
-	diamonds_symbol.position = slots[0][0].node.position
-	diamonds_symbol.ignore_texture_size = true
-	diamonds_symbol.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	add_child(diamonds_symbol)
-	diamonds_symbol.size = Vector2.ONE * SLOT_SIZE
+	suite_symbol = TextureRect.new()
+	suite_symbol.texture = DIAMONDS_TEXTURE
+	suite_symbol.position = slots[0][0].node.position
+	suite_symbol.ignore_texture_size = true
+	suite_symbol.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	add_child(suite_symbol)
+	suite_symbol.size = Vector2.ONE * SLOT_SIZE
 
 func can_play(number: Cards.Number) -> bool:
 	return not find_playable_slots(number).is_empty()
 
+func play_suite(card_node: Card) -> void:
+	# Move card to position of the suite symbol
+	card_node.move_to(suite_symbol.global_position + suite_symbol.size * 0.5)
+
 ## Returns the reward gained by playing this card
-func play_card(number: Cards.Number) -> Reward:
+func play_number(number: Cards.Number) -> Slot:
 	var playable_slots = find_playable_slots(number)
 	assert(not playable_slots.is_empty(), "Player managed to play a card that cannot be played")
 
 	# Mark slot as played
 	var slot_position = playable_slots[0]
 	played_slots.append(slot_position)
-	var slot = slots[slot_position.y][slot_position.x]
-	slot.node.is_played = true
 
 	# Reset highlights
 	highlight_options([])
 
-	return slot.reward
+	var slot = slots[slot_position.y][slot_position.x]
+	return slot.node
 
 ## Highlight slots that can be filled with one of the cards in card_types
 func highlight_options(card_types: Array) -> void:

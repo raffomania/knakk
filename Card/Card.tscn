@@ -1,23 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://cvotifiio5ola"]
+[gd_scene load_steps=4 format=3 uid="uid://cvotifiio5ola"]
 
 [ext_resource type="Texture2D" uid="uid://ujyhnxxvqosq" path="res://Card/images/Clubs_Jack.png" id="1_6nk1m"]
 [ext_resource type="Script" path="res://Card/Card.gd" id="2_tjkck"]
-[ext_resource type="Texture2D" uid="uid://b2oka8uiqatvl" path="res://icon.svg" id="3_rlwvg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m3hrd"]
 size = Vector2(398.947, 552.632)
-
-[sub_resource type="Curve" id="Curve_vtudk"]
-max_value = 100.0
-_data = [Vector2(0, 0), 0.0, 100.455, 0, 0, Vector2(1, 66.3636), 226.833, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="Curve" id="Curve_lc73l"]
-_data = [Vector2(0.253394, 0.5), 0.0, 0.0, 0, 0, Vector2(1, 0.318182), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="Gradient" id="Gradient_0fcxb"]
-colors = PackedColorArray(1, 1, 1, 0.627451, 1, 1, 1, 0)
 
 [node name="Card" type="Sprite2D"]
 scale = Vector2(0.92, 0.92)
@@ -30,46 +17,3 @@ script = ExtResource("2_tjkck")
 [node name="TouchDetectionShape" type="CollisionShape2D" parent="TouchDetectionArea"]
 position = Vector2(0.526316, -0.526308)
 shape = SubResource("RectangleShape2D_m3hrd")
-
-[node name="Particles" type="CPUParticles2D" parent="."]
-z_index = -1
-emitting = false
-amount = 6
-lifetime = 0.5
-one_shot = true
-preprocess = 0.05
-explosiveness = 1.0
-randomness = 0.42
-local_coords = true
-texture = ExtResource("3_rlwvg")
-gravity = Vector2(0, 0)
-initial_velocity_min = 1000.0
-initial_velocity_max = 1000.0
-damping_min = 100.0
-damping_max = 100.0
-damping_curve = SubResource("Curve_vtudk")
-angle_max = 180.0
-scale_amount_curve = SubResource("Curve_lc73l")
-color_ramp = SubResource("Gradient_0fcxb")
-
-[node name="Particles2" type="CPUParticles2D" parent="."]
-z_index = -1
-emitting = false
-amount = 6
-lifetime = 0.5
-one_shot = true
-preprocess = 0.05
-explosiveness = 1.0
-randomness = 0.42
-local_coords = true
-texture = ExtResource("3_rlwvg")
-direction = Vector2(-1, 0)
-gravity = Vector2(0, 0)
-initial_velocity_min = 1000.0
-initial_velocity_max = 1000.0
-damping_min = 100.0
-damping_max = 100.0
-damping_curve = SubResource("Curve_vtudk")
-angle_max = 180.0
-scale_amount_curve = SubResource("Curve_lc73l")
-color_ramp = SubResource("Gradient_0fcxb")

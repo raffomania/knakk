@@ -81,21 +81,32 @@ func _cancel_consider_action() -> void:
 	else:
 		reset_slot_highlights()
 
-func _choose_card(card_type: Array, action: Events.Action) -> void:
+func _choose_card(card_type: Array, action: Events.Action, card_node: Node) -> void:
 	if action != Events.Action.CHOOSE:
 		return
 
 	if chosen_suite == null:
-		play_suite(card_type[0])
+		play_suite(card_type[0], card_node)
 	else:	
-		play_number(card_type[1])
+		play_number(card_type[1], card_node)
 
-func play_suite(suite) -> void:
+func play_suite(suite: Cards.Suite, card_node: Card) -> void:
 	chosen_suite = suite
 
-func play_number(number) -> void:
-	var reward = child_node_for_suite(chosen_suite).play_card(number)
+	# Add card as child of the given suite while making sure it keeps its global position on screen
+	var suite_node = child_node_for_suite(suite)
+	var card_position = card_node.global_position
+	suite_node.add_child(card_node)
+	card_node.global_position = card_position
 
+	suite_node.play_suite(card_node)
+	card_node.shrink_to_played_size()
+
+func play_number(number: Cards.Number, card_node: Card) -> void:
+	var slot = child_node_for_suite(chosen_suite).play_number(number)
+	slot.fill_with_card(card_node)
+
+	var reward = slot.reward
 	# todo replace this with a global event, ez
 	if reward is Reward.Points:
 		score.add(reward.points)

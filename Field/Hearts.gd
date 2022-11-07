@@ -9,29 +9,39 @@ var slots = [
 	{
 		number = Cards.Number.Ace,
 		reward = Reward.Points.new(3),
+		is_played = false,
 	}, {
 		number = Cards.Number.Two,
 		reward = Reward.Points.new(6),
+		is_played = false,
 	}, {
 		number = Cards.Number.Three,
 		reward = Reward.Points.new(10),
+		is_played = false,
 	}, {
 		number = Cards.Number.Four,
 		reward = Reward.Points.new(15),
+		is_played = false,
 	}, {
 		number = Cards.Number.Five,
 		reward = Reward.Points.new(21),
+		is_played = false,
 	}, {
 		number = Cards.Number.Six,
 		reward = Reward.Points.new(28),
+		is_played = false,
 	}, {
 		number = Cards.Number.Seven,
 		reward = Reward.Points.new(36),
+		is_played = false,
 	}, {
 		number = Cards.Number.Eight,
 		reward = Reward.Points.new(45),
+		is_played = false,
 	},
 ]
+
+@onready var suite_symbol = $SuiteSymbol
 
 func _ready():
 	spawn_slots()
@@ -55,21 +65,24 @@ func spawn_slots() -> void:
 func can_play(number: Cards.Number) -> bool:
 	return not find_playable_slots(number).is_empty()
 
+func play_suite(card_node: Card) -> void:
+	# Move card to position of the suite symbol
+	card_node.move_to(suite_symbol.global_position + suite_symbol.size / 2)
+
 ## Mark the slot for the given number as played and
 ## return the reward gained by playing this card
-func play_card(number: Cards.Number) -> Reward:
+func play_number(number: Cards.Number) -> Slot:
 	var playable_slots = find_playable_slots(number)
 	assert(not playable_slots.is_empty(), "Player managed to play a card that cannot be played")
-
-	# Mark slot as played
-	var slot_column = playable_slots[0]
-	var slot_spec = slots[slot_column]
-	slot_spec.node.is_played = true
 
 	# Reset highlights
 	highlight_options([])
 
-	return slot_spec.reward
+	var slot_column = playable_slots[0]
+	var slot_spec = slots[slot_column]
+	slot_spec.is_played = true
+
+	return slot_spec.node
 
 ## Highlight slots that can be filled with one of the cards in card_types
 func highlight_options(card_types: Array) -> void:
@@ -88,12 +101,12 @@ func find_playable_slots(number: Cards.Number) -> Array[int]:
 		var slot = slots[column_index]
 
 		# The first free slot with a matching requirement is returned
-		if number >= slot.number and not slot.node.is_played:
+		if number >= slot.number and not slot.is_played:
 			return [column_index]
 
 		# If we find a slot that is not yet played but does not match the requirements,
 		# no slots are playable at all
-		if not slot.node.is_played:
+		if not slot.is_played:
 			return []
 
 	return []

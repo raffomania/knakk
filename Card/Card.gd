@@ -1,3 +1,4 @@
+class_name Card
 extends Sprite2D
 
 # todo dragging fast while releasing doesn't return the card to its original position
@@ -42,6 +43,9 @@ var considering_action := Events.Action.NOTHING
 ## whether the player can play this card or not
 var can_play := false
 
+## Once the card is played, it cannot be played again.
+var is_played := false
+
 ## Where on the card the user started dragging
 var drag_offset := Vector2.ZERO
 
@@ -68,6 +72,8 @@ func _exit_tree():
 
 ## Called when a user starts or stops touching this card
 func area_input(_viewport, event, _shape_index):
+	if is_played: return
+
 	if event is InputEventScreenTouch:
 		if event.pressed:
 			# The user wants to drag this card somewhere
@@ -79,24 +85,24 @@ func area_input(_viewport, event, _shape_index):
 			# The user stopped dragging this card
 			self.dragging = false
 			if considering_action != Events.Action.NOTHING and can_play:
-				var _tweener = create_tween().tween_property(self, "scale", PLAYED_SCALE, SCALE_TWEEN_DURATION)
-				_tweener = create_tween().tween_property(self, "rotation", 0, SCALE_TWEEN_DURATION)
-				$Particles.emitting = true
-				$Particles2.emitting = true
-				# todo this creates race conditions with fast-dragging players
-				await get_tree().create_timer(0.6).timeout
-				Events.choose_card.emit(card_type, considering_action)
+				Events.choose_card.emit(card_type, considering_action, self)
+				considering_action = Events.Action.NOTHING
+				queue_redraw()
+				visualize_interaction_state()
+				return
 			elif considering_action != Events.Action.NOTHING:
 				Events.cancel_consider_action.emit()
 
+			move_to(starting_position)
 			considering_action = Events.Action.NOTHING
-			self.move_to(self.starting_position)
 			queue_redraw()
 
 		visualize_interaction_state()
 
 ## Called for all input events, regardless of the area they're touching
 func _unhandled_input(event):
+	if is_played: return
+
 	if dragging and event is InputEventScreenDrag:
 		target_drag_position = drag_offset + event.position
 
@@ -153,3 +159,11 @@ func _process(delta):
 	# improved lerp smoothing to make drag motion less jittery
 	# see https://www.gamedeveloper.com/programming/improved-lerp-smoothing- for an explanation of the formula
 	self.global_position = self.target_drag_position.lerp(self.global_position, pow(2, -delta * smooth_speed))
+
+
+## When the card is played, it is usually placed on the field somewhere.
+## For that, animate it to shrink and rotate a little randomly.
+func shrink_to_played_size() -> void:
+	var _tweener = create_tween().tween_property(self, "scale", Vector2.ONE * 0.25, 0.3)
+	var new_rotation = PI * 0.1 * randf_range(-1, 1)
+	_tweener = create_tween().tween_property(self, "rotation", new_rotation, 0.35)

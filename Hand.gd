@@ -29,22 +29,37 @@ func redraw_hand() -> void:
 		child.queue_free()
 	
 	for _i in range(0,3):
-		draw_card()
+		draw_card(deck.draw_card())
 
-func _choose_card(card_type: Array, action: Events.Action) -> void:
+func _choose_card(_card_type: Array, action: Events.Action, card_node: Card) -> void:
 	if action == Events.Action.REDRAW:
 		# user chose to redraw, draw a new card now
-		node_for_card_type(card_type).queue_free()
-		draw_card()
+		card_node.queue_free()
+		draw_card(deck.draw_card())
 
 	if action == Events.Action.PLAY_AGAIN:
 		play_again_count += 1
 
+		# Remove card from hand, but make sure it keeps its global position on screen
+		var card_position = card_node.global_position
+		remove_child(card_node)
+		card_node.global_position = card_position
+
+		# Duplicate other cards
+		for child in get_children():
+			draw_card(child.card_type)
+
+		position_cards()
+
 	if action == Events.Action.CHOOSE:
 		cards_played_this_turn += 1
 
-		if play_again_count <= 0:
-			node_for_card_type(card_type).queue_free()
+		# Remove card from hand, but make sure it keeps its global position on screen
+		var card_position = card_node.global_position
+		remove_child(card_node)
+		card_node.global_position = card_position
+
+		card_node.is_played = true
 
 		var slot_was_filled = cards_played_this_turn >= 2
 		if slot_was_filled:
@@ -62,8 +77,7 @@ func node_for_card_type(card_type: Array) -> Node:
 	)[0]
 
 ## Draw a new card from the deck and insert it into the hand
-func draw_card() -> void:
-	var card_type = deck.draw_card()
+func draw_card(card_type: Array) -> void:
 	var card = card_scene.instantiate()
 	card.set_card_type(card_type)
 	add_child(card)

@@ -20,7 +20,7 @@ func _consider_action(_card_type: Array, action: Events.Action, mark_playable: C
 	var is_playable = redraw_tokens > 0
 	mark_playable.call(is_playable)
 
-func _choose_card(_card_type: Array, action: Events.Action) -> void:
+func _choose_card(_card_type: Array, action: Events.Action, _card_node: Card) -> void:
 	if action != Events.Action.REDRAW:
 		return
 

@@ -23,6 +23,8 @@ var slots = [
 	}
 ]
 
+@onready var suite_symbol = $SuiteSymbol
+
 func _ready():
 	spawn_slots()
 
@@ -54,14 +56,17 @@ func spawn_separator_label() -> void:
 	label.add_theme_color_override("font_color", COLOR)
 	add_child(label)
 
-
 ## Return true if the given number can be played on a slot in this area
 func can_play(number: Cards.Number) -> bool:
 	return not find_playable_slots(number).is_empty()
 
+func play_suite(card_node: Card) -> void:
+	# Move card to position of the suite symbol
+	card_node.move_to(suite_symbol.global_position + suite_symbol.size / 2)
+
 ## Mark the slot for the given number as played and
 ## return the reward gained by playing this card
-func play_card(number: Cards.Number) -> Reward:
+func play_number(number: Cards.Number) -> Slot:
 	var playable_slots = find_playable_slots(number)
 	assert(not playable_slots.is_empty(), "Player managed to play a card that cannot be played")
 
@@ -69,12 +74,11 @@ func play_card(number: Cards.Number) -> Reward:
 	var slot_column = playable_slots[0]
 	var slot_spec = slots[slot_column]
 	slot_spec.played_number = number
-	slot_spec.node.text = Cards.get_number_sigil(number)
 
 	# Reset highlights
 	highlight_options([])
 
-	return slot_spec.reward
+	return slot_spec.node
 
 ## Highlight slots that can be filled with one of the cards in card_types
 func highlight_options(card_types: Array) -> void:

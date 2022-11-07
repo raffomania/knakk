@@ -15,11 +15,11 @@ func _consider_action(card_type: Array, action: Events.Action, _mark_playable: C
 		Events.Action.REDRAW:
 			text = "Replace %s with a new card" % card_label
 		Events.Action.PLAY_AGAIN:
-			text = "Play an extra turn with your current cards"
+			text = "Duplicate other cards in your hand"
 		_:
 			text = "Take unknown action"
 
-func _choose_card(_card_type: Array, _action: Events.Action) -> void:
+func _choose_card(_card_type: Array, _action: Events.Action, _card_node: Card) -> void:
 	text = ""
 
 func _cancel_consider_action() -> void:

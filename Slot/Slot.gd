@@ -1,20 +1,11 @@
+class_name Slot
 extends Control
-
-const MARKER_SCALE = 0.5
 
 var color := Color.BLACK:
 	set(val):
 		color = val
 		$Reward.color = color
 		($Label as Label).add_theme_color_override("font_color", color)
-
-## When the player fills this slot by choosing a matching card,
-## we'll set this to true.
-var is_played := false:
-	set(val):
-		is_played = val
-		if is_played:
-			$Marker.color = ColorPalette.GREY
 
 var reward: Reward = Reward.Nothing.new():
 	set(val):
@@ -37,7 +28,7 @@ var is_highlighted: bool = false:
 		if is_highlighted:
 			$Marker.color = ColorPalette.GREY
 			$Marker.color.a = 0.2
-		elif not is_played:
+		else:
 			$Marker.color = null
 
 func _ready():
@@ -51,3 +42,12 @@ func _draw():
 	draw_line(Vector2(0, 0), Vector2(size.x, 0), color, thickness, true)
 	draw_line(Vector2(size.x, 0), size, color, thickness, true)
 	draw_line(Vector2(0, size.y), size, color, thickness, true)
+
+func fill_with_card(card_node: Card) -> void:
+	# Add card as child while keeping its global position
+	var card_position = card_node.global_position
+	add_child(card_node)
+	card_node.global_position = card_position
+
+	card_node.move_to(global_position + size / 2)
+	card_node.shrink_to_played_size()

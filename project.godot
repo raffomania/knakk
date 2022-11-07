@@ -9,6 +9,11 @@
 config_version=5
 
 _global_script_classes=[{
+"base": "Sprite2D",
+"class": &"Card",
+"language": &"GDScript",
+"path": "res://Card/Card.gd"
+}, {
 "base": "RefCounted",
 "class": &"Cards",
 "language": &"GDScript",
@@ -23,11 +28,18 @@ _global_script_classes=[{
 "class": &"Reward",
 "language": &"GDScript",
 "path": "res://Reward/Reward.gd"
+}, {
+"base": "Control",
+"class": &"Slot",
+"language": &"GDScript",
+"path": "res://Slot/Slot.gd"
 }]
 _global_script_class_icons={
+"Card": "",
 "Cards": "",
 "ColorPalette": "",
-"Reward": ""
+"Reward": "",
+"Slot": ""
 }
 
 [application]

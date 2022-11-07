@@ -55,6 +55,8 @@ var column_rewards = [
 ## slots have been filled
 var played_slots: Array[Vector2i] = []
 
+var suite_symbol
+
 func _ready():
 	spawn_slots()
 	spawn_reward_labels()
@@ -97,13 +99,13 @@ func spawn_reward_labels():
 
 ## Display a Spades symbol to show which suite this area is for
 func spawn_spades_symbol() -> void:
-	var spades_symbol = TextureRect.new()
-	spades_symbol.texture = SPADES_TEXTURE
-	spades_symbol.position = slots[0][0].node.position - Vector2(120, 0)
-	spades_symbol.ignore_texture_size = true
-	spades_symbol.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	add_child(spades_symbol)
-	spades_symbol.size = Vector2.ONE * SLOT_SIZE
+	suite_symbol = TextureRect.new()
+	suite_symbol.texture = SPADES_TEXTURE
+	suite_symbol.position = slots[0][0].node.position - Vector2(120, 0)
+	suite_symbol.ignore_texture_size = true
+	suite_symbol.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	add_child(suite_symbol)
+	suite_symbol.size = Vector2.ONE * SLOT_SIZE
 
 func _draw():
 	# Draw the vertical lines between slots
@@ -132,21 +134,26 @@ func get_slot_position(column_index, row_index):
 func can_play(number: Cards.Number) -> bool:
 	return not find_playable_slots(number).is_empty()
 
+func play_suite(card_node: Card) -> void:
+	# Move card to position of the suite symbol
+	card_node.move_to(suite_symbol.global_position + suite_symbol.size / 2)
+
 ## Return the reward gained by playing this card
-func play_card(number: Cards.Number) -> Reward:
+func play_number(number: Cards.Number) -> Slot:
 	var playable_slots = find_playable_slots(number)
 	assert(not playable_slots.is_empty(), "Player managed to play a card that cannot be played")
 
 	# Mark slot as played
 	var slot_position = playable_slots[0]
-	var slot_spec = slots[slot_position.x][slot_position.y]
 	played_slots.append(slot_position)
-	slot_spec.node.is_played = true
 
 	# Reset highlights
 	highlight_options([])
 
-	return get_reward_for_column(slot_position.x)
+	# todo fix column rewards
+
+	var slot_spec = slots[slot_position.x][slot_position.y]
+	return slot_spec.node
 
 func get_reward_for_column(column_index: int) -> Reward:
 	# For each slot in the column, check if it has been filled

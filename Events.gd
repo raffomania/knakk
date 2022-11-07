@@ -22,6 +22,8 @@ signal choose_card(card_type: Array, action: Action, card_node: Card)
 
 signal receive_reward(reward: Reward)
 
+signal show_help(message: String)
+
 ## Each time the player marks a slot and obtains a reward, a turn is completed.
 ## After 5 turns, all cards are returned to the deck and it is shuffled, beginning a new round
 signal turn_complete

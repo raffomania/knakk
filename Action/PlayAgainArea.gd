@@ -16,6 +16,8 @@ func _consider_action(_card_type: Array, action: Events.Action, mark_playable: C
 
 	var is_playable = play_again_tokens > 0
 	mark_playable.call(is_playable)
+	if is_playable:
+		Events.show_help.emit("Duplicate other cards in your hand")
 
 func _choose_card(_card_type: Array, action: Events.Action, card_node: Card) -> void:
 	if action != Events.Action.PLAY_AGAIN:

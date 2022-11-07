@@ -23,6 +23,9 @@ enum Number {
     King
 }
 
+static func get_label(card_type: Array) -> String:
+	return "%s of %s" % [get_suite_label(card_type[0]), get_number_label(card_type[1])]
+
 static func get_suite_label(suite: Cards.Suite) -> String:
 	return Suite.find_key(suite)
 

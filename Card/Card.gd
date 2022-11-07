@@ -92,9 +92,11 @@ func area_input(_viewport, event, _shape_index):
 				considering_action = Events.Action.NOTHING
 				queue_redraw()
 				visualize_interaction_state()
+				Events.show_help.emit("")
 				return
 			elif considering_action != Events.Action.NOTHING:
 				Events.cancel_consider_action.emit()
+				Events.show_help.emit("")
 
 			move_to(starting_position)
 			considering_action = Events.Action.NOTHING
@@ -126,6 +128,7 @@ func _unhandled_input(event):
 				Events.consider_action.emit(card_type, considering_action, func(can_play): self.can_play = can_play)
 			else:
 				Events.cancel_consider_action.emit()
+				Events.show_help.emit("")
 			visualize_interaction_state()
 
 		queue_redraw()

@@ -14,12 +14,14 @@ func _ready():
 	_err = Events.choose_card.connect(_choose_card)
 	_err = Events.receive_reward.connect(_receive_reward)
 
-func _consider_action(_card_type: Array, action: Events.Action, mark_playable: Callable) -> void:
+func _consider_action(card_type: Array, action: Events.Action, mark_playable: Callable) -> void:
 	if action != Events.Action.REDRAW:
 		return
 
 	var is_playable = redraw_tokens > 0
 	mark_playable.call(is_playable)
+	if is_playable:
+		Events.show_help.emit("Replace %s with a new card" % Cards.get_label(card_type))
 
 func _choose_card(_card_type: Array, action: Events.Action, _card_node: Card) -> void:
 	if action != Events.Action.REDRAW:

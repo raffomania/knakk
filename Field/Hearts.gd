@@ -1,7 +1,6 @@
 extends HBoxContainer
 
 const COLOR := ColorPalette.RED
-
 const SLOT_SCENE = preload("res://Slot/Slot.tscn")
 
 ## Slots in a column list, from left to right
@@ -41,11 +40,13 @@ var slots = [
 	},
 ]
 
-@onready var suite_symbol = $SuiteSymbol
+## A reference to the TextureRect showing that this area belongs to the Hearts suite
+@onready var suite_symbol: TextureRect = $SuiteSymbol
 
 
 func _ready():
 	spawn_slots()
+
 
 ## Create Slot nodes
 ## Slots are positioned automatically since we're extending HBoxContainer
@@ -71,6 +72,7 @@ func can_play(number: Cards.Number) -> bool:
 func play_suite(card_node: Card) -> void:
 	# Move card to position of the suite symbol
 	card_node.move_to(suite_symbol.global_position + suite_symbol.size / 2)
+
 
 ## Mark the slot for the given number as played and
 ## return the reward gained by playing this card

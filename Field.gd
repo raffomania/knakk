@@ -1,6 +1,5 @@
 extends Control
 
-@onready var score = $"../TopBar/Score"
 
 ## Either `null` or `Cards.Suite`
 ## If `null`, no suite has been chosen for this turn
@@ -49,24 +48,6 @@ func child_node_for_suite(suite: Cards.Suite) -> Node:
 	return null
 
 
-func _consider_action(card_type: Array, action: Events.Action, mark_playable: Callable) -> void:
-	if action != Events.Action.CHOOSE:
-		return
-
-	var can_play_card = can_play(card_type)
-	mark_playable.call(can_play_card)
-
-	# First, reset all slot highlights
-	for child in get_children():
-		child.highlight_options([])
-		# De-emphasize all areas by making them transparent
-		child.modulate = Color(1, 1, 1, 0.3)
-
-	if chosen_suite == null:
-		consider_suite(card_type, can_play_card)
-	else:
-		consider_number(card_type, can_play_card)
-	
 # User is considering playing the suite on the given card
 func consider_suite(card_type: Array, can_play_card: bool) -> void:
 	if can_play_card:
@@ -103,26 +84,6 @@ func consider_number(card_type: Array, can_play_card: bool) -> void:
 		return
 
 
-
-func _cancel_consider_action() -> void:
-	if chosen_suite != null:
-		var suite_node = child_node_for_suite(chosen_suite)
-		suite_node.highlight_options(Events.card_types_in_hand)
-		suite_node.modulate = Color.WHITE
-	else:
-		reset_slot_highlights()
-
-
-func _take_action(card_type: Array, action: Events.Action, card_node: Node) -> void:
-	if action != Events.Action.CHOOSE:
-		return
-
-	if chosen_suite == null:
-		play_suite(card_type[0], card_node)
-	else:	
-		play_number(card_type[1], card_node)
-
-
 func play_suite(suite: Cards.Suite, card_node: Card) -> void:
 	chosen_suite = suite
 
@@ -151,3 +112,41 @@ func reset_slot_highlights() -> void:
 	for child in get_children():
 		child.highlight_options([])
 		child.modulate = Color.WHITE
+
+
+func _consider_action(card_type: Array, action: Events.Action, mark_playable: Callable) -> void:
+	if action != Events.Action.CHOOSE:
+		return
+
+	var can_play_card = can_play(card_type)
+	mark_playable.call(can_play_card)
+
+	# First, reset all slot highlights
+	for child in get_children():
+		child.highlight_options([])
+		# De-emphasize all areas by making them transparent
+		child.modulate = Color(1, 1, 1, 0.3)
+
+	if chosen_suite == null:
+		consider_suite(card_type, can_play_card)
+	else:
+		consider_number(card_type, can_play_card)
+	
+
+func _cancel_consider_action() -> void:
+	if chosen_suite != null:
+		var suite_node = child_node_for_suite(chosen_suite)
+		suite_node.highlight_options(Events.card_types_in_hand)
+		suite_node.modulate = Color.WHITE
+	else:
+		reset_slot_highlights()
+
+
+func _take_action(card_type: Array, action: Events.Action, card_node: Node) -> void:
+	if action != Events.Action.CHOOSE:
+		return
+
+	if chosen_suite == null:
+		play_suite(card_type[0], card_node)
+	else:	
+		play_number(card_type[1], card_node)

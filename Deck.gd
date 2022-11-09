@@ -1,10 +1,12 @@
 extends Label
 
+
+signal reset_complete
+
 ## An array of [suite, number] arrays
 ## Cards on top of the deck are at the end of the array
 var cards_in_deck: Array[Array]
 
-signal reset_complete
 
 # todo why use init here?
 func _init():

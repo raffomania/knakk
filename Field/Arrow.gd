@@ -1,21 +1,21 @@
 extends Control
 
-@onready var label = $Label
+
+const START_TEXTURE = preload("res://Field/ArrowStart.svg")
+const END_TEXTURE = preload("res://Field/ArrowEnd.svg")
 
 var text: String
-
 var is_vertical := false
-
 var color := Color.BLACK:
 	set(value):
 		color = value
 		if is_instance_valid(label):
 			label.add_theme_color_override("font_color", color)
 
-
-const START_TEXTURE = preload("res://Field/ArrowStart.svg")
-const END_TEXTURE = preload("res://Field/ArrowEnd.svg")
 		
+@onready var label = $Label
+
+
 func _ready():
 	if is_instance_valid(label):
 		label.add_theme_color_override("font_color", color)

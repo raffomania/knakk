@@ -1,13 +1,9 @@
 @tool
 extends Control
 
+
 const BACKGROUND = preload("res://Reward/Reward.svg")
 const REDRAW_TEXTURE = preload("res://Action/RedrawCard.svg")
-
-@export var color := Color.BLACK:
-	set(val):
-		color = val
-		queue_redraw()
 
 var reward:
 	set(val):
@@ -40,6 +36,11 @@ var reward:
 				.finished
 			var _tweener = create_tween() \
 				.tween_property(self, "scale", Vector2.ONE, 0.05)
+
+@export var color := Color.BLACK:
+	set(val):
+		color = val
+		queue_redraw()
 
 
 func _ready():

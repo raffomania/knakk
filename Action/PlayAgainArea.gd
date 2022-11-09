@@ -1,5 +1,6 @@
 extends Control
 
+
 var play_again_tokens := 0:
 	set(val):
 		play_again_tokens = val
@@ -10,6 +11,19 @@ func _ready():
 	var _err = Events.consider_action.connect(_consider_action)
 	_err = Events.take_action.connect(_take_action)
 	_err = Events.receive_reward.connect(_receive_reward)
+
+
+func _draw():
+	draw_line(Vector2.ZERO, Vector2(size.x, 0), ColorPalette.PURPLE)
+	draw_line(Vector2.ZERO, Vector2(0, size.y), ColorPalette.PURPLE)
+
+	for index in range(0, play_again_tokens):
+		draw_string(
+			get_theme_default_font(), 
+			Vector2(20 + index * 55, 70), 
+			"++", 0, -1, 
+			round(get_theme_default_font_size() * 1.3), 
+			get_theme_color("Label"))
 
 
 func _consider_action(_card_type: Array, action: Events.Action, mark_playable: Callable) -> void:
@@ -44,16 +58,3 @@ func _take_action(_card_type: Array, action: Events.Action, card_node: Card) -> 
 func _receive_reward(reward: Reward) -> void:
 	if reward is Reward.PlayAgain:
 		play_again_tokens += 1
-
-
-func _draw():
-	draw_line(Vector2.ZERO, Vector2(size.x, 0), ColorPalette.PURPLE)
-	draw_line(Vector2.ZERO, Vector2(0, size.y), ColorPalette.PURPLE)
-
-	for index in range(0, play_again_tokens):
-		draw_string(
-			get_theme_default_font(), 
-			Vector2(20 + index * 55, 70), 
-			"++", 0, -1, 
-			round(get_theme_default_font_size() * 1.3), 
-			get_theme_color("Label"))

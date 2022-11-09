@@ -1,7 +1,7 @@
 extends HBoxContainer
 
-const COLOR := ColorPalette.BLUE
 
+const COLOR := ColorPalette.BLUE
 const SLOT_SCENE = preload("res://Slot/Slot.tscn")
 
 ## Slots in a column list, from left to right

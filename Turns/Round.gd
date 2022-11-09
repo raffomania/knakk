@@ -1,5 +1,6 @@
 extends Control
 
+
 const TURN_SIZE := 45
 
 var completed_turns := 0:

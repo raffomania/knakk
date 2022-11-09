@@ -1,9 +1,8 @@
 extends Node2D
 
 const SLOT_SIZE := 90
-var X_PADDING := 100
-var Y_PADDING := 110
-
+const X_PADDING := 100
+const Y_PADDING := 110
 const COLOR := ColorPalette.BLUE
 
 const SLOT_SCENE = preload("res://Slot/Slot.tscn")
@@ -54,7 +53,7 @@ var column_rewards = [
 ## An array of [column, row] indexes in the slots grid that represent which 
 ## slots have been filled
 var played_slots: Array[Vector2i] = []
-
+## A reference to the TextureRect showing that this area belongs to the Spades suite
 var suite_symbol
 
 
@@ -62,6 +61,26 @@ func _ready():
 	spawn_slots()
 	spawn_reward_labels()
 	spawn_spades_symbol()
+
+
+func _draw():
+	# Draw the vertical lines between slots
+	for column_index in len(slots):
+		for row_index in len(slots[column_index]) - 1:
+			var start_position = get_slot_position(column_index, row_index) \
+				+ Vector2(SLOT_SIZE * 0.5, SLOT_SIZE)
+			var stop_position = start_position + Vector2(0, Y_PADDING)
+			draw_line(start_position, stop_position, COLOR, 2.0, true)
+
+		# Draw a smaller vertical line to connect the lowest slot with the reward marker
+		# But only draw it for columns that are not filled yet
+		if not (get_reward_for_column(column_index) is Reward.Nothing):
+			continue
+
+		var start_position = get_slot_position(column_index, len(slots[column_index]) - 1) \
+			+ Vector2(SLOT_SIZE * 0.5, SLOT_SIZE)
+		var stop_position = start_position + Vector2(0, Y_PADDING * 0.3)
+		draw_line(start_position, stop_position, COLOR, 2.0, true)
 
 
 ## Create Slot nodes and position them
@@ -110,25 +129,6 @@ func spawn_spades_symbol() -> void:
 	add_child(suite_symbol)
 	suite_symbol.size = Vector2.ONE * SLOT_SIZE
 
-
-func _draw():
-	# Draw the vertical lines between slots
-	for column_index in len(slots):
-		for row_index in len(slots[column_index]) - 1:
-			var start_position = get_slot_position(column_index, row_index) \
-				+ Vector2(SLOT_SIZE * 0.5, SLOT_SIZE)
-			var stop_position = start_position + Vector2(0, Y_PADDING)
-			draw_line(start_position, stop_position, COLOR, 2.0, true)
-
-		# Draw a smaller vertical line to connect the lowest slot with the reward marker
-		# But only draw it for columns that are not filled yet
-		if not (get_reward_for_column(column_index) is Reward.Nothing):
-			continue
-
-		var start_position = get_slot_position(column_index, len(slots[column_index]) - 1) \
-			+ Vector2(SLOT_SIZE * 0.5, SLOT_SIZE)
-		var stop_position = start_position + Vector2(0, Y_PADDING * 0.3)
-		draw_line(start_position, stop_position, COLOR, 2.0, true)
 
 ## For a given column and row index, get the position for the corresponding slot
 ## on the screen

@@ -1,5 +1,6 @@
 extends Control
 
+
 var score:
 	set(value):
 		score = value

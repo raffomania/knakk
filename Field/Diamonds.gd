@@ -1,8 +1,8 @@
 extends Node2D
 
 const SLOT_SIZE := 90
-var X_PADDING := 146
-var Y_PADDING := 110
+const X_PADDING := 146
+const Y_PADDING := 110
 
 const SLOT_SCENE = preload("res://Slot/Slot.tscn")
 const ARROW_SCENE = preload("res://Field/Arrow.tscn")
@@ -87,10 +87,10 @@ var slots = [
 ## slots have been filled
 # todo this could be removed by using slot.node.is_played instead
 var played_slots: Array[Vector2i] = []
-
-var color := ColorPalette.RED
-
+## A reference to the TextureRect showing that this area belongs to the diamonds suite
 var suite_symbol
+# todo make this const
+var color := ColorPalette.RED
 
 
 func _ready():

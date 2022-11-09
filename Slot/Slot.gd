@@ -1,6 +1,7 @@
 class_name Slot
 extends Control
 
+
 var color := Color.BLACK:
 	set(val):
 		color = val

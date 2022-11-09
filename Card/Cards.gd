@@ -23,94 +23,6 @@ enum Number {
     King
 }
 
-static func get_label(card_type: Array) -> String:
-	return "%s of %s" % [get_suite_label(card_type[0]), get_number_label(card_type[1])]
-
-static func get_suite_label(suite: Cards.Suite) -> String:
-	return Suite.find_key(suite)
-
-static func get_number_label(number: Cards.Number) -> String:
-	return Number.find_key(number)
-
-static func get_number_sigil(number: Cards.Number) -> String:
-	match number:
-		Number.Ace: return "A"
-		Number.Two: return "2"
-		Number.Three: return "3"
-		Number.Four: return "4"
-		Number.Five: return "5"
-		Number.Six: return "6"
-		Number.Seven: return "7"
-		Number.Eight: return "8"
-		Number.Nine: return "9"
-		Number.Ten: return "10"
-		Number.Jack: return "J"
-		Number.Queen: return "Q"
-		Number.King: return "K"
-
-	return "?"
-
-## Check if the given `value` is in the given bounds (inclusive).
-## `bounds` should be a two-element [lower_bound, upper_bound] array.
-static func is_in_range(value: Number, bounds: Array):
-	return value >= bounds[0] and value <= bounds[1]	
-
-# todo remove or use this everywhere
-enum Card {
-    HeartsAce,
-    HeartsTwo,
-    HeartsThree,
-    HeartsFour,
-    HeartsFive,
-    HeartsSix,
-    HeartsSeven,
-    HeartsEight,
-    HeartsNine,
-    HeartsTen,
-    HeartsJack,
-    HeartsQueen,
-    HeartsKing,
-    DiamondsAce,
-    DiamondsTwo,
-    DiamondsThree,
-    DiamondsFour,
-    DiamondsFive,
-    DiamondsSix,
-    DiamondsSeven,
-    DiamondsEight,
-    DiamondsNine,
-    DiamondsTen,
-    DiamondsJack,
-    DiamondsQueen,
-    DiamondsKing,
-    SpadesAce,
-    SpadesTwo,
-    SpadesThree,
-    SpadesFour,
-    SpadesFive,
-    SpadesSix,
-    SpadesSeven,
-    SpadesEight,
-    SpadesNine,
-    SpadesTen,
-    SpadesJack,
-    SpadesQueen,
-    SpadesKing,
-    ClubsAce,
-    ClubsTwo,
-    ClubsThree,
-    ClubsFour,
-    ClubsFive,
-    ClubsSix,
-    ClubsSeven,
-    ClubsEight,
-    ClubsNine,
-    ClubsTen,
-    ClubsJack,
-    ClubsQueen,
-    ClubsKing,
-}
-
 const textures = {
     Suite.Hearts: {
         Number.Ace: preload("res://Card/images/Hearts_Ace.png"),
@@ -173,3 +85,40 @@ const textures = {
         Number.King: preload("res://Card/images/Clubs_King.png"),
     }
 }
+
+
+static func get_label(card_type: Array) -> String:
+	return "%s of %s" % [get_suite_label(card_type[0]), get_number_label(card_type[1])]
+
+
+static func get_suite_label(suite: Cards.Suite) -> String:
+	return Suite.find_key(suite)
+
+
+static func get_number_label(number: Cards.Number) -> String:
+	return Number.find_key(number)
+
+
+static func get_number_sigil(number: Cards.Number) -> String:
+	match number:
+		Number.Ace: return "A"
+		Number.Two: return "2"
+		Number.Three: return "3"
+		Number.Four: return "4"
+		Number.Five: return "5"
+		Number.Six: return "6"
+		Number.Seven: return "7"
+		Number.Eight: return "8"
+		Number.Nine: return "9"
+		Number.Ten: return "10"
+		Number.Jack: return "J"
+		Number.Queen: return "Q"
+		Number.King: return "K"
+
+	return "?"
+
+
+## Check if the given `value` is in the given bounds (inclusive).
+## `bounds` should be a two-element [lower_bound, upper_bound] array.
+static func is_in_range(value: Number, bounds: Array):
+	return value >= bounds[0] and value <= bounds[1]	

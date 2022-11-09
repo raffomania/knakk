@@ -14,10 +14,13 @@ func _consider_action(_card_type: Array, action: Events.Action, mark_playable: C
 	if action != Events.Action.PLAY_AGAIN:
 		return
 
-	var is_playable = play_again_tokens > 0
+	var hand_is_full = len(Events.card_types_in_hand) == 3
+	var is_playable = play_again_tokens > 0 and hand_is_full
 	mark_playable.call(is_playable)
 	if is_playable:
 		Events.show_help.emit("Duplicate other cards in your hand")
+	elif not hand_is_full:
+		Events.show_help.emit("You can only duplicate at the start of a turn")
 
 func _choose_card(_card_type: Array, action: Events.Action, card_node: Card) -> void:
 	if action != Events.Action.PLAY_AGAIN:

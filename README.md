@@ -14,7 +14,11 @@ todo: reorder functions in all scripts for readability
 
 ### Animations
 
+- Camera screen transition
+
 ### Tweens
+
+- Card dragging and transitions
 
 ### Static Types
 

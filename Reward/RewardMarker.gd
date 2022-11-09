@@ -45,7 +45,8 @@ func _ready():
 	# Always scale and rotate around the center
 	pivot_offset = size / 2
 
-	($Label as Label).add_theme_font_size_override("font_size", floor(size.x * 0.5))
+	($Label as Label).add_theme_font_size_override("font_size", floor(size.x * 0.55))
+	($Label as Label).add_theme_font_override("font", preload("res://Fonts/Dosis-Bold.ttf"))
 
 func _draw():
 	draw_texture_rect(BACKGROUND,

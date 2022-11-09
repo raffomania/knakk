@@ -28,15 +28,15 @@ var slots = [
 		is_played = false,
 	}, {
 		number = Cards.Number.Six,
-		reward = Reward.Points.new(28),
+		reward = Reward.PlayAgain.new(),
 		is_played = false,
 	}, {
 		number = Cards.Number.Seven,
-		reward = Reward.Points.new(36),
+		reward = Reward.Points.new(28),
 		is_played = false,
 	}, {
 		number = Cards.Number.Eight,
-		reward = Reward.Points.new(45),
+		reward = Reward.Points.new(36),
 		is_played = false,
 	},
 ]

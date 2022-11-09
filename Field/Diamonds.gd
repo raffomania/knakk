@@ -17,17 +17,17 @@ var slots = [
 			down_arrow = [Cards.Number.Ace, Cards.Number.Seven]
 		},
 		{
-			reward = Reward.PlayAgain.new(),
+			reward = Reward.Points.new(2),
 			right_arrow = [Cards.Number.Jack, Cards.Number.King],
 			down_arrow = [Cards.Number.Eight, Cards.Number.Ten]
 		},
 		{
-			reward = Reward.PlayAgain.new(),
+			reward = Reward.Points.new(3),
 			right_arrow = [Cards.Number.Queen, Cards.Number.King],
 			down_arrow = [Cards.Number.Ten, Cards.Number.Jack]
 		},
 		{
-			reward = Reward.Points.new(5),
+			reward = Reward.PlayAgain.new(),
 			right_arrow = [Cards.Number.Queen, Cards.Number.King],
 			down_arrow = [Cards.Number.Jack, Cards.Number.Queen]
 		},
@@ -36,7 +36,7 @@ var slots = [
 		},
 	], [
 		{
-			reward = Reward.RedrawCard.new(),
+			reward = Reward.Points.new(2),
 			right_arrow = [Cards.Number.Five, Cards.Number.Seven],
 			down_arrow = [Cards.Number.Ace, Cards.Number.Four]
 		},
@@ -46,7 +46,7 @@ var slots = [
 			down_arrow = [Cards.Number.Six, Cards.Number.Seven]
 		},
 		{
-			reward = Reward.Points.new(1),
+			reward = Reward.Points.new(5),
 			right_arrow = [Cards.Number.Ten, Cards.Number.Jack],
 			down_arrow = [Cards.Number.Nine, Cards.Number.Ten]
 		},
@@ -60,16 +60,16 @@ var slots = [
 			down_arrow = [Cards.Number.Ace, Cards.Number.Three]
 		},
 		{
-			reward = Reward.Points.new(1),
+			reward = Reward.Points.new(5),
 			right_arrow = [Cards.Number.Seven, Cards.Number.Eight],
 			down_arrow = [Cards.Number.Five, Cards.Number.Six]
 		},
 		{
-			reward = Reward.Points.new(1),
+			reward = Reward.RedrawCard.new(),
 		},
 	], [
 		{
-			reward = Reward.Points.new(8),
+			reward = Reward.PlayAgain.new(),
 			right_arrow = [Cards.Number.Three, Cards.Number.Four],
 			down_arrow = [Cards.Number.Ace, Cards.Number.Two]
 		},

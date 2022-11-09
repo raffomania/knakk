@@ -11,16 +11,18 @@ var slots = [
 	}, {
 		reward = Reward.Points.new(6),
 	}, {
+		reward = Reward.RedrawCard.new()
+	}, {
 		reward = Reward.Points.new(10),
+	}, {
+		reward = Reward.PlayAgain.new()
 	}, {
 		reward = Reward.Points.new(15),
 	}, {
 		reward = Reward.Points.new(21),
 	}, {
 		reward = Reward.Points.new(28),
-	}, {
-		reward = Reward.Points.new(36),
-	}
+	},
 ]
 
 @onready var suite_symbol = $SuiteSymbol

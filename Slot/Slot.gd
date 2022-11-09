@@ -3,34 +3,13 @@ extends Control
 
 
 var color := Color.BLACK:
-	set(val):
-		color = val
-		$Reward.color = color
-		($Label as Label).add_theme_color_override("font_color", color)
-
+	set = set_color
 var reward: Reward = Reward.Nothing.new():
-	set(val):
-		reward = val
-		$Reward.reward = val
-	get:
-		return reward
-
-var text: String = "":
-	set(val):
-		text = val
-		$Label.text = val
-	get:
-		return text
-
-var is_highlighted: bool = false:
-	set(val):
-		is_highlighted = val
-		queue_redraw()
-		if is_highlighted:
-			$Marker.color = ColorPalette.GREY
-			$Marker.color.a = 0.2
-		else:
-			$Marker.color = null
+	set = set_reward
+var text := "":
+	set = set_text
+var is_highlighted := false:
+	set = set_is_highlighted
 
 
 func _ready():
@@ -45,6 +24,34 @@ func _draw():
 	draw_line(Vector2(0, 0), Vector2(size.x, 0), color, thickness, true)
 	draw_line(Vector2(size.x, 0), size, color, thickness, true)
 	draw_line(Vector2(0, size.y), size, color, thickness, true)
+
+
+func set_color(value: Color) -> void:
+		color = value
+		$Reward.color = color
+		($Label as Label).add_theme_color_override("font_color", color)
+
+
+func set_reward(value: Reward) -> void:
+	reward = value
+	$Reward.reward = value
+
+
+func set_text(value: String) -> void:
+	text = value
+	$Label.text = value
+
+
+func set_is_highlighted(value: bool) -> void:
+	is_highlighted = value
+
+	queue_redraw()
+
+	if is_highlighted:
+		$Marker.color = ColorPalette.GREY
+		$Marker.color.a = 0.2
+	else:
+		$Marker.color = null
 
 
 func fill_with_card(card_node: Card) -> void:

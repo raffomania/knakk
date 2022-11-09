@@ -7,10 +7,7 @@ const END_TEXTURE = preload("res://Field/ArrowEnd.svg")
 var text: String
 var is_vertical := false
 var color := Color.BLACK:
-	set(value):
-		color = value
-		if is_instance_valid(label):
-			label.add_theme_color_override("font_color", color)
+	set = set_color
 
 		
 @onready var label = $Label
@@ -36,3 +33,10 @@ func _draw():
 		# Draw parts centered on the horizontal axis
 		draw_texture_rect(START_TEXTURE, Rect2(Vector2(0, (size.y - part_size.y) / 2), part_size), false)
 		draw_texture_rect(END_TEXTURE, Rect2(Vector2(size.x - part_size.x, (size.y - part_size.y) / 2), part_size), false)
+
+
+func set_color(value: Color) -> void:
+	color = value
+
+	if is_instance_valid(label):
+		label.add_theme_color_override("font_color", color)

@@ -149,6 +149,7 @@ func stop_dragging():
 		queue_redraw()
 
 
+## Update scale and rotation to indicate what the player is doing with this card at the moment
 func visualize_interaction_state() -> void:
 	if considering_action != Events.Action.NOTHING and can_play:
 		var _tweener = create_tween().tween_property(self, "scale", ACTION_SCALE, SCALE_TWEEN_DURATION)
@@ -159,10 +160,12 @@ func visualize_interaction_state() -> void:
 		var _tweener = create_tween().tween_property(self, "scale", NORMAL_SCALE, SCALE_TWEEN_DURATION)
 		_tweener = create_tween().tween_property(self, "rotation", 0, SCALE_TWEEN_DURATION)
 
+
 ## Tell this card to transition to a new position.
 ## The transition is animated.
 func move_to(new_global_position: Vector2):
 	self.target_drag_position = new_global_position
+
 
 ## Set the card type for this card.
 ## Will automatically set the new texture for that card type.

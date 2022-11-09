@@ -62,12 +62,15 @@ var drag_offset := Vector2.ZERO
 # todo rename to card_value everywhere?
 var card_type: Array
 
+
 func _ready():
 	Events.card_types_in_hand.append(card_type)
 	visualize_interaction_state()
 
+
 func _exit_tree():
 	Events.card_types_in_hand.erase(card_type)
+
 
 ## Detect when a user starts or stops touching this card
 func _input(event):
@@ -87,12 +90,14 @@ func _input(event):
 		# This event is handled by this card, stop it from bubbling to other cards
 		get_viewport().set_input_as_handled()
 
+
 ## The user has started touching this card and wants to drag it
 func start_dragging(touch_position: Vector2):
 	dragging = true
 	drag_offset = global_position - touch_position
 	# If the card is just returning to the hand, cancel that motion immediately
 	move_to(global_position)
+
 
 ## The user stopped dragging this card
 func stop_dragging():
@@ -111,6 +116,7 @@ func stop_dragging():
 		move_to(starting_position)
 		considering_action = Events.Action.NOTHING
 		queue_redraw()
+
 
 ## Called for all input events, regardless of the area they're touching
 func _unhandled_input(event):
@@ -141,6 +147,7 @@ func _unhandled_input(event):
 
 		queue_redraw()
 
+
 func visualize_interaction_state() -> void:
 	if considering_action != Events.Action.NOTHING and can_play:
 		var _tweener = create_tween().tween_property(self, "scale", ACTION_SCALE, SCALE_TWEEN_DURATION)
@@ -163,10 +170,12 @@ func set_card_type(new_card_type: Array):
 	self.card_type = new_card_type
 	self.texture = Cards.textures[self.card_type[0]][self.card_type[1]]
 
+
 func _draw():
 	if considering_action != Events.Action.NOTHING and can_play:
 		var size = self.texture.get_size() * 1.05
 		draw_rect(Rect2(-size/2, size), ColorPalette.PURPLE, false, 5.0)
+
 
 func _process(delta):
 	var smooth_speed = DRAG_SMOOTH_SPEED if self.dragging else ANIMATE_SMOOTH_SPEED

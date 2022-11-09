@@ -31,9 +31,11 @@ var is_highlighted: bool = false:
 		else:
 			$Marker.color = null
 
+
 func _ready():
 	$Label.text = text
 	$Reward.reward = reward
+
 
 func _draw():
 	var thickness = 5.0 if is_highlighted else 3.0
@@ -42,6 +44,7 @@ func _draw():
 	draw_line(Vector2(0, 0), Vector2(size.x, 0), color, thickness, true)
 	draw_line(Vector2(size.x, 0), size, color, thickness, true)
 	draw_line(Vector2(0, size.y), size, color, thickness, true)
+
 
 func fill_with_card(card_node: Card) -> void:
 	# Add card as child while keeping its global position

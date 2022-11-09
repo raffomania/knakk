@@ -22,6 +22,7 @@ func _ready():
 	label.size = size
 	label.text = text
 
+
 func _draw():
 	# To preserve the aspect ratio of the arrow, it is drawn in two parts, 
 	# each with a square size that scales to fit the overall arrow bounding box

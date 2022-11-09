@@ -43,6 +43,7 @@ var slots = [
 
 @onready var suite_symbol = $SuiteSymbol
 
+
 func _ready():
 	spawn_slots()
 
@@ -61,9 +62,11 @@ func spawn_slots() -> void:
 		add_child(node)
 		slot_spec.node = node
 
+
 ## Return true if the given number can be played on a slot in this area
 func can_play(number: Cards.Number) -> bool:
 	return not find_playable_slots(number).is_empty()
+
 
 func play_suite(card_node: Card) -> void:
 	# Move card to position of the suite symbol
@@ -84,6 +87,7 @@ func play_number(number: Cards.Number) -> Slot:
 
 	return slot_spec.node
 
+
 ## Highlight slots that can be filled with one of the cards in card_types
 func highlight_options(card_types: Array) -> void:
 	# Reset all highlights
@@ -94,6 +98,7 @@ func highlight_options(card_types: Array) -> void:
 	for card_type in card_types:
 		for slot_column in find_playable_slots(card_type[1]):
 			slots[slot_column].node.is_highlighted = true
+
 
 ## Find column indexes for slots that can be filled using a Hearts card with the given number
 func find_playable_slots(number: Cards.Number) -> Array[int]:

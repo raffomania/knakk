@@ -3,6 +3,7 @@ class_name Reward
 class Points extends Reward:
 	var points: int
 
+
 	func _init(points_value):
 		points = points_value
 

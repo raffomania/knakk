@@ -9,10 +9,12 @@ var redraw_tokens := 0:
 
 var TEXTURE = preload("res://Action/RedrawCard.svg")
 
+
 func _ready():
 	var _err = Events.consider_action.connect(_consider_action)
 	_err = Events.take_action.connect(_take_action)
 	_err = Events.receive_reward.connect(_receive_reward)
+
 
 func _consider_action(card_type: Array, action: Events.Action, mark_playable: Callable) -> void:
 	if action != Events.Action.REDRAW:
@@ -22,6 +24,7 @@ func _consider_action(card_type: Array, action: Events.Action, mark_playable: Ca
 	mark_playable.call(is_playable)
 	if is_playable:
 		Events.show_help.emit("Replace %s with a new card" % Cards.get_label(card_type))
+
 
 func _take_action(_card_type: Array, action: Events.Action, card_node: Card) -> void:
 	if action != Events.Action.REDRAW:
@@ -38,9 +41,11 @@ func _take_action(_card_type: Array, action: Events.Action, card_node: Card) -> 
 	card_node.move_to(global_position + Vector2(0, size.y / 2))
 	card_node.shrink_to_played_size()
 
+
 func _receive_reward(reward: Reward) -> void:
 	if reward is Reward.RedrawCard:
 		redraw_tokens += 1
+
 
 func _draw():
 	draw_line(Vector2.ZERO, Vector2(size.x, 0), ColorPalette.PURPLE)

@@ -57,10 +57,12 @@ var played_slots: Array[Vector2i] = []
 
 var suite_symbol
 
+
 func _ready():
 	spawn_slots()
 	spawn_reward_labels()
 	spawn_spades_symbol()
+
 
 ## Create Slot nodes and position them
 func spawn_slots() -> void:
@@ -76,6 +78,7 @@ func spawn_slots() -> void:
 
 			add_child(node)
 			slot_spec.node = node
+
 
 ## Create a label showing the reward for the given column
 func spawn_reward_labels():
@@ -96,6 +99,7 @@ func spawn_reward_labels():
 		marker.position = get_slot_position(column_index, column_index) \
 			+ Vector2(0, SLOT_SIZE) + center_offset
 
+
 ## Display a Spades symbol to show which suite this area is for
 func spawn_spades_symbol() -> void:
 	suite_symbol = TextureRect.new()
@@ -105,6 +109,7 @@ func spawn_spades_symbol() -> void:
 	suite_symbol.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	add_child(suite_symbol)
 	suite_symbol.size = Vector2.ONE * SLOT_SIZE
+
 
 func _draw():
 	# Draw the vertical lines between slots
@@ -133,13 +138,16 @@ func get_slot_position(column_index, row_index):
 		(row_index + 4 - column_index) * (SLOT_SIZE + Y_PADDING)
 	)
 
+
 ## Return true if the given number can be played on a slot in this area
 func can_play(number: Cards.Number) -> bool:
 	return not find_playable_slots(number).is_empty()
 
+
 func play_suite(card_node: Card) -> void:
 	# Move card to position of the suite symbol
 	card_node.move_to(suite_symbol.global_position + suite_symbol.size / 2)
+
 
 ## Return the reward gained by playing this card
 func play_number(number: Cards.Number) -> Slot:
@@ -164,6 +172,7 @@ func play_number(number: Cards.Number) -> Slot:
 	var slot_spec = slots[slot_position.x][slot_position.y]
 	return slot_spec.node
 
+
 func get_reward_for_column(column_index: int) -> Reward:
 	# For each slot in the column, check if it has been filled
 	for row_index in range(0, len(slots[column_index])):
@@ -174,6 +183,7 @@ func get_reward_for_column(column_index: int) -> Reward:
 
 	# Every slot in this column has been played, the reward has been reached
 	return column_rewards[column_index]
+
 
 ## Highlight slots that can be filled with one of the cards in card_types
 func highlight_options(card_types: Array) -> void:
@@ -186,6 +196,7 @@ func highlight_options(card_types: Array) -> void:
 	for card_type in card_types:
 		for slot_position in find_playable_slots(card_type[1]):
 			slots[slot_position.x][slot_position.y].node.is_highlighted = true
+
 
 ## Find slots that can be filled using a Spades card with the given number
 func find_playable_slots(number: Cards.Number) -> Array[Vector2i]:

@@ -11,6 +11,7 @@ func _init():
 	reset()
 	var _err = Events.round_complete.connect(reset)
 
+
 ## Refill the deck with all possible cards and shuffle them
 func reset():
 	cards_in_deck = []
@@ -21,11 +22,13 @@ func reset():
 	update_count()
 	reset_complete.emit()
 
+
 ## Remove the top card from the deck and return it as a [suite, number] array
 func draw_card() -> Array:
 	var card = cards_in_deck.pop_back()
 	update_count()
 	return card
+
 
 ## Update the text showing how many cards are left in the deck
 func update_count():

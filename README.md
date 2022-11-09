@@ -45,6 +45,8 @@ todo: reorder functions in all scripts for readability
 ### Code style
 
 - function ordering
+- [Official GDScript Style Guide](https://docs.godotengine.org/en/latest/tutorials/scripting/gdscript/gdscript_styleguide.html)
+- [GDQuest GDScript Style Guide](https://www.gdquest.com/docs/guidelines/best-practices/godot-gdscript/)
 
 ## Considerations
 

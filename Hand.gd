@@ -18,6 +18,7 @@ var card_scene := preload("res://Card/Card.tscn")
 ## all other cards lying on the table
 var played_cards_z_index = 0
 
+
 func _ready():
 	redraw_hand()
 
@@ -27,6 +28,7 @@ func _ready():
 	## a fresh hand from the newly shuffled deck
 	deck.reset_complete.connect(self.redraw_hand)
 
+
 ## Discard the current hand and draw a new one
 func redraw_hand() -> void:
 	for child in get_children():
@@ -34,6 +36,7 @@ func redraw_hand() -> void:
 	
 	for _i in range(0,3):
 		draw_card(deck.draw_card())
+
 
 func _take_action(_card_type: Array, action: Events.Action, card_node: Card) -> void:
 	if action == Events.Action.REDRAW:
@@ -85,10 +88,12 @@ func _take_action(_card_type: Array, action: Events.Action, card_node: Card) -> 
 				redraw_hand()
 				Events.turn_complete.emit()
 
+
 func node_for_card_type(card_type: Array) -> Node:
 	return get_children().filter(func(child): 
 		return child.card_type == card_type
 	)[0]
+
 
 ## Draw a new card from the deck and insert it into the hand
 func draw_card(card_type: Array) -> void:
@@ -119,6 +124,7 @@ func position_cards() -> void:
 		card.starting_position = card_position
 		card.move_to(card_position)
 		card_index += 1
+
 
 ## For debugging: redraw the current hand when R is pressed
 func _unhandled_input(event: InputEvent):

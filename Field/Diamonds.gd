@@ -92,6 +92,7 @@ var color := ColorPalette.RED
 
 var suite_symbol
 
+
 func _ready():
 	spawn_slots()
 
@@ -101,6 +102,7 @@ func _ready():
 	# Also, that slot is not visible, instead there's a diamond symbol there
 	slots[0][0].node.visible = false
 	spawn_diamonds_symbol()
+
 
 func spawn_slots() -> void:
 	var row_index = 0
@@ -130,6 +132,7 @@ func spawn_slots() -> void:
 
 		row_index += 1
 
+
 func spawn_arrow(rect: Rect2, is_vertical: bool, number_range) -> void:
 	var arrow = ARROW_SCENE.instantiate()
 	arrow.size = rect.size
@@ -139,6 +142,7 @@ func spawn_arrow(rect: Rect2, is_vertical: bool, number_range) -> void:
 
 	arrow.text = "%s-%s" % [Cards.get_number_sigil(number_range[0]), Cards.get_number_sigil(number_range[1])]
 	add_child(arrow)
+
 
 ## Instead of the top-left slot, we display a diamond symbol to show which suite this area is for
 func spawn_diamonds_symbol() -> void:
@@ -150,12 +154,15 @@ func spawn_diamonds_symbol() -> void:
 	add_child(suite_symbol)
 	suite_symbol.size = Vector2.ONE * SLOT_SIZE
 
+
 func can_play(number: Cards.Number) -> bool:
 	return not find_playable_slots(number).is_empty()
+
 
 func play_suite(card_node: Card) -> void:
 	# Move card to position of the suite symbol
 	card_node.move_to(suite_symbol.global_position + suite_symbol.size * 0.5)
+
 
 ## Returns the reward gained by playing this card
 func play_number(number: Cards.Number) -> Slot:
@@ -172,6 +179,7 @@ func play_number(number: Cards.Number) -> Slot:
 	var slot = slots[slot_position.y][slot_position.x]
 	return slot.node
 
+
 ## Highlight slots that can be filled with one of the cards in card_types
 func highlight_options(card_types: Array) -> void:
 	# Reset all highlights
@@ -183,6 +191,7 @@ func highlight_options(card_types: Array) -> void:
 	for card_type in card_types:
 		for slot_position in find_playable_slots(card_type[1]):
 			slots[slot_position.y][slot_position.x].node.is_highlighted = true
+
 
 ## Find slots that can be filled using a Diamonds card with the given number
 func find_playable_slots(number: Cards.Number) -> Array[Vector2i]:

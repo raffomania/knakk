@@ -10,9 +10,6 @@ const DRAG_SMOOTH_SPEED := 65.0
 ## Same as `DRAG_SMOOTH_SPEED`, but used when the user is not actively dragging
 const ANIMATE_SMOOTH_SPEED := 15.0
 
-## Used to detect when users touch this card
-@onready var touch_area: Area2D = $TouchDetectionArea
-
 ## The card's normal scale when it's not being dragged
 const NORMAL_SCALE := Vector2(0.85, 0.85)
 
@@ -66,43 +63,54 @@ var drag_offset := Vector2.ZERO
 var card_type: Array
 
 func _ready():
-	var _err = touch_area.connect("input_event", self.area_input)
 	Events.card_types_in_hand.append(card_type)
 	visualize_interaction_state()
 
 func _exit_tree():
 	Events.card_types_in_hand.erase(card_type)
 
-## Called when a user starts or stops touching this card
-func area_input(_viewport, event, _shape_index):
+## Detect when a user starts or stops touching this card
+func _input(event):
 	if is_played: return
 
 	if event is InputEventScreenTouch:
-		if event.pressed:
-			# The user wants to drag this card somewhere
-			self.dragging = true
-			self.drag_offset = self.global_position - event.position
-			# If the card is just returning to the hand, cancel that motion immediately
-			self.move_to(self.global_position)
+		if not event.pressed and dragging:
+			stop_dragging()
+		elif event.pressed and get_rect().has_point(make_input_local(event).position):
+			start_dragging(event.position)
 		else:
-			# The user stopped dragging this card
-			self.dragging = false
-			if considering_action != Events.Action.NOTHING and can_play:
-				Events.choose_card.emit(card_type, considering_action, self)
-				considering_action = Events.Action.NOTHING
-				queue_redraw()
-				visualize_interaction_state()
-				Events.show_help.emit("")
-				return
-			elif considering_action != Events.Action.NOTHING:
-				Events.cancel_consider_action.emit()
-				Events.show_help.emit("")
-
-			move_to(starting_position)
-			considering_action = Events.Action.NOTHING
-			queue_redraw()
+			# Nothing to do
+			return
 
 		visualize_interaction_state()
+
+		# This event is handled by this card, stop it from bubbling to other cards
+		get_viewport().set_input_as_handled()
+
+## The user has started touching this card and wants to drag it
+func start_dragging(touch_position: Vector2):
+	dragging = true
+	drag_offset = global_position - touch_position
+	# If the card is just returning to the hand, cancel that motion immediately
+	move_to(global_position)
+
+## The user stopped dragging this card
+func stop_dragging():
+	dragging = false
+	var was_considering_action = considering_action != Events.Action.NOTHING
+	if was_considering_action and can_play:
+		Events.choose_card.emit(card_type, considering_action, self)
+		considering_action = Events.Action.NOTHING
+		queue_redraw()
+		Events.show_help.emit("")
+	else:
+		if was_considering_action:
+			Events.cancel_consider_action.emit()
+			Events.show_help.emit("")
+
+		move_to(starting_position)
+		considering_action = Events.Action.NOTHING
+		queue_redraw()
 
 ## Called for all input events, regardless of the area they're touching
 func _unhandled_input(event):

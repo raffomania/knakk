@@ -7,7 +7,7 @@ extends Control
 var chosen_suite: Variant
 
 func _ready():
-	var _err = Events.choose_card.connect(self._choose_card)
+	var _err = Events.take_action.connect(self._take_action)
 	_err = Events.consider_action.connect(self._consider_action)
 	_err = Events.cancel_consider_action.connect(self._cancel_consider_action)
 
@@ -104,7 +104,7 @@ func _cancel_consider_action() -> void:
 	else:
 		reset_slot_highlights()
 
-func _choose_card(card_type: Array, action: Events.Action, card_node: Node) -> void:
+func _take_action(card_type: Array, action: Events.Action, card_node: Node) -> void:
 	if action != Events.Action.CHOOSE:
 		return
 

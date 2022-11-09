@@ -99,7 +99,7 @@ func stop_dragging():
 	dragging = false
 	var was_considering_action = considering_action != Events.Action.NOTHING
 	if was_considering_action and can_play:
-		Events.choose_card.emit(card_type, considering_action, self)
+		Events.take_action.emit(card_type, considering_action, self)
 		considering_action = Events.Action.NOTHING
 		queue_redraw()
 		Events.show_help.emit("")

@@ -21,7 +21,7 @@ var played_cards_z_index = 0
 func _ready():
 	redraw_hand()
 
-	var _err = Events.choose_card.connect(self._choose_card)
+	var _err = Events.take_action.connect(self._take_action)
 
 	## After a turn is complete, the deck resets. When that happens, we want to draw
 	## a fresh hand from the newly shuffled deck
@@ -35,7 +35,7 @@ func redraw_hand() -> void:
 	for _i in range(0,3):
 		draw_card(deck.draw_card())
 
-func _choose_card(_card_type: Array, action: Events.Action, card_node: Card) -> void:
+func _take_action(_card_type: Array, action: Events.Action, card_node: Card) -> void:
 	if action == Events.Action.REDRAW:
 		card_node.is_played = true
 

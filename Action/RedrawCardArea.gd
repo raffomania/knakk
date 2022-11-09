@@ -11,7 +11,7 @@ var TEXTURE = preload("res://Action/RedrawCard.svg")
 
 func _ready():
 	var _err = Events.consider_action.connect(_consider_action)
-	_err = Events.choose_card.connect(_choose_card)
+	_err = Events.take_action.connect(_take_action)
 	_err = Events.receive_reward.connect(_receive_reward)
 
 func _consider_action(card_type: Array, action: Events.Action, mark_playable: Callable) -> void:
@@ -23,7 +23,7 @@ func _consider_action(card_type: Array, action: Events.Action, mark_playable: Ca
 	if is_playable:
 		Events.show_help.emit("Replace %s with a new card" % Cards.get_label(card_type))
 
-func _choose_card(_card_type: Array, action: Events.Action, card_node: Card) -> void:
+func _take_action(_card_type: Array, action: Events.Action, card_node: Card) -> void:
 	if action != Events.Action.REDRAW:
 		return
 

@@ -7,7 +7,7 @@ var play_again_tokens := 0:
 
 func _ready():
 	var _err = Events.consider_action.connect(_consider_action)
-	_err = Events.choose_card.connect(_choose_card)
+	_err = Events.take_action.connect(_take_action)
 	_err = Events.receive_reward.connect(_receive_reward)
 
 func _consider_action(_card_type: Array, action: Events.Action, mark_playable: Callable) -> void:
@@ -22,7 +22,7 @@ func _consider_action(_card_type: Array, action: Events.Action, mark_playable: C
 	elif not hand_is_full:
 		Events.show_help.emit("You can only duplicate at the start of a turn")
 
-func _choose_card(_card_type: Array, action: Events.Action, card_node: Card) -> void:
+func _take_action(_card_type: Array, action: Events.Action, card_node: Card) -> void:
 	if action != Events.Action.PLAY_AGAIN:
 		return
 

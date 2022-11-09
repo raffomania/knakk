@@ -18,7 +18,7 @@ enum Action {
 
 signal consider_action(card_type: Array, action: Action, mark_playable: Callable)
 signal cancel_consider_action
-signal choose_card(card_type: Array, action: Action, card_node: Card)
+signal take_action(card_type: Array, action: Action, card_node: Card)
 
 signal receive_reward(reward: Reward)
 

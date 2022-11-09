@@ -1,13 +1,17 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=2 format=3 uid="uid://duh1n76roh0lu"]
 
 [ext_resource type="Script" path="res://Field/Arrow.gd" id="1_ucqqb"]
 
 [node name="Arrow" type="Control"]
+modulate = Color(1, 0.305882, 0.27451, 1)
 layout_mode = 3
 anchors_preset = 0
+offset_right = 50.0
+offset_bottom = 50.0
 script = ExtResource("1_ucqqb")
 
 [node name="Label" type="Label" parent="."]
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)

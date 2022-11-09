@@ -158,7 +158,7 @@ offset_bottom = 2383.0
 text = "50 Cards in Deck"
 script = ExtResource("12_54ssd")
 
-[node name="ActionIndicator" type="Label" parent="."]
+[node name="HelpMessage" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -171,7 +171,7 @@ offset_right = 130.0
 offset_bottom = -103.0
 grow_horizontal = 2
 grow_vertical = 0
-text = "Action Indicator"
+text = "Help Message"
 horizontal_alignment = 1
 vertical_alignment = 2
 autowrap_mode = 3

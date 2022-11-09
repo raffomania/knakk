@@ -5,11 +5,16 @@ const GAME_SCENE = preload("res://GameScreen.tscn")
 
 
 func _ready():
-	var _e = Events.game_over.connect(_game_over)
-	_e = Events.new_game.connect(_new_game)
+	var _e = Events.game_over.connect(_on_game_over)
+	_e = Events.new_game.connect(_on_new_game)
 
 
-func _game_over() -> void:
+func _unhandled_input(event):
+	if event.is_action_released("game_over") and OS.is_debug_build():
+		_on_game_over()
+
+
+func _on_game_over() -> void:
 	# Move to game over screen
 	await $Camera.go_to_game_over_screen()
 
@@ -24,12 +29,8 @@ func _game_over() -> void:
 	$GameOverScreen.animate_score(score)
 
 
-func _new_game() -> void:
+func _on_new_game() -> void:
 	var game_node = GAME_SCENE.instantiate()
 	add_child(game_node)
 	await $Camera.go_to_game_screen()
 
-
-func _unhandled_input(event):
-	if event.is_action_released("game_over") and OS.is_debug_build():
-		_game_over()

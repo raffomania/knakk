@@ -7,7 +7,7 @@ extends MarginContainer
 func _ready():
 	set_score(0)
 
-	var _err = button.pressed.connect(_new_game)
+	var _err = button.pressed.connect(_on_new_game)
 
 
 func animate_score(score: int) -> void:
@@ -19,5 +19,5 @@ func set_score(score: int) -> void:
 	$MarginBox/ScoreBox/Reward.reward = Reward.Points.new(score)
 
 
-func _new_game() -> void:
+func _on_new_game() -> void:
 	Events.new_game.emit()

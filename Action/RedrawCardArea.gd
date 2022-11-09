@@ -10,9 +10,9 @@ var redraw_tokens := 0:
 
 
 func _ready():
-	var _err = Events.consider_action.connect(_consider_action)
-	_err = Events.take_action.connect(_take_action)
-	_err = Events.receive_reward.connect(_receive_reward)
+	var _err = Events.consider_action.connect(_on_consider_action)
+	_err = Events.take_action.connect(_on_take_action)
+	_err = Events.receive_reward.connect(_on_receive_reward)
 
 
 func _draw():
@@ -25,7 +25,7 @@ func _draw():
 		draw_texture(TEXTURE, Vector2(right_edge - index * TEXTURE.get_size().x, center_y), ColorPalette.GREY)
 
 
-func _consider_action(card_type: Array, action: Events.Action, mark_playable: Callable) -> void:
+func _on_consider_action(card_type: Array, action: Events.Action, mark_playable: Callable) -> void:
 	if action != Events.Action.REDRAW:
 		return
 
@@ -35,7 +35,7 @@ func _consider_action(card_type: Array, action: Events.Action, mark_playable: Ca
 		Events.show_help.emit("Replace %s with a new card" % Cards.get_label(card_type))
 
 
-func _take_action(_card_type: Array, action: Events.Action, card_node: Card) -> void:
+func _on_take_action(_card_type: Array, action: Events.Action, card_node: Card) -> void:
 	if action != Events.Action.REDRAW:
 		return
 
@@ -51,6 +51,6 @@ func _take_action(_card_type: Array, action: Events.Action, card_node: Card) -> 
 	card_node.shrink_to_played_size()
 
 
-func _receive_reward(reward: Reward) -> void:
+func _on_receive_reward(reward: Reward) -> void:
 	if reward is Reward.RedrawCard:
 		redraw_tokens += 1

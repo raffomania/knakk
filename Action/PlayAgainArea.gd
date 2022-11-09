@@ -8,9 +8,9 @@ var play_again_tokens := 0:
 
 
 func _ready():
-	var _err = Events.consider_action.connect(_consider_action)
-	_err = Events.take_action.connect(_take_action)
-	_err = Events.receive_reward.connect(_receive_reward)
+	var _err = Events.consider_action.connect(_on_consider_action)
+	_err = Events.take_action.connect(_on_take_action)
+	_err = Events.receive_reward.connect(_on_receive_reward)
 
 
 func _draw():
@@ -26,7 +26,7 @@ func _draw():
 			get_theme_color("Label"))
 
 
-func _consider_action(_card_type: Array, action: Events.Action, mark_playable: Callable) -> void:
+func _on_consider_action(_card_type: Array, action: Events.Action, mark_playable: Callable) -> void:
 	if action != Events.Action.PLAY_AGAIN:
 		return
 
@@ -39,7 +39,7 @@ func _consider_action(_card_type: Array, action: Events.Action, mark_playable: C
 		Events.show_help.emit("You can only duplicate at the start of a turn")
 
 
-func _take_action(_card_type: Array, action: Events.Action, card_node: Card) -> void:
+func _on_take_action(_card_type: Array, action: Events.Action, card_node: Card) -> void:
 	if action != Events.Action.PLAY_AGAIN:
 		return
 
@@ -55,6 +55,6 @@ func _take_action(_card_type: Array, action: Events.Action, card_node: Card) -> 
 	card_node.shrink_to_played_size()
 
 
-func _receive_reward(reward: Reward) -> void:
+func _on_receive_reward(reward: Reward) -> void:
 	if reward is Reward.PlayAgain:
 		play_again_tokens += 1

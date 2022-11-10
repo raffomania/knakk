@@ -14,6 +14,6 @@ func _ready():
 	var _err = Events.receive_reward.connect(_on_receive_reward)
 
 
-func _on_receive_reward(reward: Reward) -> void:
+func _on_receive_reward(reward: Reward):
 	if reward is Reward.Points:
 		score += reward.points

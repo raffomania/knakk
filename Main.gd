@@ -14,7 +14,7 @@ func _unhandled_input(event):
 		_on_game_over()
 
 
-func _on_game_over() -> void:
+func _on_game_over():
 	# Move to game over screen
 	await $Camera.go_to_game_over_screen()
 
@@ -29,7 +29,7 @@ func _on_game_over() -> void:
 	$GameOverScreen.animate_score(score)
 
 
-func _on_new_game() -> void:
+func _on_new_game():
 	var game_node = GAME_SCENE.instantiate()
 	add_child(game_node)
 	await $Camera.go_to_game_screen()

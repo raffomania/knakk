@@ -50,7 +50,7 @@ func _ready():
 
 ## Create Slot nodes
 ## Slots are positioned automatically since we're extending HBoxContainer
-func spawn_slots() -> void:
+func spawn_slots():
 	for column_index in len(slots):
 		var slot_spec = slots[column_index]
 		var node = SLOT_SCENE.instantiate()
@@ -69,7 +69,7 @@ func can_play(number: Cards.Number) -> bool:
 	return not find_playable_slots(number).is_empty()
 
 
-func play_suite(card_node: Card) -> void:
+func play_suite(card_node: Card):
 	# Move card to position of the suite symbol
 	card_node.move_to(suite_symbol.global_position + suite_symbol.size / 2)
 
@@ -91,7 +91,7 @@ func play_number(number: Cards.Number) -> Slot:
 
 
 ## Highlight slots that can be filled with one of the cards in card_types
-func highlight_options(card_types: Array) -> void:
+func highlight_options(card_types: Array):
 	# Reset all highlights
 	for slot in slots:
 		slot.node.is_highlighted = false

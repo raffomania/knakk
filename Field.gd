@@ -38,7 +38,7 @@ func can_play_number(number: Cards.Number) -> bool:
 	return _child_node_for_suite(chosen_suite as Cards.Suite).can_play(number)
 
 
-func reset_slot_highlights() -> void:
+func reset_slot_highlights():
 	for child in get_children():
 		child.highlight_options([])
 		child.modulate = Color.WHITE
@@ -54,7 +54,7 @@ func _child_node_for_suite(suite: Cards.Suite) -> Node:
 	return null
 
 
-func _on_consider_action(card_type: Array, action: Events.Action, mark_playable: Callable) -> void:
+func _on_consider_action(card_type: Array, action: Events.Action, mark_playable: Callable):
 	if action != Events.Action.CHOOSE:
 		return
 
@@ -74,7 +74,7 @@ func _on_consider_action(card_type: Array, action: Events.Action, mark_playable:
 	
 
 # User is considering playing the suite on the given card
-func _consider_suite(card_type: Array, can_play_card: bool) -> void:
+func _consider_suite(card_type: Array, can_play_card: bool):
 	if can_play_card:
 		# highlight slots for all other numbers in the user's hand, 
 		# using the suite of the card the user is considering
@@ -93,7 +93,7 @@ func _consider_suite(card_type: Array, can_play_card: bool) -> void:
 
 
 ## A suite is already chosen and user is considering playing the given card's number
-func _consider_number(card_type: Array, can_play_card: bool) -> void:
+func _consider_number(card_type: Array, can_play_card: bool):
 	if can_play_card:
 		# highlight the suite's slots for the number of the considered card
 		var suite_node = _child_node_for_suite(chosen_suite)
@@ -109,7 +109,7 @@ func _consider_number(card_type: Array, can_play_card: bool) -> void:
 		return
 
 
-func _on_cancel_consider_action() -> void:
+func _on_cancel_consider_action():
 	if chosen_suite != null:
 		var suite_node = _child_node_for_suite(chosen_suite)
 		suite_node.highlight_options(Events.card_types_in_hand)
@@ -118,7 +118,7 @@ func _on_cancel_consider_action() -> void:
 		reset_slot_highlights()
 
 
-func _on_take_action(card_type: Array, action: Events.Action, card_node: Node) -> void:
+func _on_take_action(card_type: Array, action: Events.Action, card_node: Node):
 	if action != Events.Action.CHOOSE:
 		return
 
@@ -128,7 +128,7 @@ func _on_take_action(card_type: Array, action: Events.Action, card_node: Node) -
 		_play_number(card_type[1], card_node)
 
 
-func _play_suite(suite: Cards.Suite, card_node: Card) -> void:
+func _play_suite(suite: Cards.Suite, card_node: Card):
 	chosen_suite = suite
 
 	# Add card as child of the given suite while making sure it keeps its global position on screen
@@ -141,7 +141,7 @@ func _play_suite(suite: Cards.Suite, card_node: Card) -> void:
 	card_node.shrink_to_played_size()
 
 
-func _play_number(number: Cards.Number, card_node: Card) -> void:
+func _play_number(number: Cards.Number, card_node: Card):
 	var slot = _child_node_for_suite(chosen_suite).play_number(number)
 
 	Events.receive_reward.emit(slot.reward)

@@ -10,14 +10,14 @@ func _ready():
 	var _err = button.pressed.connect(_on_new_game)
 
 
-func animate_score(score: int) -> void:
+func animate_score(score: int):
 	var duration = score / 20.0
 	var _tweener = create_tween().set_ease(Tween.EASE_OUT).tween_method(set_score, 0, score, duration)
 
 
-func set_score(score: int) -> void:
+func set_score(score: int):
 	$MarginBox/ScoreBox/Reward.reward = Reward.Points.new(score)
 
 
-func _on_new_game() -> void:
+func _on_new_game():
 	Events.new_game.emit()

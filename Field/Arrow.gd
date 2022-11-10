@@ -35,7 +35,7 @@ func _draw():
 		draw_texture_rect(END_TEXTURE, Rect2(Vector2(size.x - part_size.x, (size.y - part_size.y) / 2), part_size), false)
 
 
-func set_color(value: Color) -> void:
+func set_color(value: Color):
 	color = value
 
 	if is_instance_valid(label):

@@ -38,7 +38,7 @@ func _unhandled_input(event: InputEvent):
 
 
 ## Discard the current hand and draw a new one
-func redraw_hand() -> void:
+func redraw_hand():
 	for child in get_children():
 		child.queue_free()
 	
@@ -53,7 +53,7 @@ func node_for_card_type(card_type: Array) -> Node:
 
 
 ## Draw a new card from the deck and insert it into the hand
-func draw_card(card_type: Array) -> void:
+func draw_card(card_type: Array):
 	var card = card_scene.instantiate()
 	card.set_card_type(card_type)
 	# Display card above all played cards
@@ -64,7 +64,7 @@ func draw_card(card_type: Array) -> void:
 
 ## Look at all cards and evenly distribute their position across the
 ## available screen space
-func position_cards() -> void:
+func position_cards():
 	# In case any cards were deleted during this frame,
 	# wait for `queue_free()` calls to take effect by waiting for the next frame
 	await get_tree().process_frame
@@ -84,7 +84,7 @@ func position_cards() -> void:
 		card_index += 1
 
 
-func _on_take_action(_card_type: Array, action: Events.Action, card_node: Card) -> void:
+func _on_take_action(_card_type: Array, action: Events.Action, card_node: Card):
 	if action == Events.Action.REDRAW:
 		card_node.is_played = true
 

@@ -84,7 +84,7 @@ func _draw():
 
 
 ## Create Slot nodes and position them
-func spawn_slots() -> void:
+func spawn_slots():
 	for column_index in len(slots):
 		for row_index in len(slots[column_index]):
 			var slot_spec = slots[column_index][row_index]
@@ -120,7 +120,7 @@ func spawn_reward_labels():
 
 
 ## Display a Spades symbol to show which suite this area is for
-func spawn_spades_symbol() -> void:
+func spawn_spades_symbol():
 	suite_symbol = TextureRect.new()
 	suite_symbol.texture = SPADES_TEXTURE
 	suite_symbol.position = slots[0][0].node.position - Vector2(120, 0)
@@ -144,7 +144,7 @@ func can_play(number: Cards.Number) -> bool:
 	return not find_playable_slots(number).is_empty()
 
 
-func play_suite(card_node: Card) -> void:
+func play_suite(card_node: Card):
 	# Move card to position of the suite symbol
 	card_node.move_to(suite_symbol.global_position + suite_symbol.size / 2)
 
@@ -186,7 +186,7 @@ func get_reward_for_column(column_index: int) -> Reward:
 
 
 ## Highlight slots that can be filled with one of the cards in card_types
-func highlight_options(card_types: Array) -> void:
+func highlight_options(card_types: Array):
 	# Reset all highlights
 	for row in slots:
 		for slot in row:

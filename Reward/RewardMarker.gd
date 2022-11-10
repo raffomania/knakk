@@ -35,7 +35,7 @@ func _draw():
 			false, ColorPalette.WHITE
 		)
 
-func set_reward(value: Reward) -> void:
+func set_reward(value: Reward):
 	var reward_changed = (
 		reward is Reward.Points 
 		and value is Reward.Points 

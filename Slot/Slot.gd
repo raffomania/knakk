@@ -26,23 +26,23 @@ func _draw():
 	draw_line(Vector2(0, size.y), size, color, thickness, true)
 
 
-func set_color(value: Color) -> void:
+func set_color(value: Color):
 		color = value
 		$Reward.color = color
 		($Label as Label).add_theme_color_override("font_color", color)
 
 
-func set_reward(value: Reward) -> void:
+func set_reward(value: Reward):
 	reward = value
 	$Reward.reward = value
 
 
-func set_text(value: String) -> void:
+func set_text(value: String):
 	text = value
 	$Label.text = value
 
 
-func set_is_highlighted(value: bool) -> void:
+func set_is_highlighted(value: bool):
 	is_highlighted = value
 
 	queue_redraw()
@@ -54,7 +54,7 @@ func set_is_highlighted(value: bool) -> void:
 		$Marker.color = null
 
 
-func fill_with_card(card_node: Card) -> void:
+func fill_with_card(card_node: Card):
 	# Add card as child while keeping its global position
 	var card_position = card_node.global_position
 	add_child(card_node)

@@ -8,11 +8,11 @@ func _ready():
 	_err = Events.round_complete.connect(_round_complete)
 
 
-func _turn_complete() -> void:
+func _turn_complete():
 	get_node("Round%d" % current_round).completed_turns += 1
 
 
-func _round_complete() -> void:
+func _round_complete():
 	current_round += 1
 
 	if current_round > 3:

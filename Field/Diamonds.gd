@@ -104,7 +104,7 @@ func _ready():
 	spawn_diamonds_symbol()
 
 
-func spawn_slots() -> void:
+func spawn_slots():
 	var row_index = 0
 	for row in slots:
 		var col_index = 0
@@ -133,7 +133,7 @@ func spawn_slots() -> void:
 		row_index += 1
 
 
-func spawn_arrow(rect: Rect2, is_vertical: bool, number_range) -> void:
+func spawn_arrow(rect: Rect2, is_vertical: bool, number_range):
 	var arrow = ARROW_SCENE.instantiate()
 	arrow.size = rect.size
 	arrow.position = rect.position
@@ -145,7 +145,7 @@ func spawn_arrow(rect: Rect2, is_vertical: bool, number_range) -> void:
 
 
 ## Instead of the top-left slot, we display a diamond symbol to show which suite this area is for
-func spawn_diamonds_symbol() -> void:
+func spawn_diamonds_symbol():
 	suite_symbol = TextureRect.new()
 	suite_symbol.texture = DIAMONDS_TEXTURE
 	suite_symbol.position = slots[0][0].node.position
@@ -159,7 +159,7 @@ func can_play(number: Cards.Number) -> bool:
 	return not find_playable_slots(number).is_empty()
 
 
-func play_suite(card_node: Card) -> void:
+func play_suite(card_node: Card):
 	# Move card to position of the suite symbol
 	card_node.move_to(suite_symbol.global_position + suite_symbol.size * 0.5)
 
@@ -181,7 +181,7 @@ func play_number(number: Cards.Number) -> Slot:
 
 
 ## Highlight slots that can be filled with one of the cards in card_types
-func highlight_options(card_types: Array) -> void:
+func highlight_options(card_types: Array):
 	# Reset all highlights
 	for row in slots:
 		for slot in row:

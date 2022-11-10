@@ -15,6 +15,8 @@ It also centers everything in the middle of the screen when the window's aspect 
 
 A lot of the game is implemented using custom controls. They are very similar to `Node2D` nodes, but have a `size` property that makes it easy to adapt them to different sizes. One example for this is the `RewardMarker` node which is used to great effect to show rewards associated with slots on the field, the current score, and the score on the game over screen.
 
+
+
 ### Animations
 
 The `Camera` node is animated by an `AnimationPlayer` that animates its `offset` and `zoom` properties.

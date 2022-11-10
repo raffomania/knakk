@@ -18,7 +18,7 @@ func _draw():
 		draw_rect(Rect2(Vector2(i * TURN_SIZE + padding, padding), Vector2(TURN_SIZE - padding * 2, TURN_SIZE - padding * 2)), ColorPalette.GREY, true)
 
 
-func set_completed_turns(value: int) -> void:
+func set_completed_turns(value: int):
 	completed_turns = value
 
 	queue_redraw()

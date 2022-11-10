@@ -7,5 +7,5 @@ func _ready():
 	text = ""
 
 
-func _on_set_text(message: String) -> void:
+func _on_set_text(message: String):
 	text = message

@@ -150,7 +150,7 @@ func stop_dragging():
 
 
 ## Update scale and rotation to indicate what the player is doing with this card at the moment
-func visualize_interaction_state() -> void:
+func visualize_interaction_state():
 	if considering_action != Events.Action.NOTHING and can_play:
 		var _tweener = create_tween().tween_property(self, "scale", ACTION_SCALE, SCALE_TWEEN_DURATION)
 	elif dragging:
@@ -177,7 +177,7 @@ func set_card_type(new_card_type: Array):
 
 ## When the card is played, it is usually placed on the field somewhere.
 ## For that, animate it to shrink and rotate a little randomly.
-func shrink_to_played_size() -> void:
+func shrink_to_played_size():
 	var _tweener = create_tween().tween_property(self, "scale", Vector2.ONE * 0.25, 0.3)
 	var new_rotation = PI * 0.1 * randf_range(-1, 1)
 	_tweener = create_tween().tween_property(self, "rotation", new_rotation, 0.35)

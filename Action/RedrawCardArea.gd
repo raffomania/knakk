@@ -25,7 +25,7 @@ func _draw():
 		draw_texture(TEXTURE, Vector2(right_edge - index * TEXTURE.get_size().x, center_y), ColorPalette.GREY)
 
 
-func _on_consider_action(card_type: Array, action: Events.Action, mark_playable: Callable) -> void:
+func _on_consider_action(card_type: Array, action: Events.Action, mark_playable: Callable):
 	if action != Events.Action.REDRAW:
 		return
 
@@ -35,7 +35,7 @@ func _on_consider_action(card_type: Array, action: Events.Action, mark_playable:
 		Events.show_help.emit("Replace %s with a new card" % Cards.get_label(card_type))
 
 
-func _on_take_action(_card_type: Array, action: Events.Action, card_node: Card) -> void:
+func _on_take_action(_card_type: Array, action: Events.Action, card_node: Card):
 	if action != Events.Action.REDRAW:
 		return
 
@@ -51,6 +51,6 @@ func _on_take_action(_card_type: Array, action: Events.Action, card_node: Card) 
 	card_node.shrink_to_played_size()
 
 
-func _on_receive_reward(reward: Reward) -> void:
+func _on_receive_reward(reward: Reward):
 	if reward is Reward.RedrawCard:
 		redraw_tokens += 1

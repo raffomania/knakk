@@ -2,7 +2,7 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://ukqbd3vxtrq"
+uid="uid://bw3v2l6pvp8ox"
 path="res://.godot/imported/Dosis-Bold.ttf-a6bbb1d84d7f2cbe9a6f6ccfbc67320e.fontdata"
 
 [deps]
@@ -14,7 +14,7 @@ dest_files=["res://.godot/imported/Dosis-Bold.ttf-a6bbb1d84d7f2cbe9a6f6ccfbc6732
 
 Rendering=null
 antialiasing=1
-generate_mipmaps=false
+generate_mipmaps=true
 multichannel_signed_distance_field=false
 msdf_pixel_range=8
 msdf_size=48

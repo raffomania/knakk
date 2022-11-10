@@ -61,7 +61,7 @@ func _exit_tree():
 
 
 ## Detect when a user starts or stops touching this card
-func _input(event):
+func _input(event: InputEvent):
 	if is_played: return
 
 	if event is InputEventScreenTouch:
@@ -77,11 +77,6 @@ func _input(event):
 
 		# This event is handled by this card, stop it from bubbling to other cards
 		get_viewport().set_input_as_handled()
-
-
-## Called for all input events, regardless of the area they're touching
-func _unhandled_input(event):
-	if is_played: return
 
 	if dragging and event is InputEventScreenDrag:
 		target_drag_position = drag_offset + event.position
@@ -104,6 +99,7 @@ func _unhandled_input(event):
 			else:
 				Events.cancel_consider_action.emit()
 				Events.show_help.emit("")
+
 			visualize_interaction_state()
 
 		queue_redraw()
@@ -115,7 +111,7 @@ func _draw():
 		draw_rect(Rect2(-size/2, size), ColorPalette.PURPLE, false, 5.0)
 
 
-func _process(delta):
+func _process(delta: float):
 	var smooth_speed = DRAG_SMOOTH_SPEED if self.dragging else ANIMATE_SMOOTH_SPEED
 	# improved lerp smoothing to make drag motion less jittery
 	# see https://www.gamedeveloper.com/programming/improved-lerp-smoothing- for an explanation of the formula

@@ -11,11 +11,11 @@ It also centers everything in the middle of the screen when the window's aspect 
 
 ### UI
 
-- default_theme set in project settings
-
 A lot of the game is implemented using custom controls. They are very similar to `Node2D` nodes, but have a `size` property that makes it easy to adapt them to different sizes. One example for this is the `RewardMarker` node which is used to great effect to show rewards associated with slots on the field, the current score, and the score on the game over screen.
 
+The `default_theme.tres` file defines font family, font size and button colors for the whole project. It's set in the project settings and applies to all control nodes by default.
 
+The `Hearts` and `Clubs` areas on the playing field use `HBoxContainer`s to automatically lay out their slots in a row. `Diamonds` and `Spades` are similar to a `GridContainer` but contain a custom implementation that is tailored to their triangle-shaped grid. 
 
 ### Animations
 
@@ -70,6 +70,7 @@ The code mostly follows [Official GDScript Style Guide](https://docs.godotengine
 
 - How to handle propagation and capturing of click events?
 - How to represent a single card value?
+- Defining slots, rewards etc. in scenes vs code
 
 ## Tasks left for the reader
 

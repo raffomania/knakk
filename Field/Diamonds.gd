@@ -1,4 +1,4 @@
-extends Node2D
+extends Container
 
 const SLOT_SIZE := 90
 const X_PADDING := 146

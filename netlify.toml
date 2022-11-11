@@ -1,6 +1,6 @@
 [[headers]]
 
-for = "/"
+for = "/*"
 
 [headers.values]
 

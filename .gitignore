@@ -6,3 +6,6 @@ movie.avi
 
 # Builds
 export/
+
+# Local Netlify folder
+.netlify

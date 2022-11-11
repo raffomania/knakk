@@ -12,6 +12,7 @@ export: export-web export-linux
 
 release-web: export-web
     butler push export/web raffomania/clever-solitaire:web
+    netlify deploy --dir export/web --prod
 
 release-linux: export-linux
     butler push export/linux raffomania/clever-solitaire:linux

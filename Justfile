@@ -10,7 +10,12 @@ export-linux:
     mkdir -p export/linux
     godot4 --export "Linux/X11" export/linux/clever-solitaire.x86_64 --headless
 
-export: export-web export-linux
+export-osx:
+    rm -rf export/osx
+    mkdir -p export/osx
+    godot4 --export "OSX" export/osx/clever-solitaire.app --headless
+
+export: export-web export-linux export-osx
 
 # Upload exported files to various distribution platforms
 
@@ -21,7 +26,10 @@ release-web: export-web
 release-linux: export-linux
     butler push export/linux raffomania/clever-solitaire:linux
 
-release: release-web release-linux
+release-osx: export-osx
+    butler push export/osx raffomania/clever-solitaire:osx
+
+release: release-web release-linux release-osx
 
 generate-card-images:
     fd png$ Card/source_images -x convert {} -resize 30% Card/images/{/}

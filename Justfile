@@ -1,3 +1,5 @@
+# Export the project
+
 export-web:
     rm -rf export/web
     mkdir -p export/web
@@ -9,6 +11,8 @@ export-linux:
     godot4 --export "Linux/X11" export/linux/clever-solitaire.x86_64 --headless
 
 export: export-web export-linux
+
+# Upload exported files to various distribution platforms
 
 release-web: export-web
     butler push export/web raffomania/clever-solitaire:web

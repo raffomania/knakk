@@ -13,72 +13,67 @@ var slots = [
 	[
 		{
 			reward = Reward.Nothing.new(),
-			right_arrow = [Cards.Number.Eight, Cards.Number.King],
-			down_arrow = [Cards.Number.Ace, Cards.Number.Seven]
+			range = [Cards.Number.Ace, Cards.Number.King],
 		},
 		{
 			reward = Reward.Points.new(2),
-			right_arrow = [Cards.Number.Jack, Cards.Number.King],
-			down_arrow = [Cards.Number.Eight, Cards.Number.Ten]
+			range = [Cards.Number.Eight, Cards.Number.King],
 		},
 		{
 			reward = Reward.Points.new(3),
-			right_arrow = [Cards.Number.Queen, Cards.Number.King],
-			down_arrow = [Cards.Number.Ten, Cards.Number.Jack]
+			range = [Cards.Number.Ten, Cards.Number.King],
 		},
 		{
 			reward = Reward.PlayAgain.new(),
-			right_arrow = [Cards.Number.Queen, Cards.Number.King],
-			down_arrow = [Cards.Number.Jack, Cards.Number.Queen]
+			range = [Cards.Number.Jack, Cards.Number.King],
 		},
 		{
+			range = [Cards.Number.Queen, Cards.Number.King],
 			reward = Reward.Points.new(8),
 		},
 	], [
 		{
 			reward = Reward.Points.new(2),
-			right_arrow = [Cards.Number.Five, Cards.Number.Seven],
-			down_arrow = [Cards.Number.Ace, Cards.Number.Four]
+			range = [Cards.Number.Ace, Cards.Number.Seven],
 		},
 		{
 			reward = Reward.Points.new(2),
-			right_arrow = [Cards.Number.Eight, Cards.Number.Nine],
-			down_arrow = [Cards.Number.Six, Cards.Number.Seven]
+			range = [Cards.Number.Five, Cards.Number.Nine],
 		},
 		{
 			reward = Reward.Points.new(5),
-			right_arrow = [Cards.Number.Ten, Cards.Number.Jack],
-			down_arrow = [Cards.Number.Nine, Cards.Number.Ten]
+			range = [Cards.Number.Eight, Cards.Number.Ten],
 		},
 		{
 			reward = Reward.Points.new(8),
+			range = [Cards.Number.Ten, Cards.Number.Jack],
 		},
 	], [
 		{
 			reward = Reward.Points.new(3),
-			right_arrow = [Cards.Number.Four, Cards.Number.Five],
-			down_arrow = [Cards.Number.Ace, Cards.Number.Three]
+			range = [Cards.Number.Ace, Cards.Number.Four],
 		},
 		{
 			reward = Reward.Points.new(5),
-			right_arrow = [Cards.Number.Seven, Cards.Number.Eight],
-			down_arrow = [Cards.Number.Five, Cards.Number.Six]
+			range = [Cards.Number.Four, Cards.Number.Seven],
 		},
 		{
 			reward = Reward.RedrawCard.new(),
+			range = [Cards.Number.Six, Cards.Number.Nine],
 		},
 	], [
 		{
 			reward = Reward.PlayAgain.new(),
-			right_arrow = [Cards.Number.Three, Cards.Number.Four],
-			down_arrow = [Cards.Number.Ace, Cards.Number.Two]
+			range = [Cards.Number.Ace, Cards.Number.Three],
 		},
 		{
 			reward = Reward.Points.new(8),
+			range = [Cards.Number.Three, Cards.Number.Five],
 		},
 	], [
 		{
 			reward = Reward.Points.new(8),
+			range = [Cards.Number.Ace, Cards.Number.Two],
 		},
 	],
 ]
@@ -116,31 +111,29 @@ func spawn_slots():
 			node.position.y = row_index * (SLOT_SIZE + Y_PADDING)
 			node.color = color
 			node.reward = slot_spec.reward
+			node.text = "%s-%s" % [Cards.get_number_sigil(slot_spec.range[0]), Cards.get_number_sigil(slot_spec.range[1])]
 
 			add_child(node)
 			slot_spec.node = node
 
-			if slot_spec.has("right_arrow"):
-				var x_number_range = slot_spec.right_arrow
-				spawn_arrow(Rect2(node.position + Vector2(SLOT_SIZE, 0), Vector2(X_PADDING, SLOT_SIZE)), false, x_number_range)
+			var should_spawn_arrows = col_index < len(row) - 1
+			if should_spawn_arrows:
+				spawn_arrow(Rect2(node.position + Vector2(SLOT_SIZE, 0), Vector2(X_PADDING, SLOT_SIZE)), false)
 
-				if slot_spec.has("down_arrow"):
-					var y_number_range = slot_spec.down_arrow
-					spawn_arrow(Rect2(node.position + Vector2(0, SLOT_SIZE), Vector2(SLOT_SIZE, Y_PADDING)), true, y_number_range)
+				spawn_arrow(Rect2(node.position + Vector2(0, SLOT_SIZE), Vector2(SLOT_SIZE, Y_PADDING)), true)
 		
 			col_index += 1
 
 		row_index += 1
 
 
-func spawn_arrow(rect: Rect2, is_vertical: bool, number_range):
+func spawn_arrow(rect: Rect2, is_vertical: bool):
 	var arrow = ARROW_SCENE.instantiate()
 	arrow.size = rect.size
 	arrow.position = rect.position
 	arrow.color = color
 	arrow.is_vertical = is_vertical
 
-	arrow.text = "%s-%s" % [Cards.get_number_sigil(number_range[0]), Cards.get_number_sigil(number_range[1])]
 	add_child(arrow)
 
 
@@ -196,21 +189,19 @@ func highlight_options(card_types: Array):
 ## Find slots that can be filled using a Diamonds card with the given number
 func find_playable_slots(number: Cards.Number) -> Array[Vector2i]:
 	var playable_slots: Array[Vector2i] = []
-	for slot_position in played_slots:
-		var right_range = slots[slot_position.y][slot_position.x].get("right_arrow")
-		var down_range = slots[slot_position.y][slot_position.x].get("down_arrow")
 
-		var right_position = Vector2i(slot_position.x + 1, slot_position.y) 
-		if right_range != null and \
-				Cards.is_in_range(number, right_range) and \
-				not right_position in played_slots:
-			playable_slots.append(right_position)
+	for row_index in len(slots):
+		var row = slots[row_index]
+		for col_index in len(row):
+			var left_position = Vector2i(col_index - 1, row_index)
+			var up_position = Vector2i(col_index, row_index - 1)
+			var can_reach_position = left_position in played_slots or up_position in played_slots
 
-		var down_position = Vector2i(slot_position.x, slot_position.y + 1)
-		if down_range != null and \
-				Cards.is_in_range(number, down_range) and \
-				not down_position in played_slots:
-			playable_slots.append(down_position)
+			var slot_spec = row[col_index]
+			var slot_position = Vector2i(col_index, row_index)
+			if Cards.is_in_range(number, slot_spec.range) and \
+					can_reach_position and not slot_position in played_slots:
+				playable_slots.append(slot_position)
 
 	return playable_slots
 	

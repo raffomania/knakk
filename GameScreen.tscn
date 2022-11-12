@@ -26,7 +26,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Hand" parent="." instance=ExtResource("1_56rkn")]
-position = Vector2(540, 2148)
+position = Vector2(540, 2103)
 
 [node name="TopBar" type="Control" parent="."]
 layout_mode = 1
@@ -103,17 +103,17 @@ script = ExtResource("6_58l5m")
 [node name="Spades" type="Container" parent="Field"]
 layout_mode = 0
 offset_left = 188.0
-offset_top = 339.0
+offset_top = 268.0
 offset_right = 188.0
-offset_bottom = 339.0
+offset_bottom = 268.0
 script = ExtResource("7_c7t16")
 
 [node name="Hearts" type="HBoxContainer" parent="Field"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
-offset_top = 1359.0
-offset_bottom = 1449.0
+offset_top = 1320.0
+offset_bottom = 1410.0
 theme_override_constants/separation = 25
 script = ExtResource("8_fhn0x")
 
@@ -181,6 +181,7 @@ autowrap_mode = 3
 script = ExtResource("13_j0q4n")
 
 [node name="AreaSeparator" type="Sprite2D" parent="."]
+visible = false
 modulate = Color(1, 1, 1, 0.615686)
 position = Vector2(617, 1008)
 rotation = 0.0398547

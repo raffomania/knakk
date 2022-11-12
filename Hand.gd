@@ -71,8 +71,9 @@ func position_cards():
 
 	var children = get_children()
 	var total_cards = len(children)
+	var edge_padding = 50
 	var card_size = Cards.textures[0][0].get_size()
-	card_size.x = ProjectSettings.get_setting("display/window/size/viewport_width") / total_cards
+	card_size.x = (ProjectSettings.get_setting("display/window/size/viewport_width") - edge_padding * 2) / total_cards
 	# Start with a negative index to center the cards' positions
 	# around this node's position
 	var card_index = -(total_cards-1) / 2.0

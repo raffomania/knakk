@@ -136,6 +136,8 @@ func _play_suite(suite: Cards.Suite, card_node: Card):
 	var card_position = card_node.global_position
 	suite_node.add_child(card_node)
 	card_node.global_position = card_position
+	# Display card behind the suite symbol
+	card_node.z_index = -1 
 
 	suite_node.play_suite(card_node)
 	card_node.shrink_to_played_size()

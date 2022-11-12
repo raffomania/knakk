@@ -22,3 +22,6 @@ release-linux: export-linux
     butler push export/linux raffomania/clever-solitaire:linux
 
 release: release-web release-linux
+
+generate-card-images:
+    fd png$ Card/source_images -x convert {} -resize 30% Card/images/{/}

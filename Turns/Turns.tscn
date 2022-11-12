@@ -8,30 +8,37 @@ theme_override_constants/separation = 15
 script = ExtResource("1_fbl17")
 
 [node name="Label" type="Label" parent="."]
+layout_mode = 2
 offset_right = 83.0
 offset_bottom = 48.0
 text = "Turns:"
 
 [node name="Round1" type="Control" parent="."]
-layout_mode = 3
+layout_mode = 2
 anchors_preset = 0
 offset_left = 98.0
+offset_top = 24.0
 offset_right = 98.0
-offset_bottom = 48.0
+offset_bottom = 24.0
+size_flags_vertical = 4
 script = ExtResource("2_d5yim")
 
 [node name="Round2" type="Control" parent="."]
-layout_mode = 3
+layout_mode = 2
 anchors_preset = 0
 offset_left = 113.0
+offset_top = 24.0
 offset_right = 113.0
-offset_bottom = 48.0
+offset_bottom = 24.0
+size_flags_vertical = 4
 script = ExtResource("2_d5yim")
 
 [node name="Round3" type="Control" parent="."]
-layout_mode = 3
+layout_mode = 2
 anchors_preset = 0
 offset_left = 128.0
+offset_top = 24.0
 offset_right = 128.0
-offset_bottom = 48.0
+offset_bottom = 24.0
+size_flags_vertical = 4
 script = ExtResource("2_d5yim")

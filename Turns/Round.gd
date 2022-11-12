@@ -11,7 +11,7 @@ func _draw():
 	draw_rect(Rect2(Vector2.ZERO, size), ColorPalette.GREY, false, 3.0)
 
 	for i in range(0, 5):
-		draw_line(Vector2(i * TURN_SIZE, 0), Vector2(i * TURN_SIZE, size.y), ColorPalette.GREY)
+		draw_line(Vector2(i * TURN_SIZE, 0), Vector2(i * TURN_SIZE, size.y), ColorPalette.GREY, true)
 	
 	for i in range(0, completed_turns):
 		var padding = TURN_SIZE / 4.0

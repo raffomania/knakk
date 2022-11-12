@@ -6,35 +6,35 @@ const SLOT_SCENE = preload("res://Slot/Slot.tscn")
 ## Slots in a column list, from left to right
 var slots = [
 	{
-		number = Cards.Number.Ace,
+		number = Cards.Number.Six,
 		reward = Reward.Points.new(3),
 		is_played = false,
 	}, {
-		number = Cards.Number.Two,
+		number = Cards.Number.Seven,
 		reward = Reward.Points.new(6),
 		is_played = false,
 	}, {
-		number = Cards.Number.Three,
+		number = Cards.Number.Eight,
 		reward = Reward.Points.new(10),
 		is_played = false,
 	}, {
-		number = Cards.Number.Four,
+		number = Cards.Number.Nine,
 		reward = Reward.Points.new(15),
 		is_played = false,
 	}, {
-		number = Cards.Number.Five,
+		number = Cards.Number.Ten,
 		reward = Reward.Points.new(21),
 		is_played = false,
 	}, {
-		number = Cards.Number.Six,
+		number = Cards.Number.Jack,
 		reward = Reward.PlayAgain.new(),
 		is_played = false,
 	}, {
-		number = Cards.Number.Seven,
+		number = Cards.Number.Queen,
 		reward = Reward.Points.new(28),
 		is_played = false,
 	}, {
-		number = Cards.Number.Eight,
+		number = Cards.Number.King,
 		reward = Reward.Points.new(36),
 		is_played = false,
 	},

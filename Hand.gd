@@ -21,20 +21,14 @@ var played_cards_z_index = 0
 func _ready():
 	redraw_hand()
 
-	var _err = Events.take_action.connect(self._on_take_action)
-
-	## After a turn is complete, the deck resets. When that happens, we want to draw
-	## a fresh hand from the newly shuffled deck
-	deck.reset_complete.connect(self.redraw_hand)
+	var _err = Events.take_action.connect(_on_take_action)
+	_err = Events.round_complete.connect(_round_complete)
 
 
 ## For debugging: redraw the current hand when R is pressed
 func _unhandled_input(event: InputEvent):
 	if event.is_action_released("reset_hand") and OS.is_debug_build():
 		redraw_hand()
-
-		if len(deck.cards_in_deck) < 3:
-			deck.reset()
 
 
 ## Discard the current hand and draw a new one
@@ -44,6 +38,11 @@ func redraw_hand():
 	
 	for _i in range(0,3):
 		draw_card(deck.draw_card())
+
+
+func _round_complete():
+	deck.reset()
+	redraw_hand()
 
 
 func node_for_card_type(card_type: Array) -> Node:

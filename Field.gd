@@ -101,11 +101,11 @@ func _consider_number(card_type: Array, can_play_card: bool):
 
 		# Highlight this suite by resetting the modulate value
 		suite_node.modulate = Color.WHITE
-		Events.show_help.emit("Put %s in %s area" % [Cards.get_number_label(card_type[1]), Cards.get_suite_label(card_type[0])])
+		Events.show_help.emit("Put %s in %s area" % [Cards.get_number_label(card_type[1]), Cards.get_suite_label(chosen_suite)])
 
 		return
 	else:
-		Events.show_help.emit("Can't put %s in %s area" % [Cards.get_number_label(card_type[1]), Cards.get_suite_label(card_type[0])])
+		Events.show_help.emit("Can't put %s in %s area" % [Cards.get_number_label(card_type[1]), Cards.get_suite_label(chosen_suite)])
 		return
 
 

@@ -33,7 +33,7 @@ var considering_action := Events.Action.NOTHING
 var can_play := false:
 	set(val):
 		can_play = val
-		visualize_interaction_state()
+		_visualize_interaction_state()
 ## Once the card is played, it cannot be played again.
 var is_played := false
 ## Where on the card the user started dragging
@@ -53,7 +53,7 @@ var card_type: Array
 
 func _ready():
 	Events.card_types_in_hand.append(card_type)
-	visualize_interaction_state()
+	_visualize_interaction_state()
 	var _err = Events.consider_action.connect(_on_consider_action)
 	_err = Events.cancel_consider_action.connect(_on_cancel_consider_action)
 
@@ -68,14 +68,14 @@ func _input(event: InputEvent):
 
 	if event is InputEventScreenTouch:
 		if not event.pressed and is_dragging:
-			stop_dragging()
+			_stop_dragging()
 		elif event.pressed and get_rect().has_point(make_input_local(event).position):
-			start_dragging(event.position)
+			_start_dragging(event.position)
 		else:
 			# Nothing to do
 			return
 
-		visualize_interaction_state()
+		_visualize_interaction_state()
 
 		# This event is handled by this card, stop it from bubbling to other cards
 		get_viewport().set_input_as_handled()
@@ -107,7 +107,7 @@ func _input(event: InputEvent):
 				Events.cancel_consider_action.emit(previously_considering_action)
 				Events.show_help.emit("")
 
-			visualize_interaction_state()
+			_visualize_interaction_state()
 
 		queue_redraw()
 
@@ -123,45 +123,6 @@ func _process(delta: float):
 	# improved lerp smoothing to make drag motion less jittery
 	# see https://www.gamedeveloper.com/programming/improved-lerp-smoothing- for an explanation of the formula
 	self.global_position = self.target_drag_position.lerp(self.global_position, pow(2, -delta * smooth_speed))
-
-
-## The user has started touching this card and wants to drag it
-func start_dragging(touch_position: Vector2):
-	is_dragging = true
-	drag_offset = global_position - touch_position
-	# If the card is just returning to the hand, cancel that motion immediately
-	move_to(global_position)
-
-
-## The user stopped dragging this card
-func stop_dragging():
-	is_dragging = false
-	var was_considering_action = considering_action != Events.Action.NOTHING
-	if was_considering_action and can_play:
-		Events.take_action.emit(card_type, considering_action, self)
-		considering_action = Events.Action.NOTHING
-		queue_redraw()
-		Events.show_help.emit("")
-	else:
-		if was_considering_action:
-			Events.cancel_consider_action.emit(considering_action)
-			Events.show_help.emit("")
-
-		move_to(starting_position)
-		considering_action = Events.Action.NOTHING
-		queue_redraw()
-
-
-## Update scale and rotation to indicate what the player is doing with this card at the moment
-func visualize_interaction_state():
-	if considering_action != Events.Action.NOTHING and can_play:
-		var _tweener = create_tween().tween_property(self, "scale", ACTION_SCALE, SCALE_TWEEN_DURATION)
-	elif is_dragging:
-		var _tweener = create_tween().tween_property(self, "scale", DRAGGING_SCALE, SCALE_TWEEN_DURATION)
-		_tweener = create_tween().tween_property(self, "rotation", DRAGGING_ROTATION, SCALE_TWEEN_DURATION)
-	else:
-		var _tweener = create_tween().tween_property(self, "scale", NORMAL_SCALE, SCALE_TWEEN_DURATION)
-		_tweener = create_tween().tween_property(self, "rotation", 0, SCALE_TWEEN_DURATION)
 
 
 ## Tell this card to transition to a new position.
@@ -215,6 +176,45 @@ func _on_cancel_consider_action(action: Events.Action):
 		return
 
 	move_to(starting_position)
+
+
+## The user has started touching this card and wants to drag it
+func _start_dragging(touch_position: Vector2):
+	is_dragging = true
+	drag_offset = global_position - touch_position
+	# If the card is just returning to the hand, cancel that motion immediately
+	move_to(global_position)
+
+
+## The user stopped dragging this card
+func _stop_dragging():
+	is_dragging = false
+	var was_considering_action = considering_action != Events.Action.NOTHING
+	if was_considering_action and can_play:
+		Events.take_action.emit(card_type, considering_action, self)
+		considering_action = Events.Action.NOTHING
+		queue_redraw()
+		Events.show_help.emit("")
+	else:
+		if was_considering_action:
+			Events.cancel_consider_action.emit(considering_action)
+			Events.show_help.emit("")
+
+		move_to(starting_position)
+		considering_action = Events.Action.NOTHING
+		queue_redraw()
+
+
+## Update scale and rotation to indicate what the player is doing with this card at the moment
+func _visualize_interaction_state():
+	if considering_action != Events.Action.NOTHING and can_play:
+		var _tweener = create_tween().tween_property(self, "scale", ACTION_SCALE, SCALE_TWEEN_DURATION)
+	elif is_dragging:
+		var _tweener = create_tween().tween_property(self, "scale", DRAGGING_SCALE, SCALE_TWEEN_DURATION)
+		_tweener = create_tween().tween_property(self, "rotation", DRAGGING_ROTATION, SCALE_TWEEN_DURATION)
+	else:
+		var _tweener = create_tween().tween_property(self, "scale", NORMAL_SCALE, SCALE_TWEEN_DURATION)
+		_tweener = create_tween().tween_property(self, "rotation", 0, SCALE_TWEEN_DURATION)
 
 
 ## Sometimes, it's impossible to make any move with a given hand.

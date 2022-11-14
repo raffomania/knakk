@@ -26,7 +26,8 @@ var is_dragging := false
 ## the card will light up. If the player drops the card while
 ## in that zone, the card is chosen and the "choose" signal
 ## is emitted.
-var considering_action := Events.Action.NOTHING
+var considering_action := Events.Action.NOTHING:
+	set = _set_considering_action
 ## When players are considering this card,
 ## The playing field will set this value depending on
 ## whether the player can play this card or not
@@ -81,36 +82,7 @@ func _input(event: InputEvent):
 		get_viewport().set_input_as_handled()
 
 	if is_dragging and event is InputEventScreenDrag:
-		target_drag_position = drag_offset + event.position
-
-		var previously_considering_action = considering_action
-
-		if target_drag_position.x < 300 and target_drag_position.y > 2200:
-			considering_action = Events.Action.REDRAW
-		elif target_drag_position.x > 800 and target_drag_position.y > 2200:
-			considering_action = Events.Action.PLAY_AGAIN
-		elif target_drag_position.y < 1700:
-			considering_action = Events.Action.CHOOSE
-		else:
-			considering_action = Events.Action.NOTHING
-			can_play = false
-
-		if previously_considering_action != considering_action:
-			if considering_action != Events.Action.NOTHING:
-				can_play = Events.is_playable(card_type, considering_action)
-				if considering_action == Events.Action.CHOOSE and not can_play and _need_to_skip_round():
-					can_play = true
-					considering_action = Events.Action.SKIP_ROUND
-					Events.show_help.emit("No moves possible with your hand - Discard cards and move to next turn")
-				Events.consider_action.emit(card_type, considering_action)
-			else:
-				Events.cancel_consider_action.emit(previously_considering_action)
-				Events.show_help.emit("")
-
-			_visualize_interaction_state()
-
-		queue_redraw()
-
+		_drag(event.position)
 
 func _draw():
 	if considering_action != Events.Action.NOTHING and can_play:
@@ -203,6 +175,54 @@ func _stop_dragging():
 		move_to(starting_position)
 		considering_action = Events.Action.NOTHING
 		queue_redraw()
+
+
+func _drag(to_position: Vector2):
+	target_drag_position = drag_offset + to_position
+
+	if target_drag_position.x < 300 and target_drag_position.y > 2200:
+		considering_action = Events.Action.REDRAW
+	elif target_drag_position.x > 800 and target_drag_position.y > 2200:
+		considering_action = Events.Action.PLAY_AGAIN
+	elif target_drag_position.y < 1700:
+		considering_action = Events.Action.CHOOSE
+	else:
+		considering_action = Events.Action.NOTHING
+		can_play = false
+
+	_visualize_interaction_state()
+	queue_redraw()
+
+
+func _set_considering_action(new_considering_action: Events.Action):
+	var previously_considering_action = considering_action
+	considering_action = new_considering_action
+
+	if previously_considering_action == considering_action:
+		# Nothing changed, nothing to do
+		return
+
+	if considering_action == Events.Action.NOTHING:
+		Events.cancel_consider_action.emit(previously_considering_action)
+		Events.show_help.emit("")
+
+		return
+
+	can_play = Events.is_playable(card_type, considering_action)
+
+	# If we can't play any action this turn, change the action to `SKIP_ROUND`
+	# and emit that instead
+	if (considering_action == Events.Action.CHOOSE 
+			and not can_play 
+			and _need_to_skip_round()):
+		considering_action = Events.Action.SKIP_ROUND
+		# Since we've changed the action to `SKIP_ROUND`, we know we are allowed to
+		# play it
+		can_play = true
+		Events.show_help.emit("No moves possible with your hand - Discard cards and move to next turn")
+
+	# Notify other nodes of the action being considered
+	Events.consider_action.emit(card_type, considering_action)
 
 
 ## Update scale and rotation to indicate what the player is doing with this card at the moment

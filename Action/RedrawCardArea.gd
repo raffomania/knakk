@@ -3,9 +3,9 @@ extends Control
 
 const TEXTURE = preload("res://Action/RedrawCard.svg")
 
-var redraw_tokens := 0:
+var _redraw_tokens := 0:
 	set(val):
-		redraw_tokens = val
+		_redraw_tokens = val
 		queue_redraw()
 
 
@@ -22,12 +22,14 @@ func _draw():
 
 	var center_y = (size.y - TEXTURE.get_size().y) / 2
 	var right_edge = size.x - 20 - TEXTURE.get_size().x
-	for index in range(0, redraw_tokens):
-		draw_texture(TEXTURE, Vector2(right_edge - index * TEXTURE.get_size().x, center_y), ColorPalette.GREY)
+	for index in range(0, _redraw_tokens):
+		draw_texture(TEXTURE, 
+				Vector2(right_edge - index * TEXTURE.get_size().x, center_y), 
+				ColorPalette.GREY)
 
 
 func _can_play() -> bool:
-	return redraw_tokens > 0
+	return _redraw_tokens > 0
 
 
 func _on_query_playable(_card_type: Array, action: Events.Action, mark_playable: Callable):
@@ -49,8 +51,8 @@ func _on_take_action(_card_type: Array, action: Events.Action, card_node: Card):
 	if action != Events.Action.REDRAW:
 		return
 
-	assert(redraw_tokens > 0, "Redraw triggered but user has no redraw tokens")
-	redraw_tokens -= 1
+	assert(_redraw_tokens > 0, "Redraw triggered but user has no redraw tokens")
+	_redraw_tokens -= 1
 
 	# Add card as child while keeping its global position
 	var card_position = card_node.global_position
@@ -63,4 +65,4 @@ func _on_take_action(_card_type: Array, action: Events.Action, card_node: Card):
 
 func _on_receive_reward(reward: Reward):
 	if reward is Reward.RedrawCard:
-		redraw_tokens += 1
+		_redraw_tokens += 1

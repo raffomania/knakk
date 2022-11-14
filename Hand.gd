@@ -2,20 +2,20 @@
 extends Node2D
 
 
+const CARD_SCENE := preload("res://Card/Card.tscn")
+
 ## When the player uses a token to play the current hand again,
 ## we increment this to allow them more plays before the turn is marked complete
-var play_again_count := 0
+var _play_again_count := 0
 ## Count the cards played: once two cards are played, the turn is over
-var cards_played_this_turn := 0
-# todo make this const
-var card_scene := preload("res://Card/Card.tscn")
+var _cards_played_this_turn := 0
 ## Each time a card is played, increase its z-index so it's displayed above
 ## all other cards lying on the table
-var played_cards_z_index = 0
+var _played_cards_z_index = 0
 
 ## The deck provides us with new cards when a card is played
 # todo see if we can get rid of this reference somehow
-@onready var deck := $"../Deck"
+@onready var _deck := $"../Deck"
 
 
 func _ready():
@@ -37,11 +37,11 @@ func redraw_hand():
 		child.queue_free()
 	
 	for _i in range(0,3):
-		draw_card(deck.draw_card())
+		draw_card(_deck.draw_card())
 
 
 func _round_complete():
-	deck.reset()
+	_deck.reset()
 	redraw_hand()
 
 
@@ -51,12 +51,12 @@ func node_for_card_type(card_type: Array) -> Node:
 	)[0]
 
 
-## Draw a new card from the deck and insert it into the hand
+## Draw a new card from the _deck and insert it into the hand
 func draw_card(card_type: Array):
-	var card = card_scene.instantiate()
+	var card = CARD_SCENE.instantiate()
 	card.set_card_type(card_type)
 	# Display card above all played cards
-	card.z_index = played_cards_z_index + 1
+	card.z_index = _played_cards_z_index + 1
 	add_child(card)
 	position_cards()
 
@@ -85,21 +85,19 @@ func position_cards():
 
 
 func _on_take_action(_card_type: Array, action: Events.Action, card_node: Card):
-	if action == Events.Action.REDRAW:
-		card_node.is_played = true
+	card_node.is_played = true
 
+	if action == Events.Action.REDRAW:
 		# Remove card from hand, but make sure it keeps its global position on screen
 		var card_position = card_node.global_position
 		remove_child(card_node)
 		card_node.global_position = card_position
 
 		# user chose to redraw, draw a new card now
-		draw_card(deck.draw_card())
+		draw_card(_deck.draw_card())
 
 	if action == Events.Action.PLAY_AGAIN:
-		play_again_count += 1
-
-		card_node.is_played = true
+		_play_again_count += 1
 
 		# Remove card from hand, but make sure it keeps its global position on screen
 		var card_position = card_node.global_position
@@ -113,28 +111,32 @@ func _on_take_action(_card_type: Array, action: Events.Action, card_node: Card):
 		position_cards()
 
 	if action == Events.Action.CHOOSE:
-		cards_played_this_turn += 1
+		_cards_played_this_turn += 1
 
 		# Remove card from hand, but make sure it keeps its global position on screen
 		var card_position = card_node.global_position
 		remove_child(card_node)
 		card_node.global_position = card_position
 
-		card_node.is_played = true
-		card_node.z_index = played_cards_z_index
-		played_cards_z_index += 1
+		card_node.z_index = _played_cards_z_index
+		_played_cards_z_index += 1
 
-		var slot_was_filled = cards_played_this_turn >= 2
+		var slot_was_filled = _cards_played_this_turn >= 2
 		if slot_was_filled:
-			cards_played_this_turn = 0
+			_cards_played_this_turn = 0
 
-			if play_again_count > 0:
-				play_again_count -= 1
+			if _play_again_count > 0:
+				_play_again_count -= 1
 			else:
 				redraw_hand()
 				Events.turn_complete.emit()
 			
 	if action == Events.Action.SKIP_ROUND:
+		for every_card_node in get_children():
+			# Prevent card from moving back to the hand position
+			every_card_node.is_played = true
+
+		# Animate card disappearance
 		for every_card_node in get_children():
 			# Remove card from hand, but make sure it keeps its global position on screen
 			var card_position = every_card_node.global_position
@@ -142,12 +144,13 @@ func _on_take_action(_card_type: Array, action: Events.Action, card_node: Card):
 			every_card_node.global_position = card_position
 
 			get_tree().get_root().add_child(every_card_node)
-			every_card_node.is_played = true
+
 			await every_card_node.animate_disappear()
 			every_card_node.queue_free()
 
-
 		redraw_hand()
-		cards_played_this_turn = 0
-		play_again_count = 0
+		_cards_played_this_turn = 0
+		_play_again_count = 0
 		Events.turn_complete.emit()
+
+

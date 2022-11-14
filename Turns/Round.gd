@@ -18,6 +18,10 @@ func _draw():
 		draw_rect(Rect2(Vector2(i * TURN_SIZE + padding, padding), Vector2(TURN_SIZE - padding * 2, TURN_SIZE - padding * 2)), ColorPalette.GREY, true)
 
 
+func _get_minimum_size() -> Vector2:
+	return Vector2(TURN_SIZE * 5, TURN_SIZE)
+
+
 func set_completed_turns(value: int):
 	completed_turns = value
 
@@ -25,7 +29,3 @@ func set_completed_turns(value: int):
 
 	if completed_turns >= 5:
 		Events.round_complete.emit()
-
-
-func _get_minimum_size() -> Vector2:
-	return Vector2(TURN_SIZE * 5, TURN_SIZE)

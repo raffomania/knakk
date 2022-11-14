@@ -1,9 +1,9 @@
 extends Control
 
 
-var play_again_tokens := 0:
+var _play_again_tokens := 0:
 	set(val):
-		play_again_tokens = val
+		_play_again_tokens = val
 		queue_redraw()
 
 
@@ -18,7 +18,7 @@ func _draw():
 	draw_line(Vector2.ZERO, Vector2(size.x, 0), ColorPalette.PURPLE)
 	draw_line(Vector2.ZERO, Vector2(0, size.y), ColorPalette.PURPLE)
 
-	for index in range(0, play_again_tokens):
+	for index in range(0, _play_again_tokens):
 		draw_string(
 			get_theme_default_font(), 
 			Vector2(20 + index * 55, 70), 
@@ -29,7 +29,7 @@ func _draw():
 
 func _can_play() -> bool:
 	var hand_is_full = len(Events.card_types_in_hand) == 3
-	return play_again_tokens > 0 and hand_is_full
+	return _play_again_tokens > 0 and hand_is_full
 
 
 func _on_query_playable(_card_type: Array, action: Events.Action, mark_playable: Callable):
@@ -54,8 +54,8 @@ func _on_take_action(_card_type: Array, action: Events.Action, card_node: Card):
 	if action != Events.Action.PLAY_AGAIN:
 		return
 
-	assert(play_again_tokens > 0, "PlayAgain triggered but user has no play again tokens")
-	play_again_tokens -= 1
+	assert(_play_again_tokens > 0, "PlayAgain triggered but user has no play again tokens")
+	_play_again_tokens -= 1
 
 	# Add card as child while keeping its global position
 	var card_position = card_node.global_position
@@ -68,4 +68,4 @@ func _on_take_action(_card_type: Array, action: Events.Action, card_node: Card):
 
 func _on_receive_reward(reward: Reward):
 	if reward is Reward.PlayAgain:
-		play_again_tokens += 1
+		_play_again_tokens += 1

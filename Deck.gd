@@ -10,6 +10,7 @@ var cards_in_deck: Array[Array]
 func _init():
 	reset()
 
+	# Only show card count in debug builds
 	if not OS.is_debug_build():
 		visible = false
 
@@ -21,7 +22,7 @@ func reset():
 		for number in Cards.Number:
 			cards_in_deck.push_back([Cards.Suite[suite], Cards.Number[number]])
 	cards_in_deck.shuffle()
-	update_count()
+	_update_count()
 
 
 ## Remove the top card from the deck and return it as a [suite, number] array
@@ -30,10 +31,10 @@ func draw_card() -> Array:
 		reset()
 
 	var card = cards_in_deck.pop_back()
-	update_count()
+	_update_count()
 	return card
 
 
 ## Update the text showing how many cards are left in the deck
-func update_count():
+func _update_count():
 	text = "%d cards in deck" % len(cards_in_deck)

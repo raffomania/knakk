@@ -15,6 +15,7 @@ func _ready():
 
 ## Check if `card_type` can be chosen by the player right now.
 func can_play(card_type: Array) -> bool:
+	# todo this erroneously filters out multiple versions of the same card
 	var other_card_types = Events.card_types_in_hand.filter(func(other_card_type): 
 		return other_card_type != card_type
 	)
@@ -78,13 +79,13 @@ func _on_consider_action(card_type: Array, action: Events.Action):
 
 # User is considering playing the suite on the given card
 func _consider_suite(card_type: Array, can_play_card: bool):
+	var other_card_types = Events.card_types_in_hand.filter(func(other_card_type): 
+		return other_card_type != card_type
+	)
 	if can_play_card:
 		# highlight slots for all other numbers in the user's hand, 
 		# using the suite of the card the user is considering
 		var card_suite_node = _child_node_for_suite(card_type[0])
-		var other_card_types = Events.card_types_in_hand.filter(func(other_card_type): 
-			return other_card_type != card_type
-		)
 		card_suite_node.highlight_options(other_card_types)
 
 		# Highlight this suite by resetting the modulate value
@@ -92,7 +93,13 @@ func _consider_suite(card_type: Array, can_play_card: bool):
 
 		Events.show_help.emit("Choose %s area" % Cards.get_suite_label(card_type[0]))
 	else:
-		Events.show_help.emit("Can't choose %s with your current hand" % Cards.get_suite_label(card_type[0]))
+		var other_card_labels = other_card_types.map(func(card_type):
+			return Cards.get_number_label(card_type[1])
+		)
+		Events.show_help.emit("Can't put %s in %s area" % [
+				" or ".join(other_card_labels),
+				Cards.get_suite_label(card_type[0]),
+		])
 
 
 ## A suite is already chosen and user is considering playing the given card's number

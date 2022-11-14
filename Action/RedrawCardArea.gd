@@ -10,7 +10,8 @@ var redraw_tokens := 0:
 
 
 func _ready():
-	var _err = Events.consider_action.connect(_on_consider_action)
+	var _err = Events.query_playable.connect(_on_query_playable)
+	_err = Events.consider_action.connect(_on_consider_action)
 	_err = Events.take_action.connect(_on_take_action)
 	_err = Events.receive_reward.connect(_on_receive_reward)
 
@@ -25,13 +26,22 @@ func _draw():
 		draw_texture(TEXTURE, Vector2(right_edge - index * TEXTURE.get_size().x, center_y), ColorPalette.GREY)
 
 
-func _on_consider_action(card_type: Array, action: Events.Action, mark_playable: Callable):
+func _can_play() -> bool:
+	return redraw_tokens > 0
+
+
+func _on_query_playable(_card_type: Array, action: Events.Action, mark_playable: Callable):
 	if action != Events.Action.REDRAW:
 		return
 
-	var is_playable = redraw_tokens > 0
-	mark_playable.call(is_playable)
-	if is_playable:
+	mark_playable.call(_can_play())
+
+
+func _on_consider_action(card_type: Array, action: Events.Action):
+	if action != Events.Action.REDRAW:
+		return
+
+	if _can_play():
 		Events.show_help.emit("Replace %s with a new card" % Cards.get_label(card_type))
 
 

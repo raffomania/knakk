@@ -8,10 +8,14 @@ enum Action {
 	NOTHING
 }
 
+## Emitted when some node needs to know if the given action and card
+## are playable. Any other node can respond by calling `mark_playable`
+## with a boolean argument.
+signal query_playable(card_type: Array, action: Action, mark_playable: Callable)
 ## Emitted when the player hovers over the field while still holding the card.
 ## If the player lets go of the card afterwards, the `take_action` event is emitted.
 ## Contains a callback that allows any component of the game to allow or prohibit that action
-signal consider_action(card_type: Array, action: Action, mark_playable: Callable)
+signal consider_action(card_type: Array, action: Action)
 ## Emitted when the player moves the card away from the field.
 ## If the player lets go of the card afterwards, it's returned to the hand.
 signal cancel_consider_action
@@ -43,3 +47,12 @@ signal new_game
 ## it's better to have this here than to refer to 
 # the Hand everywhere we need it
 var card_types_in_hand: Array[Array]
+
+func is_playable(card_type: Array, action: Action) -> bool:
+	# Wrap our result value in an object to get a reference in the callable below,
+	# allowing it to write the `result` key
+	var result_obj = { result = false }
+	query_playable.emit(card_type, action, func(response_result): 
+			result_obj.result = response_result
+	)
+	return result_obj.result

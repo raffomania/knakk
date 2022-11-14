@@ -7,9 +7,10 @@ var chosen_suite: Variant
 
 
 func _ready():
-	var _err = Events.take_action.connect(self._on_take_action)
+	var _err = Events.query_playable.connect(self._on_query_playable)
 	_err = Events.consider_action.connect(self._on_consider_action)
 	_err = Events.cancel_consider_action.connect(self._on_cancel_consider_action)
+	_err = Events.take_action.connect(self._on_take_action)
 
 
 ## Check if `card_type` can be chosen by the player right now.
@@ -53,13 +54,15 @@ func _child_node_for_suite(suite: Cards.Suite) -> Node:
 
 	return null
 
-
-func _on_consider_action(card_type: Array, action: Events.Action, mark_playable: Callable):
+func _on_query_playable(card_type: Array, action: Events.Action, mark_playable: Callable):
 	if action != Events.Action.CHOOSE:
 		return
 
-	var can_play_card = can_play(card_type)
-	mark_playable.call(can_play_card)
+	mark_playable.call(can_play(card_type))
+
+func _on_consider_action(card_type: Array, action: Events.Action):
+	if action != Events.Action.CHOOSE:
+		return
 
 	# First, reset all slot highlights
 	for child in get_children():
@@ -68,9 +71,9 @@ func _on_consider_action(card_type: Array, action: Events.Action, mark_playable:
 		child.modulate = Color(1, 1, 1, 0.3)
 
 	if chosen_suite == null:
-		_consider_suite(card_type, can_play_card)
+		_consider_suite(card_type, can_play(card_type))
 	else:
-		_consider_number(card_type, can_play_card)
+		_consider_number(card_type, can_play(card_type))
 	
 
 # User is considering playing the suite on the given card

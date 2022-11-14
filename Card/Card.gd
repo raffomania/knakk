@@ -95,7 +95,8 @@ func _input(event: InputEvent):
 
 		if previously_considering_action != considering_action:
 			if considering_action != Events.Action.NOTHING:
-				Events.consider_action.emit(card_type, considering_action, func(can_play): self.can_play = can_play)
+				can_play = Events.is_playable(card_type, considering_action)
+				Events.consider_action.emit(card_type, considering_action)
 			else:
 				Events.cancel_consider_action.emit()
 				Events.show_help.emit("")

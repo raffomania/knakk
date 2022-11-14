@@ -8,7 +8,8 @@ var play_again_tokens := 0:
 
 
 func _ready():
-	var _err = Events.consider_action.connect(_on_consider_action)
+	var _err = Events.query_playable.connect(_on_query_playable)
+	_err = Events.consider_action.connect(_on_consider_action)
 	_err = Events.take_action.connect(_on_take_action)
 	_err = Events.receive_reward.connect(_on_receive_reward)
 
@@ -26,14 +27,24 @@ func _draw():
 			get_theme_color("Label"))
 
 
-func _on_consider_action(_card_type: Array, action: Events.Action, mark_playable: Callable):
+func _can_play() -> bool:
+	var hand_is_full = len(Events.card_types_in_hand) == 3
+	return play_again_tokens > 0 and hand_is_full
+
+
+func _on_query_playable(_card_type: Array, action: Events.Action, mark_playable: Callable):
+	if action != Events.Action.PLAY_AGAIN:
+		return
+
+	mark_playable.call(_can_play())
+
+
+func _on_consider_action(_card_type: Array, action: Events.Action):
 	if action != Events.Action.PLAY_AGAIN:
 		return
 
 	var hand_is_full = len(Events.card_types_in_hand) == 3
-	var is_playable = play_again_tokens > 0 and hand_is_full
-	mark_playable.call(is_playable)
-	if is_playable:
+	if _can_play():
 		Events.show_help.emit("Duplicate other cards in your hand")
 	elif not hand_is_full:
 		Events.show_help.emit("You can only duplicate at the start of a turn")

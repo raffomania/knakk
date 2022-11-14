@@ -21,7 +21,7 @@ const PLAYED_SCALE := Vector2(0.8, 0.8)
 
 ## Once users touch this card, this is set to `true`
 ## and subsequent drag events will move this card on the screen
-var dragging := false
+var is_dragging := false
 ## Once users move the card into the confirmation area,
 ## the card will light up. If the player drops the card while
 ## in that zone, the card is chosen and the "choose" signal
@@ -67,7 +67,7 @@ func _input(event: InputEvent):
 	if is_played: return
 
 	if event is InputEventScreenTouch:
-		if not event.pressed and dragging:
+		if not event.pressed and is_dragging:
 			stop_dragging()
 		elif event.pressed and get_rect().has_point(make_input_local(event).position):
 			start_dragging(event.position)
@@ -80,7 +80,7 @@ func _input(event: InputEvent):
 		# This event is handled by this card, stop it from bubbling to other cards
 		get_viewport().set_input_as_handled()
 
-	if dragging and event is InputEventScreenDrag:
+	if is_dragging and event is InputEventScreenDrag:
 		target_drag_position = drag_offset + event.position
 
 		var previously_considering_action = considering_action
@@ -119,7 +119,7 @@ func _draw():
 
 
 func _process(delta: float):
-	var smooth_speed = DRAG_SMOOTH_SPEED if self.dragging else ANIMATE_SMOOTH_SPEED
+	var smooth_speed = DRAG_SMOOTH_SPEED if is_dragging else ANIMATE_SMOOTH_SPEED
 	# improved lerp smoothing to make drag motion less jittery
 	# see https://www.gamedeveloper.com/programming/improved-lerp-smoothing- for an explanation of the formula
 	self.global_position = self.target_drag_position.lerp(self.global_position, pow(2, -delta * smooth_speed))
@@ -127,7 +127,7 @@ func _process(delta: float):
 
 ## The user has started touching this card and wants to drag it
 func start_dragging(touch_position: Vector2):
-	dragging = true
+	is_dragging = true
 	drag_offset = global_position - touch_position
 	# If the card is just returning to the hand, cancel that motion immediately
 	move_to(global_position)
@@ -135,7 +135,7 @@ func start_dragging(touch_position: Vector2):
 
 ## The user stopped dragging this card
 func stop_dragging():
-	dragging = false
+	is_dragging = false
 	var was_considering_action = considering_action != Events.Action.NOTHING
 	if was_considering_action and can_play:
 		Events.take_action.emit(card_type, considering_action, self)
@@ -156,7 +156,7 @@ func stop_dragging():
 func visualize_interaction_state():
 	if considering_action != Events.Action.NOTHING and can_play:
 		var _tweener = create_tween().tween_property(self, "scale", ACTION_SCALE, SCALE_TWEEN_DURATION)
-	elif dragging:
+	elif is_dragging:
 		var _tweener = create_tween().tween_property(self, "scale", DRAGGING_SCALE, SCALE_TWEEN_DURATION)
 		_tweener = create_tween().tween_property(self, "rotation", DRAGGING_ROTATION, SCALE_TWEEN_DURATION)
 	else:
@@ -199,7 +199,7 @@ func _on_consider_action(_card_type: Array, action: Events.Action):
 	if action != Events.Action.SKIP_ROUND:
 		return
 
-	if dragging or is_played:
+	if is_dragging or is_played:
 		return
 
 	move_to(starting_position - Vector2(0, 500))
@@ -211,7 +211,7 @@ func _on_cancel_consider_action(action: Events.Action):
 	if action != Events.Action.SKIP_ROUND:
 		return
 
-	if dragging or is_played:
+	if is_dragging or is_played:
 		return
 
 	move_to(starting_position)

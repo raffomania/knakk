@@ -5,6 +5,7 @@ enum Action {
 	CHOOSE,
 	REDRAW,
 	PLAY_AGAIN,
+	SKIP_ROUND,
 	NOTHING
 }
 
@@ -18,7 +19,7 @@ signal query_playable(card_type: Array, action: Action, mark_playable: Callable)
 signal consider_action(card_type: Array, action: Action)
 ## Emitted when the player moves the card away from the field.
 ## If the player lets go of the card afterwards, it's returned to the hand.
-signal cancel_consider_action
+signal cancel_consider_action(action: Action)
 ## Emitted when a player drops a card on the field.
 ## By convention, this can only be emitted when that action was marked as playable using the
 ## `consider_action` event.

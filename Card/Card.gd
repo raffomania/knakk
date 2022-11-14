@@ -54,6 +54,8 @@ var card_type: Array
 func _ready():
 	Events.card_types_in_hand.append(card_type)
 	visualize_interaction_state()
+	var _err = Events.consider_action.connect(_on_consider_action)
+	_err = Events.cancel_consider_action.connect(_on_cancel_consider_action)
 
 
 func _exit_tree():
@@ -96,9 +98,13 @@ func _input(event: InputEvent):
 		if previously_considering_action != considering_action:
 			if considering_action != Events.Action.NOTHING:
 				can_play = Events.is_playable(card_type, considering_action)
+				if considering_action == Events.Action.CHOOSE and not can_play and _need_to_skip_round():
+					can_play = true
+					considering_action = Events.Action.SKIP_ROUND
+					Events.show_help.emit("No moves possible with your hand - Discard cards and move to next turn")
 				Events.consider_action.emit(card_type, considering_action)
 			else:
-				Events.cancel_consider_action.emit()
+				Events.cancel_consider_action.emit(previously_considering_action)
 				Events.show_help.emit("")
 
 			visualize_interaction_state()
@@ -138,7 +144,7 @@ func stop_dragging():
 		Events.show_help.emit("")
 	else:
 		if was_considering_action:
-			Events.cancel_consider_action.emit()
+			Events.cancel_consider_action.emit(considering_action)
 			Events.show_help.emit("")
 
 		move_to(starting_position)
@@ -178,4 +184,48 @@ func shrink_to_played_size():
 	var target_scale = 120 / texture.get_size().x
 	var _tweener = create_tween().tween_property(self, "scale", Vector2.ONE * target_scale, 0.3)
 	var new_rotation = PI * 0.1 * randf_range(-1, 1)
-	_tweener = create_tween().tween_property(self, "rotation", new_rotation, 0.35)
+	var tweener = create_tween().tween_property(self, "rotation", new_rotation, 0.35)
+	await tweener.finished
+
+
+func animate_disappear():
+	var tweener = create_tween().tween_property(self, "scale", Vector2(0, scale.y), 0.2)
+	await tweener.finished
+
+
+## If another card is considering to skip this round (because no moves are possible),
+## move this card to the top to indicate that it will be discarded as well.
+func _on_consider_action(_card_type: Array, action: Events.Action):
+	if action != Events.Action.SKIP_ROUND:
+		return
+
+	if dragging or is_played:
+		return
+
+	move_to(starting_position - Vector2(0, 500))
+
+
+## If the player was considering to skip this round, move this card back
+## to its position in the hand
+func _on_cancel_consider_action(action: Events.Action):
+	if action != Events.Action.SKIP_ROUND:
+		return
+
+	if dragging or is_played:
+		return
+
+	move_to(starting_position)
+
+
+## Sometimes, it's impossible to make any move with a given hand.
+## If that's the case, the player has to discard their hand and move on to the
+## next round.
+## This method detects when this shoud happen.
+func _need_to_skip_round() -> bool:
+	var result = true
+
+	for other_card_type in Events.card_types_in_hand:
+		result = result and not Events.is_playable(other_card_type, Events.Action.CHOOSE)
+		result = result and not Events.is_playable(other_card_type, Events.Action.REDRAW)
+
+	return result

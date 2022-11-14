@@ -112,7 +112,7 @@ func _consider_number(card_type: Array, can_play_card: bool):
 		return
 
 
-func _on_cancel_consider_action():
+func _on_cancel_consider_action(_action: Events.Action):
 	if chosen_suite != null:
 		var suite_node = _child_node_for_suite(chosen_suite)
 		suite_node.highlight_options(Events.card_types_in_hand)

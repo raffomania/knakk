@@ -133,3 +133,21 @@ func _on_take_action(_card_type: Array, action: Events.Action, card_node: Card):
 			else:
 				redraw_hand()
 				Events.turn_complete.emit()
+			
+	if action == Events.Action.SKIP_ROUND:
+		for every_card_node in get_children():
+			# Remove card from hand, but make sure it keeps its global position on screen
+			var card_position = every_card_node.global_position
+			remove_child(every_card_node)
+			every_card_node.global_position = card_position
+
+			get_tree().get_root().add_child(every_card_node)
+			every_card_node.is_played = true
+			await every_card_node.animate_disappear()
+			every_card_node.queue_free()
+
+
+		redraw_hand()
+		cards_played_this_turn = 0
+		play_again_count = 0
+		Events.turn_complete.emit()

@@ -8,6 +8,10 @@ const REDRAW_TEXTURE = preload("res://Action/RedrawCard.svg")
 var reward:
 	set = set_reward
 
+## If there's a tween that's animating the marker because of a reward change,
+## it's set here to prevent new tweens while the old one is running
+var _change_tweener: Variant
+
 @export var color := Color.BLACK:
 	set(val):
 		color = val
@@ -18,7 +22,7 @@ func _ready():
 	# Always scale and rotate around the center
 	pivot_offset = size / 2
 
-	($Label as Label).add_theme_font_size_override("font_size", floor(size.x * 0.55))
+	($Label as Label).add_theme_font_size_override("font_size", floor(size.x * 0.5))
 	($Label as Label).add_theme_font_override("font", preload("res://Fonts/Dosis-Bold.ttf"))
 
 
@@ -36,7 +40,7 @@ func _draw():
 		)
 
 func set_reward(value: Reward):
-	var reward_changed = (
+	var points_changed = (
 		reward is Reward.Points 
 		and value is Reward.Points 
 		and reward.points != value.points
@@ -59,9 +63,16 @@ func set_reward(value: Reward):
 		$Label.visible = false
 
 	# When this node is used to show a score, animate it when the score changes.
-	if is_inside_tree() and reward_changed:
-		await create_tween() \
-			.tween_property(self, "scale", Vector2.ONE * 1.05, 0.05) \
-			.finished
-		var _tweener = create_tween() \
-			.tween_property(self, "scale", Vector2.ONE, 0.05)
+	var is_already_tweening = is_instance_valid(_change_tweener)
+	if is_inside_tree() and points_changed and not is_already_tweening:
+		_change_tweener = create_tween() \
+			.tween_property(self, "scale", Vector2.ONE * 1.07, 0.02)
+
+		await _change_tweener.finished
+
+		_change_tweener = create_tween() \
+			.tween_property(self, "scale", Vector2.ONE, 0.08)
+
+		await _change_tweener.finished
+
+		_change_tweener = null

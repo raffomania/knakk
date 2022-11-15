@@ -34,3 +34,5 @@ func _on_new_game():
 	add_child(game_node)
 	await $Camera.go_to_game_screen()
 
+	$GameOverScreen.reset()
+

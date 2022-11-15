@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://brocv2rlmnpw8"]
+[gd_scene load_steps=9 format=3 uid="uid://brocv2rlmnpw8"]
 
 [ext_resource type="Script" path="res://Camera.gd" id="1_5jlkv"]
 [ext_resource type="Script" path="res://Main.gd" id="1_os57m"]
 [ext_resource type="PackedScene" uid="uid://cpvkx83kt5emk" path="res://GameScreen.tscn" id="3_w0hn2"]
+[ext_resource type="PackedScene" uid="uid://sxggt3tc5d0v" path="res://Tutorial.tscn" id="4_kj7ux"]
 [ext_resource type="PackedScene" uid="uid://q1h3f0r3grhr" path="res://GameOverScreen.tscn" id="15_yok5v"]
 
 [sub_resource type="Animation" id="Animation_v032t"]
@@ -97,6 +98,10 @@ libraries = {
 }
 
 [node name="GameScreen" parent="." instance=ExtResource("3_w0hn2")]
+layout_mode = 1
+
+[node name="Tutorial" parent="." instance=ExtResource("4_kj7ux")]
+visible = false
 layout_mode = 1
 
 [node name="GameOverScreen" parent="." instance=ExtResource("15_yok5v")]

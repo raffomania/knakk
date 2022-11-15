@@ -71,7 +71,8 @@ func _input(event: InputEvent):
 	if event is InputEventScreenTouch:
 		if not event.pressed and _is_dragging:
 			_stop_dragging()
-		elif event.pressed and get_rect().has_point(make_input_local(event).position):
+		elif (event.pressed and 
+				get_rect().has_point(make_input_local(event).position)):
 			_start_dragging(event.position)
 		else:
 			# Nothing to do
@@ -94,8 +95,10 @@ func _draw():
 func _process(delta: float):
 	var smooth_speed = DRAG_SMOOTH_SPEED if _is_dragging else ANIMATE_SMOOTH_SPEED
 	# improved lerp smoothing to make drag motion less jittery
-	# see https://www.gamedeveloper.com/programming/improved-lerp-smoothing- for an explanation of the formula
-	global_position = _target_drag_position.lerp(global_position, pow(2, -delta * smooth_speed))
+	# see https://www.gamedeveloper.com/programming/improved-lerp-smoothing- 
+	# for an explanation of the formula
+	global_position = _target_drag_position.lerp(global_position, 
+			pow(2, -delta * smooth_speed))
 
 
 ## Tell this card to transition to a new position.
@@ -115,20 +118,27 @@ func set_card_type(new_card_type: Array):
 ## When the card is played, it is usually placed on the field somewhere.
 ## For that, animate it to shrink and rotate a little randomly.
 func shrink_to_played_size():
+	var tween = create_tween().set_parallel()
+
 	var target_scale = 120 / texture.get_size().x
-	var _tweener = create_tween().tween_property(self, "scale", Vector2.ONE * target_scale, 0.3)
+	var _tweener = tween.tween_property(
+			self, "scale", Vector2.ONE * target_scale, 0.3)
+
 	var new_rotation = PI * 0.1 * randf_range(-1, 1)
-	var tweener = create_tween().tween_property(self, "rotation", new_rotation, 0.35)
-	await tweener.finished
+	_tweener = tween.tween_property(self, "rotation", new_rotation, 0.35)
+
+	await tween.finished
 
 
 func animate_disappear():
-	var tweener = create_tween().tween_property(self, "scale", Vector2(0, scale.y), 0.2)
+	var tweener = create_tween().tween_property(
+			self, "scale", Vector2(0, scale.y), 0.2)
 	await tweener.finished
 
 
-## If another card is considering to skip this round (because no moves are possible),
-## move this card to the top to indicate that it will be discarded as well.
+## If another card is considering to skip this round (because no moves 
+## are possible), move this card to the top to indicate that 
+## it will be discarded as well.
 func _on_consider_action(_other_card_type: Array, action: Events.Action):
 	if action != Events.Action.SKIP_ROUND:
 		return
@@ -214,7 +224,8 @@ func _set_considering_action(new_considering_action: Events.Action):
 		# Since we've changed the action to `SKIP_ROUND`, we know we are allowed to
 		# play it
 		_can_play = true
-		Events.show_help.emit("No moves possible with your hand - Discard cards and move to next turn")
+		Events.show_help.emit(
+				"No moves possible with your hand - Discard cards and move to next turn")
 
 	# Notify other nodes of the action being considered
 	Events.consider_action.emit(card_type, _considering_action)
@@ -223,13 +234,19 @@ func _set_considering_action(new_considering_action: Events.Action):
 ## Update scale and rotation to indicate what the player is doing with this card at the moment
 func _visualize_interaction_state():
 	if _considering_action != Events.Action.NOTHING and _can_play:
-		var _tweener = create_tween().tween_property(self, "scale", ACTION_SCALE, SCALE_TWEEN_DURATION)
+		var _tweener = create_tween() \
+				.tween_property(self, "scale", ACTION_SCALE, SCALE_TWEEN_DURATION)
 	elif _is_dragging:
-		var _tweener = create_tween().tween_property(self, "scale", DRAGGING_SCALE, SCALE_TWEEN_DURATION)
-		_tweener = create_tween().tween_property(self, "rotation", DRAGGING_ROTATION, SCALE_TWEEN_DURATION)
+		var tween = create_tween().set_parallel()
+		var _tweener = tween.tween_property(
+				self, "scale", DRAGGING_SCALE, SCALE_TWEEN_DURATION)
+		_tweener = tween.tween_property(
+				self, "rotation", DRAGGING_ROTATION, SCALE_TWEEN_DURATION)
 	else:
-		var _tweener = create_tween().tween_property(self, "scale", NORMAL_SCALE, SCALE_TWEEN_DURATION)
-		_tweener = create_tween().tween_property(self, "rotation", 0, SCALE_TWEEN_DURATION)
+		var tween = create_tween().set_parallel()
+		var _tweener = tween.tween_property(
+				self, "scale", NORMAL_SCALE, SCALE_TWEEN_DURATION)
+		_tweener = tween.tween_property(self, "rotation", 0, SCALE_TWEEN_DURATION)
 
 
 ## Sometimes, it's impossible to make any move with a given hand.
@@ -240,7 +257,9 @@ func _need_to_skip_round() -> bool:
 	var result = true
 
 	for other_card_type in Events.card_types_in_hand:
-		result = result and not Events.is_playable(other_card_type, Events.Action.CHOOSE)
-		result = result and not Events.is_playable(other_card_type, Events.Action.REDRAW)
+		result = result and not Events.is_playable(
+				other_card_type, Events.Action.CHOOSE)
+		result = result and not Events.is_playable(
+				other_card_type, Events.Action.REDRAW)
 
 	return result

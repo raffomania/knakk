@@ -12,7 +12,8 @@ func _ready():
 
 func animate_score(score: int):
 	var duration = score / 20.0
-	var _tweener = create_tween().set_ease(Tween.EASE_OUT).tween_method(set_score, 0, score, duration)
+	var tween = create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	var _tweener = tween.tween_method(set_score, 0, score, duration)
 
 
 func set_score(score: int):

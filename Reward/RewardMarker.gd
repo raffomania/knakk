@@ -10,7 +10,7 @@ var reward:
 
 ## If there's a tween that's animating the marker because of a reward change,
 ## it's set here to prevent new tweens while the old one is running
-var _change_tweener: Variant
+var _change_tween: Variant
 
 @export var color := Color.BLACK:
 	set(val):
@@ -62,17 +62,9 @@ func set_reward(value: Reward):
 	elif reward is Reward.RedrawCard:
 		$Label.visible = false
 
+	var is_animating = _change_tween != null and _change_tween.is_running()
 	# When this node is used to show a score, animate it when the score changes.
-	var is_already_tweening = is_instance_valid(_change_tweener)
-	if is_inside_tree() and points_changed and not is_already_tweening:
-		_change_tweener = create_tween() \
-			.tween_property(self, "scale", Vector2.ONE * 1.07, 0.02)
-
-		await _change_tweener.finished
-
-		_change_tweener = create_tween() \
-			.tween_property(self, "scale", Vector2.ONE, 0.08)
-
-		await _change_tweener.finished
-
-		_change_tweener = null
+	if is_inside_tree() and points_changed and not is_animating:
+		_change_tween = create_tween()
+		_change_tween.tween_property(self, "scale", Vector2.ONE * 1.07, 0.02)
+		_change_tween.tween_property(self, "scale", Vector2.ONE, 0.08)

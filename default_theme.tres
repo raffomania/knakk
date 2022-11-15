@@ -1,6 +1,6 @@
 [gd_resource type="Theme" load_steps=5 format=3 uid="uid://cnmy8s7h1qby8"]
 
-[ext_resource type="FontFile" uid="uid://8lo5awqmuhq" path="res://Fonts/Dosis-Medium.ttf" id="1_guvjk"]
+[ext_resource type="FontFile" uid="uid://bc4xo7qq46pua" path="res://Fonts/Dosis-Medium.ttf" id="1_guvjk"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_em24b"]
 bg_color = Color(0.47451, 0.419608, 0.839216, 1)

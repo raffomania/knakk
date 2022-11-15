@@ -130,7 +130,8 @@ func highlight_options(card_types: Array):
 
 	# Highlight playable slots for each card type
 	for card_type in card_types:
-		for slot_position in _find_playable_slots(card_type[1]):
+		var slot_position = _find_playable_slots(card_type[1]).front()
+		if slot_position != null:
 			_slots[slot_position.y][slot_position.x].node.is_highlighted = true
 
 

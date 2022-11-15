@@ -11,6 +11,8 @@ var text := "":
 var is_highlighted := false:
 	set = set_is_highlighted
 
+var _scale_tween: Variant
+
 
 func _ready():
 	# Always scale and rotate around the center
@@ -53,13 +55,18 @@ func set_is_highlighted(value: bool):
 
 	queue_redraw()
 
+	if _scale_tween:
+		_scale_tween.kill()
+
 	if is_highlighted:
 		$Marker.color = ColorPalette.GREY
 		$Marker.color.a = 0.2
-		var _tweener = create_tween().tween_property(self, "scale", Vector2.ONE * 1.1, 0.05)
+		_scale_tween = create_tween()
+		_scale_tween.tween_property(self, "scale", Vector2.ONE * 1.1, 0.05)
 	else:
 		$Marker.color = null
-		var _tweener = create_tween().tween_property(self, "scale", Vector2.ONE, 0.05)
+		_scale_tween = create_tween()
+		_scale_tween.tween_property(self, "scale", Vector2.ONE, 0.05)
 
 
 func fill_with_card(card_node: Card):

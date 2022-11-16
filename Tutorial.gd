@@ -5,7 +5,7 @@ const STEPS := [
 Welcome to Clever Solitaire!
 In this game, you play cards to fill slots.
 Each filled slot will reward you with points or bonuses. 
-The goal is to get the highest score you can!
+The goal is to get the highest possible score!
 	""",
 	"""
 Each turn, you pick two cards: First, a [b]suite[/b] card. 
@@ -33,7 +33,7 @@ Each slot needs a number higher or equal to the one it shows.
 	"""
 There are two bonuses:
 [img color=#303030 height=35]res://Action//RedrawCard.svg[/img]: Replace a card with a new one by dragging it to the bottom left corner.
-[b]++[/b]: Duplicate hand cards by dragging a card to the bottom right corner.
+[b]++[/b]: Play the same hand twice by dragging a card to the bottom right corner.
 	""",
 	"""
 	You're ready to play.

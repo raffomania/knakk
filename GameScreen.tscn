@@ -63,6 +63,7 @@ offset_right = 0.0
 offset_bottom = 0.0
 grow_horizontal = 2
 grow_vertical = 2
+color = Color(0.341176, 0.239216, 1, 1)
 
 [node name="Field" type="Control" parent="."]
 layout_mode = 1

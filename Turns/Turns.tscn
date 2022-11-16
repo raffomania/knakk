@@ -11,6 +11,7 @@ script = ExtResource("1_fbl17")
 layout_mode = 2
 offset_right = 83.0
 offset_bottom = 48.0
+theme_override_colors/font_color = Color(0.25098, 0.176471, 0.729412, 1)
 text = "Turns:"
 
 [node name="Round1" type="Control" parent="."]

@@ -9,7 +9,6 @@ var score:
 
 func _ready():
 	score = 0
-	$Reward.color = ColorPalette.PURPLE
 
 	var _err = Events.receive_reward.connect(_on_receive_reward)
 

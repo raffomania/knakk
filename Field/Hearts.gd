@@ -27,7 +27,7 @@ var _slots = [
 		is_played = false,
 	}, {
 		number = Cards.Number.Jack,
-		reward = Reward.PlayAgain.new(),
+		reward = Reward.RedrawCard.new(),
 		is_played = false,
 	}, {
 		number = Cards.Number.Queen,

@@ -59,7 +59,7 @@ func set_is_highlighted(value: bool):
 		_scale_tween.kill()
 
 	if is_highlighted:
-		$Marker.color = ColorPalette.GREY
+		$Marker.color = color
 		$Marker.color.a = 0.2
 		_scale_tween = create_tween()
 		_scale_tween.set_ease(Tween.EASE_OUT) \

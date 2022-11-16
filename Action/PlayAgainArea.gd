@@ -1,10 +1,10 @@
-extends Control
+extends HBoxContainer
 
 
-var _play_again_tokens := 0:
-	set(val):
-		_play_again_tokens = val
-		queue_redraw()
+const REWARD_MARKER_SCENE := preload("res://Reward/RewardMarker.tscn")
+
+var _play_again_tokens := 0
+var _token_nodes: Array[Node] = []
 
 
 func _ready():
@@ -18,13 +18,19 @@ func _draw():
 	draw_line(Vector2.ZERO, Vector2(size.x, 0), ColorPalette.PURPLE)
 	draw_line(Vector2.ZERO, Vector2(0, size.y), ColorPalette.PURPLE)
 
-	for index in range(0, _play_again_tokens):
-		draw_string(
-			get_theme_default_font(), 
-			Vector2(20 + index * 55, 70), 
-			"++", 0, -1, 
-			round(get_theme_default_font_size() * 1.3), 
-			get_theme_color("Label"))
+
+func _add_token():
+	var marker = REWARD_MARKER_SCENE.instantiate()
+	marker.reward = Reward.PlayAgain.new()
+	marker.color = ColorPalette.PURPLE
+	add_child(marker)
+	_token_nodes.append(marker)
+	_play_again_tokens += 1
+
+func _remove_token():
+	var node = _token_nodes.pop_back()
+	node.queue_free()
+	_play_again_tokens -= 1
 
 
 func _can_play() -> bool:
@@ -55,7 +61,7 @@ func _on_take_action(_card_type: Array, action: Events.Action, card_node: Card):
 		return
 
 	assert(_play_again_tokens > 0, "PlayAgain triggered but user has no play again tokens")
-	_play_again_tokens -= 1
+	_remove_token()
 
 	# Add card as child while keeping its global position
 	var card_position = card_node.global_position
@@ -68,4 +74,4 @@ func _on_take_action(_card_type: Array, action: Events.Action, card_node: Card):
 
 func _on_receive_reward(reward: Reward):
 	if reward is Reward.PlayAgain:
-		_play_again_tokens += 1
+		_add_token()

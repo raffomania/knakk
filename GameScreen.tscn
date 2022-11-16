@@ -139,7 +139,7 @@ offset_bottom = -87.0
 grow_vertical = 0
 script = ExtResource("10_if57e")
 
-[node name="PlayAgainArea" type="Control" parent="."]
+[node name="PlayAgainArea" type="HBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -152,6 +152,8 @@ offset_right = -33.0
 offset_bottom = -87.0
 grow_horizontal = 0
 grow_vertical = 0
+scale = Vector2(0.810653, 0.881159)
+theme_override_constants/separation = 5
 script = ExtResource("11_61q87")
 
 [node name="Deck" type="Label" parent="."]

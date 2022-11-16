@@ -26,7 +26,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Hand" parent="." instance=ExtResource("1_56rkn")]
-position = Vector2(540, 2103)
+position = Vector2(540, 2045)
 
 [node name="TopBar" type="Control" parent="."]
 layout_mode = 1

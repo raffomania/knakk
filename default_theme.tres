@@ -3,26 +3,37 @@
 [ext_resource type="FontFile" uid="uid://bc4xo7qq46pua" path="res://Fonts/Dosis-Medium.ttf" id="1_guvjk"]
 [ext_resource type="FontFile" uid="uid://ukqbd3vxtrq" path="res://Fonts/Dosis-Bold.ttf" id="1_lpect"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fiemj"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jqq1r"]
 bg_color = Color(0.47451, 0.419608, 0.839216, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_llkid"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i6xc5"]
 bg_color = Color(0.423529, 0.356863, 0.843137, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yj1uk"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vxojk"]
 bg_color = Color(0.318693, 0.2508, 0.76, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ow1p1"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5jyb3"]
 bg_color = Color(0.980392, 0.980392, 0.980392, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.25098, 0.176471, 0.729412, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 4
+shadow_color = Color(0, 0, 0, 0.101961)
 
 [resource]
 default_font = ExtResource("1_guvjk")
 default_font_size = 35
 Button/colors/font_color = Color(0.980392, 0.980392, 0.980392, 1)
-Button/styles/hover = SubResource("StyleBoxFlat_fiemj")
-Button/styles/normal = SubResource("StyleBoxFlat_llkid")
-Button/styles/pressed = SubResource("StyleBoxFlat_yj1uk")
+Button/styles/hover = SubResource("StyleBoxFlat_jqq1r")
+Button/styles/normal = SubResource("StyleBoxFlat_i6xc5")
+Button/styles/pressed = SubResource("StyleBoxFlat_vxojk")
 Label/colors/font_color = Color(0.0627451, 0.0627451, 0.0627451, 1)
-Panel/styles/panel = SubResource("StyleBoxFlat_ow1p1")
+Panel/styles/panel = SubResource("StyleBoxFlat_5jyb3")
 RichTextLabel/constants/line_separation = 5
 RichTextLabel/fonts/bold_font = ExtResource("1_lpect")

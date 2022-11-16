@@ -12,17 +12,17 @@ grow_vertical = 2
 script = ExtResource("1_im6vo")
 
 [node name="BGPanel" type="Panel" parent="."]
-clip_contents = true
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -433.0
+offset_top = -361.0
 grow_horizontal = 2
 grow_vertical = 0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="BGPanel"]
+clip_contents = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -32,10 +32,10 @@ grow_vertical = 2
 size_flags_horizontal = 0
 
 [node name="TextContainer" type="MarginContainer" parent="BGPanel/VBoxContainer"]
-custom_minimum_size = Vector2(0, 340)
+custom_minimum_size = Vector2(0, 260)
 layout_mode = 2
 offset_right = 1080.0
-offset_bottom = 340.0
+offset_bottom = 260.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 20
@@ -46,23 +46,25 @@ theme_override_constants/margin_bottom = 20
 [node name="RichTextLabel" type="RichTextLabel" parent="BGPanel/VBoxContainer/TextContainer"]
 layout_mode = 2
 offset_left = 20.0
-offset_top = 20.0
+offset_top = 80.0
 offset_right = 1060.0
-offset_bottom = 320.0
+offset_bottom = 180.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_vertical = 4
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 bbcode_enabled = true
 text = "Bonjour
 This is the Tutorial"
+fit_content_height = true
 scroll_active = false
 
 [node name="Buttons" type="HBoxContainer" parent="BGPanel/VBoxContainer"]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
-offset_top = 344.0
+offset_top = 264.0
 offset_right = 1080.0
-offset_bottom = 444.0
+offset_bottom = 364.0
 
 [node name="ExitButton" type="Button" parent="BGPanel/VBoxContainer/Buttons"]
 layout_mode = 2

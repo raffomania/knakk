@@ -13,6 +13,8 @@ func _ready():
 	_err = Events.take_action.connect(_on_take_action)
 	_err = Events.receive_reward.connect(_on_receive_reward)
 
+	_update_visibility()
+
 
 func _draw():
 	draw_line(Vector2.ZERO, Vector2(size.x, 0), ColorPalette.PURPLE)
@@ -25,13 +27,25 @@ func _add_token():
 	marker.color = ColorPalette.PURPLE
 	add_child(marker)
 	_token_nodes.append(marker)
+
 	_redraw_tokens += 1
+	_update_visibility()
 
 
 func _remove_token():
 	var node = _token_nodes.pop_back()
 	node.queue_free()
+
 	_redraw_tokens -= 1
+	_update_visibility()
+
+
+## Only show this node if the player has any tokens
+func _update_visibility():
+	if _redraw_tokens > 0:
+		visible = true
+	else:
+		visible = false
 
 
 func _can_play() -> bool:

@@ -27,12 +27,14 @@ func _add_token():
 	marker.color = ColorPalette.PURPLE
 	add_child(marker)
 	_token_nodes.append(marker)
+
 	_play_again_tokens += 1
 	_update_visibility()
 
 func _remove_token():
 	var node = _token_nodes.pop_back()
 	node.queue_free()
+
 	_play_again_tokens -= 1
 	_update_visibility()
 

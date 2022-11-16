@@ -1,12 +1,10 @@
 extends Control
 
 
-const TEXTURE = preload("res://Action/RedrawCard.svg")
+const REWARD_MARKER_SCENE := preload("res://Reward/RewardMarker.tscn")
 
-var _redraw_tokens := 0:
-	set(val):
-		_redraw_tokens = val
-		queue_redraw()
+var _redraw_tokens := 0
+var _token_nodes: Array[Node] = []
 
 
 func _ready():
@@ -20,12 +18,20 @@ func _draw():
 	draw_line(Vector2.ZERO, Vector2(size.x, 0), ColorPalette.PURPLE)
 	draw_line(Vector2(size.x, 0), Vector2(size.x, size.y), ColorPalette.PURPLE)
 
-	var center_y = (size.y - TEXTURE.get_size().y) / 2
-	var right_edge = size.x - 20 - TEXTURE.get_size().x
-	for index in range(0, _redraw_tokens):
-		draw_texture(TEXTURE, 
-				Vector2(right_edge - index * TEXTURE.get_size().x, center_y), 
-				ColorPalette.GREY)
+
+func _add_token():
+	var marker = REWARD_MARKER_SCENE.instantiate()
+	marker.reward = Reward.RedrawCard.new()
+	marker.color = ColorPalette.PURPLE
+	add_child(marker)
+	_token_nodes.append(marker)
+	_redraw_tokens += 1
+
+
+func _remove_token():
+	var node = _token_nodes.pop_back()
+	node.queue_free()
+	_redraw_tokens -= 1
 
 
 func _can_play() -> bool:
@@ -52,7 +58,7 @@ func _on_take_action(_card_type: Array, action: Events.Action, card_node: Card):
 		return
 
 	assert(_redraw_tokens > 0, "Redraw triggered but user has no redraw tokens")
-	_redraw_tokens -= 1
+	_remove_token()
 
 	# Add card as child while keeping its global position
 	var card_position = card_node.global_position
@@ -65,4 +71,4 @@ func _on_take_action(_card_type: Array, action: Events.Action, card_node: Card):
 
 func _on_receive_reward(reward: Reward):
 	if reward is Reward.RedrawCard:
-		_redraw_tokens += 1
+		_add_token()

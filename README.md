@@ -77,6 +77,10 @@ There's still a bug in headless export, which is why this action is disabled for
 
 The code mostly follows the [Official GDScript Style Guide](https://docs.godotengine.org/en/latest/tutorials/scripting/gdscript/gdscript_styleguide.html) and the [GDQuest GDScript Style Guide](https://www.gdquest.com/docs/guidelines/best-practices/godot-gdscript/).
 
+### Debugging
+
+- key shortcuts
+
 ### Other tweaks
 
 ### 🏃 Coroutines

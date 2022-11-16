@@ -127,7 +127,7 @@ texture = ExtResource("9_k3wye")
 ignore_texture_size = true
 stretch_mode = 5
 
-[node name="RedrawCardArea" type="Control" parent="."]
+[node name="RedrawCardArea" type="HBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -137,6 +137,8 @@ offset_top = -187.0
 offset_right = 328.0
 offset_bottom = -87.0
 grow_vertical = 0
+theme_override_constants/separation = 5
+alignment = 2
 script = ExtResource("10_if57e")
 
 [node name="PlayAgainArea" type="HBoxContainer" parent="."]

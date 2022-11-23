@@ -1,6 +1,69 @@
-[gd_scene load_steps=2 format=3 uid="uid://dlytt6vu2k6q2"]
+[gd_scene load_steps=6 format=3 uid="uid://dlytt6vu2k6q2"]
 
 [ext_resource type="Script" path="res://Reward/RewardMarker.gd" id="1_go8lb"]
+[ext_resource type="FontFile" uid="uid://dlbna5qf0660q" path="res://Fonts/Dosis-Bold.ttf" id="2_j80w7"]
+
+[sub_resource type="Animation" id="Animation_tmmnj"]
+resource_name = "blink"
+length = 0.1
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.08, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.02, 1.1), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.06, 0.08),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.139626, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_kb0w7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_avq4s"]
+_data = {
+"RESET": SubResource("Animation_kb0w7"),
+"blink": SubResource("Animation_tmmnj")
+}
 
 [node name="Reward" type="Control"]
 custom_minimum_size = Vector2(60, 60)
@@ -23,6 +86,13 @@ offset_bottom = 4.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0.980392, 0.980392, 0.980392, 1)
+theme_override_fonts/font = ExtResource("2_j80w7")
+theme_override_font_sizes/font_size = 30
 text = "10"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_avq4s")
+}

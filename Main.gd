@@ -24,6 +24,10 @@ func _on_game_over():
 	# Remove the game completely
 	$GameScreen.queue_free()
 
+	# Remove the tutorial if it's still there
+	if is_instance_valid($Tutorial):
+		$Tutorial.queue_free()
+
 	# Play score animation
 	await get_tree().create_timer(0.5).timeout
 	$GameOverScreen.animate_score(score)

@@ -96,17 +96,19 @@ ignore_texture_size = true
 stretch_mode = 4
 
 [node name="Diamonds" type="Container" parent="Field"]
-layout_mode = 0
-offset_top = 269.0
-offset_bottom = 269.0
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+offset_top = 270.0
+offset_bottom = 1000.0
 script = ExtResource("6_58l5m")
 
 [node name="Spades" type="Container" parent="Field"]
-layout_mode = 0
-offset_left = 188.0
-offset_top = 268.0
-offset_right = 188.0
-offset_bottom = 268.0
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+offset_top = 270.0
+offset_bottom = 1000.0
 script = ExtResource("7_c7t16")
 
 [node name="Hearts" type="HBoxContainer" parent="Field"]

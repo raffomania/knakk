@@ -1,8 +1,8 @@
 extends Container
 
+const GRID_COLUMNS := 6
+const GRID_ROWS := 5
 const SLOT_SIZE := 90
-const X_PADDING := 146
-const Y_PADDING := 110
 const COLOR := ColorPalette.RED
 
 const SLOT_SCENE = preload("res://Slot/Slot.tscn")
@@ -86,6 +86,9 @@ var _suite_symbol
 
 
 func _ready():
+	# Wait for a frame for get_size() to return the correct values
+	await get_tree().process_frame
+
 	_spawn_slots()
 
 	# The top-left slot is always filled when the game starts
@@ -136,15 +139,16 @@ func highlight_options(card_types: Array):
 
 
 func _spawn_slots():
+	var x_padding = (size.x - (SLOT_SIZE * GRID_COLUMNS)) / (GRID_COLUMNS - 1)
+	var y_padding = (size.y - (SLOT_SIZE * GRID_ROWS)) / (GRID_ROWS - 1)
 	var row_index = 0
 	for row in _slots:
 		var col_index = 0
 
 		for slot_spec in row:
 			var node = SLOT_SCENE.instantiate()
-			node.size = Vector2.ONE * SLOT_SIZE
-			node.position.x = col_index * (SLOT_SIZE + X_PADDING)
-			node.position.y = row_index * (SLOT_SIZE + Y_PADDING)
+			node.position.x = col_index * (SLOT_SIZE + x_padding)
+			node.position.y = row_index * (SLOT_SIZE + y_padding)
 			node.color = COLOR
 			node.reward = slot_spec.reward
 			node.text = "%s-%s" % [Cards.get_number_sigil(slot_spec.range[0]), Cards.get_number_sigil(slot_spec.range[1])]
@@ -154,9 +158,9 @@ func _spawn_slots():
 
 			var should_spawn_arrows = col_index < len(row) - 1
 			if should_spawn_arrows:
-				_spawn_arrow(Rect2(node.position + Vector2(SLOT_SIZE, 0), Vector2(X_PADDING, SLOT_SIZE)), false)
+				_spawn_arrow(Rect2(node.position + Vector2(SLOT_SIZE, 0), Vector2(x_padding, SLOT_SIZE)), false)
 
-				_spawn_arrow(Rect2(node.position + Vector2(0, SLOT_SIZE), Vector2(SLOT_SIZE, Y_PADDING)), true)
+				_spawn_arrow(Rect2(node.position + Vector2(0, SLOT_SIZE), Vector2(SLOT_SIZE, y_padding)), true)
 		
 			col_index += 1
 

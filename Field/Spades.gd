@@ -1,8 +1,8 @@
 extends Container
 
+const GRID_COLUMNS := 6
+const GRID_ROWS := 5
 const SLOT_SIZE := 90
-const X_PADDING := 100
-const Y_PADDING := 110
 const COLOR := ColorPalette.BLUE
 
 const SLOT_SCENE = preload("res://Slot/Slot.tscn")
@@ -56,18 +56,21 @@ var _suite_symbol
 
 
 func _ready():
+	# Wait for a frame for get_size() to return the correct values
+	await get_tree().process_frame
 	_spawn_slots()
 	_spawn_reward_labels()
 	_spawn_spades_symbol()
 
 
 func _draw():
+	var y_padding = _get_slot_padding().y
 	# Draw the vertical lines between slots
 	for column_index in len(_slots):
 		for row_index in len(_slots[column_index]) - 1:
 			var start_position = _get_slot_position(column_index, row_index) \
 				+ Vector2(SLOT_SIZE * 0.5, SLOT_SIZE)
-			var stop_position = start_position + Vector2(0, Y_PADDING)
+			var stop_position = start_position + Vector2(0, y_padding)
 			draw_line(start_position, stop_position, COLOR, 2.0, true)
 
 		# Draw a smaller vertical line to connect the lowest slot with the reward marker
@@ -77,7 +80,7 @@ func _draw():
 
 		var start_position = _get_slot_position(column_index, len(_slots[column_index]) - 1) \
 			+ Vector2(SLOT_SIZE * 0.5, SLOT_SIZE)
-		var stop_position = start_position + Vector2(0, Y_PADDING * 0.3)
+		var stop_position = start_position + Vector2(0, y_padding * 0.3)
 		draw_line(start_position, stop_position, COLOR, 2.0, true)
 
 
@@ -179,10 +182,15 @@ func _spawn_spades_symbol():
 ## on the screen
 func _get_slot_position(column_index, row_index):
 	return Vector2(
-		(column_index + 1) * (SLOT_SIZE + X_PADDING),
-		(row_index + 4 - column_index) * (SLOT_SIZE + Y_PADDING)
+		(column_index + 2) * (SLOT_SIZE + _get_slot_padding().x),
+		(row_index + 4 - column_index) * (SLOT_SIZE + _get_slot_padding().y)
 	)
 
+
+func _get_slot_padding() -> Vector2:
+	var x_padding = (size.x - (SLOT_SIZE * GRID_COLUMNS)) / (GRID_COLUMNS - 1)
+	var y_padding = (size.y - (SLOT_SIZE * GRID_ROWS)) / (GRID_ROWS - 1)
+	return Vector2(x_padding, y_padding)
 
 func _get_reward_for_column(column_index: int) -> Reward:
 	# For each slot in the column, check if it has been filled

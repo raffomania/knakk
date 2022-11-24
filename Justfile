@@ -3,15 +3,15 @@
 export-web:
     rm -rf export/web
     mkdir -p export/web
-    godot4 --headless --export "Web" export/web/index.html 
+    godot4 --headless --export-release "Web" export/web/index.html 
 export-linux:
     rm -rf export/linux
     mkdir -p export/linux
-    godot4 --headless --export "Linux/X11" export/linux/clever-solitaire.x86_64 
+    godot4 --headless --export-release "Linux/X11" export/linux/clever-solitaire.x86_64 
 export-osx:
     rm -rf export/osx
     mkdir -p export/osx
-    godot4 --headless --export "OSX" export/osx/clever-solitaire.app
+    godot4 --headless --export-release "OSX" export/osx/clever-solitaire.app
 
 export-android:
     rm -rf export/android

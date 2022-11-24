@@ -2,7 +2,6 @@ extends Container
 
 const GRID_COLUMNS := 6
 const GRID_ROWS := 5
-const SLOT_SIZE := 90
 const COLOR := ColorPalette.RED
 
 const SLOT_SCENE = preload("res://Slot/Slot.tscn")
@@ -139,16 +138,16 @@ func highlight_options(card_types: Array):
 
 
 func _spawn_slots():
-	var x_padding = (size.x - (SLOT_SIZE * GRID_COLUMNS)) / (GRID_COLUMNS - 1)
-	var y_padding = (size.y - (SLOT_SIZE * GRID_ROWS)) / (GRID_ROWS - 1)
+	var x_padding = (size.x - (Slot.SIZE * GRID_COLUMNS)) / (GRID_COLUMNS - 1)
+	var y_padding = (size.y - (Slot.SIZE * GRID_ROWS)) / (GRID_ROWS - 1)
 	var row_index = 0
 	for row in _slots:
 		var col_index = 0
 
 		for slot_spec in row:
 			var node = SLOT_SCENE.instantiate()
-			node.position.x = col_index * (SLOT_SIZE + x_padding)
-			node.position.y = row_index * (SLOT_SIZE + y_padding)
+			node.position.x = col_index * (Slot.SIZE + x_padding)
+			node.position.y = row_index * (Slot.SIZE + y_padding)
 			node.color = COLOR
 			node.reward = slot_spec.reward
 			node.text = "%s-%s" % [Cards.get_number_sigil(slot_spec.range[0]), Cards.get_number_sigil(slot_spec.range[1])]
@@ -158,9 +157,9 @@ func _spawn_slots():
 
 			var should_spawn_arrows = col_index < len(row) - 1
 			if should_spawn_arrows:
-				_spawn_arrow(Rect2(node.position + Vector2(SLOT_SIZE, 0), Vector2(x_padding, SLOT_SIZE)), false)
+				_spawn_arrow(Rect2(node.position + Vector2(Slot.SIZE, 0), Vector2(x_padding, Slot.SIZE)), false)
 
-				_spawn_arrow(Rect2(node.position + Vector2(0, SLOT_SIZE), Vector2(SLOT_SIZE, y_padding)), true)
+				_spawn_arrow(Rect2(node.position + Vector2(0, Slot.SIZE), Vector2(Slot.SIZE, y_padding)), true)
 		
 			col_index += 1
 
@@ -185,7 +184,7 @@ func _spawn_diamonds_symbol():
 	_suite_symbol.ignore_texture_size = true
 	_suite_symbol.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	add_child(_suite_symbol)
-	_suite_symbol.size = Vector2.ONE * SLOT_SIZE
+	_suite_symbol.size = Vector2.ONE * Slot.SIZE
 
 
 ## Find slots that can be filled using a Diamonds card with the given number

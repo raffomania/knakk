@@ -2,7 +2,6 @@ extends Container
 
 const GRID_COLUMNS := 6
 const GRID_ROWS := 5
-const SLOT_SIZE := 90
 const COLOR := ColorPalette.BLUE
 
 const SLOT_SCENE = preload("res://Slot/Slot.tscn")
@@ -69,7 +68,7 @@ func _draw():
 	for column_index in len(_slots):
 		for row_index in len(_slots[column_index]) - 1:
 			var start_position = _get_slot_position(column_index, row_index) \
-				+ Vector2(SLOT_SIZE * 0.5, SLOT_SIZE)
+				+ Vector2(Slot.SIZE * 0.5, Slot.SIZE)
 			var stop_position = start_position + Vector2(0, y_padding)
 			draw_line(start_position, stop_position, COLOR, 2.0, true)
 
@@ -79,7 +78,7 @@ func _draw():
 			continue
 
 		var start_position = _get_slot_position(column_index, len(_slots[column_index]) - 1) \
-			+ Vector2(SLOT_SIZE * 0.5, SLOT_SIZE)
+			+ Vector2(Slot.SIZE * 0.5, Slot.SIZE)
 		var stop_position = start_position + Vector2(0, y_padding * 0.3)
 		draw_line(start_position, stop_position, COLOR, 2.0, true)
 
@@ -138,7 +137,6 @@ func _spawn_slots():
 			var slot_spec = _slots[column_index][row_index]
 			var node = SLOT_SCENE.instantiate()
 
-			node.size = Vector2.ONE * SLOT_SIZE
 			node.position = _get_slot_position(column_index, row_index)
 			node.color = COLOR
 			node.text = Cards.get_number_sigil(slot_spec.number)
@@ -158,13 +156,13 @@ func _spawn_reward_labels():
 
 		add_child(marker)
 		
-		marker.size = Vector2.ONE * SLOT_SIZE * 0.5
+		marker.size = Vector2.ONE * Slot.SIZE * 0.5
 		marker.color = COLOR
 
 		# Place the marker below the bottom row and center it
-		var center_offset = (Vector2.ONE * SLOT_SIZE - marker.size) * 0.5
+		var center_offset = (Vector2.ONE * Slot.SIZE - marker.size) * 0.5
 		marker.position = _get_slot_position(column_index, column_index) \
-			+ Vector2(0, SLOT_SIZE) + center_offset
+			+ Vector2(0, Slot.SIZE) + center_offset
 
 
 ## Display a Spades symbol to show which suite this area is for
@@ -175,21 +173,21 @@ func _spawn_spades_symbol():
 	_suite_symbol.ignore_texture_size = true
 	_suite_symbol.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	add_child(_suite_symbol)
-	_suite_symbol.size = Vector2.ONE * SLOT_SIZE
+	_suite_symbol.size = Vector2.ONE * Slot.SIZE
 
 
 ## For a given column and row index, get the position for the corresponding slot
 ## on the screen
 func _get_slot_position(column_index, row_index):
 	return Vector2(
-		(column_index + 2) * (SLOT_SIZE + _get_slot_padding().x),
-		(row_index + 4 - column_index) * (SLOT_SIZE + _get_slot_padding().y)
+		(column_index + 2) * (Slot.SIZE + _get_slot_padding().x),
+		(row_index + 4 - column_index) * (Slot.SIZE + _get_slot_padding().y)
 	)
 
 
 func _get_slot_padding() -> Vector2:
-	var x_padding = (size.x - (SLOT_SIZE * GRID_COLUMNS)) / (GRID_COLUMNS - 1)
-	var y_padding = (size.y - (SLOT_SIZE * GRID_ROWS)) / (GRID_ROWS - 1)
+	var x_padding = (size.x - (Slot.SIZE * GRID_COLUMNS)) / (GRID_COLUMNS - 1)
+	var y_padding = (size.y - (Slot.SIZE * GRID_ROWS)) / (GRID_ROWS - 1)
 	return Vector2(x_padding, y_padding)
 
 func _get_reward_for_column(column_index: int) -> Reward:

@@ -2,6 +2,8 @@ class_name Slot
 extends Control
 
 
+const SIZE = 100
+
 var color := Color.BLACK:
 	set = set_color
 var reward: Reward = Reward.Nothing.new():
@@ -78,3 +80,7 @@ func fill_with_card(card_node: Card):
 
 	card_node.move_to(global_position + size / 2)
 	card_node.shrink_to_played_size()
+
+
+func _get_minimum_size():
+	return Vector2(SIZE, SIZE)

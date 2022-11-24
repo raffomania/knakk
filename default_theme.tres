@@ -3,16 +3,16 @@
 [ext_resource type="FontFile" uid="uid://8lo5awqmuhq" path="res://Fonts/Dosis-Medium.ttf" id="1_guvjk"]
 [ext_resource type="FontFile" uid="uid://dlbna5qf0660q" path="res://Fonts/Dosis-Bold.ttf" id="1_lpect"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jqq1r"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6btep"]
 bg_color = Color(0.47451, 0.419608, 0.839216, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i6xc5"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j4g53"]
 bg_color = Color(0.423529, 0.356863, 0.843137, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vxojk"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v8nec"]
 bg_color = Color(0.318693, 0.2508, 0.76, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5jyb3"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jrox1"]
 bg_color = Color(0.980392, 0.980392, 0.980392, 1)
 border_width_left = 2
 border_width_top = 2
@@ -30,10 +30,10 @@ shadow_color = Color(0, 0, 0, 0.101961)
 default_font = ExtResource("1_guvjk")
 default_font_size = 40
 Button/colors/font_color = Color(0.980392, 0.980392, 0.980392, 1)
-Button/styles/hover = SubResource("StyleBoxFlat_jqq1r")
-Button/styles/normal = SubResource("StyleBoxFlat_i6xc5")
-Button/styles/pressed = SubResource("StyleBoxFlat_vxojk")
+Button/styles/hover = SubResource("StyleBoxFlat_6btep")
+Button/styles/normal = SubResource("StyleBoxFlat_j4g53")
+Button/styles/pressed = SubResource("StyleBoxFlat_v8nec")
 Label/colors/font_color = Color(0.0627451, 0.0627451, 0.0627451, 1)
-Panel/styles/panel = SubResource("StyleBoxFlat_5jyb3")
+Panel/styles/panel = SubResource("StyleBoxFlat_jrox1")
 RichTextLabel/constants/line_separation = 5
 RichTextLabel/fonts/bold_font = ExtResource("1_lpect")

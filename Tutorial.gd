@@ -1,4 +1,4 @@
-extends Control
+extends CanvasLayer
 
 const STEPS := [
 	"""Welcome to Clever Solitaire!

@@ -2,22 +2,20 @@
 
 [ext_resource type="Script" path="res://Tutorial.gd" id="1_im6vo"]
 
-[node name="Control" type="Control"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Control" type="CanvasLayer"]
 script = ExtResource("1_im6vo")
 
 [node name="BGPanel" type="Panel" parent="."]
-layout_mode = 1
-anchors_preset = 12
+custom_minimum_size = Vector2(1040, 0)
+anchors_preset = -1
+anchor_left = 0.5
 anchor_top = 1.0
-anchor_right = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
-offset_top = -415.0
+offset_left = -520.0
+offset_top = -479.0
+offset_right = 520.0
+offset_bottom = -30.0
 grow_horizontal = 2
 grow_vertical = 0
 
@@ -32,10 +30,10 @@ grow_vertical = 2
 size_flags_horizontal = 0
 
 [node name="TextContainer" type="MarginContainer" parent="BGPanel/VBoxContainer"]
-custom_minimum_size = Vector2(0, 320)
+custom_minimum_size = Vector2(0, 360)
 layout_mode = 2
-offset_right = 1080.0
-offset_bottom = 320.0
+offset_right = 1040.0
+offset_bottom = 360.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 20
@@ -46,9 +44,9 @@ theme_override_constants/margin_bottom = 20
 [node name="RichTextLabel" type="RichTextLabel" parent="BGPanel/VBoxContainer/TextContainer"]
 layout_mode = 2
 offset_left = 20.0
-offset_top = 110.0
-offset_right = 1060.0
-offset_bottom = 210.0
+offset_top = 123.0
+offset_right = 1020.0
+offset_bottom = 237.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 4
@@ -62,21 +60,21 @@ scroll_active = false
 [node name="Buttons" type="HBoxContainer" parent="BGPanel/VBoxContainer"]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
-offset_top = 324.0
-offset_right = 1080.0
-offset_bottom = 424.0
+offset_top = 364.0
+offset_right = 1040.0
+offset_bottom = 464.0
 
 [node name="ExitButton" type="Button" parent="BGPanel/VBoxContainer/Buttons"]
 layout_mode = 2
-offset_right = 538.0
+offset_right = 518.0
 offset_bottom = 100.0
 size_flags_horizontal = 3
 text = "Skip Tutorial"
 
 [node name="NextButton" type="Button" parent="BGPanel/VBoxContainer/Buttons"]
 layout_mode = 2
-offset_left = 542.0
-offset_right = 1080.0
+offset_left = 522.0
+offset_right = 1040.0
 offset_bottom = 100.0
 grow_horizontal = 2
 grow_vertical = 0

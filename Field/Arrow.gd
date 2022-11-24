@@ -13,7 +13,8 @@ func _draw():
 	# To preserve the aspect ratio of the arrow, it is drawn with a line 
 	# and a texture for the end,
 	# the end is sized to fit into the bounding box given to the arrow
-	var end_size = Vector2.ONE * min(size.x, size.y) * 0.4
+	var end_dimension = size.x if is_vertical else size.y
+	var end_size = Vector2.ONE * end_dimension * 0.3
 	if is_vertical:
 		# Rotate everything and center it on the vertical axis
 		draw_set_transform(Vector2(size.x / 2, 0), PI / 2)

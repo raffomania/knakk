@@ -2,28 +2,25 @@ extends Control
 
 const COLOR := ColorPalette.RED
 const SLOT_SCENE = preload("res://Slot/Slot.tscn")
+const ARROW_SCENE = preload("res://Field/Arrow.tscn")
 
 ## Slots in a column list, from left to right
 var _slots = [
 	{
-		number = Cards.Number.Six,
+		number = Cards.Number.Seven,
 		reward = Reward.Points.new(3),
 		is_played = false,
 	}, {
-		number = Cards.Number.Seven,
+		number = Cards.Number.Eight,
 		reward = Reward.Points.new(6),
 		is_played = false,
 	}, {
-		number = Cards.Number.Eight,
+		number = Cards.Number.Nine,
 		reward = Reward.Points.new(10),
 		is_played = false,
 	}, {
-		number = Cards.Number.Nine,
-		reward = Reward.Points.new(15),
-		is_played = false,
-	}, {
 		number = Cards.Number.Ten,
-		reward = Reward.Points.new(21),
+		reward = Reward.Points.new(15),
 		is_played = false,
 	}, {
 		number = Cards.Number.Jack,
@@ -31,11 +28,11 @@ var _slots = [
 		is_played = false,
 	}, {
 		number = Cards.Number.Queen,
-		reward = Reward.Points.new(28),
+		reward = Reward.Points.new(21),
 		is_played = false,
 	}, {
 		number = Cards.Number.King,
-		reward = Reward.Points.new(36),
+		reward = Reward.Points.new(28),
 		is_played = false,
 	},
 ]
@@ -100,6 +97,22 @@ func _spawn_slots():
 
 		_slot_container.add_child(node)
 		slot_spec.node = node
+
+		# For every slot except the last one, spawn an arrow
+		if column_index < len(_slots) - 1:
+			_spawn_separator_arrow()
+
+
+## An arrow between slots indicating that the slots have
+## to be filled left to right
+func _spawn_separator_arrow():
+	var arrow = ARROW_SCENE.instantiate()
+	arrow.color = COLOR
+	arrow.is_vertical = false
+	arrow.size_flags_horizontal = SIZE_EXPAND_FILL
+	arrow.size_flags_vertical = SIZE_EXPAND_FILL
+
+	_slot_container.add_child(arrow)
 
 
 ## Find column indexes for slots that can be filled using a Hearts card with the given number

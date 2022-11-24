@@ -63,6 +63,7 @@ offset_right = 0.0
 offset_bottom = 0.0
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset = Vector2(35, 35)
 color = Color(0.341176, 0.239216, 1, 1)
 
 [node name="Field" type="Control" parent="."]
@@ -80,9 +81,11 @@ script = ExtResource("5_3f0wa")
 
 [node name="Clubs" type="Control" parent="Field"]
 layout_mode = 1
+anchors_preset = 10
 anchor_right = 1.0
 offset_top = 68.0
 offset_bottom = 268.0
+grow_horizontal = 2
 script = ExtResource("9_qy27a")
 
 [node name="SuiteSymbol" type="TextureRect" parent="Field/Clubs"]
@@ -123,9 +126,11 @@ script = ExtResource("7_c7t16")
 
 [node name="Hearts" type="Control" parent="Field"]
 layout_mode = 1
+anchors_preset = 10
 anchor_right = 1.0
 offset_top = 1181.0
 offset_bottom = 1376.0
+grow_horizontal = 2
 script = ExtResource("8_fhn0x")
 
 [node name="SuiteSymbol" type="TextureRect" parent="Field/Hearts"]

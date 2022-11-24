@@ -10,7 +10,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 90.0
 offset_bottom = 90.0
-size_flags_horizontal = 6
+size_flags_horizontal = 4
 size_flags_vertical = 4
 script = ExtResource("1_s8io1")
 
@@ -45,3 +45,4 @@ offset_right = 0.0
 offset_bottom = 0.0
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset = Vector2(35, 35)

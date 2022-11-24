@@ -20,8 +20,6 @@ var _slots = [
 		reward = Reward.Points.new(15),
 	}, {
 		reward = Reward.Points.new(21),
-	}, {
-		reward = Reward.Points.new(28),
 	},
 ]
 
@@ -99,6 +97,7 @@ func _spawn_separator_label():
 	label.size_flags_horizontal = SIZE_EXPAND_FILL
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	label.add_theme_color_override("font_color", COLOR)
+	label.add_theme_font_size_override("font_size", 50)
 	_slot_container.add_child(label)
 
 

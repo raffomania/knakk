@@ -17,7 +17,7 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -361.0
+offset_top = -415.0
 grow_horizontal = 2
 grow_vertical = 0
 
@@ -32,10 +32,10 @@ grow_vertical = 2
 size_flags_horizontal = 0
 
 [node name="TextContainer" type="MarginContainer" parent="BGPanel/VBoxContainer"]
-custom_minimum_size = Vector2(0, 260)
+custom_minimum_size = Vector2(0, 320)
 layout_mode = 2
 offset_right = 1080.0
-offset_bottom = 260.0
+offset_bottom = 320.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 20
@@ -46,9 +46,9 @@ theme_override_constants/margin_bottom = 20
 [node name="RichTextLabel" type="RichTextLabel" parent="BGPanel/VBoxContainer/TextContainer"]
 layout_mode = 2
 offset_left = 20.0
-offset_top = 80.0
+offset_top = 110.0
 offset_right = 1060.0
-offset_bottom = 180.0
+offset_bottom = 210.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 4
@@ -62,9 +62,9 @@ scroll_active = false
 [node name="Buttons" type="HBoxContainer" parent="BGPanel/VBoxContainer"]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
-offset_top = 264.0
+offset_top = 324.0
 offset_right = 1080.0
-offset_bottom = 364.0
+offset_bottom = 424.0
 
 [node name="ExitButton" type="Button" parent="BGPanel/VBoxContainer/Buttons"]
 layout_mode = 2

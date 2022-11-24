@@ -28,7 +28,7 @@ shadow_color = Color(0, 0, 0, 0.101961)
 
 [resource]
 default_font = ExtResource("1_guvjk")
-default_font_size = 35
+default_font_size = 40
 Button/colors/font_color = Color(0.980392, 0.980392, 0.980392, 1)
 Button/styles/hover = SubResource("StyleBoxFlat_jqq1r")
 Button/styles/normal = SubResource("StyleBoxFlat_i6xc5")

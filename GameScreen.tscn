@@ -78,56 +78,74 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("5_3f0wa")
 
-[node name="Clubs" type="HBoxContainer" parent="Field"]
+[node name="Clubs" type="Control" parent="Field"]
 layout_mode = 1
-anchors_preset = -1
 anchor_right = 1.0
-offset_top = 83.0
-offset_bottom = 173.0
+offset_top = 68.0
+offset_bottom = 268.0
 script = ExtResource("9_qy27a")
 
 [node name="SuiteSymbol" type="TextureRect" parent="Field/Clubs"]
 custom_minimum_size = Vector2(100, 80)
-layout_mode = 2
-offset_right = 100.0
-offset_bottom = 90.0
+layout_mode = 0
+offset_left = 15.0
+offset_top = -3.0
+offset_right = 115.0
+offset_bottom = 87.0
 texture = ExtResource("11_ogyhr")
 ignore_texture_size = true
 stretch_mode = 4
+
+[node name="SlotContainer" type="HBoxContainer" parent="Field/Clubs"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
 
 [node name="Diamonds" type="Container" parent="Field"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
-offset_top = 270.0
-offset_bottom = 1000.0
+offset_top = 359.0
+offset_bottom = 1089.0
 script = ExtResource("6_58l5m")
 
 [node name="Spades" type="Container" parent="Field"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
-offset_top = 270.0
-offset_bottom = 1000.0
+offset_top = 359.0
+offset_bottom = 1089.0
 script = ExtResource("7_c7t16")
 
-[node name="Hearts" type="HBoxContainer" parent="Field"]
+[node name="Hearts" type="Control" parent="Field"]
 layout_mode = 1
-anchors_preset = -1
 anchor_right = 1.0
-offset_top = 1320.0
-offset_bottom = 1410.0
-theme_override_constants/separation = 25
+offset_top = 1181.0
+offset_bottom = 1376.0
 script = ExtResource("8_fhn0x")
 
 [node name="SuiteSymbol" type="TextureRect" parent="Field/Hearts"]
 custom_minimum_size = Vector2(80, 80)
-layout_mode = 2
-offset_right = 80.0
+layout_mode = 0
+offset_left = 26.0
+offset_right = 106.0
 offset_bottom = 90.0
 texture = ExtResource("9_k3wye")
 ignore_texture_size = true
 stretch_mode = 5
+
+[node name="SlotContainer" type="HBoxContainer" parent="Field/Hearts"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
 
 [node name="RedrawCardArea" type="HBoxContainer" parent="."]
 layout_mode = 1

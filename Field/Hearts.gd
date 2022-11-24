@@ -1,4 +1,4 @@
-extends HBoxContainer
+extends Control
 
 const COLOR := ColorPalette.RED
 const SLOT_SCENE = preload("res://Slot/Slot.tscn")
@@ -42,6 +42,7 @@ var _slots = [
 
 ## A reference to the TextureRect showing that this area belongs to the Hearts suite
 @onready var _suite_symbol: TextureRect = $SuiteSymbol
+@onready var _slot_container: HBoxContainer = $SlotContainer
 
 
 func _ready():
@@ -96,9 +97,8 @@ func _spawn_slots():
 		node.color = COLOR
 		node.reward = slot_spec.reward
 		node.text = "≥ %s" % Cards.get_number_sigil(slot_spec.number)
-		node.size_flags_horizontal = SIZE_EXPAND_FILL
 
-		add_child(node)
+		_slot_container.add_child(node)
 		slot_spec.node = node
 
 

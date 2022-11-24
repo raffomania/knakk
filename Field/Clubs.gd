@@ -1,4 +1,4 @@
-extends HBoxContainer
+extends Control
 
 
 const COLOR := ColorPalette.BLUE
@@ -26,6 +26,7 @@ var _slots = [
 ]
 
 @onready var _suite_symbol = $SuiteSymbol
+@onready var _slot_container: HBoxContainer = $SlotContainer
 
 
 func _ready():
@@ -82,7 +83,7 @@ func _spawn_slots():
 		node.color = COLOR
 		node.reward = slot_spec.reward
 
-		add_child(node)
+		_slot_container.add_child(node)
 		slot_spec.node = node
 
 		# For every slot except the last one, spawn a "<" label
@@ -98,7 +99,7 @@ func _spawn_separator_label():
 	label.size_flags_horizontal = SIZE_EXPAND_FILL
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	label.add_theme_color_override("font_color", COLOR)
-	add_child(label)
+	_slot_container.add_child(label)
 
 
 ## Find column indexes for slots that can be filled using a Clubs card with the given number

@@ -38,10 +38,20 @@ var _current_step := 0
 
 
 func _ready():
+	Events.new_game.connect(_on_new_game)
+
 	_next_button.pressed.connect(_on_next_button_pressed)
 	_exit_button.pressed.connect(queue_free)
 
 	_label.text = STEPS[_current_step]
+
+
+func _on_new_game(with_tutorial: bool):
+	if not with_tutorial:
+		return
+
+	await get_tree().create_timer(3).timeout
+	visible = true
 
 
 func _on_next_button_pressed():

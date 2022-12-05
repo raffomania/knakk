@@ -1,0 +1,30 @@
+[gd_scene load_steps=2 format=3 uid="uid://co1kt3p5x1h3d"]
+
+[ext_resource type="Script" path="res://MenuScreen.gd" id="1_3vljn"]
+
+[node name="MenuScreen" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 80
+theme_override_constants/margin_top = 200
+theme_override_constants/margin_right = 80
+theme_override_constants/margin_bottom = 200
+script = ExtResource("1_3vljn")
+
+[node name="Buttons" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 50
+alignment = 2
+
+[node name="Start" type="Button" parent="Buttons"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+text = "New Game"
+
+[node name="Tutorial" type="Button" parent="Buttons"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+text = "Play Tutorial"

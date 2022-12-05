@@ -21,21 +21,18 @@ func _on_game_over():
 	# Remember score for later
 	var score = $GameScreen/TopBar/Score.score
 
-	# Remove the game completely
+	# Remove the game completely and create a new one
 	$GameScreen.queue_free()
-
-	# Remove the tutorial if it's still there
-	if is_instance_valid($Tutorial):
-		$Tutorial.queue_free()
+	await get_tree().process_frame
+	var game_node = GAME_SCENE.instantiate()
+	add_child(game_node)
 
 	# Play score animation
 	await get_tree().create_timer(0.5).timeout
 	$GameOverScreen.animate_score(score)
 
 
-func _on_new_game():
-	var game_node = GAME_SCENE.instantiate()
-	add_child(game_node)
+func _on_new_game(_with_tutorial: bool):
 	await $Camera.go_to_game_screen()
 
 	$GameOverScreen.reset()

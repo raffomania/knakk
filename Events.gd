@@ -38,8 +38,8 @@ signal turn_complete
 signal round_complete
 ## After three rounds, the game is over and the game over screen is shown
 signal game_over
-## Start a new game, usually triggered on the game over screen.
-signal new_game
+## Start a new game - this is emitted in the main menu and on the game over screen.
+signal new_game(with_tutorial: bool)
 
 ## All the card types currently available to play
 ## This is not optimal because we have to take care to update this

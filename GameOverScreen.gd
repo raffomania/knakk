@@ -25,4 +25,4 @@ func reset():
 
 
 func _on_new_game():
-	Events.new_game.emit()
+	Events.new_game.emit(false)

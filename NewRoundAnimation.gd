@@ -8,8 +8,13 @@ var current_round := 0
 
 func _ready():
 	Events.round_complete.connect(_on_round_complete)
+	Events.new_game.connect(_on_new_game)
 	visible = false
-	await get_tree().create_timer(0.5).timeout
+
+
+func _on_new_game(_with_tutorial: bool):
+	current_round = 0
+	await get_tree().create_timer(1.3).timeout
 	_on_round_complete()
 
 

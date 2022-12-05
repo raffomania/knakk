@@ -1,9 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://brocv2rlmnpw8"]
+[gd_scene load_steps=10 format=3 uid="uid://xsnetu1hpaml"]
 
 [ext_resource type="Script" path="res://Camera.gd" id="1_5jlkv"]
 [ext_resource type="Script" path="res://Main.gd" id="1_os57m"]
-[ext_resource type="PackedScene" uid="uid://cpvkx83kt5emk" path="res://GameScreen.tscn" id="3_w0hn2"]
-[ext_resource type="PackedScene" uid="uid://sxggt3tc5d0v" path="res://Tutorial.tscn" id="4_kj7ux"]
+[ext_resource type="PackedScene" uid="uid://b5ij436lvnjbr" path="res://GameScreen.tscn" id="3_w0hn2"]
+[ext_resource type="PackedScene" uid="uid://co1kt3p5x1h3d" path="res://MenuScreen.tscn" id="5_r8sk6"]
 [ext_resource type="PackedScene" uid="uid://q1h3f0r3grhr" path="res://GameOverScreen.tscn" id="15_yok5v"]
 
 [sub_resource type="Animation" id="Animation_v032t"]
@@ -18,7 +18,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, 0)]
+"values": [Vector2(0, -2408)]
 }
 tracks/1/type = "bezier"
 tracks/1/imported = false
@@ -33,7 +33,7 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_ryx7w"]
-resource_name = "go_to_game_over_screen"
+resource_name = "game_to_game_over"
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -70,10 +70,49 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.15, 0.85, 0.993552)
 }
 
+[sub_resource type="Animation" id="Animation_sjx1b"]
+resource_name = "menu_to_game"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.3, 0.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -2408), Vector2(0, 0)]
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:zoom:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.1, -0.089019, 0.802229, -0.1, 0.0215544, 0.233333, 0, 0.8, -0.25, 0, 0.1, 0.0972646, 1, -0.143552, -0.0282748, 0.25, 0),
+"times": PackedFloat32Array(0, 0.15, 0.85, 0.993552)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:zoom:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.1, -0.089019, 0.802229, -0.1, 0.0215544, 0.233333, 0, 0.8, -0.25, 0, 0.1, 0.0972646, 1, -0.143552, -0.0282748, 0.25, 0),
+"times": PackedFloat32Array(0, 0.15, 0.85, 0.993552)
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_cv8xt"]
 _data = {
 "RESET": SubResource("Animation_v032t"),
-"go_to_game_over_screen": SubResource("Animation_ryx7w")
+"game_to_game_over": SubResource("Animation_ryx7w"),
+"menu_to_game": SubResource("Animation_sjx1b")
 }
 
 [node name="Main" type="Control"]
@@ -89,6 +128,7 @@ script = ExtResource("1_os57m")
 
 [node name="Camera" type="Camera2D" parent="."]
 position = Vector2(547, 1228)
+offset = Vector2(0, -2408)
 current = true
 script = ExtResource("1_5jlkv")
 
@@ -100,11 +140,14 @@ libraries = {
 [node name="GameScreen" parent="." instance=ExtResource("3_w0hn2")]
 layout_mode = 1
 
-[node name="Tutorial" parent="." instance=ExtResource("4_kj7ux")]
-layout_mode = 1
-
 [node name="GameOverScreen" parent="." instance=ExtResource("15_yok5v")]
 layout_mode = 1
 anchors_preset = -1
 offset_top = 2408.0
 offset_bottom = 2408.0
+
+[node name="MenuScreen" parent="." instance=ExtResource("5_r8sk6")]
+layout_mode = 1
+anchors_preset = -1
+offset_top = -2408.0
+offset_bottom = -2408.0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cpvkx83kt5emk"]
+[gd_scene load_steps=21 format=3 uid="uid://b5ij436lvnjbr"]
 
 [ext_resource type="PackedScene" uid="uid://csxepv0yylg0m" path="res://Hand.tscn" id="1_56rkn"]
 [ext_resource type="PackedScene" uid="uid://iqa80l616fa4" path="res://Turns/Turns.tscn" id="2_j64vv"]
@@ -16,6 +16,69 @@
 [ext_resource type="Script" path="res://Deck.gd" id="12_54ssd"]
 [ext_resource type="Script" path="res://Action/ActionIndicator.gd" id="13_j0q4n"]
 [ext_resource type="Texture2D" uid="uid://udfg6icv8x20" path="res://Field/AreaSeparator.svg" id="16_sp2ru"]
+[ext_resource type="Script" path="res://NewRoundAnimation.gd" id="17_hf8a0"]
+
+[sub_resource type="Animation" id="Animation_0crcx"]
+resource_name = "round_complete"
+length = 1.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect/TurnCounter:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1, 0.3, 1.15, 1.45),
+"transitions": PackedFloat32Array(0.277393, 1, 2, 1),
+"update": 0,
+"values": [Vector2(-200, 0), Vector2(-20, 0), Vector2(20, 0), Vector2(200, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextureRect:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.15, 1.4, 1.5),
+"transitions": PackedFloat32Array(0.435275, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-1000, 1104), Vector2(40, 1104), Vector2(60, 1104), Vector2(1200, 1104)]
+}
+
+[sub_resource type="Animation" id="Animation_7ilcp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect/TurnCounter:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextureRect:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(50, 1104)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_a4v08"]
+_data = {
+"RESET": SubResource("Animation_7ilcp"),
+"round_complete": SubResource("Animation_0crcx")
+}
 
 [node name="GameScreen" type="Control"]
 layout_mode = 3
@@ -216,3 +279,51 @@ modulate = Color(1, 1, 1, 0.615686)
 position = Vector2(617, 1008)
 rotation = 0.0398547
 texture = ExtResource("16_sp2ru")
+
+[node name="NewRoundAnimation" type="CanvasLayer" parent="."]
+script = ExtResource("17_hf8a0")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="NewRoundAnimation"]
+libraries = {
+"": SubResource("AnimationLibrary_a4v08")
+}
+
+[node name="TextureRect" type="Panel" parent="NewRoundAnimation"]
+custom_minimum_size = Vector2(0, 200)
+anchors_preset = -1
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 50.0
+offset_top = -100.0
+offset_right = -50.1104
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TurnCounter" type="Label" parent="NewRoundAnimation/TextureRect"]
+custom_minimum_size = Vector2(0, 140)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+offset_right = -0.000244141
+offset_bottom = 140.0
+grow_horizontal = 2
+scale = Vector2(1, 1.01823)
+theme_override_font_sizes/font_size = 80
+text = "Turn 3"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ShuffleMessage" type="Label" parent="NewRoundAnimation/TextureRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -55.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Shuffling deck..."
+horizontal_alignment = 1

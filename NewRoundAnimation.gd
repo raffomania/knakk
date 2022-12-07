@@ -1,7 +1,7 @@
 extends CanvasLayer
 
 
-var current_round := 0
+var current_round := 1
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 

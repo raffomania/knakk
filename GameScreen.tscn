@@ -1,10 +1,11 @@
-[gd_scene load_steps=22 format=3 uid="uid://b5ij436lvnjbr"]
+[gd_scene load_steps=23 format=3 uid="uid://b5ij436lvnjbr"]
 
 [ext_resource type="PackedScene" uid="uid://csxepv0yylg0m" path="res://Hand.tscn" id="1_56rkn"]
 [ext_resource type="PackedScene" uid="uid://iqa80l616fa4" path="res://Turns/Turns.tscn" id="2_j64vv"]
 [ext_resource type="Script" path="res://Score.gd" id="3_g6w2l"]
 [ext_resource type="PackedScene" uid="uid://dlytt6vu2k6q2" path="res://Reward/RewardMarker.tscn" id="4_bwyhj"]
 [ext_resource type="Script" path="res://Field.gd" id="5_3f0wa"]
+[ext_resource type="Texture2D" uid="uid://bosrvrsa1q17t" path="res://MenuButton.svg" id="5_873i1"]
 [ext_resource type="Script" path="res://Field/Diamonds.gd" id="6_58l5m"]
 [ext_resource type="Script" path="res://Field/Spades.gd" id="7_c7t16"]
 [ext_resource type="Script" path="res://Field/Hearts.gd" id="8_fhn0x"]
@@ -99,17 +100,17 @@ position = Vector2(540, 2045)
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_left = 74.0
-offset_top = 77.0
-offset_right = -20.0
-offset_bottom = 152.0
+offset_left = 50.0
+offset_top = 61.0
+offset_right = -30.0
+offset_bottom = 136.0
 grow_horizontal = 2
 
 [node name="Turns" parent="TopBar" instance=ExtResource("2_j64vv")]
 layout_mode = 1
 anchors_preset = -1
-anchor_bottom = 1.0
-offset_left = 100.0
+anchor_left = 0.5
+anchor_right = 0.5
 
 [node name="Score" type="Control" parent="TopBar"]
 layout_mode = 1
@@ -123,6 +124,7 @@ grow_vertical = 2
 script = ExtResource("3_g6w2l")
 
 [node name="Reward" parent="TopBar/Score" instance=ExtResource("4_bwyhj")]
+custom_minimum_size = Vector2(100, 100)
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -131,8 +133,23 @@ offset_right = 0.0
 offset_bottom = 0.0
 grow_horizontal = 2
 grow_vertical = 2
-pivot_offset = Vector2(35, 35)
+pivot_offset = Vector2(50, 50)
 color = Color(0.341176, 0.239216, 1, 1)
+
+[node name="MenuButton" type="TextureButton" parent="TopBar"]
+modulate = Color(0.356863, 0.282353, 0.85098, 1)
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -33.0
+grow_horizontal = 0
+grow_vertical = 2
+texture_normal = ExtResource("5_873i1")
+ignore_texture_size = true
+stretch_mode = 4
 
 [node name="Field" type="Control" parent="."]
 layout_mode = 1

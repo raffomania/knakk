@@ -19,6 +19,11 @@ layout_mode = 2
 theme_override_constants/separation = 50
 alignment = 2
 
+[node name="Continue" type="Button" parent="Buttons"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+text = "Continue"
+
 [node name="Start" type="Button" parent="Buttons"]
 custom_minimum_size = Vector2(0, 200)
 layout_mode = 2

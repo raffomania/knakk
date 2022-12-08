@@ -3,6 +3,8 @@ extends MarginContainer
 
 @onready var button: Button = $MarginBox/Button
 
+signal new_game
+
 
 func _ready():
 	reset()
@@ -25,4 +27,4 @@ func reset():
 
 
 func _on_new_game():
-	Events.new_game.emit(false)
+	new_game.emit()

@@ -10,6 +10,7 @@ func _ready():
 	Events.game_over.connect(_on_game_over)
 	$MenuScreen.continue_game.connect(_on_continue_game)
 	$MenuScreen.new_game.connect(_on_new_game)
+	$GameOverScreen.new_game.connect(func(): _on_new_game(false))
 
 
 func _unhandled_input(event):

@@ -1,4 +1,6 @@
-# Clever Solitaire
+# knakk
+
+*A draw-and-write card game for mobile phones*
 
 ## 📖 Reading the Code
 

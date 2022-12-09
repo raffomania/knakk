@@ -12,17 +12,17 @@ _global_script_classes=[{
 "base": "Sprite2D",
 "class": &"Card",
 "language": &"GDScript",
-"path": "res://Card/Card.gd"
+"path": "res://GameScreen/Card/Card.gd"
 }, {
 "base": "RefCounted",
 "class": &"Cards",
 "language": &"GDScript",
-"path": "res://Card/Cards.gd"
+"path": "res://GameScreen/Card/Cards.gd"
 }, {
 "base": "RefCounted",
 "class": &"ColorPalette",
 "language": &"GDScript",
-"path": "res://ColorPalette.gd"
+"path": "res://Global/ColorPalette.gd"
 }, {
 "base": "RefCounted",
 "class": &"Reward",
@@ -32,7 +32,7 @@ _global_script_classes=[{
 "base": "Control",
 "class": &"Slot",
 "language": &"GDScript",
-"path": "res://Slot/Slot.gd"
+"path": "res://GameScreen/Slot/Slot.gd"
 }]
 _global_script_class_icons={
 "Card": "",
@@ -52,7 +52,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-Events="*res://Events.gd"
+Events="*res://Global/Events.gd"
 
 [display]
 

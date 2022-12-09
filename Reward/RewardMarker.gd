@@ -3,7 +3,7 @@ extends Control
 
 
 const BACKGROUND = preload("res://Reward/Reward.svg")
-const REDRAW_TEXTURE = preload("res://Action/RedrawCard.svg")
+const REDRAW_TEXTURE = preload("res://GameScreen/Action/RedrawCard.svg")
 
 var reward:
 	set = set_reward

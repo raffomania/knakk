@@ -1,10 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://xsnetu1hpaml"]
+[gd_scene load_steps=10 format=3 uid="uid://cftjpyo1jqxfa"]
 
-[ext_resource type="Script" path="res://Camera.gd" id="1_5jlkv"]
+[ext_resource type="Script" path="res://Global/Camera.gd" id="1_5jlkv"]
 [ext_resource type="Script" path="res://Main.gd" id="1_os57m"]
-[ext_resource type="PackedScene" uid="uid://b5ij436lvnjbr" path="res://GameScreen.tscn" id="3_w0hn2"]
-[ext_resource type="PackedScene" uid="uid://co1kt3p5x1h3d" path="res://MenuScreen.tscn" id="5_r8sk6"]
-[ext_resource type="PackedScene" uid="uid://q1h3f0r3grhr" path="res://GameOverScreen.tscn" id="15_yok5v"]
+[ext_resource type="PackedScene" path="res://GameScreen/GameScreen.tscn" id="3_w0hn2"]
+[ext_resource type="PackedScene" path="res://MenuScreen/MenuScreen.tscn" id="5_r8sk6"]
+[ext_resource type="PackedScene" path="res://GameOverScreen/GameOverScreen.tscn" id="15_yok5v"]
 
 [sub_resource type="Animation" id="Animation_v032t"]
 length = 0.001

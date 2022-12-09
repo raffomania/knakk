@@ -1,7 +1,7 @@
 extends Control
 
 
-const GAME_SCENE = preload("res://GameScreen.tscn")
+const GAME_SCENE = preload("res://GameScreen/GameScreen.tscn")
 
 @onready var camera: Camera2D = $Camera
 

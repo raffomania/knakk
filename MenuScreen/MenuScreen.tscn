@@ -1,0 +1,43 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://MenuScreen/MenuScreen.gd" id="1_3vljn"]
+[ext_resource type="Texture2D" uid="uid://doogopexn2xex" path="res://logo.png" id="2_ndgbq"]
+
+[node name="MenuScreen" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 80
+theme_override_constants/margin_top = 200
+theme_override_constants/margin_right = 80
+theme_override_constants/margin_bottom = 200
+script = ExtResource("1_3vljn")
+
+[node name="Logo" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+texture = ExtResource("2_ndgbq")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="Buttons" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 50
+alignment = 2
+
+[node name="Continue" type="Button" parent="Buttons"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+text = "Continue"
+
+[node name="Start" type="Button" parent="Buttons"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+text = "New Game"
+
+[node name="Tutorial" type="Button" parent="Buttons"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+text = "Play Tutorial"

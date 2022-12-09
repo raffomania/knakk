@@ -44,7 +44,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Clever Solitaire"
+config/name="knakk"
 run/main_scene="res://Main.tscn"
 config/features=PackedStringArray("4.0", "Mobile")
 run/max_fps=60

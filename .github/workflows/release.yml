@@ -43,7 +43,7 @@ jobs:
               env:
                   BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
                   CHANNEL: web
-                  ITCH_GAME: clever-solitaire
+                  ITCH_GAME: knakk
                   ITCH_USER: raffomania
                   PACKAGE: export/web
                   VERSION: ${{ steps.tag_version.outputs.TAG_VERSION }}
@@ -53,7 +53,7 @@ jobs:
               env:
                   BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
                   CHANNEL: linux
-                  ITCH_GAME: clever-solitaire
+                  ITCH_GAME: knakk
                   ITCH_USER: raffomania
                   PACKAGE: export/linux
                   VERSION: ${{ steps.tag_version.outputs.TAG_VERSION }}

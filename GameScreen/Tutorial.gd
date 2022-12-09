@@ -14,11 +14,11 @@ After each turn, you get a new hand with three new cards.
 After five turns, the deck is refilled and shuffled.
 After fifteen turns, the game is over.""",
 	"""Each suite has its own rules:
-[b]Clubs[/b]: Filled from left to right, with each number higher than the previous one.
-[b]Diamonds[/b]: Starting from the top left corner, numbers need to fit the range on each slot.""",
-	"""[b]Spades[/b]: Filled in [b]any[/b] order. 
+[img height=60]res://GameScreen/Suite/Clubs.png[/img]: Filled from left to right, with each number higher than the previous one.
+[img height=60]res://GameScreen/Suite/Diamonds.png[/img]: Starting from the top left corner, numbers need to fit the range on each slot.""",
+	"""[img height=60]res://GameScreen/Suite/Spades.png[/img]: Filled in [b]any[/b] order. 
 Each slot needs exactly the number it shows.
-[b]Hearts[/b]: Filled from left to right. 
+[img height=60]res://GameScreen/Suite/Hearts.png[/img]: Filled from left to right. 
 Each slot needs a number higher or equal to the one it shows.""",
 	"""There are two bonuses:
 [img color=#303030 height=35]res://GameScreen/Action//RedrawCard.svg[/img]: Replace a card with a new one by dragging it to the bottom left corner.
@@ -48,6 +48,7 @@ func _ready():
 
 func _on_new_game(with_tutorial: bool):
 	if not with_tutorial:
+		visible = false
 		return
 
 	await get_tree().create_timer(3).timeout

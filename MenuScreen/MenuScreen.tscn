@@ -1,7 +1,112 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=6 format=3 uid="uid://d2beo1wbbdlx7"]
 
 [ext_resource type="Script" path="res://MenuScreen/MenuScreen.gd" id="1_3vljn"]
 [ext_resource type="Texture2D" uid="uid://doogopexn2xex" path="res://logo.png" id="2_ndgbq"]
+
+[sub_resource type="Animation" id="Animation_qpxdu"]
+resource_name = "Intro"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.5, 1.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.225147, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5, 1.2, 2.3),
+"transitions": PackedFloat32Array(2.2974, 1.56917, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.568627), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:scale:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(2, -0.25, 0, 0.25, 0, 0.95, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0.5, 1.2, 2.5)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:scale:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(2, -0.25, 0, 0.25, 0, 0.95, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0.5, 1.2, 2.5)
+}
+
+[sub_resource type="Animation" id="Animation_s7brt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:scale:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:scale:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rmnto"]
+_data = {
+"Intro": SubResource("Animation_qpxdu"),
+"RESET": SubResource("Animation_s7brt")
+}
 
 [node name="MenuScreen" type="MarginContainer"]
 anchors_preset = 15
@@ -15,29 +120,51 @@ theme_override_constants/margin_right = 80
 theme_override_constants/margin_bottom = 200
 script = ExtResource("1_3vljn")
 
-[node name="Logo" type="TextureRect" parent="."]
-custom_minimum_size = Vector2(0, 200)
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
+
+[node name="LogoContainer" type="Control" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Logo" type="TextureRect" parent="VBoxContainer/LogoContainer"]
+custom_minimum_size = Vector2(0, 1200)
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -600.0
+offset_bottom = 600.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(464, 644)
 texture = ExtResource("2_ndgbq")
 ignore_texture_size = true
-stretch_mode = 4
+stretch_mode = 5
 
-[node name="Buttons" type="VBoxContainer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="VBoxContainer/LogoContainer/Logo"]
+autoplay = "Intro"
+libraries = {
+"": SubResource("AnimationLibrary_rmnto")
+}
+
+[node name="Buttons" type="VBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 50
 alignment = 2
 
-[node name="Continue" type="Button" parent="Buttons"]
+[node name="Continue" type="Button" parent="VBoxContainer/Buttons"]
 custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
 text = "Continue"
 
-[node name="Start" type="Button" parent="Buttons"]
+[node name="Start" type="Button" parent="VBoxContainer/Buttons"]
 custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
 text = "New Game"
 
-[node name="Tutorial" type="Button" parent="Buttons"]
+[node name="Tutorial" type="Button" parent="VBoxContainer/Buttons"]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 text = "Play Tutorial"

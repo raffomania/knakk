@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://Global/Camera.gd" id="1_5jlkv"]
 [ext_resource type="Script" path="res://Main.gd" id="1_os57m"]
-[ext_resource type="PackedScene" path="res://GameScreen/GameScreen.tscn" id="3_w0hn2"]
-[ext_resource type="PackedScene" path="res://MenuScreen/MenuScreen.tscn" id="5_r8sk6"]
+[ext_resource type="PackedScene" uid="uid://blgultqxld18q" path="res://GameScreen/GameScreen.tscn" id="3_w0hn2"]
+[ext_resource type="PackedScene" uid="uid://d2beo1wbbdlx7" path="res://MenuScreen/MenuScreen.tscn" id="5_r8sk6"]
 [ext_resource type="PackedScene" path="res://GameOverScreen/GameOverScreen.tscn" id="15_yok5v"]
 
 [sub_resource type="Animation" id="Animation_v032t"]
@@ -137,6 +137,11 @@ libraries = {
 "": SubResource("AnimationLibrary_cv8xt")
 }
 
+[node name="MenuScreen" parent="." instance=ExtResource("5_r8sk6")]
+layout_mode = 1
+offset_top = -2408.0
+offset_bottom = -2408.0
+
 [node name="GameScreen" parent="." instance=ExtResource("3_w0hn2")]
 layout_mode = 1
 
@@ -145,9 +150,3 @@ layout_mode = 1
 anchors_preset = -1
 offset_top = 2408.0
 offset_bottom = 2408.0
-
-[node name="MenuScreen" parent="." instance=ExtResource("5_r8sk6")]
-layout_mode = 1
-anchors_preset = -1
-offset_top = -2408.0
-offset_bottom = -2408.0

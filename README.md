@@ -94,7 +94,7 @@ There are a couple good usage examples of coroutines:
 - [`Card.gd`](GameScreen/Card/Card.gd) uses coroutines to wait for tweens to finish
 - [`MenuScreen.gd`](MenuScreen/MenuScreen.gd), [`Tutorial.gd`](GameScreen/Tutorial.gd) and [`NewRoundAnimation.gd`](GameScreen/NewRoundAnimation.gd) use coroutines to wait for a specified amount of time before doing something
 
-## ✅ Tasks left for the reader
+## 🎯 Tasks left for the reader
 
 - Implement a landscape layout: Use Godot's UI features to make the controls automatically resize and reflow depending on different window aspect ratios.
 - Implement a highscore system: Use the filesystem abstraction to save, load and show highscores of previous games.

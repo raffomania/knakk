@@ -1,4 +1,4 @@
-![knakk logo](logo.png)
+![knakk logo](small_logo.png)
 
 *A draw-and-write card game for mobile phones*
 

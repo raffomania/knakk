@@ -6,9 +6,9 @@ This game contains many examples that show you how to use Godot's built-in featu
 
 ### 📊 UI
 
-A lot of the game is implemented using custom controls. They are very similar to `Node2D` nodes, but have a `size` property that makes it easy to adapt them to different sizes. One example for this is the `RewardMarker` node which is used to great effect to show rewards associated with slots on the field, the current score, and the score on the game over screen.
+A lot of the game is implemented using custom controls. They are very similar to `Node2D` nodes, but have a `size` property that makes it easy to adapt them to different sizes. One example for this is the [`RewardMarker`](Reward/RewardMarker.gd) node which is used to great effect to show rewards associated with slots on the field, the current score, and the score on the game over screen.
 
-The `default_theme.tres` file defines font family, font size and button colors for the whole project. It's set in the project settings and applies to all control nodes by default.
+The [`default_theme.tres`](default_theme.tres) file defines font family, font size and button colors for the whole project. It's set in the project settings and applies to all control nodes by default.
 
 The `Hearts` and `Clubs` areas on the playing field use `HBoxContainer`s to automatically lay out their slots in a row. `Diamonds` and `Spades` are similar to a `GridContainer` but contain a custom layout that is tailored to their triangle-shaped grid. 
 
@@ -23,16 +23,16 @@ The `Camera` node is animated by an `AnimationPlayer` that animates its `offset`
 
 The animation uses Bezier curve tracks for precise control over way the animation feels. You can see the curves by switching to the bezier curve editor in the animation editor.
 
-#### Tweens
+#### ↔ Tweens
 
 Tweens are used in two situations:
 
-- We don't know the start or end values of an animation in advance. For an example of this, see the `shrink_to_played_size` method in `Card.gd`. It animates the card's rotation to a random value.
-- It's a super simple animation that is more convenient to create with a short line of code. See the `visualize_interaction_state` method in `Card.gd` for an example. It sets the card's scale and rotation to constant values but uses a tween to smoothly transition to those values.
+- We don't know the start or end values of an animation in advance. For an example of this, see the `shrink_to_played_size` method in [`Card.gd`](GameScreen/Card/Card.gd). It animates the card's rotation to a random value.
+- It's a super simple animation that is more convenient to create with a short line of code. See the `visualize_interaction_state` method in [`Card.gd`](GameScreen/Card/Card.gd) for an example. It sets the card's scale and rotation to constant values but uses a tween to smoothly transition to those values.
 
-#### Smooth movement
+#### 🔧 Manual frame-by-frame animation
 
-When cards move around on the board, their movement is smooth. This is not implemented using a tween but a custom movement step in the `_process` method.
+When cards move around on the board, their movement is smoothed. This is not implemented using a tween but a custom movement step in the `_process` method.
 This is to have precise control over the speed and smoothing curve of the movement, and to avoid creating a new tween object every frame when users drag a card.
 
 ### ✅ Static Types
@@ -59,7 +59,7 @@ By setting the aspect ratio to `expand`, we allow the game to fill the window wi
 
 The "emulate touch input using mouse" project setting allows the code to always work using touchscreen events and still "just work" with a mouse.
 
-The drag-and-drop mechanic in `Card.gd` works by capturing all input events and checking whether they apply to the card node that runs the script:
+The drag-and-drop mechanic in [`Card.gd`](GameScreen/Card/Card.gd) works by capturing all input events and checking whether they apply to the card node that runs the script:
 
 - For a touch start event, if it is inside the card's bounds, set the card's status to "being dragged"
 - For a touch movement (`InputEventScreenDrag`), if the card is being dragged, move it to the new finger position
@@ -77,22 +77,24 @@ There's still a bug in headless export, which is why this action is disabled for
 
 The code mostly follows the [Official GDScript Style Guide](https://docs.godotengine.org/en/latest/tutorials/scripting/gdscript/gdscript_styleguide.html) and the [GDQuest GDScript Style Guide](https://www.gdquest.com/docs/guidelines/best-practices/godot-gdscript/).
 
-### Debugging
+### 🧐 Debugging
 
-- key shortcuts
+There are a few debugging shortcuts that are only enabled in debug mode:
 
-### Other tweaks
+- **R** Draw a new hand without spending a turn
+- **O** End the game instantly
+
+Also, the `Deck` script shows how many cards are left in the deck in debug mode.
 
 ### 🏃 Coroutines
 
-### Particles
+There are a couple good usage examples of coroutines:
 
-### Considerations
+- [`Main.gd`](Main.gd) and [`Camera.gd`](Global/Camera.gd) use coroutines to wait for camera transitions to complete before performing subsequent actions
+- [`Card.gd`](GameScreen/Card/Card.gd) uses coroutines to wait for tweens to finish
+- [`MenuScreen.gd`](MenuScreen/MenuScreen.gd), [`Tutorial.gd`](GameScreen/Tutorial.gd) and [`NewRoundAnimation.gd`](GameScreen/NewRoundAnimation.gd) use coroutines to wait for a specified amount of time before doing something
 
-- How to handle propagation and capturing of click events?
-- How to represent a single card value?
-- Defining slots, rewards etc. in scenes vs code
+## ✅ Tasks left for the reader
 
-## Tasks left for the reader
-
-- Implement a landscape layout: Use godot's UI features to make the controls automatically resize and reflow depending on different window aspect ratios.
+- Implement a landscape layout: Use Godot's UI features to make the controls automatically resize and reflow depending on different window aspect ratios.
+- Implement a highscore system: Use the filesystem abstraction to save, load and show highscores of previous games.

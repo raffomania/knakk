@@ -19,10 +19,12 @@ var _played_cards_z_index = 0
 
 
 func _ready():
-	redraw_hand()
-
 	var _err = Events.take_action.connect(_on_take_action)
 	_err = Events.round_complete.connect(_round_complete)
+	_err = Events.game_over.connect(_game_over)
+
+	await get_tree().create_timer(1.2).timeout
+	redraw_hand()
 
 
 ## For debugging: redraw the current hand when R is pressed
@@ -32,17 +34,34 @@ func _unhandled_input(event: InputEvent):
 
 
 ## Discard the current hand and draw a new one
+## Since this is a coroutine and the hand may get freed while running it,
+## godot may log errors mentioning that it tried to continue this coroutine but
+## the hand instance was gone.
+## This should be fixed with https://github.com/godotengine/godot/pull/65910
 func redraw_hand():
-	for child in get_children():
-		child.queue_free()
+	await clear()
+
+	# Give the user a little break to notice that cards have disappeared 
+	# before drawing new ones
+	await get_tree().create_timer(0.3).timeout
 	
 	for _i in range(0,3):
-		draw_card(_deck.draw_card())
+		await draw_card(_deck.draw_card())
+
+
+func clear():
+	for child in get_children():
+		await child.animate_disappear()
+		child.queue_free()
 
 
 func _round_complete():
 	_deck.reset()
-	redraw_hand()
+
+
+func _game_over():
+	await clear()
+	queue_free()
 
 
 func node_for_card_type(card_type: Array) -> Node:
@@ -57,8 +76,11 @@ func draw_card(card_type: Array):
 	card.set_card_type(card_type)
 	# Display card above all played cards
 	card.z_index = _played_cards_z_index + 1
+	# position the card a little below the deck
+	card.position = Vector2(0, 200)
 	add_child(card)
 	position_cards()
+	await card.animate_appear()
 
 
 ## Look at all cards and evenly distribute their position across the
@@ -92,6 +114,8 @@ func _on_take_action(_card_type: Array, action: Events.Action, card_node: Card):
 		var card_position = card_node.global_position
 		remove_child(card_node)
 		card_node.global_position = card_position
+
+		await get_tree().create_timer(0.5).timeout
 
 		# user chose to redraw, draw a new card now
 		draw_card(_deck.draw_card())
@@ -128,8 +152,11 @@ func _on_take_action(_card_type: Array, action: Events.Action, card_node: Card):
 			if _play_again_count > 0:
 				_play_again_count -= 1
 			else:
-				redraw_hand()
+				await get_tree().create_timer(0.2).timeout
+
 				Events.turn_complete.emit()
+
+				await redraw_hand()
 			
 	if action == Events.Action.SKIP_ROUND:
 		for every_card_node in get_children():
@@ -148,9 +175,9 @@ func _on_take_action(_card_type: Array, action: Events.Action, card_node: Card):
 			await every_card_node.animate_disappear()
 			every_card_node.queue_free()
 
-		redraw_hand()
 		_cards_played_this_turn = 0
 		_play_again_count = 0
 		Events.turn_complete.emit()
+		await redraw_hand()
 
 

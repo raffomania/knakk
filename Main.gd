@@ -19,6 +19,8 @@ func _unhandled_input(event):
 
 
 func _on_game_over():
+	await get_tree().create_timer(.8).timeout
+
 	# Move to game over screen
 	await camera.go_to_game_over_screen()
 

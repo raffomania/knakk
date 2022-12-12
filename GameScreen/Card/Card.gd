@@ -130,9 +130,16 @@ func shrink_to_played_size():
 	await tween.finished
 
 
+func animate_appear():
+	var tweener = create_tween().tween_property(
+			self, "scale", Vector2(scale.x, scale.y), .2) \
+		.from(Vector2(0, scale.y))
+	await tweener.finished
+
+
 func animate_disappear():
 	var tweener = create_tween().tween_property(
-			self, "scale", Vector2(0, scale.y), 0.2)
+			self, "scale", Vector2(0, scale.y), 0.1)
 	await tweener.finished
 
 

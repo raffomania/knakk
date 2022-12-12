@@ -5,6 +5,7 @@ const REWARD_MARKER_SCENE := preload("res://Reward/RewardMarker.tscn")
 
 var _redraw_tokens := 0
 var _token_nodes: Array[Node] = []
+var _activated_at_least_once := false
 
 
 func _ready():
@@ -42,10 +43,7 @@ func _remove_token():
 
 ## Only show this node if the player has any tokens
 func _update_visibility():
-	if _redraw_tokens > 0:
-		visible = true
-	else:
-		visible = false
+	visible = _activated_at_least_once or (_redraw_tokens > 0)
 
 
 func _can_play() -> bool:
@@ -72,6 +70,8 @@ func _on_take_action(_card_type: Array, action: Events.Action, card_node: Card):
 		return
 
 	assert(_redraw_tokens > 0, "Redraw triggered but user has no redraw tokens")
+
+	_activated_at_least_once = true
 	_remove_token()
 
 	# Add card as child while keeping its global position

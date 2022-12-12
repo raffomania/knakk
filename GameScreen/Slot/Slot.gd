@@ -31,10 +31,10 @@ func _draw():
 	# Draw colored outline
 	var thickness = 5.0 if is_highlighted else 3.0
 	# use draw_line instead of draw_rect to get antialiasing
-	draw_line(Vector2(0, 0), Vector2(0, size.y), color, thickness, true)
-	draw_line(Vector2(0, 0), Vector2(size.x, 0), color, thickness, true)
-	draw_line(Vector2(size.x, 0), size, color, thickness, true)
-	draw_line(Vector2(0, size.y), size, color, thickness, true)
+	draw_line(Vector2(0, 0), Vector2(0, size.y), color, thickness, false)
+	draw_line(Vector2(0, 0), Vector2(size.x, 0), color, thickness, false)
+	draw_line(Vector2(size.x, 0), size, color, thickness, false)
+	draw_line(Vector2(0, size.y), size, color, thickness, false)
 
 func set_color(value: Color):
 		color = value

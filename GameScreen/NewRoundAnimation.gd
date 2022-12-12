@@ -20,7 +20,7 @@ func _on_new_game(_with_tutorial: bool):
 
 func _on_round_complete():
 	current_round += 1
-	if current_round >= 3:
+	if current_round > 3:
 		return
 
 	$TextureRect/TurnCounter.text = "Round %d" % current_round

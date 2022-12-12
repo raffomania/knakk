@@ -8,19 +8,19 @@ const ARROW_SCENE = preload("res://GameScreen/Field/Arrow.tscn")
 var _slots = [
 	{
 		number = Cards.Number.Seven,
-		reward = Reward.Points.new(3),
+		reward = Reward.Points.new(2),
 		is_played = false,
 	}, {
 		number = Cards.Number.Eight,
-		reward = Reward.Points.new(6),
+		reward = Reward.Points.new(3),
 		is_played = false,
 	}, {
 		number = Cards.Number.Nine,
-		reward = Reward.Points.new(10),
+		reward = Reward.RedrawCard.new(),
 		is_played = false,
 	}, {
 		number = Cards.Number.Ten,
-		reward = Reward.Points.new(15),
+		reward = Reward.Points.new(10),
 		is_played = false,
 	}, {
 		number = Cards.Number.Jack,
@@ -28,11 +28,11 @@ var _slots = [
 		is_played = false,
 	}, {
 		number = Cards.Number.Queen,
-		reward = Reward.Points.new(21),
+		reward = Reward.Points.new(15),
 		is_played = false,
 	}, {
 		number = Cards.Number.King,
-		reward = Reward.Points.new(28),
+		reward = Reward.Points.new(21),
 		is_played = false,
 	},
 ]

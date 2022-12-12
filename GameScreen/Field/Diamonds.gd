@@ -36,7 +36,7 @@ var _slots = [
 			range = [Cards.Number.Ace, Cards.Number.Seven],
 		},
 		{
-			reward = Reward.Points.new(2),
+			reward = Reward.RedrawCard.new(),
 			range = [Cards.Number.Five, Cards.Number.Nine],
 		},
 		{
@@ -49,7 +49,7 @@ var _slots = [
 		},
 	], [
 		{
-			reward = Reward.Points.new(3),
+			reward = Reward.PlayAgain.new(),
 			range = [Cards.Number.Ace, Cards.Number.Four],
 		},
 		{
@@ -57,7 +57,7 @@ var _slots = [
 			range = [Cards.Number.Four, Cards.Number.Seven],
 		},
 		{
-			reward = Reward.RedrawCard.new(),
+			reward = Reward.Points.new(13),
 			range = [Cards.Number.Six, Cards.Number.Nine],
 		},
 	], [
@@ -66,12 +66,12 @@ var _slots = [
 			range = [Cards.Number.Ace, Cards.Number.Three],
 		},
 		{
-			reward = Reward.Points.new(8),
+			reward = Reward.Points.new(5),
 			range = [Cards.Number.Three, Cards.Number.Five],
 		},
 	], [
 		{
-			reward = Reward.Points.new(8),
+			reward = Reward.Points.new(5),
 			range = [Cards.Number.Ace, Cards.Number.Two],
 		},
 	],
@@ -132,8 +132,9 @@ func highlight_options(card_types: Array):
 
 	# Highlight playable slots for each card type
 	for card_type in card_types:
-		var slot_position = _find_playable_slots(card_type[1]).front()
-		if slot_position != null:
+		var playable_slots = _find_playable_slots(card_type[1])
+		if not playable_slots.is_empty():
+			var slot_position = playable_slots[0]
 			_slots[slot_position.y][slot_position.x].node.is_highlighted = true
 
 

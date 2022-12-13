@@ -21,20 +21,20 @@ func _draw():
 		draw_line(
 				Vector2(padding, 0), 
 				Vector2(size.y - padding - 5, 0), 
-				color, 3.0, true)
+				color, 3.0)
 		draw_texture_rect(END_TEXTURE, 
 				Rect2(Vector2(size.y - end_size.y - padding, -end_size.x / 2), end_size), 
-				false)
+				false, color)
 	else:
 		# Center everything on the horizontal axis
 		draw_set_transform(Vector2(0, size.y / 2))
 		draw_line(
 				Vector2(padding, 0),
 				Vector2(size.x - padding - 5, 0), 
-				color, 2.0, true)
+				color, 3.0)
 		draw_texture_rect(END_TEXTURE, 
 				Rect2(Vector2(size.x - end_size.x - padding, -end_size.y / 2), end_size), 
-				false)
+				false, color)
 
 
 func set_color(value: Color):

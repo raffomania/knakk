@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://dlytt6vu2k6q2"]
 
 [ext_resource type="Script" path="res://Reward/RewardMarker.gd" id="1_go8lb"]
-[ext_resource type="FontFile" uid="uid://dlbna5qf0660q" path="res://Fonts/Dosis-Bold.ttf" id="2_j80w7"]
+[ext_resource type="FontFile" uid="uid://ukqbd3vxtrq" path="res://Fonts/Dosis-Bold.ttf" id="2_j80w7"]
 
-[sub_resource type="Animation" id="Animation_pmatr"]
+[sub_resource type="Animation" id="Animation_p1vd6"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -30,7 +30,7 @@ tracks/1/keys = {
 "values": [0.0]
 }
 
-[sub_resource type="Animation" id="Animation_ju4w5"]
+[sub_resource type="Animation" id="Animation_17wx0"]
 resource_name = "blink"
 length = 0.1
 step = 0.01
@@ -59,10 +59,10 @@ tracks/1/keys = {
 "values": [0.0, 0.139626, 0.0]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_x3d5b"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mh73o"]
 _data = {
-"RESET": SubResource("Animation_pmatr"),
-"blink": SubResource("Animation_ju4w5")
+"RESET": SubResource("Animation_p1vd6"),
+"blink": SubResource("Animation_17wx0")
 }
 
 [node name="Reward" type="Control"]
@@ -71,7 +71,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-pivot_offset = Vector2(30, 30)
+pivot_offset = Vector2(35, 35)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 script = ExtResource("1_go8lb")
@@ -87,12 +87,12 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0.980392, 0.980392, 0.980392, 1)
 theme_override_fonts/font = ExtResource("2_j80w7")
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 35
 text = "10"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_x3d5b")
+"": SubResource("AnimationLibrary_mh73o")
 }

@@ -1,7 +1,6 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=3 format=3 uid="uid://cw4v0w7vcyimy"]
 
 [ext_resource type="Script" path="res://GameScreen/Slot/Slot.gd" id="1_s8io1"]
-[ext_resource type="Script" path="res://GameScreen/Slot/Marker.gd" id="2_yvqn3"]
 [ext_resource type="PackedScene" uid="uid://dlytt6vu2k6q2" path="res://Reward/RewardMarker.tscn" id="3_6w4dj"]
 
 [node name="Slot" type="Control"]
@@ -24,15 +23,6 @@ grow_vertical = 2
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Marker" type="Control" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("2_yvqn3")
-
 [node name="Reward" parent="." instance=ExtResource("3_6w4dj")]
 layout_mode = 1
 anchors_preset = -1
@@ -45,4 +35,3 @@ offset_right = 0.0
 offset_bottom = 0.0
 grow_horizontal = 2
 grow_vertical = 2
-pivot_offset = Vector2(35, 35)

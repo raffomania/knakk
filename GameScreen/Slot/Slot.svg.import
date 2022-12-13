@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bpj578bc51kc1"
-path="res://.godot/imported/ArrowEnd.svg-1d9060a95aa4c642b721208ca2efcbbf.ctex"
+uid="uid://clduraty0x8fb"
+path="res://.godot/imported/Slot.svg-720af157d7ec2b3a9db76e358b7667e9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://GameScreen/Field/ArrowEnd.svg"
-dest_files=["res://.godot/imported/ArrowEnd.svg-1d9060a95aa4c642b721208ca2efcbbf.ctex"]
+source_file="res://GameScreen/Slot/Slot.svg"
+dest_files=["res://.godot/imported/Slot.svg-720af157d7ec2b3a9db76e358b7667e9.ctex"]
 
 [params]
 
@@ -21,7 +21,7 @@ compress/hdr_compression=1
 compress/bptc_ldr=0
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=false
+mipmaps/generate=true
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
@@ -32,6 +32,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=0.25
+svg/scale=1.0
 editor/scale_with_editor_scale=false
 editor/convert_colors_with_editor_theme=false

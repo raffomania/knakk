@@ -3,6 +3,7 @@ extends Control
 
 
 const SIZE = 100
+const TEXTURE = preload("res://GameScreen/Slot/Slot.svg")
 
 var color := Color.BLACK:
 	set = set_color
@@ -26,15 +27,10 @@ func _ready():
 
 func _draw():
 	# Draw white background
-	draw_rect(Rect2(Vector2.ZERO, size), ColorPalette.WHITE)
+	draw_rect(Rect2(size * 0.075, size * 0.85), ColorPalette.WHITE)
 
 	# Draw colored outline
-	var thickness = 5.0 if is_highlighted else 3.0
-	# use draw_line instead of draw_rect to get antialiasing
-	draw_line(Vector2(0, 0), Vector2(0, size.y), color, thickness, false)
-	draw_line(Vector2(0, 0), Vector2(size.x, 0), color, thickness, false)
-	draw_line(Vector2(size.x, 0), size, color, thickness, false)
-	draw_line(Vector2(0, size.y), size, color, thickness, false)
+	draw_texture_rect(TEXTURE, Rect2(Vector2.ZERO, size), false, color)
 
 func set_color(value: Color):
 		color = value
@@ -61,13 +57,10 @@ func set_is_highlighted(value: bool):
 		_scale_tween.kill()
 
 	if is_highlighted:
-		$Marker.color = color
-		$Marker.color.a = 0.2
 		_scale_tween = create_tween()
 		_scale_tween.set_ease(Tween.EASE_OUT) \
-				.tween_property(self, "scale", Vector2.ONE * 1.1, 0.1)
+				.tween_property(self, "scale", Vector2.ONE * 1.2, 0.1)
 	else:
-		$Marker.color = null
 		_scale_tween = create_tween()
 		_scale_tween.tween_property(self, "scale", Vector2.ONE, 0.05)
 

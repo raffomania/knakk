@@ -1,9 +1,8 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=2 format=3 uid="uid://wtjn0tm7x5lj"]
 
 [ext_resource type="Script" path="res://GameScreen/Field/Arrow.gd" id="1_ucqqb"]
 
 [node name="Arrow" type="Control"]
-modulate = Color(1, 0.305882, 0.27451, 1)
 layout_mode = 3
 anchors_preset = 0
 offset_right = 50.0

@@ -70,7 +70,7 @@ func _draw():
 			var start_position = _get_slot_position(column_index, row_index) \
 				+ Vector2(Slot.SIZE * 0.5, Slot.SIZE)
 			var stop_position = start_position + Vector2(0, y_padding)
-			draw_line(start_position, stop_position, COLOR, 2.0, true)
+			draw_line(start_position, stop_position, COLOR, 3.0)
 
 		# Draw a smaller vertical line to connect the lowest slot with the reward marker
 		# But only draw it for columns that are not filled yet
@@ -80,7 +80,7 @@ func _draw():
 		var start_position = _get_slot_position(column_index, len(_slots[column_index]) - 1) \
 			+ Vector2(Slot.SIZE * 0.5, Slot.SIZE)
 		var stop_position = start_position + Vector2(0, y_padding * 0.3)
-		draw_line(start_position, stop_position, COLOR, 2.0, true)
+		draw_line(start_position, stop_position, COLOR, 3.0)
 
 
 ## Return true if the given number can be played on a slot in this area

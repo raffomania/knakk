@@ -1,5 +1,5 @@
 @tool
-extends Control
+class_name RewardMarker extends Control
 
 
 const BACKGROUND = preload("res://Reward/Reward.svg")
@@ -7,6 +7,10 @@ const REDRAW_TEXTURE = preload("res://GameScreen/Action/RedrawCard.svg")
 
 var reward:
 	set = set_reward
+
+## When the points for this reward change, an animation is played to indicate
+## the change. This property determines the speed of that animation.
+var animation_speed := 1.0
 
 @export var color := Color.BLACK:
 	set(val):
@@ -62,4 +66,20 @@ func set_reward(value: Reward):
 
 	# When this node is used to show a score, animate it when the score changes.
 	if is_inside_tree() and points_changed and not animation_player.is_playing():
-		animation_player.play("blink")
+		animation_player.play("blink", -1, animation_speed)
+
+
+## Animate the marker to move to the given position in a cool arc motion.
+## Used when a slot is filled and the reward is added to the score or bonus areas.
+func tween_to_position(global_target: Vector2):
+	var tween = create_tween().set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_BACK)
+	tween.tween_property(self, "global_position", global_target, .7)
+	await tween.finished
+
+
+## Move this node in the scene tree while retaining its global position.
+func reparent(new_parent: Node):
+	var previous_position = global_position
+	get_parent().remove_child(self)
+	new_parent.add_child(self)
+	global_position = previous_position

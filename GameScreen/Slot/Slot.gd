@@ -33,14 +33,18 @@ func _draw():
 	draw_texture_rect(TEXTURE, Rect2(Vector2.ZERO, size), false, color)
 
 func set_color(value: Color):
-		color = value
-		$Reward.color = color
-		($Label as Label).add_theme_color_override("font_color", color)
+	color = value
+	$Reward.color = color
+	($Label as Label).add_theme_color_override("font_color", color)
 
 
 func set_reward(value: Reward):
 	reward = value
 	$Reward.reward = value
+
+
+func get_reward_node() -> RewardMarker:
+	return $Reward
 
 
 func set_text(value: String):

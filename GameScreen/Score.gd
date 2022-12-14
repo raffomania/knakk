@@ -13,6 +13,15 @@ func _ready():
 	var _err = Events.receive_reward.connect(_on_receive_reward)
 
 
-func _on_receive_reward(reward: Reward):
-	if reward is Reward.Points:
-		score += reward.points
+func _on_receive_reward(marker: RewardMarker):
+	if not (marker.reward is Reward.Points):
+		return
+	
+	# Draw the RewardMarker above field and cards
+	marker.z_index = 100
+
+	await marker.tween_to_position(global_position)
+	marker.queue_free()
+
+	score += marker.reward.points
+

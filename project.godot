@@ -30,6 +30,11 @@ _global_script_classes=[{
 "path": "res://Reward/Reward.gd"
 }, {
 "base": "Control",
+"class": &"RewardMarker",
+"language": &"GDScript",
+"path": "res://Reward/RewardMarker.gd"
+}, {
+"base": "Control",
 "class": &"Slot",
 "language": &"GDScript",
 "path": "res://GameScreen/Slot/Slot.gd"
@@ -39,6 +44,7 @@ _global_script_class_icons={
 "Cards": "",
 "ColorPalette": "",
 "Reward": "",
+"RewardMarker": "",
 "Slot": ""
 }
 

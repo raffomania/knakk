@@ -26,7 +26,7 @@ signal cancel_consider_action(action: Action)
 signal take_action(card_type: Array, action: Action, card_node: Card)
 
 ## Emitted when the player receives a reward, usually by filling a slot on the field.
-signal receive_reward(reward: Reward)
+signal receive_reward(reward_node: Node)
 
 ## Change the message displayed at the bottom of the screen.
 signal show_help(message: String)

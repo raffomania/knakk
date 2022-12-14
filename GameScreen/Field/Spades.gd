@@ -107,11 +107,10 @@ func play_number(number: Cards.Number) -> Slot:
 
 	var column_reward = _get_reward_for_column(slot_position.x)
 	if not (column_reward is Reward.Nothing):
-		Events.receive_reward.emit(column_reward)
-		queue_redraw()
-
 		var marker = get_node("ColumnReward%d" % slot_position.x)
-		marker.queue_free()
+		Events.receive_reward.emit(marker)
+
+		queue_redraw()
 
 	var slot_spec = _slots[slot_position.x][slot_position.y]
 	return slot_spec.node

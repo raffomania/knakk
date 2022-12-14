@@ -19,7 +19,7 @@
 [ext_resource type="Script" path="res://GameScreen/NewRoundAnimation.gd" id="17_hf8a0"]
 [ext_resource type="PackedScene" path="res://GameScreen/Tutorial.tscn" id="18_vn86j"]
 
-[sub_resource type="Animation" id="Animation_hdl0r"]
+[sub_resource type="Animation" id="Animation_6fox8"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -46,7 +46,7 @@ tracks/1/keys = {
 "values": [Vector2(50, 1104)]
 }
 
-[sub_resource type="Animation" id="Animation_rpc77"]
+[sub_resource type="Animation" id="Animation_e4rey"]
 resource_name = "round_complete"
 length = 1.5
 step = 0.05
@@ -75,10 +75,10 @@ tracks/1/keys = {
 "values": [Vector2(-1000, 1104), Vector2(40, 1104), Vector2(60, 1104), Vector2(1200, 1104)]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_3i84p"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ef27s"]
 _data = {
-"RESET": SubResource("Animation_hdl0r"),
-"round_complete": SubResource("Animation_rpc77")
+"RESET": SubResource("Animation_6fox8"),
+"round_complete": SubResource("Animation_e4rey")
 }
 
 [node name="GameScreen" type="Control"]
@@ -94,61 +94,6 @@ grow_vertical = 2
 
 [node name="Hand" parent="." instance=ExtResource("1_56rkn")]
 position = Vector2(540, 2045)
-
-[node name="TopBar" type="Control" parent="."]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_left = 50.0
-offset_top = 61.0
-offset_right = -30.0
-offset_bottom = 136.0
-grow_horizontal = 2
-
-[node name="Turns" parent="TopBar" instance=ExtResource("2_j64vv")]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.5
-anchor_right = 0.5
-
-[node name="Score" type="Control" parent="TopBar"]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -24.5
-offset_right = 49.0
-offset_bottom = 24.5
-grow_vertical = 2
-script = ExtResource("3_g6w2l")
-
-[node name="Reward" parent="TopBar/Score" instance=ExtResource("4_bwyhj")]
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = 0.0
-offset_bottom = 0.0
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset = Vector2(50, 50)
-color = Color(0.341176, 0.239216, 1, 1)
-
-[node name="MenuButton" type="TextureButton" parent="TopBar"]
-modulate = Color(0.356863, 0.282353, 0.85098, 1)
-custom_minimum_size = Vector2(80, 0)
-layout_mode = 1
-anchors_preset = 11
-anchor_left = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -33.0
-grow_horizontal = 0
-grow_vertical = 2
-texture_normal = ExtResource("5_873i1")
-ignore_texture_size = true
-stretch_mode = 4
 
 [node name="Field" type="Control" parent="."]
 layout_mode = 1
@@ -236,6 +181,61 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 0
 
+[node name="TopBar" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 50.0
+offset_top = 61.0
+offset_right = -30.0
+offset_bottom = 136.0
+grow_horizontal = 2
+
+[node name="Turns" parent="TopBar" instance=ExtResource("2_j64vv")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+
+[node name="Score" type="Control" parent="TopBar"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -24.5
+offset_right = 49.0
+offset_bottom = 24.5
+grow_vertical = 2
+script = ExtResource("3_g6w2l")
+
+[node name="Reward" parent="TopBar/Score" instance=ExtResource("4_bwyhj")]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(50, 50)
+color = Color(0.341176, 0.239216, 1, 1)
+
+[node name="MenuButton" type="TextureButton" parent="TopBar"]
+modulate = Color(0.356863, 0.282353, 0.85098, 1)
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -33.0
+grow_horizontal = 0
+grow_vertical = 2
+texture_normal = ExtResource("5_873i1")
+ignore_texture_size = true
+stretch_mode = 4
+
 [node name="RedrawCardArea" type="HBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 2
@@ -246,8 +246,9 @@ offset_top = -187.0
 offset_right = 328.0
 offset_bottom = -87.0
 grow_vertical = 0
+pivot_offset = Vector2(1, 101)
 theme_override_constants/separation = 5
-alignment = 2
+alignment = 1
 script = ExtResource("10_if57e")
 
 [node name="PlayAgainArea" type="HBoxContainer" parent="."]
@@ -263,8 +264,9 @@ offset_right = -33.0
 offset_bottom = -87.0
 grow_horizontal = 0
 grow_vertical = 0
-scale = Vector2(0.810653, 0.881159)
+pivot_offset = Vector2(299, 98)
 theme_override_constants/separation = 5
+alignment = 1
 script = ExtResource("11_61q87")
 
 [node name="Deck" type="Label" parent="."]
@@ -299,7 +301,7 @@ script = ExtResource("17_hf8a0")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="NewRoundAnimation"]
 libraries = {
-"": SubResource("AnimationLibrary_3i84p")
+"": SubResource("AnimationLibrary_ef27s")
 }
 
 [node name="TextureRect" type="Panel" parent="NewRoundAnimation"]

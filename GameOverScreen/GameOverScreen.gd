@@ -11,6 +11,8 @@ func _ready():
 
 	var _err = button.pressed.connect(_on_new_game)
 
+	$MarginBox/ScoreBox/Reward.animation_speed = 2.0
+
 
 func animate_score(score: int):
 	var duration = score / 20.0

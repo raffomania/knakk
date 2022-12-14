@@ -1,11 +1,8 @@
 extends HBoxContainer
 
 
-const REWARD_MARKER_SCENE := preload("res://Reward/RewardMarker.tscn")
-
 var _play_again_tokens := 0
 var _token_nodes: Array[Node] = []
-var _activated_at_least_once := false
 
 
 func _ready():
@@ -14,7 +11,7 @@ func _ready():
 	_err = Events.take_action.connect(_on_take_action)
 	_err = Events.receive_reward.connect(_on_receive_reward)
 
-	_update_visibility()
+	visible = false
 
 
 func _draw():
@@ -22,27 +19,17 @@ func _draw():
 	draw_line(Vector2.ZERO, Vector2(0, size.y), ColorPalette.PURPLE)
 
 
-func _add_token():
-	var marker = REWARD_MARKER_SCENE.instantiate()
-	marker.reward = Reward.PlayAgain.new()
-	marker.color = ColorPalette.PURPLE
-	add_child(marker)
+func _add_token(marker: RewardMarker):
+	marker.reparent(self)
 	_token_nodes.append(marker)
 
 	_play_again_tokens += 1
-	_update_visibility()
 
 func _remove_token():
 	var node = _token_nodes.pop_back()
 	node.queue_free()
 
 	_play_again_tokens -= 1
-	_update_visibility()
-
-
-## Only show this node if the player has any tokens
-func _update_visibility():
-	visible = _activated_at_least_once or (_play_again_tokens > 0)
 
 
 func _can_play() -> bool:
@@ -74,7 +61,6 @@ func _on_take_action(_card_type: Array, action: Events.Action, card_node: Card):
 
 	assert(_play_again_tokens > 0, "PlayAgain triggered but user has no play again tokens")
 
-	_activated_at_least_once = true
 	_remove_token()
 
 	# Add card as child while keeping its global position
@@ -86,6 +72,19 @@ func _on_take_action(_card_type: Array, action: Events.Action, card_node: Card):
 	card_node.shrink_to_played_size()
 
 
-func _on_receive_reward(reward: Reward):
-	if reward is Reward.PlayAgain:
-		_add_token()
+func _on_receive_reward(marker: RewardMarker):
+	if not (marker.reward is Reward.PlayAgain):
+		return
+		
+	visible = true
+
+	# Draw the RewardMarker above field and cards
+	marker.z_index = 100
+
+	await marker.tween_to_position(global_position + Vector2(size.x * 0.5, 0))
+
+	var tween = create_tween()
+	tween.tween_property(self, "scale", Vector2.ONE * 1.15, 0.05)
+	tween.tween_property(self, "scale", Vector2.ONE, 0.05)
+
+	_add_token(marker)

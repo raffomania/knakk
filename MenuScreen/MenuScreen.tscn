@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://d2beo1wbbdlx7"]
+[gd_scene load_steps=7 format=3 uid="uid://d2beo1wbbdlx7"]
 
 [ext_resource type="Script" path="res://MenuScreen/MenuScreen.gd" id="1_3vljn"]
 [ext_resource type="Texture2D" uid="uid://doogopexn2xex" path="res://logo.png" id="2_ndgbq"]
+[ext_resource type="PackedScene" uid="uid://b84mtgu5e78yi" path="res://MenuScreen/Credits.tscn" id="3_3n468"]
 
 [sub_resource type="Animation" id="Animation_qpxdu"]
 resource_name = "Intro"
@@ -149,6 +150,10 @@ libraries = {
 "": SubResource("AnimationLibrary_rmnto")
 }
 
+[node name="Credits" parent="VBoxContainer" instance=ExtResource("3_3n468")]
+visible = false
+layout_mode = 2
+
 [node name="Buttons" type="VBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 50
@@ -168,3 +173,8 @@ text = "New Game"
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 text = "Play Tutorial"
+
+[node name="Credits" type="Button" parent="VBoxContainer/Buttons"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+text = "Credits"

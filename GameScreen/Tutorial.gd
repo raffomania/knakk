@@ -5,26 +5,30 @@ const STEPS := [
 In this game, you play cards to fill slots.
 Each filled slot will reward you with points or bonuses. 
 The goal is to get the highest possible score!""",
-	"""Each turn, you pick two cards: First, a [b]suite[/b] card. 
-Its suite determines the area where you'll play the second card: 
-The [b]number[/b] card.  Its number determines the slot you're going to fill.
-You can drag cards upwards to play them. Try it now!""",
+	"""Each turn, you select two of your three hand cards to play.
+First, you pick a [b]suite[/b] [img height=60]res://GameScreen/Suite/Clubs.png[/img] [img height=60]res://GameScreen/Suite/Diamonds.png[/img] [img height=60]res://GameScreen/Suite/Spades.png[/img] [img height=60]res://GameScreen/Suite/Hearts.png[/img] card.
+Its suite determines the [b]area[/b] where you'll fill a slot.
+Only the suite on the card matters - its number has no effect.""",
+"""Next, you pick a [b]number[/b] card. Its number determines the slot you're going to fill.
+
+You can drag a card upwards to pick it. [b]Try it now![/b]""",
+	"""Each suite area has its own rules.
+[img height=60]res://GameScreen/Suite/Clubs.png[/img]: Filled from left to right, with [b]each number higher than the previous one[/b].
+[img height=60]res://GameScreen/Suite/Diamonds.png[/img]: Starting from the top left corner, numbers need to [b]fit the range[/b] on each slot.""",
+	"""[img height=60]res://GameScreen/Suite/Spades.png[/img]: Filled in any order. 
+Each slot needs [b]exactly the number[/b] it shows.
+[img height=60]res://GameScreen/Suite/Hearts.png[/img]: Filled from left to right. 
+Each slot needs a number [b]higher or equal[/b] to the one it shows.""",
 	"""The turn indicator boxes at the top show how many turns you've played.
 After each turn, you get a new hand with three new cards.
 After five turns, the deck is refilled and shuffled.
 After fifteen turns, the game is over.""",
-	"""Each suite has its own rules:
-[img height=60]res://GameScreen/Suite/Clubs.png[/img]: Filled from left to right, with each number higher than the previous one.
-[img height=60]res://GameScreen/Suite/Diamonds.png[/img]: Starting from the top left corner, numbers need to fit the range on each slot.""",
-	"""[img height=60]res://GameScreen/Suite/Spades.png[/img]: Filled in [b]any[/b] order. 
-Each slot needs exactly the number it shows.
-[img height=60]res://GameScreen/Suite/Hearts.png[/img]: Filled from left to right. 
-Each slot needs a number higher or equal to the one it shows.""",
-	"""There are two bonuses:
+	"""Some slots will reward you with bonuses.
 [img color=#303030 height=35]res://GameScreen/Action//RedrawCard.svg[/img]: Replace a card with a new one by dragging it to the bottom left corner.
-[b]++[/b]: Play the same hand twice by dragging a card to the bottom right corner.""",
+[b]++[/b]: Drag a card to the bottom right corner to sacrifice it. Your other hand cards will be duplicated.""",
 	"""You're ready to play.
-Good luck and have fun!
+
+[b]Good luck and have fun![/b]
 """,
 ]
 

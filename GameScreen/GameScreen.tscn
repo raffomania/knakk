@@ -19,7 +19,7 @@
 [ext_resource type="Script" path="res://GameScreen/NewRoundAnimation.gd" id="17_hf8a0"]
 [ext_resource type="PackedScene" path="res://GameScreen/Tutorial.tscn" id="18_vn86j"]
 
-[sub_resource type="Animation" id="Animation_6fox8"]
+[sub_resource type="Animation" id="Animation_exl1f"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -46,7 +46,7 @@ tracks/1/keys = {
 "values": [Vector2(50, 1104)]
 }
 
-[sub_resource type="Animation" id="Animation_e4rey"]
+[sub_resource type="Animation" id="Animation_ur41e"]
 resource_name = "round_complete"
 length = 1.5
 step = 0.05
@@ -75,10 +75,10 @@ tracks/1/keys = {
 "values": [Vector2(-1000, 1104), Vector2(40, 1104), Vector2(60, 1104), Vector2(1200, 1104)]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ef27s"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kvo3y"]
 _data = {
-"RESET": SubResource("Animation_6fox8"),
-"round_complete": SubResource("Animation_e4rey")
+"RESET": SubResource("Animation_exl1f"),
+"round_complete": SubResource("Animation_ur41e")
 }
 
 [node name="GameScreen" type="Control"]
@@ -301,7 +301,7 @@ script = ExtResource("17_hf8a0")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="NewRoundAnimation"]
 libraries = {
-"": SubResource("AnimationLibrary_ef27s")
+"": SubResource("AnimationLibrary_kvo3y")
 }
 
 [node name="TextureRect" type="Panel" parent="NewRoundAnimation"]

@@ -60,6 +60,7 @@ func _ready():
 	_err = Events.cancel_consider_action.connect(_on_cancel_consider_action)
 
 	scale = NORMAL_SCALE
+	$PlayMarker.visible = false
 
 
 func _exit_tree():
@@ -87,12 +88,6 @@ func _input(event: InputEvent):
 
 	if _is_dragging and event is InputEventScreenDrag:
 		_drag(event.position)
-
-func _draw():
-	if _considering_action != Events.Action.NOTHING and _can_play:
-		var size = texture.get_size() * 1.05
-		draw_rect(Rect2(-size/2, size), ColorPalette.PURPLE, false, 5.0)
-
 
 func _process(delta: float):
 	var smooth_speed = DRAG_SMOOTH_SPEED if _is_dragging else ANIMATE_SMOOTH_SPEED
@@ -188,7 +183,7 @@ func _stop_dragging():
 		move_to(starting_position)
 
 	_considering_action = Events.Action.NOTHING
-	queue_redraw()
+	$PlayMarker.visible = false
 
 
 func _drag(to_position: Vector2):
@@ -205,7 +200,6 @@ func _drag(to_position: Vector2):
 		_can_play = false
 
 	_visualize_interaction_state()
-	queue_redraw()
 
 
 func _set_considering_action(new_considering_action: Events.Action):
@@ -245,12 +239,14 @@ func _visualize_interaction_state():
 	if _considering_action != Events.Action.NOTHING and _can_play:
 		var _tweener = create_tween() \
 				.tween_property(self, "scale", ACTION_SCALE, SCALE_TWEEN_DURATION)
+		$PlayMarker.visible = true
 	elif _is_dragging:
 		var tween = create_tween().set_parallel()
 		var _tweener = tween.tween_property(
 				self, "scale", DRAGGING_SCALE, SCALE_TWEEN_DURATION)
 		_tweener = tween.tween_property(
 				self, "rotation", DRAGGING_ROTATION, SCALE_TWEEN_DURATION)
+		$PlayMarker.visible = false
 	else:
 		var tween = create_tween().set_parallel()
 		var _tweener = tween.tween_property(

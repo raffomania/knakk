@@ -1,11 +1,19 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3 uid="uid://c8m00kjrwg732"]
 
 [ext_resource type="Texture2D" uid="uid://ujyhnxxvqosq" path="res://GameScreen/Card/images/Clubs_Jack.png" id="1_6nk1m"]
 [ext_resource type="Script" path="res://GameScreen/Card/Card.gd" id="2_tjkck"]
+[ext_resource type="Texture2D" uid="uid://bpj578bc51kc1" path="res://GameScreen/Field/ArrowEnd.svg" id="3_8riv6"]
 
 [node name="Card" type="Sprite2D"]
-scale = Vector2(0.92, 0.92)
 z_index = 1
 z_as_relative = false
+scale = Vector2(0.92, 0.92)
 texture = ExtResource("1_6nk1m")
 script = ExtResource("2_tjkck")
+
+[node name="PlayMarker" type="Sprite2D" parent="."]
+modulate = Color(0.25098, 0.176471, 0.729412, 1)
+position = Vector2(0, -225)
+rotation = -1.5708
+scale = Vector2(0.563684, 0.563684)
+texture = ExtResource("3_8riv6")

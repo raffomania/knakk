@@ -37,9 +37,8 @@ func _on_consider_action(card_type: Array, action: Events.Action):
 
 # User is considering playing the suite on the given card
 func _consider_suite(card_type: Array, can_play_card: bool):
-	var other_card_types = Events.card_types_in_hand.filter(func(other_card_type): 
-		return other_card_type != card_type
-	)
+	var other_card_types = Events.card_types_in_hand.duplicate()
+	other_card_types.erase(card_type)
 	if can_play_card:
 		# highlight slots for all other numbers in the user's hand, 
 		# using the suite of the card the user is considering
@@ -124,10 +123,8 @@ func _play_number(number: Cards.Number, card_node: Card):
 
 ## Check if `card_type` can be chosen by the player right now.
 func _can_play(card_type: Array) -> bool:
-	# todo this erroneously filters out multiple versions of the same card
-	var other_card_types = Events.card_types_in_hand.filter(func(other_card_type): 
-		return other_card_type != card_type
-	)
+	var other_card_types = Events.card_types_in_hand.duplicate()
+	other_card_types.erase(card_type)
 	if _chosen_suite == null:
 		return _can_play_suite(card_type[0], other_card_types)
 

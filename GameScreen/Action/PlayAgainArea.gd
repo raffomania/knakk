@@ -19,12 +19,6 @@ func _draw():
 	draw_line(Vector2.ZERO, Vector2(0, size.y), ColorPalette.PURPLE)
 
 
-func _add_token(marker: RewardMarker):
-	marker.reparent(self)
-	_token_nodes.append(marker)
-
-	_play_again_tokens += 1
-
 func _remove_token():
 	var node = _token_nodes.pop_back()
 	node.queue_free()
@@ -33,7 +27,7 @@ func _remove_token():
 
 
 func _can_play() -> bool:
-	var hand_is_full = len(Events.card_types_in_hand) == 3
+	var hand_is_full = len(Events.card_types_in_hand) >= 3
 	return _play_again_tokens > 0 and hand_is_full
 
 
@@ -52,7 +46,7 @@ func _on_consider_action(_card_type: Array, action: Events.Action):
 	if _can_play():
 		Events.show_help.emit("Duplicate other cards in your hand")
 	elif not hand_is_full:
-		Events.show_help.emit("You can only duplicate at the start of a turn")
+		Events.show_help.emit("You need 3 or more hand cards to do this")
 
 
 func _on_take_action(_card_type: Array, action: Events.Action, card_node: Card):
@@ -87,4 +81,7 @@ func _on_receive_reward(marker: RewardMarker):
 	tween.tween_property(self, "scale", Vector2.ONE * 1.15, 0.05)
 	tween.tween_property(self, "scale", Vector2.ONE, 0.05)
 
-	_add_token(marker)
+	marker.reparent(self)
+	_token_nodes.append(marker)
+
+	_play_again_tokens += 1

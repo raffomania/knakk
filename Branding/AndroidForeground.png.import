@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dbgt3xbwdv0qn"
-path="res://.godot/imported/small_logo.png-4e919f31dbf264132725d9fed5cfff14.ctex"
+uid="uid://cesdl7k6v4qnt"
+path="res://.godot/imported/AndroidForeground.png-cbd891596599be51d7e364ef44df2898.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://small_logo.png"
-dest_files=["res://.godot/imported/small_logo.png-4e919f31dbf264132725d9fed5cfff14.ctex"]
+source_file="res://Branding/AndroidForeground.png"
+dest_files=["res://.godot/imported/AndroidForeground.png-cbd891596599be51d7e364ef44df2898.ctex"]
 
 [params]
 

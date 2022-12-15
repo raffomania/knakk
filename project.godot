@@ -54,7 +54,9 @@ config/name="knakk"
 run/main_scene="res://Main.tscn"
 config/features=PackedStringArray("4.0", "Mobile")
 run/max_fps=60
-config/icon="res://icon.svg"
+boot_splash/show_image=false
+boot_splash/bg_color=Color(0.996078, 0.996078, 0.996078, 1)
+config/icon="res://Branding/Icon.png"
 
 [autoload]
 

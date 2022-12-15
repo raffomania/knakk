@@ -1,7 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://d2beo1wbbdlx7"]
+[gd_scene load_steps=7 format=3 uid="uid://bgdux7kjr61q1"]
 
 [ext_resource type="Script" path="res://MenuScreen/MenuScreen.gd" id="1_3vljn"]
-[ext_resource type="Texture2D" uid="uid://doogopexn2xex" path="res://logo.png" id="2_ndgbq"]
+[ext_resource type="Texture2D" uid="uid://doogopexn2xex" path="res://Branding/logo.png" id="2_m6tur"]
 [ext_resource type="PackedScene" uid="uid://b84mtgu5e78yi" path="res://MenuScreen/Credits.tscn" id="3_3n468"]
 
 [sub_resource type="Animation" id="Animation_qpxdu"]
@@ -140,7 +140,7 @@ offset_bottom = 600.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(464, 644)
-texture = ExtResource("2_ndgbq")
+texture = ExtResource("2_m6tur")
 ignore_texture_size = true
 stretch_mode = 5
 

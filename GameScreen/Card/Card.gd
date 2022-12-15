@@ -59,6 +59,8 @@ func _ready():
 	var _err = Events.consider_action.connect(_on_consider_action)
 	_err = Events.cancel_consider_action.connect(_on_cancel_consider_action)
 
+	scale = NORMAL_SCALE
+
 
 func _exit_tree():
 	Events.card_types_in_hand.erase(card_type)

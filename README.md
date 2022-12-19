@@ -100,3 +100,7 @@ There are a couple good usage examples of coroutines:
 
 - Implement a landscape layout: Use Godot's UI features to make the controls automatically resize and reflow depending on different window aspect ratios.
 - Implement a highscore system: Use the filesystem abstraction to save, load and show highscores of previous games.
+
+## License
+
+This project is licensed under the terms of the MIT License. Please see [`LICENSE.md`](LICENSE.md) for more information.

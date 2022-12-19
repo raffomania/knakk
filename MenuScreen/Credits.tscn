@@ -16,11 +16,14 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 bbcode_enabled = true
-text = "knakk is licensed under the [url=https://creativecommons.org/licenses/by-sa/4.0/]CC BY-SA license[/url].
+text = "knakk was designed and developed by [url=https://www.rafa.ee]Rafael Epplée[/url] as a learning resource for [url=https://www.hoou.de/]Hamburg Open Online University[/url].
 
-It was designed and developed by [url=https://www.rafa.ee]Rafael Epplée[/url] as a learning resource for [url=https://www.hoou.de/]Hamburg Open Online University[/url].
 
-The card graphics were designed by Peter Wood."
+Where not specified otherwise, knakk is licensed under the MIT license.
+
+The card graphics were designed by Peter Wood and are licensed under the CC-BY license.
+
+The font family is [url=https://fonts.google.com/specimen/Dosis]Dosis[/url], designed by Pablo Impallari, licensed under the [url=https://scripts.sil.org/ofl]SIL Open Font License[/url]."
 
 [node name="Back" type="Button" parent="."]
 custom_minimum_size = Vector2(0, 100)

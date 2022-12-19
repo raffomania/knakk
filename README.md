@@ -103,4 +103,8 @@ There are a couple good usage examples of coroutines:
 
 ## License
 
-This project is licensed under the terms of the MIT License. Please see [`LICENSE.md`](LICENSE.md) for more information.
+Where not specified otherwise, this project is licensed under the terms of the [MIT License](MIT.txt).
+
+The card graphics found in the [`GameScreen/Card`](GameScreen/Card) folder were designed by Peter Wood and are licensed under the CC-BY license.
+
+The font files in the [`Fonts`](Fonts) directory belong to the font family [Dosis](https://fonts.google.com/specimen/Dosis), designed by Pablo Impallari, licensed under the [SIL Open Font License](Fonts/OFL.txt).

@@ -18,7 +18,6 @@ theme_override_colors/default_color = Color(0, 0, 0, 1)
 bbcode_enabled = true
 text = "knakk was designed and developed by [url=https://www.rafa.ee]Rafael Epplée[/url] as a learning resource for [url=https://www.hoou.de/]Hamburg Open Online University[/url].
 
-
 Where not specified otherwise, knakk is licensed under the MIT license.
 
 The card graphics were designed by Peter Wood and are licensed under the CC-BY license.

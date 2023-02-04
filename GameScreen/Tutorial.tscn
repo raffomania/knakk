@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=2 format=3 uid="uid://dbs1b7uqvfsfr"]
 
 [ext_resource type="Script" path="res://GameScreen/Tutorial.gd" id="1_im6vo"]
 
@@ -7,7 +7,7 @@ script = ExtResource("1_im6vo")
 
 [node name="BGPanel" type="Panel" parent="."]
 custom_minimum_size = Vector2(1040, 0)
-anchors_preset = -1
+anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -42,12 +42,10 @@ size_flags_vertical = 3
 
 [node name="RichTextLabel" type="RichTextLabel" parent="BGPanel/VBoxContainer/TextContainer"]
 layout_mode = 2
-size_flags_vertical = 4
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 bbcode_enabled = true
 text = "Bonjour
 This is the Tutorial"
-fit_content_height = true
 scroll_active = false
 
 [node name="Buttons" type="HBoxContainer" parent="BGPanel/VBoxContainer"]

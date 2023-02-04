@@ -1,7 +1,7 @@
 [gd_resource type="Theme" load_steps=7 format=3 uid="uid://cnmy8s7h1qby8"]
 
-[ext_resource type="FontFile" uid="uid://bc4xo7qq46pua" path="res://Fonts/Dosis-Medium.ttf" id="1_guvjk"]
-[ext_resource type="FontFile" uid="uid://ukqbd3vxtrq" path="res://Fonts/Dosis-Bold.ttf" id="1_lpect"]
+[ext_resource type="FontFile" uid="uid://8lo5awqmuhq" path="res://Fonts/Dosis-Medium.ttf" id="1_guvjk"]
+[ext_resource type="FontFile" uid="uid://dlbna5qf0660q" path="res://Fonts/Dosis-Bold.ttf" id="1_lpect"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6btep"]
 bg_color = Color(0.47451, 0.419608, 0.839216, 1)

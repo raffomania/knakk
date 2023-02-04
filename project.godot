@@ -8,54 +8,14 @@
 
 config_version=5
 
-_global_script_classes=[{
-"base": "Sprite2D",
-"class": &"Card",
-"language": &"GDScript",
-"path": "res://GameScreen/Card/Card.gd"
-}, {
-"base": "RefCounted",
-"class": &"Cards",
-"language": &"GDScript",
-"path": "res://GameScreen/Card/Cards.gd"
-}, {
-"base": "RefCounted",
-"class": &"ColorPalette",
-"language": &"GDScript",
-"path": "res://Global/ColorPalette.gd"
-}, {
-"base": "RefCounted",
-"class": &"Reward",
-"language": &"GDScript",
-"path": "res://Reward/Reward.gd"
-}, {
-"base": "Control",
-"class": &"RewardMarker",
-"language": &"GDScript",
-"path": "res://Reward/RewardMarker.gd"
-}, {
-"base": "Control",
-"class": &"Slot",
-"language": &"GDScript",
-"path": "res://GameScreen/Slot/Slot.gd"
-}]
-_global_script_class_icons={
-"Card": "",
-"Cards": "",
-"ColorPalette": "",
-"Reward": "",
-"RewardMarker": "",
-"Slot": ""
-}
-
 [application]
 
 config/name="knakk"
 run/main_scene="res://Main.tscn"
 config/features=PackedStringArray("4.0", "Mobile")
 run/max_fps=60
-boot_splash/show_image=false
 boot_splash/bg_color=Color(0.996078, 0.996078, 0.996078, 1)
+boot_splash/show_image=false
 config/icon="res://Branding/Icon.png"
 
 [autoload]
@@ -79,6 +39,10 @@ window/stretch/aspect="expand"
 
 movie_writer/movie_file="movie.avi"
 
+[filesystem]
+
+import/blender/enabled=false
+
 [gui]
 
 theme/custom="res://default_theme.tres"
@@ -87,12 +51,12 @@ theme/custom="res://default_theme.tres"
 
 reset_hand={
 "deadzone": 0.5,
-"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":82,"unicode":0,"echo":false,"script":null)
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":82,"key_label":0,"unicode":0,"echo":false,"script":null)
 ]
 }
 game_over={
 "deadzone": 0.5,
-"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":79,"unicode":0,"echo":false,"script":null)
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":79,"key_label":0,"unicode":0,"echo":false,"script":null)
 ]
 }
 

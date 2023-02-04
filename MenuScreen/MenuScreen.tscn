@@ -141,7 +141,7 @@ grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(464, 644)
 texture = ExtResource("2_m6tur")
-ignore_texture_size = true
+expand_mode = 1
 stretch_mode = 5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="VBoxContainer/LogoContainer/Logo"]

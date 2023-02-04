@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Global/Camera.gd" id="1_5jlkv"]
 [ext_resource type="Script" path="res://Main.gd" id="1_os57m"]
 [ext_resource type="PackedScene" uid="uid://blgultqxld18q" path="res://GameScreen/GameScreen.tscn" id="3_w0hn2"]
-[ext_resource type="PackedScene" uid="uid://d2beo1wbbdlx7" path="res://MenuScreen/MenuScreen.tscn" id="5_r8sk6"]
+[ext_resource type="PackedScene" uid="uid://bgdux7kjr61q1" path="res://MenuScreen/MenuScreen.tscn" id="5_r8sk6"]
 [ext_resource type="PackedScene" path="res://GameOverScreen/GameOverScreen.tscn" id="15_yok5v"]
 
 [sub_resource type="Animation" id="Animation_v032t"]
@@ -129,7 +129,6 @@ script = ExtResource("1_os57m")
 [node name="Camera" type="Camera2D" parent="."]
 position = Vector2(547, 1228)
 offset = Vector2(0, -2408)
-current = true
 script = ExtResource("1_5jlkv")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Camera"]

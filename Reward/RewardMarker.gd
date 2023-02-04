@@ -75,11 +75,3 @@ func tween_to_position(global_target: Vector2):
 	var tween = create_tween().set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_BACK)
 	tween.tween_property(self, "global_position", global_target, .7)
 	await tween.finished
-
-
-## Move this node in the scene tree while retaining its global position.
-func reparent(new_parent: Node):
-	var previous_position = global_position
-	get_parent().remove_child(self)
-	new_parent.add_child(self)
-	global_position = previous_position

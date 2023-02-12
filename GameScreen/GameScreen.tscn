@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://blgultqxld18q"]
+[gd_scene load_steps=24 format=3 uid="uid://blgultqxld18q"]
 
 [ext_resource type="PackedScene" path="res://GameScreen/Hand.tscn" id="1_56rkn"]
 [ext_resource type="PackedScene" path="res://GameScreen/Turns/Turns.tscn" id="2_j64vv"]
@@ -17,7 +17,14 @@
 [ext_resource type="Script" path="res://GameScreen/Deck.gd" id="12_54ssd"]
 [ext_resource type="Script" path="res://GameScreen/Action/ActionIndicator.gd" id="13_j0q4n"]
 [ext_resource type="Script" path="res://GameScreen/NewRoundAnimation.gd" id="17_hf8a0"]
-[ext_resource type="PackedScene" path="res://GameScreen/Tutorial.tscn" id="18_vn86j"]
+[ext_resource type="PackedScene" uid="uid://dbs1b7uqvfsfr" path="res://GameScreen/Tutorial.tscn" id="18_vn86j"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_natam"]
+action = &"ui_cancel"
+pressed = true
+
+[sub_resource type="Shortcut" id="Shortcut_ju33x"]
+events = [SubResource("InputEventAction_natam")]
 
 [sub_resource type="Animation" id="Animation_j2q01"]
 length = 0.001
@@ -232,6 +239,7 @@ anchor_bottom = 1.0
 offset_left = -33.0
 grow_horizontal = 0
 grow_vertical = 2
+shortcut = SubResource("Shortcut_ju33x")
 texture_normal = ExtResource("5_873i1")
 ignore_texture_size = true
 stretch_mode = 4

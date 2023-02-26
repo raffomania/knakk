@@ -73,7 +73,6 @@ To prevent that jump, cards always interpolate between their current and their t
 ### 🤖 GitHub Actions
 
 The `.github/workflows/release.yml` file contains an example CI workflow for automatically exporting the project and uploading it to itch.io.
-There's still a bug in headless export, which is why this action is disabled for the moment.
 
 ### 🖊 Code style
 

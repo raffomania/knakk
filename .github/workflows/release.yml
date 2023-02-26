@@ -1,23 +1,39 @@
 env:
     GODOT_VERSION: "4.0"
-    GODOT_BUILD: "beta4"
+    GODOT_BUILD: "rc5"
 
 on:
-    push:
-        branches:
-            - main
-jobs:
-    build:
-        name: Export game
-        runs-on: ubuntu-latest
-        # This job is currently disabled as godot 4's headless export is broken.
-        if: ${{ false }}
+    - push
 
+jobs:
+    release:
+        name: Export and publish game
+        runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v3
 
+            - name: Set up JDK
+              uses: actions/setup-java@v3
+              with:
+                  java-version: 11
+                  distribution: temurin
+
+            - name: Setup Android SDK
+              uses: android-actions/setup-android@v2
+
+            - name: Set up Android keystore
+              run: |
+                  keytool -keyalg RSA -genkeypair -alias knakk_debug -keypass android -keystore debug.keystore -storepass android -dname "CN=Android Debug,O=Android,C=US" -validity 9999 -deststoretype pkcs12
+                  sed 's@keystore/debug=".*"@keystore/debug="debug.keystore"@g' -i export_presets.cfg
+                  sed 's@keystore/debug_password=".*"@keystore/debug_password="android"@g' -i export_presets.cfg
+                  sed 's@keystore/debug_user=".*"@keystore/debug_user="knakk_debug"@g' -i export_presets.cfg
+                  echo ${{ secrets.KEYSTORE_BASE64 }} | base64 --decode > release.keystore
+                  sed 's@keystore/release=".*"@keystore/release="release.keystore"@g' -i export_presets.cfg
+                  sed 's@keystore/release_password=".*"@keystore/release_password="'${{ secrets.KEYSTORE_PASSWORD }}'"@g' -i export_presets.cfg
+                  sed 's@keystore/release_user=".*"@keystore/release_user="'${{ secrets.KEYSTORE_USER }}'"@g' -i export_presets.cfg
+
             - name: export game
-              uses: firebelley/godot-export@v4.2.0
+              uses: firebelley/godot-export@v4.7.0
               with:
                   godot_executable_download_url: https://downloads.tuxfamily.org/godotengine/${{ env.GODOT_VERSION }}/${{ env.GODOT_BUILD }}/Godot_v${{ env.GODOT_VERSION }}-${{ env.GODOT_BUILD }}_linux.x86_64.zip
                   godot_export_templates_download_url: https://downloads.tuxfamily.org/godotengine/${{ env.GODOT_VERSION }}/${{ env.GODOT_BUILD }}/Godot_v${{ env.GODOT_VERSION }}-${{ env.GODOT_BUILD }}_export_templates.tpz
@@ -28,32 +44,61 @@ jobs:
             - name: get tag from version
               id: tag_version
               run: |
-                  echo name=TAG_VERSION::${GITHUB_REF#refs/tags/v} >> $GITHUB_OUTPUT
+                  echo "TAG_VERSION=$GITHUB_REF_NAME" >> $GITHUB_OUTPUT
 
-            - name: Publish
-              uses: netlify/actions/cli@master
-              with:
-                  args: deploy --dir=export/web --prod
-              env:
-                  NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-                  NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+            - name: debug stuff
+              run: |
+                  tree export
 
-            - name: Upload web build to itch.io
-              uses: yeslayla/butler-publish-itchio-action@v1.0.3
-              env:
-                  BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
-                  CHANNEL: web
-                  ITCH_GAME: knakk
-                  ITCH_USER: raffomania
-                  PACKAGE: export/web
-                  VERSION: ${{ steps.tag_version.outputs.TAG_VERSION }}
+            # - name: Publish to Netlify
+            #   uses: netlify/actions/cli@master
+            #   with:
+            #       args: deploy --dir=export/web --prod
+            #   env:
+            #       NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+            #       NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+            #   if: github.ref_type == 'tag'
 
-            - name: Upload linux build to itch.io
-              uses: yeslayla/butler-publish-itchio-action@v1.0.3
-              env:
-                  BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
-                  CHANNEL: linux
-                  ITCH_GAME: knakk
-                  ITCH_USER: raffomania
-                  PACKAGE: export/linux
-                  VERSION: ${{ steps.tag_version.outputs.TAG_VERSION }}
+            # - name: Upload android build to itch.io
+            #   uses: yeslayla/butler-publish-itchio-action@v1.0.3
+            #   env:
+            #       BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
+            #       CHANNEL: android
+            #       ITCH_GAME: knakk
+            #       ITCH_USER: raffomania
+            #       PACKAGE: export/android/knakk.apk
+            #       VERSION: ${{ steps.tag_version.outputs.tag_version }}
+            #   if: github.ref_type == 'tag'
+
+            # - name: Upload linux build to itch.io
+            #   uses: yeslayla/butler-publish-itchio-action@v1.0.3
+            #   env:
+            #       BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
+            #       CHANNEL: linux
+            #       ITCH_GAME: knakk
+            #       ITCH_USER: raffomania
+            #       PACKAGE: export/linux
+            #       VERSION: ${{ steps.tag_version.outputs.tag_version }}
+            #   if: github.ref_type == 'tag'
+
+            # - name: Upload web build to itch.io
+            #   uses: yeslayla/butler-publish-itchio-action@v1.0.3
+            #   env:
+            #       BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
+            #       CHANNEL: web
+            #       ITCH_GAME: knakk
+            #       ITCH_USER: raffomania
+            #       PACKAGE: export/web
+            #       VERSION: ${{ steps.tag_version.outputs.tag_version }}
+            #   if: github.ref_type == 'tag'
+
+            # - name: Upload osx build to itch.io
+            #   uses: yeslayla/butler-publish-itchio-action@v1.0.3
+            #   env:
+            #       BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
+            #       CHANNEL: osx
+            #       ITCH_GAME: knakk
+            #       ITCH_USER: raffomania
+            #       PACKAGE: export/osx
+            #       VERSION: ${{ steps.tag_version.outputs.tag_version }}
+            #   if: github.ref_type == 'tag'

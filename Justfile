@@ -16,7 +16,7 @@ export-osx:
 export-android:
     rm -rf export/android
     mkdir -p export/android
-    godot4 --headless --export-debug "Android" export/android/knakk.apk
+    godot4 --headless --export-debug "Android" export/android/knakk.aab
 
 export: export-web export-linux export-osx
 

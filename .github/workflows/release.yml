@@ -50,6 +50,12 @@ jobs:
               run: |
                   tree export
 
+            - name: Upload APK to release
+              uses: svenstaro/upload-release-action@v2
+              with:
+                  file: export/android/**/*
+                  file_glob: true
+
             # - name: Publish to Netlify
             #   uses: netlify/actions/cli@master
             #   with:

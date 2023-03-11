@@ -74,6 +74,8 @@ To prevent that jump, cards always interpolate between their current and their t
 
 The `.github/workflows/release.yml` file contains an example CI workflow for automatically exporting the project and uploading it to itch.io.
 
+Due to problems with the gradle build system, the android publishing is disabled at the moment.
+
 ### 🖊 Code style
 
 The code mostly follows the [Official GDScript Style Guide](https://docs.godotengine.org/en/latest/tutorials/scripting/gdscript/gdscript_styleguide.html) and the [GDQuest GDScript Style Guide](https://www.gdquest.com/docs/guidelines/best-practices/godot-gdscript/).

@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://blgultqxld18q"]
+[gd_scene load_steps=25 format=3 uid="uid://blgultqxld18q"]
 
 [ext_resource type="PackedScene" path="res://GameScreen/Hand.tscn" id="1_56rkn"]
 [ext_resource type="PackedScene" path="res://GameScreen/Turns/Turns.tscn" id="2_j64vv"]
@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://c4s5k1gwq7a5h" path="res://GameScreen/Suite/Clubs.png" id="11_ogyhr"]
 [ext_resource type="Script" path="res://GameScreen/Deck.gd" id="12_54ssd"]
 [ext_resource type="Script" path="res://GameScreen/Action/ActionIndicator.gd" id="13_j0q4n"]
+[ext_resource type="Texture2D" uid="uid://b12vce7uici1p" path="res://GameScreen/Action/Elements_Hexagon_Fill25_pink_M.png" id="14_xiwgi"]
 [ext_resource type="Script" path="res://GameScreen/NewRoundAnimation.gd" id="17_hf8a0"]
 [ext_resource type="PackedScene" uid="uid://dbs1b7uqvfsfr" path="res://GameScreen/Tutorial.tscn" id="18_vn86j"]
 
@@ -244,20 +245,35 @@ texture_normal = ExtResource("5_873i1")
 ignore_texture_size = true
 stretch_mode = 4
 
-[node name="RedrawCardArea" type="HBoxContainer" parent="."]
+[node name="RedrawCardArea" type="Control" parent="."]
 layout_mode = 1
-anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 28.0
-offset_top = -187.0
-offset_right = 328.0
-offset_bottom = -87.0
+offset_left = 96.0
+offset_top = -165.0
+offset_right = 352.0
+offset_bottom = -65.0
 grow_vertical = 0
 pivot_offset = Vector2(1, 101)
-theme_override_constants/separation = 5
-alignment = 1
 script = ExtResource("10_if57e")
+
+[node name="Container" type="HBoxContainer" parent="RedrawCardArea"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Sprite2D" type="TextureRect" parent="RedrawCardArea"]
+layout_mode = 0
+offset_left = -277.0
+offset_top = -169.0
+offset_right = 212.0
+offset_bottom = 396.0
+scale = Vector2(1.12667, 1.12667)
+texture = ExtResource("14_xiwgi")
 
 [node name="PlayAgainArea" type="HBoxContainer" parent="."]
 layout_mode = 1
@@ -279,10 +295,10 @@ script = ExtResource("11_61q87")
 
 [node name="Deck" type="Label" parent="."]
 layout_mode = 0
-offset_left = 38.0
+offset_left = 409.0
 offset_top = 2335.0
-offset_right = 264.0
-offset_bottom = 2383.0
+offset_right = 667.0
+offset_bottom = 2390.0
 text = "50 Cards in Deck"
 script = ExtResource("12_54ssd")
 

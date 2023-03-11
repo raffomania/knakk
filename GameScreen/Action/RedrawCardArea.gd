@@ -2,7 +2,7 @@ extends Control
 
 
 var _redraw_tokens := 0
-var _token_nodes: Array[Node] = []
+@onready var container: HBoxContainer = $Container
 
 
 func _ready():
@@ -14,20 +14,14 @@ func _ready():
 	visible = false
 
 
-func _draw():
-	draw_line(Vector2.ZERO, Vector2(size.x, 0), ColorPalette.PURPLE)
-	draw_line(Vector2(size.x, 0), Vector2(size.x, size.y), ColorPalette.PURPLE)
-
-
 func _add_token(marker: RewardMarker):
-	marker.reparent(self)
-	_token_nodes.append(marker)
+	marker.reparent(container)
 
 	_redraw_tokens += 1
 
 
 func _remove_token():
-	var node = _token_nodes.pop_back()
+	var node = container.get_child(0)
 	node.queue_free()
 
 	_redraw_tokens -= 1

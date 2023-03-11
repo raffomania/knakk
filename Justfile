@@ -3,20 +3,20 @@
 export-web:
     rm -rf export/web
     mkdir -p export/web
-    godot4 --headless --export-release "Web" export/web/index.html 
+    godot --headless --export-release "Web" export/web/index.html 
 export-linux:
     rm -rf export/linux
     mkdir -p export/linux
-    godot4 --headless --export-release "Linux/X11" export/linux/knakk.x86_64 
+    godot --headless --export-release "Linux/X11" export/linux/knakk.x86_64 
 export-osx:
     rm -rf export/osx
     mkdir -p export/osx
-    godot4 --headless --export-release "OSX" export/osx/knakk.app
+    godot --headless --export-release "OSX" export/osx/knakk.app
 
 export-android:
     rm -rf export/android
     mkdir -p export/android
-    godot4 --headless --export-debug "Android" export/android/knakk.aab
+    godot --headless --export-debug "Android" export/android/knakk.aab
 
 export: export-web export-linux export-osx
 

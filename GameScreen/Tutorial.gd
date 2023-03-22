@@ -1,7 +1,7 @@
 extends CanvasLayer
 
 const STEPS := [
-	"""Welcome to Clever Solitaire!
+	"""Welcome to knakk!
 In this game, you play cards to fill slots.
 Each filled slot will reward you with points or bonuses. 
 The goal is to get the highest possible score!""",

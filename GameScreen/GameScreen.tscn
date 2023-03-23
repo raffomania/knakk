@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://blgultqxld18q"]
+[gd_scene load_steps=26 format=3 uid="uid://blgultqxld18q"]
 
 [ext_resource type="PackedScene" path="res://GameScreen/Hand.tscn" id="1_56rkn"]
 [ext_resource type="PackedScene" path="res://GameScreen/Turns/Turns.tscn" id="2_j64vv"]
@@ -19,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://b12vce7uici1p" path="res://GameScreen/Action/Elements_Hexagon_Fill25_pink_M.png" id="14_xiwgi"]
 [ext_resource type="Script" path="res://GameScreen/NewRoundAnimation.gd" id="17_hf8a0"]
 [ext_resource type="PackedScene" uid="uid://dbs1b7uqvfsfr" path="res://GameScreen/Tutorial.tscn" id="18_vn86j"]
+[ext_resource type="Script" path="res://CheatCodes.gd" id="20_7c6at"]
 
 [sub_resource type="InputEventAction" id="InputEventAction_natam"]
 action = &"ui_cancel"
@@ -247,12 +248,13 @@ stretch_mode = 4
 
 [node name="RedrawCardArea" type="Control" parent="."]
 layout_mode = 1
+anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 96.0
-offset_top = -165.0
-offset_right = 352.0
-offset_bottom = -65.0
+offset_left = 47.0
+offset_top = -150.0
+offset_right = 323.0
+offset_bottom = -50.0
 grow_vertical = 0
 pivot_offset = Vector2(1, 101)
 script = ExtResource("10_if57e")
@@ -267,11 +269,11 @@ grow_vertical = 2
 alignment = 1
 
 [node name="Sprite2D" type="TextureRect" parent="RedrawCardArea"]
-layout_mode = 0
-offset_left = -277.0
-offset_top = -169.0
-offset_right = 212.0
-offset_bottom = 396.0
+layout_mode = 1
+offset_left = -163.0
+offset_top = -145.0
+offset_right = 256.0
+offset_bottom = 339.0
 scale = Vector2(1.12667, 1.12667)
 texture = ExtResource("14_xiwgi")
 
@@ -370,3 +372,6 @@ horizontal_alignment = 1
 
 [node name="Tutorial" parent="." instance=ExtResource("18_vn86j")]
 visible = false
+
+[node name="CheatCodes" type="Node" parent="."]
+script = ExtResource("20_7c6at")

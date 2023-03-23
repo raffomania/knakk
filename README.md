@@ -78,8 +78,11 @@ The code mostly follows the [Official GDScript Style Guide](https://docs.godoten
 
 There are a few debugging shortcuts that are only enabled in debug mode:
 
-- **R** Draw a new hand without spending a turn
+- **H** Draw a new hand without spending a turn
 - **O** End the game instantly
+- **R** End the current round
+- **B** Add a redraw bonus
+- **P** Add a play again bonus
 
 Also, the `Deck` script shows how many cards are left in the deck in debug mode.
 

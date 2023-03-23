@@ -12,15 +12,7 @@ func _ready():
 	$MenuScreen.new_game.connect(_on_new_game)
 	$GameOverScreen.new_game.connect(func(): _on_new_game(false))
 
-
-func _unhandled_input(event):
-	if event.is_action_released("game_over") and OS.is_debug_build():
-		_on_game_over()
-
-
 func _on_game_over():
-	await get_tree().create_timer(.8).timeout
-
 	# Move to game over screen
 	await camera.go_to_game_over_screen()
 

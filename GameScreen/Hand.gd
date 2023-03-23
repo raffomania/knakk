@@ -27,12 +27,6 @@ func _ready():
 	redraw_hand()
 
 
-## For debugging: redraw the current hand when R is pressed
-func _unhandled_input(event: InputEvent):
-	if event.is_action_released("reset_hand") and OS.is_debug_build():
-		redraw_hand()
-
-
 ## Discard the current hand and draw a new one
 ## Since this is a coroutine and the hand may get freed while running it,
 ## godot may log errors mentioning that it tried to continue this coroutine but

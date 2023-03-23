@@ -88,7 +88,7 @@ const textures = {
 
 
 static func get_label(card_type: Array) -> String:
-	return "%s of %s" % [get_suite_label(card_type[0]), get_number_label(card_type[1])]
+	return "%s of %s" % [get_number_label(card_type[1]), get_suite_label(card_type[0])]
 
 
 static func get_suite_label(suite: Cards.Suite) -> String:

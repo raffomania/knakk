@@ -16,7 +16,8 @@ export-osx:
 export-android:
     rm -rf export/android
     mkdir -p export/android
-    godot --headless --export-release "Android" export/android/knakk.aab
+    godot --headless --export-release "Android aab" export/android/knakk.aab
+    godot --headless --export-release "Android apk" export/android/knakk.apk
 
 export: export-web export-linux export-osx
 
@@ -33,7 +34,7 @@ release-osx: export-osx
     butler push export/osx raffomania/knakk:osx
 
 release-android: export-android
-    butler push export/android/knakk.aab raffomania/knakk:android
+    butler push export/android/knakk.apk raffomania/knakk:android
 
 release: release-web release-linux release-osx release-android
 

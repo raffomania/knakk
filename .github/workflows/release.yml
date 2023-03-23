@@ -32,23 +32,23 @@ jobs:
                   sed 's@keystore/release_password=".*"@keystore/release_password="'${{ secrets.KEYSTORE_PASSWORD }}'"@g' -i export_presets.cfg
                   sed 's@keystore/release_user=".*"@keystore/release_user="'${{ secrets.KEYSTORE_USER }}'"@g' -i export_presets.cfg
 
-            - name: export game
-              uses: firebelley/godot-export@v4.7.0
-              with:
-                  godot_executable_download_url: https://downloads.tuxfamily.org/godotengine/${{ env.GODOT_VERSION }}/Godot_v${{ env.GODOT_VERSION }}-${{ env.GODOT_BUILD }}_linux.x86_64.zip
-                  godot_export_templates_download_url: https://downloads.tuxfamily.org/godotengine/${{ env.GODOT_VERSION }}/Godot_v${{ env.GODOT_VERSION }}-${{ env.GODOT_BUILD }}_export_templates.tpz
-                  relative_project_path: ./
-                  use_preset_export_path: true
-                  use_godot_4: true
+            # - name: export game
+            #   uses: firebelley/godot-export@v4.7.0
+            #   with:
+            #       godot_executable_download_url: https://downloads.tuxfamily.org/godotengine/${{ env.GODOT_VERSION }}/Godot_v${{ env.GODOT_VERSION }}-${{ env.GODOT_BUILD }}_linux.x86_64.zip
+            #       godot_export_templates_download_url: https://downloads.tuxfamily.org/godotengine/${{ env.GODOT_VERSION }}/Godot_v${{ env.GODOT_VERSION }}-${{ env.GODOT_BUILD }}_export_templates.tpz
+            #       relative_project_path: ./
+            #       use_preset_export_path: true
+            #       use_godot_4: true
 
-            - name: get tag from version
-              id: tag_version
-              run: |
-                  echo "TAG_VERSION=$GITHUB_REF_NAME" >> $GITHUB_OUTPUT
+            # - name: get tag from version
+            #   id: tag_version
+            #   run: |
+            #       echo "TAG_VERSION=$GITHUB_REF_NAME" >> $GITHUB_OUTPUT
 
-            - name: debug stuff
-              run: |
-                  tree export
+            # - name: debug stuff
+            #   run: |
+            #       tree export
 
             # - name: Upload APK to release
             #   uses: svenstaro/upload-release-action@v2

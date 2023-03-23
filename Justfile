@@ -33,7 +33,7 @@ release-osx: export-osx
     butler push export/osx raffomania/knakk:osx
 
 release-android: export-android
-    butler push export/android/knakk.apk raffomania/knakk:android
+    butler push export/android/knakk.aab raffomania/knakk:android
 
 release: release-web release-linux release-osx release-android
 

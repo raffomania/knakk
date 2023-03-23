@@ -12,25 +12,25 @@ jobs:
         steps:
             - uses: actions/checkout@v3
 
-            - name: Set up JDK
-              uses: actions/setup-java@v3
-              with:
-                  java-version: 11
-                  distribution: temurin
+            # - name: Set up JDK
+            #   uses: actions/setup-java@v3
+            #   with:
+            #       java-version: 11
+            #       distribution: temurin
 
-            - name: Setup Android SDK
-              uses: android-actions/setup-android@v2
+            # - name: Setup Android SDK
+            #   uses: android-actions/setup-android@v2
 
-            - name: Set up Android keystore
-              run: |
-                  keytool -keyalg RSA -genkeypair -alias knakk_debug -keypass android -keystore debug.keystore -storepass android -dname "CN=Android Debug,O=Android,C=US" -validity 9999 -deststoretype pkcs12
-                  sed 's@keystore/debug=".*"@keystore/debug="debug.keystore"@g' -i export_presets.cfg
-                  sed 's@keystore/debug_password=".*"@keystore/debug_password="android"@g' -i export_presets.cfg
-                  sed 's@keystore/debug_user=".*"@keystore/debug_user="knakk_debug"@g' -i export_presets.cfg
-                  echo ${{ secrets.KEYSTORE_BASE64 }} | base64 --decode > release.keystore
-                  sed 's@keystore/release=".*"@keystore/release="release.keystore"@g' -i export_presets.cfg
-                  sed 's@keystore/release_password=".*"@keystore/release_password="'${{ secrets.KEYSTORE_PASSWORD }}'"@g' -i export_presets.cfg
-                  sed 's@keystore/release_user=".*"@keystore/release_user="'${{ secrets.KEYSTORE_USER }}'"@g' -i export_presets.cfg
+            # - name: Set up Android keystore
+            #   run: |
+            #       keytool -keyalg RSA -genkeypair -alias knakk_debug -keypass android -keystore debug.keystore -storepass android -dname "CN=Android Debug,O=Android,C=US" -validity 9999 -deststoretype pkcs12
+            #       sed 's@keystore/debug=".*"@keystore/debug="debug.keystore"@g' -i export_presets.cfg
+            #       sed 's@keystore/debug_password=".*"@keystore/debug_password="android"@g' -i export_presets.cfg
+            #       sed 's@keystore/debug_user=".*"@keystore/debug_user="knakk_debug"@g' -i export_presets.cfg
+            #       echo ${{ secrets.KEYSTORE_BASE64 }} | base64 --decode > release.keystore
+            #       sed 's@keystore/release=".*"@keystore/release="release.keystore"@g' -i export_presets.cfg
+            #       sed 's@keystore/release_password=".*"@keystore/release_password="'${{ secrets.KEYSTORE_PASSWORD }}'"@g' -i export_presets.cfg
+            #       sed 's@keystore/release_user=".*"@keystore/release_user="'${{ secrets.KEYSTORE_USER }}'"@g' -i export_presets.cfg
 
             # - name: export game
             #   uses: firebelley/godot-export@v4.7.0

@@ -19,9 +19,10 @@ const ACTION_SCALE := Vector2(1, 1)
 ## The card's scale while the player is hovering over an action area
 const PLAYED_SCALE := Vector2(0.8, 0.8)
 
-## Global position that this card had in the deck,
+## Global position and rotation that this card had in the deck,
 ## used to move the card back if the player doesn't choose it for playing
 var starting_position: Vector2
+var starting_rotation: float
 ## The value of this card.
 ## Stored as a [suite, number] array.
 # todo rename to card_value everywhere?
@@ -51,6 +52,7 @@ var _can_play := false:
 ## The current position of the user's finger.
 ## in _process(), we interpolate the card position towards this position
 @onready var _target_drag_position := global_position
+@onready var _target_rotation := starting_rotation
 
 
 func _ready():
@@ -94,14 +96,20 @@ func _process(delta: float):
 	# improved lerp smoothing to make drag motion less jittery
 	# see https://www.gamedeveloper.com/programming/improved-lerp-smoothing- 
 	# for an explanation of the formula
-	global_position = _target_drag_position.lerp(global_position, 
-			pow(2, -delta * smooth_speed))
+	var lerp_factor = pow(2, -delta * smooth_speed)
+	global_position = _target_drag_position.lerp(global_position, lerp_factor)
+
+	rotation = rotation + (_target_rotation - rotation) * lerp_factor
 
 
 ## Tell this card to transition to a new position.
 ## The transition is animated.
 func move_to(new_global_position: Vector2):
 	_target_drag_position = new_global_position
+
+
+func rotate_to(new_rotation: float):
+	_target_rotation = new_rotation
 
 
 ## Set the card type for this card.
@@ -121,10 +129,7 @@ func shrink_to_played_size():
 	var _tweener = tween.tween_property(
 			self, "scale", Vector2.ONE * target_scale, 0.3)
 
-	var new_rotation = PI * 0.1 * randf_range(-1, 1)
-	_tweener = tween.tween_property(self, "rotation", new_rotation, 0.35)
-
-	await tween.finished
+	_target_rotation = PI * 0.1 * randf_range(-1, 1)
 
 
 func animate_appear():
@@ -244,14 +249,13 @@ func _visualize_interaction_state():
 		var tween = create_tween().set_parallel()
 		var _tweener = tween.tween_property(
 				self, "scale", DRAGGING_SCALE, SCALE_TWEEN_DURATION)
-		_tweener = tween.tween_property(
-				self, "rotation", DRAGGING_ROTATION, SCALE_TWEEN_DURATION)
+		_target_rotation = DRAGGING_ROTATION
 		$PlayMarker.visible = false
 	else:
 		var tween = create_tween().set_parallel()
 		var _tweener = tween.tween_property(
 				self, "scale", NORMAL_SCALE, SCALE_TWEEN_DURATION)
-		_tweener = tween.tween_property(self, "rotation", 0, SCALE_TWEEN_DURATION)
+		_target_rotation = starting_rotation
 
 
 ## Sometimes, it's impossible to make any move with a given hand.

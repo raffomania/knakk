@@ -18,11 +18,17 @@ func _unhandled_input(event):
 	if event.is_action_released("add_redraw_bonus"):
 		var marker: RewardMarker = REWARD_MARKER_SCENE.instantiate()
 		marker.reward = Reward.RedrawCard.new()
+		marker.color = random_reward_color()
 		add_child(marker)
 		Events.receive_reward.emit(marker)
 
 	if event.is_action_released("add_play_again_bonus"):
 		var marker = REWARD_MARKER_SCENE.instantiate()
 		marker.reward = Reward.PlayAgain.new()
+		marker.color = random_reward_color()
 		add_child(marker)
 		Events.receive_reward.emit(marker)
+
+func random_reward_color():
+	var colors = [ColorPalette.RED, ColorPalette.BLUE]
+	return colors[randi() % colors.size()]

@@ -12,8 +12,6 @@ func _ready():
 	_err = Events.take_action.connect(_on_take_action)
 	_err = Events.receive_reward.connect(_on_receive_reward)
 
-	visible = false
-
 
 func _add_token(marker: RewardMarker):
 	marker.reparent(container)
@@ -72,8 +70,6 @@ func _on_receive_reward(marker: RewardMarker):
 	if not (marker.reward is Reward.PlayAgain):
 		return
 		
-	visible = true
-
 	# Draw the RewardMarker above field and cards
 	marker.z_index = 100
 

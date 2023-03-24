@@ -408,7 +408,15 @@ visible = false
 [node name="CheatCodes" type="Node" parent="."]
 script = ExtResource("20_7c6at")
 
-[node name="ElementsHexagonFill25PurpleL" type="TextureRect" parent="."]
+[node name="Control" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ElementsHexagonFill25PurpleL" type="TextureRect" parent="Control"]
 modulate = Color(1, 1, 1, 0.380392)
 layout_mode = 0
 offset_left = -984.0
@@ -419,18 +427,18 @@ texture = ExtResource("22_6r0mw")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="ElementsHexagonFill25PurpleL4" type="TextureRect" parent="."]
+[node name="ElementsHexagonFill25PurpleL4" type="TextureRect" parent="Control"]
 modulate = Color(1, 1, 1, 0.290196)
 layout_mode = 0
 offset_left = -1140.0
-offset_top = 1183.0
+offset_top = 1112.0
 offset_right = -460.0
-offset_bottom = 1791.0
+offset_bottom = 1720.0
 texture = ExtResource("23_ma24w")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="ElementsHexagonFill25PurpleL2" type="TextureRect" parent="."]
+[node name="ElementsHexagonFill25PurpleL2" type="TextureRect" parent="Control"]
 modulate = Color(1, 1, 1, 0.615686)
 layout_mode = 0
 offset_left = 1094.0
@@ -441,7 +449,7 @@ texture = ExtResource("16_a2r0m")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="ElementsHexagonFill25PurpleL3" type="TextureRect" parent="."]
+[node name="ElementsHexagonFill25PurpleL3" type="TextureRect" parent="Control"]
 modulate = Color(1, 1, 1, 0.372549)
 layout_mode = 0
 offset_left = 1562.0
@@ -452,7 +460,7 @@ texture = ExtResource("14_5jo7a")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="ElementsHexagonFill25PurpleL5" type="TextureRect" parent="."]
+[node name="ElementsHexagonFill25PurpleL5" type="TextureRect" parent="Control"]
 modulate = Color(1, 1, 1, 0.372549)
 layout_mode = 0
 offset_left = -712.0

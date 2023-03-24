@@ -251,6 +251,7 @@ stretch_mode = 4
 
 [node name="RedrawCardArea" type="Control" parent="."]
 layout_mode = 1
+anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 20.0
@@ -288,6 +289,7 @@ stretch_mode = 4
 
 [node name="PlayAgainArea" type="Control" parent="."]
 layout_mode = 1
+anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
@@ -326,7 +328,6 @@ expand_mode = 1
 stretch_mode = 4
 
 [node name="Deck" type="Label" parent="."]
-visible = false
 layout_mode = 0
 offset_left = 409.0
 offset_top = 2335.0

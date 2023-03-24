@@ -126,8 +126,6 @@ func _on_take_action(_card_type: Array, action: Events.Action, card_node: Card):
 		for child in get_children():
 			draw_card(child.card_type)
 
-		position_cards()
-
 	if action == Events.Action.CHOOSE:
 		_cards_played_this_turn += 1
 
@@ -138,6 +136,8 @@ func _on_take_action(_card_type: Array, action: Events.Action, card_node: Card):
 
 		card_node.z_index = _played_cards_z_index
 		_played_cards_z_index += 1
+
+		position_cards()
 
 		var slot_was_filled = _cards_played_this_turn >= 2
 		if slot_was_filled:
@@ -173,5 +173,6 @@ func _on_take_action(_card_type: Array, action: Events.Action, card_node: Card):
 		_play_again_count = 0
 		Events.turn_complete.emit()
 		await redraw_hand()
+
 
 

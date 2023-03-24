@@ -1,8 +1,9 @@
-extends HBoxContainer
+extends Control
 
 
 var _play_again_tokens := 0
-var _token_nodes: Array[Node] = []
+
+@onready var container: HBoxContainer = $Container
 
 
 func _ready():
@@ -14,13 +15,14 @@ func _ready():
 	visible = false
 
 
-func _draw():
-	draw_line(Vector2.ZERO, Vector2(size.x, 0), ColorPalette.PURPLE)
-	draw_line(Vector2.ZERO, Vector2(0, size.y), ColorPalette.PURPLE)
+func _add_token(marker: RewardMarker):
+	marker.reparent(container)
+
+	_play_again_tokens += 1
 
 
 func _remove_token():
-	var node = _token_nodes.pop_back()
+	var node = container.get_child(0)
 	node.queue_free()
 
 	_play_again_tokens -= 1
@@ -81,7 +83,4 @@ func _on_receive_reward(marker: RewardMarker):
 	tween.tween_property(self, "scale", Vector2.ONE * 1.15, 0.05)
 	tween.tween_property(self, "scale", Vector2.ONE, 0.05)
 
-	marker.reparent(self)
-	_token_nodes.append(marker)
-
-	_play_again_tokens += 1
+	_add_token(marker)

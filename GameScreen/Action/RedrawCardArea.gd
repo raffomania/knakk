@@ -2,6 +2,7 @@ extends Control
 
 
 var _redraw_tokens := 0
+
 @onready var container: HBoxContainer = $Container
 
 

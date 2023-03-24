@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://blgultqxld18q"]
+[gd_scene load_steps=29 format=3 uid="uid://blgultqxld18q"]
 
 [ext_resource type="PackedScene" path="res://GameScreen/Hand.tscn" id="1_56rkn"]
 [ext_resource type="PackedScene" path="res://GameScreen/Turns/Turns.tscn" id="2_j64vv"]
@@ -16,10 +16,13 @@
 [ext_resource type="Texture2D" uid="uid://c4s5k1gwq7a5h" path="res://GameScreen/Suite/Clubs.png" id="11_ogyhr"]
 [ext_resource type="Script" path="res://GameScreen/Deck.gd" id="12_54ssd"]
 [ext_resource type="Script" path="res://GameScreen/Action/ActionIndicator.gd" id="13_j0q4n"]
-[ext_resource type="Texture2D" uid="uid://b12vce7uici1p" path="res://GameScreen/Action/Elements_Hexagon_Fill25_pink_M.png" id="14_xiwgi"]
+[ext_resource type="Texture2D" uid="uid://bj7ps2v3qc77w" path="res://GameScreen/Action/Elements_Hexagon_Fill25_blue_L.png" id="14_5jo7a"]
+[ext_resource type="Texture2D" uid="uid://e7bv46taiftm" path="res://GameScreen/Action/Elements_Hexagon_Fill25_green_L.png" id="16_a2r0m"]
 [ext_resource type="Script" path="res://GameScreen/NewRoundAnimation.gd" id="17_hf8a0"]
 [ext_resource type="PackedScene" uid="uid://dbs1b7uqvfsfr" path="res://GameScreen/Tutorial.tscn" id="18_vn86j"]
 [ext_resource type="Script" path="res://CheatCodes.gd" id="20_7c6at"]
+[ext_resource type="Texture2D" uid="uid://bo45gs8f4tja8" path="res://GameScreen/Action/Elements_Hexagon_Fill25_purple_L.png" id="22_6r0mw"]
+[ext_resource type="Texture2D" uid="uid://bnkivayuvgpl2" path="res://GameScreen/Action/Elements_Hexagon_Fill25_pink_L.png" id="23_ma24w"]
 
 [sub_resource type="InputEventAction" id="InputEventAction_natam"]
 action = &"ui_cancel"
@@ -248,10 +251,9 @@ stretch_mode = 4
 
 [node name="RedrawCardArea" type="Control" parent="."]
 layout_mode = 1
-anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 47.0
+offset_left = 20.0
 offset_top = -150.0
 offset_right = 323.0
 offset_bottom = -50.0
@@ -266,36 +268,65 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-alignment = 1
+alignment = 2
 
-[node name="Sprite2D" type="TextureRect" parent="RedrawCardArea"]
+[node name="TextureRect" type="TextureRect" parent="RedrawCardArea"]
+modulate = Color(1, 1, 1, 0.764706)
 layout_mode = 1
-offset_left = -163.0
-offset_top = -145.0
-offset_right = 256.0
-offset_bottom = 339.0
-scale = Vector2(1.12667, 1.12667)
-texture = ExtResource("14_xiwgi")
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -150.0
+offset_top = -140.0
+offset_right = 50.0
+offset_bottom = 399.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("14_5jo7a")
+expand_mode = 1
+stretch_mode = 4
 
-[node name="PlayAgainArea" type="HBoxContainer" parent="."]
+[node name="PlayAgainArea" type="Control" parent="."]
 layout_mode = 1
-anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -333.0
-offset_top = -187.0
-offset_right = -33.0
-offset_bottom = -87.0
+offset_left = -323.0
+offset_top = -150.0
+offset_right = -20.0
+offset_bottom = -50.0
 grow_horizontal = 0
 grow_vertical = 0
 pivot_offset = Vector2(299, 98)
-theme_override_constants/separation = 5
-alignment = 1
 script = ExtResource("11_61q87")
 
+[node name="Container" type="HBoxContainer" parent="PlayAgainArea"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="PlayAgainArea"]
+modulate = Color(1, 1, 1, 0.764706)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -50.0
+offset_top = -180.0
+offset_right = 220.0
+offset_bottom = 505.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("16_a2r0m")
+expand_mode = 1
+stretch_mode = 4
+
 [node name="Deck" type="Label" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 409.0
 offset_top = 2335.0
@@ -353,7 +384,7 @@ offset_bottom = 140.0
 grow_horizontal = 2
 scale = Vector2(1, 1.01823)
 theme_override_font_sizes/font_size = 80
-text = "Turn 3"
+text = "Round 3"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -375,3 +406,58 @@ visible = false
 
 [node name="CheatCodes" type="Node" parent="."]
 script = ExtResource("20_7c6at")
+
+[node name="ElementsHexagonFill25PurpleL" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0.380392)
+layout_mode = 0
+offset_left = -984.0
+offset_top = 1606.0
+offset_right = 69.0
+offset_bottom = 2591.0
+texture = ExtResource("22_6r0mw")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ElementsHexagonFill25PurpleL4" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0.290196)
+layout_mode = 0
+offset_left = -1140.0
+offset_top = 1183.0
+offset_right = -460.0
+offset_bottom = 1791.0
+texture = ExtResource("23_ma24w")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ElementsHexagonFill25PurpleL2" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0.615686)
+layout_mode = 0
+offset_left = 1094.0
+offset_top = 1276.0
+offset_right = 2328.0
+offset_bottom = 2422.0
+texture = ExtResource("16_a2r0m")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ElementsHexagonFill25PurpleL3" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0.372549)
+layout_mode = 0
+offset_left = 1562.0
+offset_top = 853.0
+offset_right = 2357.0
+offset_bottom = 1585.0
+texture = ExtResource("14_5jo7a")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ElementsHexagonFill25PurpleL5" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0.372549)
+layout_mode = 0
+offset_left = -712.0
+offset_top = 830.0
+offset_right = -420.0
+offset_bottom = 1120.0
+texture = ExtResource("14_5jo7a")
+expand_mode = 1
+stretch_mode = 5

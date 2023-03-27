@@ -42,10 +42,17 @@ var _slots = [
 ]
 ## Rewards for each column from left to right
 var _column_rewards = [
-	Reward.Points.new(5),
+	Reward.Points.new(3),
 	Reward.Points.new(8),
 	Reward.Points.new(13),
 	Reward.Points.new(21),
+]
+## Rewards for each column from top to bottom
+var _row_rewards = [
+	Reward.Points.new(5),
+	Reward.RedrawCard.new(),
+	Reward.Points.new(13),
+	Reward.PlayAgain.new(),
 ]
 ## An array of [column, row] indexes in the slots grid that represent which 
 ## slots have been filled
@@ -64,19 +71,34 @@ func _ready():
 
 func _draw():
 	var y_padding = _get_slot_padding().y
-	# Draw the vertical lines between slots
+	var x_padding = _get_slot_padding().x
+
+	# Draw horizontal lines between slots
+	for column_index in len(_slots) - 1:
+		for row_index in len(_slots[column_index]):
+			# Draw lines between slots
+			var start_position = _get_slot_position(column_index, row_index) \
+				+ Vector2(Slot.SIZE, Slot.SIZE * 0.5)
+			var stop_position = start_position + Vector2(x_padding, 0)
+			draw_line(start_position, stop_position, COLOR, 3.0)
+
+	# Draw a smaller line to connect the leftmost slot with the reward marker
+	for column_index in len(_slots):
+		var start_position = _get_slot_position(column_index, 0) \
+			+ Vector2(0, Slot.SIZE * 0.5)
+		var stop_position = start_position - Vector2(x_padding * 0.25, 0)
+		draw_line(start_position, stop_position, COLOR, 3.0)
+
+	# Draw the vertical reward indicator lines
 	for column_index in len(_slots):
 		for row_index in len(_slots[column_index]) - 1:
+			# Draw lines between slots
 			var start_position = _get_slot_position(column_index, row_index) \
 				+ Vector2(Slot.SIZE * 0.5, Slot.SIZE)
 			var stop_position = start_position + Vector2(0, y_padding)
 			draw_line(start_position, stop_position, COLOR, 3.0)
 
-		# Draw a smaller vertical line to connect the lowest slot with the reward marker
-		# But only draw it for columns that are not filled yet
-		if not (_get_reward_for_column(column_index) is Reward.Nothing):
-			continue
-
+		# Draw a smaller line to connect the lowest slot with the reward marker
 		var start_position = _get_slot_position(column_index, len(_slots[column_index]) - 1) \
 			+ Vector2(Slot.SIZE * 0.5, Slot.SIZE)
 		var stop_position = start_position + Vector2(0, y_padding * 0.3)
@@ -105,9 +127,14 @@ func play_number(number: Cards.Number) -> Slot:
 	# Reset highlights
 	highlight_options([])
 
-	var column_reward = _get_reward_for_column(slot_position.x)
-	if not (column_reward is Reward.Nothing):
-		var marker = get_node("ColumnReward%d" % slot_position.x)
+	var marker = _get_reward_for_column(slot_position.x)
+	if is_instance_valid(marker):
+		Events.receive_reward.emit(marker)
+
+		queue_redraw()
+
+	marker = _get_reward_for_row(slot_position)
+	if is_instance_valid(marker):
 		Events.receive_reward.emit(marker)
 
 		queue_redraw()
@@ -163,12 +190,29 @@ func _spawn_reward_labels():
 		marker.position = _get_slot_position(column_index, column_index) \
 			+ Vector2(0, Slot.SIZE) + center_offset
 
+	for row_index in len(_row_rewards):
+		var marker = REWARD_MARKER_SCENE.instantiate()
+
+		var reward = _row_rewards[row_index]
+		marker.reward = reward
+		marker.name = "RowReward%d" % row_index
+
+		add_child(marker)
+		
+		marker.size = Vector2.ONE * Slot.SIZE * 0.5
+		marker.color = COLOR
+
+		# Place the marker beside the leftmost slot and center it
+		var center_offset = (Vector2.ONE * Slot.SIZE - marker.size) * 0.5
+		marker.position = _get_slot_position(len(_slots) - row_index - 1, 0) \
+			- Vector2(Slot.SIZE, 0) + center_offset
+
 
 ## Display a Spades symbol to show which suite this area is for
 func _spawn_spades_symbol():
 	_suite_symbol = TextureRect.new()
 	_suite_symbol.texture = SPADES_TEXTURE
-	_suite_symbol.position = _slots[0][0].node.position - Vector2(120, 0)
+	_suite_symbol.position = _slots[0][0].node.position + Vector2(-Slot.SIZE * 1.2, Slot.SIZE * 1.2)
 	_suite_symbol.ignore_texture_size = true
 	_suite_symbol.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	add_child(_suite_symbol)
@@ -189,16 +233,35 @@ func _get_slot_padding() -> Vector2:
 	var y_padding = (size.y - (Slot.SIZE * GRID_ROWS)) / (GRID_ROWS - 1)
 	return Vector2(x_padding, y_padding)
 
-func _get_reward_for_column(column_index: int) -> Reward:
+
+func _get_reward_for_column(column_index: int) -> RewardMarker:
 	# For each slot in the column, check if it has been filled
 	for row_index in range(0, len(_slots[column_index])):
 		if Vector2i(column_index, row_index) not in _played_slots:
 			# This slot has not been filled, the reward for this column
 			# is not yet reached
-			return Reward.Nothing.new()
+			return null
 
 	# Every slot in this column has been played, the reward has been reached
-	return _column_rewards[column_index]
+	return get_node_or_null("ColumnReward%d" % column_index)
+
+
+func _get_reward_for_row(slot_position: Vector2i) -> RewardMarker:
+	var total_rows = len(_slots[len(_slots) - 1])
+	# Since row_index differs from column to column for the same row,
+	# calculate a grid-based row value here
+	var logical_row = slot_position.y + len(_slots) - 1 - slot_position.x
+	# For each slot in the column, check if it has been filled
+	for column_index in range(len(_slots) - 1 - logical_row, len(_slots)):
+		var row_index = column_index - (total_rows - logical_row - 1)
+		
+		if Vector2i(column_index, row_index) not in _played_slots:
+			# This slot has not been filled, the reward for this column
+			# is not yet reached
+			return null
+
+	# Every slot in this column has been played, the reward has been reached
+	return get_node_or_null("RowReward%d" % logical_row)
 
 
 ## Find slots that can be filled using a Spades card with the given number

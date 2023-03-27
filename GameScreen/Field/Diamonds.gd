@@ -8,6 +8,8 @@ const SLOT_SCENE = preload("res://GameScreen/Slot/Slot.tscn")
 const ARROW_SCENE = preload("res://GameScreen/Field/Arrow.tscn")
 const DIAMONDS_TEXTURE = preload("res://GameScreen/Suite/Diamonds.png")
 
+# Available slots in row, column format
+# top to bottom, left to right
 var _slots = [
 	[
 		{
@@ -62,7 +64,7 @@ var _slots = [
 		},
 	], [
 		{
-			reward = Reward.PlayAgain.new(),
+			reward = Reward.Points.new(5),
 			range = [Cards.Number.Ace, Cards.Number.Three],
 		},
 		{

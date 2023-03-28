@@ -29,6 +29,9 @@ var starting_rotation: float
 var card_type: Array
 ## Once the card is played, it cannot be played again.
 var is_played := false
+## If true, this card is used to select a suite.
+## If false, this card is used to play a number.
+var selects_suite: bool
 
 ## Once users touch this card, this is set to `true`
 ## and subsequent drag events will move this card on the screen
@@ -63,6 +66,7 @@ func _ready():
 
 	scale = NORMAL_SCALE
 	$PlayMarker.visible = false
+	_set_show_suite_marker(false)
 
 
 func _exit_tree():
@@ -245,17 +249,63 @@ func _visualize_interaction_state():
 		var _tweener = create_tween() \
 				.tween_property(self, "scale", ACTION_SCALE, SCALE_TWEEN_DURATION)
 		$PlayMarker.visible = true
+		if _considering_action == Events.Action.CHOOSE:
+			if selects_suite:
+				_set_show_suite_marker(true)
+			else:
+				_set_show_number_marker(true)
 	elif _is_dragging:
 		var tween = create_tween().set_parallel()
 		var _tweener = tween.tween_property(
 				self, "scale", DRAGGING_SCALE, SCALE_TWEEN_DURATION)
 		_target_rotation = DRAGGING_ROTATION
 		$PlayMarker.visible = false
+		_set_show_number_marker(false)
+		_set_show_suite_marker(false)
 	else:
 		var tween = create_tween().set_parallel()
 		var _tweener = tween.tween_property(
 				self, "scale", NORMAL_SCALE, SCALE_TWEEN_DURATION)
 		_target_rotation = starting_rotation
+		_set_show_number_marker(false)
+		_set_show_suite_marker(false)
+
+
+func _set_show_suite_marker(should_be_visible: bool):
+	var suite_marker: Sprite2D = $SuiteMarker
+	_dim_card_image(should_be_visible)
+	if should_be_visible and not suite_marker.visible:
+		suite_marker.texture = Cards.suite_textures[card_type[0]]
+
+		var tween = create_tween()
+		tween.tween_property(suite_marker, "scale", Vector2.ONE * 1.2, .1).set_ease(Tween.EASE_IN)
+		tween.tween_property(suite_marker, "scale", Vector2.ONE, .1).set_ease(Tween.EASE_OUT)
+
+	suite_marker.visible = should_be_visible
+
+
+
+func _set_show_number_marker(should_be_visible: bool):
+	var number_marker: Label = $NumberMarker
+	_dim_card_image(should_be_visible)
+
+	if should_be_visible and not number_marker.visible:
+		number_marker.text = Cards.get_number_sigil(card_type[1])
+
+		var tween = create_tween()
+		tween.tween_property(number_marker, "scale", Vector2.ONE * 1.2, .1).set_ease(Tween.EASE_IN)
+		tween.tween_property(number_marker, "scale", Vector2.ONE, .1).set_ease(Tween.EASE_OUT)
+
+	number_marker.visible = should_be_visible
+
+
+func _dim_card_image(dimmed: bool):
+	var tween = create_tween().set_ease(Tween.EASE_OUT)
+	var color = Color.WHITE
+	if dimmed:
+		color = Color(2, 2, 2, 1)
+
+	tween.tween_property(self, "self_modulate", color, .1)
 
 
 ## Sometimes, it's impossible to make any move with a given hand.

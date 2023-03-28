@@ -72,6 +72,7 @@ func draw_card(card_type: Array):
 	card.z_index = _played_cards_z_index + 1
 	# position the card a little below the deck
 	card.position = Vector2(0, 200)
+	card.selects_suite = _cards_played_this_turn == 0
 	add_child(card)
 	position_cards()
 	await card.animate_appear()
@@ -86,6 +87,9 @@ func position_cards():
 
 	var children = get_children()
 	var total_cards = len(children)
+	if total_cards == 0:
+		return
+
 	var edge_padding = 50
 	var available_space = ProjectSettings.get_setting("display/window/size/viewport_width") - edge_padding * 2
 	var card_size = Cards.textures[0][0].get_size()
@@ -150,9 +154,17 @@ func _on_take_action(_card_type: Array, action: Events.Action, card_node: Card):
 		if slot_was_filled:
 			_cards_played_this_turn = 0
 
+		for card in get_children():
+			card.selects_suite = _cards_played_this_turn == 0
+
+		if slot_was_filled:
 			if _play_again_count > 0:
 				_play_again_count -= 1
 			else:
+				# Prevent player from selecting any other cards
+				for card in get_children():
+					card.is_played = true
+
 				await get_tree().create_timer(1).timeout
 
 				Events.turn_complete.emit()

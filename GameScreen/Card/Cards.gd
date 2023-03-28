@@ -87,6 +87,14 @@ const textures = {
 }
 
 
+const suite_textures = {
+	Suite.Spades: preload("res://GameScreen/Suite/Spades.png"),
+	Suite.Clubs:  preload("res://GameScreen/Suite/Clubs.png"),
+	Suite.Hearts: preload("res://GameScreen/Suite/Hearts.png"),
+	Suite.Diamonds: preload("res://GameScreen/Suite/Diamonds.png"),
+}
+
+
 static func get_label(card_type: Array) -> String:
 	return "%s of %s" % [get_number_label(card_type[1]), get_suite_label(card_type[0])]
 

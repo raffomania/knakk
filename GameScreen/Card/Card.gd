@@ -263,12 +263,12 @@ func _visualize_interaction_state():
 ## next round.
 ## This method detects when this shoud happen.
 func _need_to_skip_round() -> bool:
-	var result = true
+	var skip_round = true
 
 	for other_card_type in Events.card_types_in_hand:
-		result = result and not Events.is_playable(
+		skip_round = skip_round and not Events.is_playable(
 				other_card_type, Events.Action.CHOOSE)
-		result = result and not Events.is_playable(
+		skip_round = skip_round and not Events.is_playable(
 				other_card_type, Events.Action.REDRAW)
 
-	return result
+	return skip_round

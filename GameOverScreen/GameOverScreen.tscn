@@ -19,55 +19,6 @@ theme_override_constants/margin_right = 80
 theme_override_constants/margin_bottom = 200
 script = ExtResource("1_r4kx5")
 
-[node name="MarginBox" type="Control" parent="."]
-layout_mode = 2
-
-[node name="ScoreBox" type="VBoxContainer" parent="MarginBox"]
-layout_mode = 1
-anchors_preset = 14
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_top = -452.0
-offset_bottom = 117.0
-grow_horizontal = 2
-grow_vertical = 2
-alignment = 1
-
-[node name="Label2" type="Label" parent="MarginBox/ScoreBox"]
-custom_minimum_size = Vector2(0, 200)
-layout_mode = 2
-theme_override_font_sizes/font_size = 80
-text = "Game Over!"
-horizontal_alignment = 1
-
-[node name="Label" type="Label" parent="MarginBox/ScoreBox"]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_font_sizes/font_size = 120
-text = "Your Score:"
-horizontal_alignment = 1
-
-[node name="Reward" parent="MarginBox/ScoreBox" instance=ExtResource("1_cdunu")]
-custom_minimum_size = Vector2(300, 300)
-layout_mode = 2
-color = Color(0, 0.866667, 1, 1)
-
-[node name="Button" type="Button" parent="MarginBox"]
-custom_minimum_size = Vector2(600, 150)
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -72.0
-grow_horizontal = 2
-grow_vertical = 0
-size_flags_horizontal = 4
-size_flags_vertical = 10
-theme_override_font_sizes/font_size = 50
-text = "Play Again"
-
 [node name="Background" type="Control" parent="."]
 layout_mode = 2
 
@@ -125,3 +76,52 @@ offset_bottom = 1672.0
 texture = ExtResource("6_a4brp")
 expand_mode = 1
 stretch_mode = 5
+
+[node name="MarginBox" type="Control" parent="."]
+layout_mode = 2
+
+[node name="ScoreBox" type="VBoxContainer" parent="MarginBox"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -452.0
+offset_bottom = 117.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Label2" type="Label" parent="MarginBox/ScoreBox"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+theme_override_font_sizes/font_size = 80
+text = "Game Over!"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="MarginBox/ScoreBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 120
+text = "Your Score:"
+horizontal_alignment = 1
+
+[node name="Reward" parent="MarginBox/ScoreBox" instance=ExtResource("1_cdunu")]
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 2
+color = Color(0, 0.866667, 1, 1)
+
+[node name="Button" type="Button" parent="MarginBox"]
+custom_minimum_size = Vector2(600, 150)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -72.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 10
+theme_override_font_sizes/font_size = 50
+text = "Play Again"

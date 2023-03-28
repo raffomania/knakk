@@ -153,7 +153,7 @@ func _on_take_action(_card_type: Array, action: Events.Action, card_node: Card):
 			if _play_again_count > 0:
 				_play_again_count -= 1
 			else:
-				await get_tree().create_timer(0.2).timeout
+				await get_tree().create_timer(1).timeout
 
 				Events.turn_complete.emit()
 

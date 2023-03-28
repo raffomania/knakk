@@ -21,10 +21,8 @@ var animation_speed := 1.0
 
 
 func _ready():
-	# Always scale and rotate around the center
-	pivot_offset = size / 2
-
-	($Label as Label).add_theme_font_size_override("font_size", floor(size.x * 0.5))
+	self.resized.connect(_on_resize)
+	_on_resize()
 	($Label as Label).add_theme_font_override("font", preload("res://Fonts/Dosis-Bold.ttf"))
 
 
@@ -69,9 +67,28 @@ func set_reward(value: Reward):
 		animation_player.play("blink", -1, animation_speed)
 
 
+func _on_resize():
+	# Always scale and rotate around the center
+	pivot_offset = size / 2
+	# Adapt font to size
+	($Label as Label).add_theme_font_size_override("font_size", floor(size.x * 0.5))
+
+
 ## Animate the marker to move to the given position in a cool arc motion.
 ## Used when a slot is filled and the reward is added to the score or bonus areas.
 func tween_to_position(global_target: Vector2):
-	var tween = create_tween().set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_BACK)
-	tween.tween_property(self, "global_position", global_target, .7)
+	var original_size = size
+	var center_highlight_size = size * 3
+	var center_position = Util.get_camera_bounds().get_center() - center_highlight_size / 2
+
+	var tween = create_tween().set_trans(Tween.TRANS_EXPO)
+	tween.tween_property(self, "global_position", center_position, .8).set_ease(Tween.EASE_OUT)
+	tween.parallel().tween_property(self, "size", center_highlight_size, .6).set_ease(Tween.EASE_OUT)
+
+	var scale_tween = create_tween().set_trans(Tween.TRANS_EXPO)
+	scale_tween.tween_property(self, "scale", Vector2(0, 1), .2).set_ease(Tween.EASE_IN)
+	scale_tween.tween_property(self, "scale", Vector2.ONE, .4).set_ease(Tween.EASE_OUT)
+
+	tween.tween_property(self, "global_position", global_target, .5).set_ease(Tween.EASE_IN)
+	tween.parallel().tween_property(self, "size", original_size, .4).set_ease(Tween.EASE_IN)
 	await tween.finished

@@ -21,6 +21,7 @@ config/icon="res://Branding/Icon.png"
 [autoload]
 
 Events="*res://Global/Events.gd"
+Util="*res://Global/Util.gd"
 
 [display]
 

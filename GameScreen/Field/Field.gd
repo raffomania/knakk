@@ -48,12 +48,12 @@ func _consider_suite(card_type: Array, can_play_card: bool):
 		# Highlight this suite by resetting the modulate value
 		card_suite_node.modulate = Color.WHITE
 
-		Events.show_help.emit("Choose %s area" % Cards.get_suite_label(card_type[0]))
+		Events.show_help.emit("Choose %s" % Cards.get_suite_label(card_type[0]))
 	else:
 		var other_card_labels = other_card_types.map(func(card_type):
 			return Cards.get_number_label(card_type[1])
 		)
-		Events.show_help.emit("Can't put %s in %s area" % [
+		Events.show_help.emit("Can't put %s in %s" % [
 				" or ".join(other_card_labels),
 				Cards.get_suite_label(card_type[0]),
 		])
@@ -68,11 +68,11 @@ func _consider_number(card_type: Array, can_play_card: bool):
 
 		# Highlight this suite by resetting the modulate value
 		suite_node.modulate = Color.WHITE
-		Events.show_help.emit("Put %s in %s area" % [Cards.get_number_label(card_type[1]), Cards.get_suite_label(_chosen_suite)])
+		Events.show_help.emit("Put %s in %s" % [Cards.get_number_label(card_type[1]), Cards.get_suite_label(_chosen_suite)])
 
 		return
 	else:
-		Events.show_help.emit("Can't put %s in %s area" % [Cards.get_number_label(card_type[1]), Cards.get_suite_label(_chosen_suite)])
+		Events.show_help.emit("Can't put %s in %s" % [Cards.get_number_label(card_type[1]), Cards.get_suite_label(_chosen_suite)])
 		return
 
 

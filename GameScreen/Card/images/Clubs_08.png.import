@@ -16,9 +16,9 @@ dest_files=["res://.godot/imported/Clubs_08.png-24435a98ad367987ab632a6e22e1f5b3
 [params]
 
 compress/mode=0
+compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
-compress/bptc_ldr=0
 compress/normal_map=0
 compress/channel_pack=0
 mipmaps/generate=true

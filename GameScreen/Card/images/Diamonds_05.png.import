@@ -16,9 +16,9 @@ dest_files=["res://.godot/imported/Diamonds_05.png-524621ab74730f152acc4646cf4b4
 [params]
 
 compress/mode=0
+compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
-compress/bptc_ldr=0
 compress/normal_map=0
 compress/channel_pack=0
 mipmaps/generate=true

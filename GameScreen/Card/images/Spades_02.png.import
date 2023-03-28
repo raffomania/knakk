@@ -16,9 +16,9 @@ dest_files=["res://.godot/imported/Spades_02.png-f8edaf183c2375b2b0fdb5b02a68f6b
 [params]
 
 compress/mode=0
+compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
-compress/bptc_ldr=0
 compress/normal_map=0
 compress/channel_pack=0
 mipmaps/generate=true

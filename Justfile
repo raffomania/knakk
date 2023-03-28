@@ -24,7 +24,6 @@ export: export-web export-linux export-osx
 # Upload exported files to various distribution platforms
 
 release-web: export-web
-    butler push export/web raffomania/knakk:web
     netlify deploy --dir export/web --prod
 
 release-linux: export-linux

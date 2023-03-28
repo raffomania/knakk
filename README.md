@@ -85,8 +85,6 @@ There are a few debugging shortcuts that are only enabled in debug mode:
 - **A** Add a play again bonus
 - **D** Toggle debug view
 
-Also, the `Deck` script shows how many cards are left in the deck in debug mode.
-
 ### 🏃 Coroutines
 
 There are a couple good usage examples of coroutines:

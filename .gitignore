@@ -6,7 +6,7 @@ movie.avi
 
 # Builds
 export/
-android/build
+android/
 
 # Local Netlify folder
 .netlify

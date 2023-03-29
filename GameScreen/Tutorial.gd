@@ -5,18 +5,22 @@ const STEPS := [
 In this game, you play cards to fill slots.
 Each filled slot will reward you with points or bonuses. 
 The goal is to get the highest possible score!""",
-	"""Each turn, you select two of your three hand cards to play.
-First, you pick a [b]suite[/b] [img height=60]res://GameScreen/Suite/Clubs.png[/img] [img height=60]res://GameScreen/Suite/Diamonds.png[/img] [img height=60]res://GameScreen/Suite/Spades.png[/img] [img height=60]res://GameScreen/Suite/Hearts.png[/img] card.
-Its suite determines the [b]area[/b] where you'll fill a slot.
-Only the suite on the card matters - its number has no effect.""",
-"""Next, you pick a [b]number[/b] card. Its number determines the slot you're going to fill.
+	"""To pick a slot to fill, you play two cards.
+The first card determines the [b]suite[/b] [img height=60]res://GameScreen/Suite/Clubs.png[/img] [img height=60]res://GameScreen/Suite/Diamonds.png[/img] [img height=60]res://GameScreen/Suite/Spades.png[/img] [img height=60]res://GameScreen/Suite/Hearts.png[/img].
+Each suite has has its own group of slots on the board above.
 
-You can drag a card upwards to pick it. [b]Try it now![/b]""",
+You can drag a card upwards to play it. [b]Try it now![/b]
+""",
+"""Your next card's [b]number[/b] determines the slot you're going to fill.
+This time, only the number matters, and the card's suite will be ignored.
+
+Try picking a number now!
+""",
 	"""Each suite area has its own rules.
 [img height=60]res://GameScreen/Suite/Clubs.png[/img]: Filled from left to right, with [b]each number higher than the previous one[/b].
 [img height=60]res://GameScreen/Suite/Diamonds.png[/img]: Starting from the top left corner, numbers need to [b]fit the range[/b] on each slot.""",
 	"""[img height=60]res://GameScreen/Suite/Spades.png[/img]: Filled in any order. 
-Each slot needs [b]exactly the number[/b] it shows.
+Each slot needs [b]exactly the number[/b] it shows. You get a reward for each row or column you fill.
 [img height=60]res://GameScreen/Suite/Hearts.png[/img]: Filled from left to right. 
 Each slot needs a number [b]higher or equal[/b] to the one it shows.""",
 	"""The turn indicator boxes at the top show how many turns you've played.
@@ -46,6 +50,7 @@ func _ready():
 
 	_next_button.pressed.connect(_on_next_button_pressed)
 	_exit_button.pressed.connect(queue_free)
+	Events.take_action.connect(_on_action_taken)
 
 	_label.text = STEPS[_current_step]
 
@@ -62,10 +67,21 @@ func _on_new_game(with_tutorial: bool):
 func _on_next_button_pressed():
 	_current_step += 1
 
+	_next_button.disabled = false
+
 	if _current_step == len(STEPS) - 1:
 		_next_button.text = "Finish Tutorial"
+		_exit_button.visible = false
+	elif _current_step == 1 or _current_step == 2:
+		_next_button.disabled = true
 
 	if _current_step < len(STEPS):
 		_label.text = STEPS[_current_step]
 	else:
 		queue_free()
+
+
+func _on_action_taken(_card_type, action, _node):
+	if action == Events.Action.CHOOSE:
+		_next_button.disabled = false
+		_on_next_button_pressed()

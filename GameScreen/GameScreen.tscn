@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://blgultqxld18q"]
+[gd_scene load_steps=29 format=3 uid="uid://dk13nxba6ktn5"]
 
 [ext_resource type="PackedScene" path="res://GameScreen/Hand.tscn" id="1_56rkn"]
 [ext_resource type="PackedScene" path="res://GameScreen/Turns/Turns.tscn" id="2_j64vv"]
@@ -9,12 +9,12 @@
 [ext_resource type="Script" path="res://GameScreen/Field/Diamonds.gd" id="6_58l5m"]
 [ext_resource type="Script" path="res://GameScreen/Field/Spades.gd" id="7_c7t16"]
 [ext_resource type="Script" path="res://GameScreen/Field/Hearts.gd" id="8_fhn0x"]
-[ext_resource type="Texture2D" uid="uid://bv5extw7i2q3s" path="res://GameScreen/Suite/Hearts.png" id="9_k3wye"]
+[ext_resource type="Texture2D" uid="uid://c4s5k1gwq7a5h" path="res://GameScreen/Suit/Clubs.png" id="8_weyaj"]
 [ext_resource type="Script" path="res://GameScreen/Field/Clubs.gd" id="9_qy27a"]
 [ext_resource type="Script" path="res://GameScreen/Action/RedrawCardArea.gd" id="10_if57e"]
 [ext_resource type="Script" path="res://GameScreen/Action/PlayAgainArea.gd" id="11_61q87"]
-[ext_resource type="Texture2D" uid="uid://c4s5k1gwq7a5h" path="res://GameScreen/Suite/Clubs.png" id="11_ogyhr"]
 [ext_resource type="Script" path="res://GameScreen/Deck.gd" id="12_54ssd"]
+[ext_resource type="Texture2D" uid="uid://bv5extw7i2q3s" path="res://GameScreen/Suit/Hearts.png" id="12_kgn4i"]
 [ext_resource type="Script" path="res://GameScreen/Action/ActionIndicator.gd" id="13_j0q4n"]
 [ext_resource type="Texture2D" uid="uid://bj7ps2v3qc77w" path="res://GameScreen/Action/Elements_Hexagon_Fill25_blue_L.png" id="14_5jo7a"]
 [ext_resource type="Texture2D" uid="uid://e7bv46taiftm" path="res://GameScreen/Action/Elements_Hexagon_Fill25_green_L.png" id="16_a2r0m"]
@@ -192,14 +192,14 @@ offset_bottom = 268.0
 grow_horizontal = 2
 script = ExtResource("9_qy27a")
 
-[node name="SuiteSymbol" type="TextureRect" parent="Field/Clubs"]
+[node name="SuitSymbol" type="TextureRect" parent="Field/Clubs"]
 custom_minimum_size = Vector2(100, 80)
 layout_mode = 0
 offset_left = 15.0
 offset_top = -3.0
 offset_right = 115.0
 offset_bottom = 87.0
-texture = ExtResource("11_ogyhr")
+texture = ExtResource("8_weyaj")
 expand_mode = 1
 stretch_mode = 4
 
@@ -237,13 +237,13 @@ offset_bottom = 1376.0
 grow_horizontal = 2
 script = ExtResource("8_fhn0x")
 
-[node name="SuiteSymbol" type="TextureRect" parent="Field/Hearts"]
+[node name="SuitSymbol" type="TextureRect" parent="Field/Hearts"]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 0
 offset_left = 26.0
 offset_right = 106.0
 offset_bottom = 90.0
-texture = ExtResource("9_k3wye")
+texture = ExtResource("12_kgn4i")
 expand_mode = 1
 stretch_mode = 5
 

@@ -72,7 +72,7 @@ func draw_card(card_type: Array):
 	card.z_index = _played_cards_z_index + 1
 	# position the card a little below the deck
 	card.position = Vector2(0, 200)
-	card.selects_suite = _cards_played_this_turn == 0
+	card.selects_suit = _cards_played_this_turn == 0
 	add_child(card)
 	position_cards()
 	await card.animate_appear()
@@ -155,7 +155,7 @@ func _on_take_action(_card_type: Array, action: Events.Action, card_node: Card):
 			_cards_played_this_turn = 0
 
 		for card in get_children():
-			card.selects_suite = _cards_played_this_turn == 0
+			card.selects_suit = _cards_played_this_turn == 0
 
 		if slot_was_filled:
 			if _play_again_count > 0:

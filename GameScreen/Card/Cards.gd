@@ -1,6 +1,6 @@
 class_name Cards
 
-enum Suite {
+enum Suit {
     Hearts,
     Diamonds,
     Spades,
@@ -24,7 +24,7 @@ enum Number {
 }
 
 const textures = {
-    Suite.Hearts: {
+    Suit.Hearts: {
         Number.Ace: preload("res://GameScreen/Card/images/Hearts_Ace.png"),
         Number.Two: preload("res://GameScreen/Card/images/Hearts_02.png"),
         Number.Three: preload("res://GameScreen/Card/images/Hearts_03.png"),
@@ -39,7 +39,7 @@ const textures = {
         Number.Queen: preload("res://GameScreen/Card/images/Hearts_Queen.png"),
         Number.King: preload("res://GameScreen/Card/images/Hearts_King.png"),
     },
-    Suite.Diamonds: {
+    Suit.Diamonds: {
         Number.Ace: preload("res://GameScreen/Card/images/Diamonds_Ace.png"),
         Number.Two: preload("res://GameScreen/Card/images/Diamonds_02.png"),
         Number.Three: preload("res://GameScreen/Card/images/Diamonds_03.png"),
@@ -54,7 +54,7 @@ const textures = {
         Number.Queen: preload("res://GameScreen/Card/images/Diamonds_Queen.png"),
         Number.King: preload("res://GameScreen/Card/images/Diamonds_King.png"),
     },
-    Suite.Spades: {
+    Suit.Spades: {
         Number.Ace: preload("res://GameScreen/Card/images/Spades_Ace.png"),
         Number.Two: preload("res://GameScreen/Card/images/Spades_02.png"),
         Number.Three: preload("res://GameScreen/Card/images/Spades_03.png"),
@@ -69,7 +69,7 @@ const textures = {
         Number.Queen: preload("res://GameScreen/Card/images/Spades_Queen.png"),
         Number.King: preload("res://GameScreen/Card/images/Spades_King.png"),
     },
-    Suite.Clubs: {
+    Suit.Clubs: {
         Number.Ace: preload("res://GameScreen/Card/images/Clubs_Ace.png"),
         Number.Two: preload("res://GameScreen/Card/images/Clubs_02.png"),
         Number.Three: preload("res://GameScreen/Card/images/Clubs_03.png"),
@@ -87,20 +87,20 @@ const textures = {
 }
 
 
-const suite_textures = {
-	Suite.Spades: preload("res://GameScreen/Suite/Spades.png"),
-	Suite.Clubs:  preload("res://GameScreen/Suite/Clubs.png"),
-	Suite.Hearts: preload("res://GameScreen/Suite/Hearts.png"),
-	Suite.Diamonds: preload("res://GameScreen/Suite/Diamonds.png"),
+const suit_textures = {
+	Suit.Spades: preload("res://GameScreen/Suit/Spades.png"),
+	Suit.Clubs:  preload("res://GameScreen/Suit/Clubs.png"),
+	Suit.Hearts: preload("res://GameScreen/Suit/Hearts.png"),
+	Suit.Diamonds: preload("res://GameScreen/Suit/Diamonds.png"),
 }
 
 
 static func get_label(card_type: Array) -> String:
-	return "%s of %s" % [get_number_label(card_type[1]), get_suite_label(card_type[0])]
+	return "%s of %s" % [get_number_label(card_type[1]), get_suit_label(card_type[0])]
 
 
-static func get_suite_label(suite: Cards.Suite) -> String:
-	return Suite.find_key(suite)
+static func get_suit_label(suit: Cards.Suit) -> String:
+	return Suit.find_key(suit)
 
 
 static func get_number_label(number: Cards.Number) -> String:

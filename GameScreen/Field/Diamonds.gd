@@ -6,7 +6,7 @@ const COLOR := ColorPalette.RED
 
 const SLOT_SCENE = preload("res://GameScreen/Slot/Slot.tscn")
 const ARROW_SCENE = preload("res://GameScreen/Field/Arrow.tscn")
-const DIAMONDS_TEXTURE = preload("res://GameScreen/Suite/Diamonds.png")
+const DIAMONDS_TEXTURE = preload("res://GameScreen/Suit/Diamonds.png")
 
 # Available slots in row, column format
 # top to bottom, left to right
@@ -82,8 +82,8 @@ var _slots = [
 ## slots have been filled
 # todo this could be removed by using slot.node.is_played instead
 var _played_slots: Array[Vector2i] = []
-## A reference to the TextureRect showing that this area belongs to the diamonds suite
-var _suite_symbol
+## A reference to the TextureRect showing that this area belongs to the diamonds suit
+var _suit_symbol
 
 
 func _ready():
@@ -104,9 +104,9 @@ func can_play(number: Cards.Number) -> bool:
 	return not _find_playable_slots(number).is_empty()
 
 
-func play_suite(card_node: Card):
-	# Move card to position of the suite symbol
-	card_node.move_to(_suite_symbol.global_position + _suite_symbol.size * 0.5)
+func play_suit(card_node: Card):
+	# Move card to position of the suit symbol
+	card_node.move_to(_suit_symbol.global_position + _suit_symbol.size * 0.5)
 
 
 ## Returns the reward gained by playing this card
@@ -179,15 +179,15 @@ func _spawn_arrow(rect: Rect2, is_vertical: bool):
 	add_child(arrow)
 
 
-## Instead of the top-left slot, we display a diamond symbol to show which suite this area is for
+## Instead of the top-left slot, we display a diamond symbol to show which suit this area is for
 func _spawn_diamonds_symbol():
-	_suite_symbol = TextureRect.new()
-	_suite_symbol.texture = DIAMONDS_TEXTURE
-	_suite_symbol.position = _slots[0][0].node.position
-	_suite_symbol.ignore_texture_size = true
-	_suite_symbol.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	add_child(_suite_symbol)
-	_suite_symbol.size = Vector2.ONE * Slot.SIZE
+	_suit_symbol = TextureRect.new()
+	_suit_symbol.texture = DIAMONDS_TEXTURE
+	_suit_symbol.position = _slots[0][0].node.position
+	_suit_symbol.ignore_texture_size = true
+	_suit_symbol.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	add_child(_suit_symbol)
+	_suit_symbol.size = Vector2.ONE * Slot.SIZE
 
 
 ## Find slots that can be filled using a Diamonds card with the given number

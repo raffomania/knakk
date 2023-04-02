@@ -37,8 +37,8 @@ var _slots = [
 	},
 ]
 
-## A reference to the TextureRect showing that this area belongs to the Hearts suite
-@onready var _suite_symbol: TextureRect = $SuiteSymbol
+## A reference to the TextureRect showing that this area belongs to the Hearts suit
+@onready var _suit_symbol: TextureRect = $SuitSymbol
 @onready var _slot_container: HBoxContainer = $SlotContainer
 
 
@@ -51,9 +51,9 @@ func can_play(number: Cards.Number) -> bool:
 	return not _find_playable_slots(number).is_empty()
 
 
-func play_suite(card_node: Card):
-	# Move card to position of the suite symbol
-	card_node.move_to(_suite_symbol.global_position + _suite_symbol.size / 2)
+func play_suit(card_node: Card):
+	# Move card to position of the suit symbol
+	card_node.move_to(_suit_symbol.global_position + _suit_symbol.size / 2)
 
 
 ## Mark the slot for the given number as played and

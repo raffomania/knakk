@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bv5extw7i2q3s"
-path="res://.godot/imported/Hearts.png-f32195804c1e8bce130c00a427eb0229.ctex"
+uid="uid://c4s5k1gwq7a5h"
+path="res://.godot/imported/Clubs.png-323ceb5a61e64812ea0e51f77986e80d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://GameScreen/Suite/Hearts.png"
-dest_files=["res://.godot/imported/Hearts.png-f32195804c1e8bce130c00a427eb0229.ctex"]
+source_file="res://GameScreen/Suit/Clubs.png"
+dest_files=["res://.godot/imported/Clubs.png-323ceb5a61e64812ea0e51f77986e80d.ctex"]
 
 [params]
 

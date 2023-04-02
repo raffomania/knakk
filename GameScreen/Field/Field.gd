@@ -1,9 +1,9 @@
 extends Control
 
 
-## Either `null` or `Cards.Suite`
-## If `null`, no suite has been chosen for this turn
-var _chosen_suite: Variant
+## Either `null` or `Cards.Suit`
+## If `null`, no suit has been chosen for this turn
+var _chosen_suit: Variant
 
 
 func _ready():
@@ -29,58 +29,58 @@ func _on_consider_action(card_type: Array, action: Events.Action):
 		# De-emphasize all areas by making them transparent
 		child.modulate = Color(1, 1, 1, 0.3)
 
-	if _chosen_suite == null:
-		_consider_suite(card_type, _can_play(card_type))
+	if _chosen_suit == null:
+		_consider_suit(card_type, _can_play(card_type))
 	else:
 		_consider_number(card_type, _can_play(card_type))
 	
 
-# User is considering playing the suite on the given card
-func _consider_suite(card_type: Array, can_play_card: bool):
+# User is considering playing the suit on the given card
+func _consider_suit(card_type: Array, can_play_card: bool):
 	var other_card_types = Events.card_types_in_hand.duplicate()
 	other_card_types.erase(card_type)
 	if can_play_card:
 		# highlight slots for all other numbers in the user's hand, 
-		# using the suite of the card the user is considering
-		var card_suite_node = _child_node_for_suite(card_type[0])
-		card_suite_node.highlight_options(other_card_types)
+		# using the suit of the card the user is considering
+		var card_suit_node = _child_node_for_suit(card_type[0])
+		card_suit_node.highlight_options(other_card_types)
 
-		# Highlight this suite by resetting the modulate value
-		card_suite_node.modulate = Color.WHITE
+		# Highlight this suit by resetting the modulate value
+		card_suit_node.modulate = Color.WHITE
 
-		Events.show_help.emit("Choose %s" % Cards.get_suite_label(card_type[0]))
+		Events.show_help.emit("Choose %s" % Cards.get_suit_label(card_type[0]))
 	else:
 		var other_card_labels = other_card_types.map(func(card_type):
 			return Cards.get_number_label(card_type[1])
 		)
 		Events.show_help.emit("Can't put %s in %s" % [
 				" or ".join(other_card_labels),
-				Cards.get_suite_label(card_type[0]),
+				Cards.get_suit_label(card_type[0]),
 		])
 
 
-## A suite is already chosen and user is considering playing the given card's number
+## A suit is already chosen and user is considering playing the given card's number
 func _consider_number(card_type: Array, can_play_card: bool):
 	if can_play_card:
-		# highlight the suite's slots for the number of the considered card
-		var suite_node = _child_node_for_suite(_chosen_suite)
-		suite_node.highlight_options([card_type as Array])
+		# highlight the suit's slots for the number of the considered card
+		var suit_node = _child_node_for_suit(_chosen_suit)
+		suit_node.highlight_options([card_type as Array])
 
-		# Highlight this suite by resetting the modulate value
-		suite_node.modulate = Color.WHITE
-		Events.show_help.emit("Put %s in %s" % [Cards.get_number_label(card_type[1]), Cards.get_suite_label(_chosen_suite)])
+		# Highlight this suit by resetting the modulate value
+		suit_node.modulate = Color.WHITE
+		Events.show_help.emit("Put %s in %s" % [Cards.get_number_label(card_type[1]), Cards.get_suit_label(_chosen_suit)])
 
 		return
 	else:
-		Events.show_help.emit("Can't put %s in %s" % [Cards.get_number_label(card_type[1]), Cards.get_suite_label(_chosen_suite)])
+		Events.show_help.emit("Can't put %s in %s" % [Cards.get_number_label(card_type[1]), Cards.get_suit_label(_chosen_suit)])
 		return
 
 
 func _on_cancel_consider_action(_action: Events.Action):
-	if _chosen_suite != null:
-		var suite_node = _child_node_for_suite(_chosen_suite)
-		suite_node.highlight_options(Events.card_types_in_hand)
-		suite_node.modulate = Color.WHITE
+	if _chosen_suit != null:
+		var suit_node = _child_node_for_suit(_chosen_suit)
+		suit_node.highlight_options(Events.card_types_in_hand)
+		suit_node.modulate = Color.WHITE
 	else:
 		_reset_slot_highlights()
 
@@ -89,35 +89,35 @@ func _on_take_action(card_type: Array, action: Events.Action, card_node: Node):
 	if action != Events.Action.CHOOSE:
 		return
 
-	if _chosen_suite == null:
-		_play_suite(card_type[0], card_node)
+	if _chosen_suit == null:
+		_play_suit(card_type[0], card_node)
 	else:	
 		_play_number(card_type[1], card_node)
 
 
-func _play_suite(suite: Cards.Suite, card_node: Card):
-	_chosen_suite = suite
+func _play_suit(suit: Cards.Suit, card_node: Card):
+	_chosen_suit = suit
 
-	# Add card as child of the given suite while making sure it keeps its global position on screen
-	var suite_node = _child_node_for_suite(suite)
+	# Add card as child of the given suit while making sure it keeps its global position on screen
+	var suit_node = _child_node_for_suit(suit)
 	var card_position = card_node.global_position
-	suite_node.add_child(card_node)
+	suit_node.add_child(card_node)
 	card_node.global_position = card_position
-	# Display card behind the suite symbol
+	# Display card behind the suit symbol
 	card_node.z_index = -1 
 
-	suite_node.play_suite(card_node)
+	suit_node.play_suit(card_node)
 	card_node.shrink_to_played_size()
 
 
 func _play_number(number: Cards.Number, card_node: Card):
-	var slot = _child_node_for_suite(_chosen_suite).play_number(number)
+	var slot = _child_node_for_suit(_chosen_suit).play_number(number)
 
 	var reward_node = slot.get_reward_node()
 	Events.receive_reward.emit(reward_node)
 	slot.fill_with_card(card_node)
 
-	_chosen_suite = null
+	_chosen_suit = null
 	_reset_slot_highlights()
 
 
@@ -125,25 +125,25 @@ func _play_number(number: Cards.Number, card_node: Card):
 func _can_play(card_type: Array) -> bool:
 	var other_card_types = Events.card_types_in_hand.duplicate()
 	other_card_types.erase(card_type)
-	if _chosen_suite == null:
-		return _can_play_suite(card_type[0], other_card_types)
+	if _chosen_suit == null:
+		return _can_play_suit(card_type[0], other_card_types)
 
 	return _can_play_number(card_type[1])
 
 
-func _can_play_suite(suite: Cards.Suite, other_cards: Array[Array]) -> bool:
-	var suite_node = _child_node_for_suite(suite)
-	if suite_node == null: return false
+func _can_play_suit(suit: Cards.Suit, other_cards: Array[Array]) -> bool:
+	var suit_node = _child_node_for_suit(suit)
+	if suit_node == null: return false
 
 	for other_card in other_cards:
-		if suite_node.can_play(other_card[1]):
+		if suit_node.can_play(other_card[1]):
 			return true
 
 	return false
 
 
 func _can_play_number(number: Cards.Number) -> bool:
-	return _child_node_for_suite(_chosen_suite as Cards.Suite).can_play(number)
+	return _child_node_for_suit(_chosen_suit as Cards.Suit).can_play(number)
 
 
 func _reset_slot_highlights():
@@ -152,11 +152,11 @@ func _reset_slot_highlights():
 		child.modulate = Color.WHITE
 
 
-func _child_node_for_suite(suite: Cards.Suite) -> Node:
-	match suite:
-		Cards.Suite.Diamonds: return $Diamonds
-		Cards.Suite.Spades: return $Spades
-		Cards.Suite.Hearts: return $Hearts
-		Cards.Suite.Clubs: return $Clubs
+func _child_node_for_suit(suit: Cards.Suit) -> Node:
+	match suit:
+		Cards.Suit.Diamonds: return $Diamonds
+		Cards.Suit.Spades: return $Spades
+		Cards.Suit.Hearts: return $Hearts
+		Cards.Suit.Clubs: return $Clubs
 
 	return null

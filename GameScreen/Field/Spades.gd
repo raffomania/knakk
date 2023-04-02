@@ -6,7 +6,7 @@ const COLOR := ColorPalette.BLUE
 
 const SLOT_SCENE = preload("res://GameScreen/Slot/Slot.tscn")
 const REWARD_MARKER_SCENE = preload("res://Reward/RewardMarker.tscn")
-const SPADES_TEXTURE = preload("res://GameScreen/Suite/Spades.png")
+const SPADES_TEXTURE = preload("res://GameScreen/Suit/Spades.png")
 
 ## Slots in a column, row format, from left to right, top to bottom
 var _slots = [
@@ -57,8 +57,8 @@ var _row_rewards = [
 ## An array of [column, row] indexes in the slots grid that represent which 
 ## slots have been filled
 var _played_slots: Array[Vector2i] = []
-## A reference to the TextureRect showing that this area belongs to the Spades suite
-var _suite_symbol
+## A reference to the TextureRect showing that this area belongs to the Spades suit
+var _suit_symbol
 
 
 func _ready():
@@ -110,9 +110,9 @@ func can_play(number: Cards.Number) -> bool:
 	return not _find_playable_slots(number).is_empty()
 
 
-func play_suite(card_node: Card):
-	# Move card to position of the suite symbol
-	card_node.move_to(_suite_symbol.global_position + _suite_symbol.size / 2)
+func play_suit(card_node: Card):
+	# Move card to position of the suit symbol
+	card_node.move_to(_suit_symbol.global_position + _suit_symbol.size / 2)
 
 
 ## Return the reward gained by playing this card
@@ -208,15 +208,15 @@ func _spawn_reward_labels():
 			- Vector2(Slot.SIZE, 0) + center_offset
 
 
-## Display a Spades symbol to show which suite this area is for
+## Display a Spades symbol to show which suit this area is for
 func _spawn_spades_symbol():
-	_suite_symbol = TextureRect.new()
-	_suite_symbol.texture = SPADES_TEXTURE
-	_suite_symbol.position = _slots[0][0].node.position + Vector2(-Slot.SIZE * 1.2, Slot.SIZE * 1.2)
-	_suite_symbol.ignore_texture_size = true
-	_suite_symbol.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	add_child(_suite_symbol)
-	_suite_symbol.size = Vector2.ONE * Slot.SIZE
+	_suit_symbol = TextureRect.new()
+	_suit_symbol.texture = SPADES_TEXTURE
+	_suit_symbol.position = _slots[0][0].node.position + Vector2(-Slot.SIZE * 1.2, Slot.SIZE * 1.2)
+	_suit_symbol.ignore_texture_size = true
+	_suit_symbol.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	add_child(_suit_symbol)
+	_suit_symbol.size = Vector2.ONE * Slot.SIZE
 
 
 ## For a given column and row index, get the position for the corresponding slot

@@ -1,7 +1,7 @@
 extends Label
 
 
-## An array of [suite, number] arrays
+## An array of [suit, number] arrays
 ## Cards on top of the deck are at the end of the array
 var cards_in_deck: Array[Array]
 
@@ -18,14 +18,14 @@ func _init():
 ## Refill the deck with all possible cards and shuffle them
 func reset():
 	cards_in_deck = []
-	for suite in Cards.Suite:
+	for suit in Cards.Suit:
 		for number in Cards.Number:
-			cards_in_deck.push_back([Cards.Suite[suite], Cards.Number[number]])
+			cards_in_deck.push_back([Cards.Suit[suit], Cards.Number[number]])
 	cards_in_deck.shuffle()
 	_update_count()
 
 
-## Remove the top card from the deck and return it as a [suite, number] array
+## Remove the top card from the deck and return it as a [suit, number] array
 func draw_card() -> Array:
 	if cards_in_deck.is_empty():
 		reset()

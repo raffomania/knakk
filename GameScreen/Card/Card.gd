@@ -24,14 +24,14 @@ const PLAYED_SCALE := Vector2(0.8, 0.8)
 var starting_position: Vector2
 var starting_rotation: float
 ## The value of this card.
-## Stored as a [suite, number] array.
+## Stored as a [suit, number] array.
 # todo rename to card_value everywhere?
 var card_type: Array
 ## Once the card is played, it cannot be played again.
 var is_played := false
-## If true, this card is used to select a suite.
+## If true, this card is used to select a suit.
 ## If false, this card is used to play a number.
-var selects_suite: bool
+var selects_suit: bool
 
 ## Once users touch this card, this is set to `true`
 ## and subsequent drag events will move this card on the screen
@@ -66,7 +66,7 @@ func _ready():
 
 	scale = NORMAL_SCALE
 	$PlayMarker.visible = false
-	_set_show_suite_marker(false)
+	_set_show_suit_marker(false)
 
 
 func _exit_tree():
@@ -118,7 +118,7 @@ func rotate_to(new_rotation: float):
 
 ## Set the card type for this card.
 ## Will automatically set the new texture for that card type.
-## Expects an array of [suite, number] as the card_type argument
+## Expects an array of [suit, number] as the card_type argument
 func set_card_type(new_card_type: Array):
 	card_type = new_card_type
 	texture = Cards.textures[card_type[0]][card_type[1]]
@@ -250,8 +250,8 @@ func _visualize_interaction_state():
 				.tween_property(self, "scale", ACTION_SCALE, SCALE_TWEEN_DURATION)
 		$PlayMarker.visible = true
 		if _considering_action == Events.Action.CHOOSE:
-			if selects_suite:
-				_set_show_suite_marker(true)
+			if selects_suit:
+				_set_show_suit_marker(true)
 			else:
 				_set_show_number_marker(true)
 	elif _is_dragging:
@@ -261,27 +261,27 @@ func _visualize_interaction_state():
 		_target_rotation = DRAGGING_ROTATION
 		$PlayMarker.visible = false
 		_set_show_number_marker(false)
-		_set_show_suite_marker(false)
+		_set_show_suit_marker(false)
 	else:
 		var tween = create_tween().set_parallel()
 		var _tweener = tween.tween_property(
 				self, "scale", NORMAL_SCALE, SCALE_TWEEN_DURATION)
 		_target_rotation = starting_rotation
 		_set_show_number_marker(false)
-		_set_show_suite_marker(false)
+		_set_show_suit_marker(false)
 
 
-func _set_show_suite_marker(should_be_visible: bool):
-	var suite_marker: Sprite2D = $SuiteMarker
+func _set_show_suit_marker(should_be_visible: bool):
+	var suit_marker: Sprite2D = $SuitMarker
 	_dim_card_image(should_be_visible)
-	if should_be_visible and not suite_marker.visible:
-		suite_marker.texture = Cards.suite_textures[card_type[0]]
+	if should_be_visible and not suit_marker.visible:
+		suit_marker.texture = Cards.suit_textures[card_type[0]]
 
 		var tween = create_tween()
-		tween.tween_property(suite_marker, "scale", Vector2.ONE * 1.2, .1).set_ease(Tween.EASE_IN)
-		tween.tween_property(suite_marker, "scale", Vector2.ONE, .1).set_ease(Tween.EASE_OUT)
+		tween.tween_property(suit_marker, "scale", Vector2.ONE * 1.2, .1).set_ease(Tween.EASE_IN)
+		tween.tween_property(suit_marker, "scale", Vector2.ONE, .1).set_ease(Tween.EASE_OUT)
 
-	suite_marker.visible = should_be_visible
+	suit_marker.visible = should_be_visible
 
 
 

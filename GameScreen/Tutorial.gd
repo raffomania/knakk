@@ -6,22 +6,22 @@ In this game, you play cards to fill slots.
 Each filled slot will reward you with points or bonuses. 
 The goal is to get the highest possible score!""",
 	"""To pick a slot to fill, you play two cards.
-The first card determines the [b]suite[/b] [img height=60]res://GameScreen/Suite/Clubs.png[/img] [img height=60]res://GameScreen/Suite/Diamonds.png[/img] [img height=60]res://GameScreen/Suite/Spades.png[/img] [img height=60]res://GameScreen/Suite/Hearts.png[/img].
-Each suite has has its own group of slots on the board above.
+The first card determines the [b]suit[/b] [img height=60]res://GameScreen/Suit/Clubs.png[/img] [img height=60]res://GameScreen/Suit/Diamonds.png[/img] [img height=60]res://GameScreen/Suit/Spades.png[/img] [img height=60]res://GameScreen/Suit/Hearts.png[/img].
+Each suit has has its own group of slots on the board above.
 
 You can drag a card upwards to play it. [b]Try it now![/b]
 """,
 """Your next card's [b]number[/b] determines the slot you're going to fill.
-This time, only the number matters, and the card's suite will be ignored.
+This time, only the number matters, and the card's suit will be ignored.
 
 Try picking a number now!
 """,
-	"""Each suite area has its own rules.
-[img height=60]res://GameScreen/Suite/Clubs.png[/img]: Filled from left to right, with [b]each number higher than the previous one[/b].
-[img height=60]res://GameScreen/Suite/Diamonds.png[/img]: Starting from the top left corner, numbers need to [b]fit the range[/b] on each slot.""",
-	"""[img height=60]res://GameScreen/Suite/Spades.png[/img]: Filled in any order. 
+	"""Each suit area has its own rules.
+[img height=60]res://GameScreen/Suit/Clubs.png[/img]: Filled from left to right, with [b]each number higher than the previous one[/b].
+[img height=60]res://GameScreen/Suit/Diamonds.png[/img]: Starting from the top left corner, numbers need to [b]fit the range[/b] on each slot.""",
+	"""[img height=60]res://GameScreen/Suit/Spades.png[/img]: Filled in any order. 
 Each slot needs [b]exactly the number[/b] it shows. You get a reward for each row or column you fill.
-[img height=60]res://GameScreen/Suite/Hearts.png[/img]: Filled from left to right. 
+[img height=60]res://GameScreen/Suit/Hearts.png[/img]: Filled from left to right. 
 Each slot needs a number [b]higher or equal[/b] to the one it shows.""",
 	"""The turn indicator boxes at the top show how many turns you've played.
 After each turn, you get a new hand with three new cards.

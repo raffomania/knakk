@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b8w3k86mopexv"
-path="res://.godot/imported/Spades.png-904ab294a0ac3db3bc1f5a1a10982501.ctex"
+path="res://.godot/imported/Spades.png-764107dd9ee7becb223ef4291e3365d7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://GameScreen/Suite/Spades.png"
-dest_files=["res://.godot/imported/Spades.png-904ab294a0ac3db3bc1f5a1a10982501.ctex"]
+source_file="res://GameScreen/Suit/Spades.png"
+dest_files=["res://.godot/imported/Spades.png-764107dd9ee7becb223ef4291e3365d7.ctex"]
 
 [params]
 

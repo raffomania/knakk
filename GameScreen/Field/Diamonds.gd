@@ -15,66 +15,81 @@ var _slots = [
 		{
 			reward = Reward.Nothing.new(),
 			range = [Cards.Number.Two, Cards.Number.Ace],
+			reachable_from = [0, 0],
 		},
 		{
 			reward = Reward.Points.new(2),
-			range = [Cards.Number.Eight, Cards.Number.Ace],
+			range = [Cards.Number.Jack, Cards.Number.Ace],
+			reachable_from = [0, 0],
 		},
 		{
 			reward = Reward.Points.new(3),
-			range = [Cards.Number.Ten, Cards.Number.Ace],
+			range = [Cards.Number.Jack, Cards.Number.Ace],
+			reachable_from = [1, 0],
 		},
 		{
 			reward = Reward.PlayAgain.new(),
 			range = [Cards.Number.Jack, Cards.Number.Ace],
+			reachable_from = [2, 0],
 		},
 		{
-			range = [Cards.Number.Queen, Cards.Number.Ace],
+			range = [Cards.Number.King, Cards.Number.Ace],
 			reward = Reward.Points.new(8),
+			reachable_from = [3, 0],
 		},
 	], [
 		{
 			reward = Reward.Points.new(2),
-			range = [Cards.Number.Two, Cards.Number.Seven],
+			range = [Cards.Number.Two, Cards.Number.Ten],
+			reachable_from = [0, 0],
 		},
 		{
 			reward = Reward.RedrawCard.new(),
-			range = [Cards.Number.Five, Cards.Number.Nine],
+			range = [Cards.Number.Six, Cards.Number.Ten],
+			reachable_from = [0, 1],
 		},
 		{
 			reward = Reward.Points.new(5),
 			range = [Cards.Number.Eight, Cards.Number.Ten],
+			reachable_from = [1, 1],
 		},
 		{
 			reward = Reward.Points.new(8),
-			range = [Cards.Number.Ten, Cards.Number.Jack],
+			range = [Cards.Number.Jack, Cards.Number.Queen],
+			reachable_from = [3, 0]
 		},
 	], [
 		{
 			reward = Reward.PlayAgain.new(),
-			range = [Cards.Number.Two, Cards.Number.Four],
+			range = [Cards.Number.Two, Cards.Number.Five],
+			reachable_from = [0, 1],
 		},
 		{
 			reward = Reward.Points.new(5),
-			range = [Cards.Number.Four, Cards.Number.Seven],
+			range = [Cards.Number.Six, Cards.Number.Seven],
+			reachable_from = [1, 1],
 		},
 		{
 			reward = Reward.Points.new(13),
-			range = [Cards.Number.Six, Cards.Number.Nine],
+			range = [Cards.Number.Eight, Cards.Number.Ten],
+			reachable_from = [2, 1],
+		},
+	], [
+		{
+			reward = Reward.Points.new(5),
+			range = [Cards.Number.Two, Cards.Number.Five],
+			reachable_from = [0, 2],
+		},
+		{
+			reward = Reward.Points.new(5),
+			range = [Cards.Number.Four, Cards.Number.Five],
+			reachable_from = [0, 3],
 		},
 	], [
 		{
 			reward = Reward.Points.new(5),
 			range = [Cards.Number.Two, Cards.Number.Three],
-		},
-		{
-			reward = Reward.Points.new(5),
-			range = [Cards.Number.Three, Cards.Number.Five],
-		},
-	], [
-		{
-			reward = Reward.Points.new(5),
-			range = [Cards.Number.Two, Cards.Number.Three],
+			reachable_from = [0, 3],
 		},
 	],
 ]
@@ -158,12 +173,17 @@ func _spawn_slots():
 			add_child(node)
 			slot_spec.node = node
 
-			var should_spawn_arrows = col_index < len(row) - 1
-			if should_spawn_arrows:
-				_spawn_arrow(Rect2(node.position + Vector2(Slot.SIZE, 0), Vector2(x_padding, Slot.SIZE)), false)
+			var arrow_source_indexes = slot_spec.get("reachable_from")
 
-				_spawn_arrow(Rect2(node.position + Vector2(0, Slot.SIZE), Vector2(Slot.SIZE, y_padding)), true)
-		
+			var source_position = Vector2(arrow_source_indexes[0] * (Slot.SIZE + x_padding) + Slot.SIZE, arrow_source_indexes[1] * (Slot.SIZE + y_padding))
+			var arrow_size = Vector2(x_padding, Slot.SIZE)
+
+			var is_vertical = arrow_source_indexes[1] < row_index
+			if is_vertical:
+				source_position += Vector2(-Slot.SIZE, Slot.SIZE)
+				arrow_size = Vector2(Slot.SIZE, y_padding)
+			_spawn_arrow(Rect2(source_position, arrow_size), is_vertical)
+
 			col_index += 1
 
 		row_index += 1
@@ -197,11 +217,10 @@ func _find_playable_slots(number: Cards.Number) -> Array[Vector2i]:
 	for row_index in len(_slots):
 		var row = _slots[row_index]
 		for col_index in len(row):
-			var left_position = Vector2i(col_index - 1, row_index)
-			var up_position = Vector2i(col_index, row_index - 1)
-			var can_reach_position = left_position in _played_slots or up_position in _played_slots
-
 			var slot_spec = row[col_index]
+			var reachable_from = slot_spec.get("reachable_from")
+			var can_reach_position = reachable_from != null and Vector2i(reachable_from[0], reachable_from[1]) in _played_slots
+
 			var slot_position = Vector2i(col_index, row_index)
 			if Cards.is_in_range(number, slot_spec.range) and \
 					can_reach_position and not slot_position in _played_slots:

@@ -12,31 +12,31 @@ const SPADES_TEXTURE = preload("res://GameScreen/Suit/Spades.png")
 var _slots = [
 	[
 		{
-			number = Cards.Number.Ace,
-		},
-	], [
-		{
-			number = Cards.Number.Five,
-		}, {
 			number = Cards.Number.Two,
 		},
 	], [
 		{
-			number = Cards.Number.Eight,
-		}, {
 			number = Cards.Number.Six,
 		}, {
 			number = Cards.Number.Three,
-		}
+		},
 	], [
 		{
-			number = Cards.Number.Ten,
-		}, {
 			number = Cards.Number.Nine,
 		}, {
 			number = Cards.Number.Seven,
 		}, {
 			number = Cards.Number.Four,
+		}
+	], [
+		{
+			number = Cards.Number.Ace,
+		}, {
+			number = Cards.Number.Ten,
+		}, {
+			number = Cards.Number.Eight,
+		}, {
+			number = Cards.Number.Five,
 		},
 	]
 ]

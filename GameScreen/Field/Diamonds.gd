@@ -14,28 +14,28 @@ var _slots = [
 	[
 		{
 			reward = Reward.Nothing.new(),
-			range = [Cards.Number.Ace, Cards.Number.King],
+			range = [Cards.Number.Two, Cards.Number.Ace],
 		},
 		{
 			reward = Reward.Points.new(2),
-			range = [Cards.Number.Eight, Cards.Number.King],
+			range = [Cards.Number.Eight, Cards.Number.Ace],
 		},
 		{
 			reward = Reward.Points.new(3),
-			range = [Cards.Number.Ten, Cards.Number.King],
+			range = [Cards.Number.Ten, Cards.Number.Ace],
 		},
 		{
 			reward = Reward.PlayAgain.new(),
-			range = [Cards.Number.Jack, Cards.Number.King],
+			range = [Cards.Number.Jack, Cards.Number.Ace],
 		},
 		{
-			range = [Cards.Number.Queen, Cards.Number.King],
+			range = [Cards.Number.Queen, Cards.Number.Ace],
 			reward = Reward.Points.new(8),
 		},
 	], [
 		{
 			reward = Reward.Points.new(2),
-			range = [Cards.Number.Ace, Cards.Number.Seven],
+			range = [Cards.Number.Two, Cards.Number.Seven],
 		},
 		{
 			reward = Reward.RedrawCard.new(),
@@ -52,7 +52,7 @@ var _slots = [
 	], [
 		{
 			reward = Reward.PlayAgain.new(),
-			range = [Cards.Number.Ace, Cards.Number.Four],
+			range = [Cards.Number.Two, Cards.Number.Four],
 		},
 		{
 			reward = Reward.Points.new(5),
@@ -65,7 +65,7 @@ var _slots = [
 	], [
 		{
 			reward = Reward.Points.new(5),
-			range = [Cards.Number.Ace, Cards.Number.Three],
+			range = [Cards.Number.Two, Cards.Number.Three],
 		},
 		{
 			reward = Reward.Points.new(5),
@@ -74,7 +74,7 @@ var _slots = [
 	], [
 		{
 			reward = Reward.Points.new(5),
-			range = [Cards.Number.Ace, Cards.Number.Two],
+			range = [Cards.Number.Two, Cards.Number.Three],
 		},
 	],
 ]

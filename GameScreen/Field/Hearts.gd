@@ -7,31 +7,31 @@ const ARROW_SCENE = preload("res://GameScreen/Field/Arrow.tscn")
 ## Slots in a column list, from left to right
 var _slots = [
 	{
-		number = Cards.Number.Seven,
+		number = Cards.Number.Eight,
 		reward = Reward.Points.new(2),
 		is_played = false,
 	}, {
-		number = Cards.Number.Eight,
+		number = Cards.Number.Nine,
 		reward = Reward.Points.new(3),
 		is_played = false,
 	}, {
-		number = Cards.Number.Nine,
-		reward = Reward.RedrawCard.new(),
-		is_played = false,
-	}, {
 		number = Cards.Number.Ten,
-		reward = Reward.Points.new(10),
+		reward = Reward.RedrawCard.new(),
 		is_played = false,
 	}, {
 		number = Cards.Number.Jack,
-		reward = Reward.RedrawCard.new(),
+		reward = Reward.Points.new(10),
 		is_played = false,
 	}, {
 		number = Cards.Number.Queen,
-		reward = Reward.Points.new(15),
+		reward = Reward.RedrawCard.new(),
 		is_played = false,
 	}, {
 		number = Cards.Number.King,
+		reward = Reward.Points.new(15),
+		is_played = false,
+	}, {
+		number = Cards.Number.Ace,
 		reward = Reward.Points.new(21),
 		is_played = false,
 	},

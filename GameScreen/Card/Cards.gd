@@ -8,7 +8,6 @@ enum Suit {
 }
 
 enum Number {
-    Ace,
     Two,
     Three,
     Four,
@@ -20,12 +19,12 @@ enum Number {
     Ten,
     Jack,
     Queen,
-    King
+    King,
+    Ace
 }
 
 const textures = {
     Suit.Hearts: {
-        Number.Ace: preload("res://GameScreen/Card/images/Hearts_Ace.png"),
         Number.Two: preload("res://GameScreen/Card/images/Hearts_02.png"),
         Number.Three: preload("res://GameScreen/Card/images/Hearts_03.png"),
         Number.Four: preload("res://GameScreen/Card/images/Hearts_04.png"),
@@ -38,9 +37,9 @@ const textures = {
         Number.Jack: preload("res://GameScreen/Card/images/Hearts_Jack.png"),
         Number.Queen: preload("res://GameScreen/Card/images/Hearts_Queen.png"),
         Number.King: preload("res://GameScreen/Card/images/Hearts_King.png"),
+        Number.Ace: preload("res://GameScreen/Card/images/Hearts_Ace.png"),
     },
     Suit.Diamonds: {
-        Number.Ace: preload("res://GameScreen/Card/images/Diamonds_Ace.png"),
         Number.Two: preload("res://GameScreen/Card/images/Diamonds_02.png"),
         Number.Three: preload("res://GameScreen/Card/images/Diamonds_03.png"),
         Number.Four: preload("res://GameScreen/Card/images/Diamonds_04.png"),
@@ -53,9 +52,9 @@ const textures = {
         Number.Jack: preload("res://GameScreen/Card/images/Diamonds_Jack.png"),
         Number.Queen: preload("res://GameScreen/Card/images/Diamonds_Queen.png"),
         Number.King: preload("res://GameScreen/Card/images/Diamonds_King.png"),
+        Number.Ace: preload("res://GameScreen/Card/images/Diamonds_Ace.png"),
     },
     Suit.Spades: {
-        Number.Ace: preload("res://GameScreen/Card/images/Spades_Ace.png"),
         Number.Two: preload("res://GameScreen/Card/images/Spades_02.png"),
         Number.Three: preload("res://GameScreen/Card/images/Spades_03.png"),
         Number.Four: preload("res://GameScreen/Card/images/Spades_04.png"),
@@ -68,9 +67,9 @@ const textures = {
         Number.Jack: preload("res://GameScreen/Card/images/Spades_Jack.png"),
         Number.Queen: preload("res://GameScreen/Card/images/Spades_Queen.png"),
         Number.King: preload("res://GameScreen/Card/images/Spades_King.png"),
+        Number.Ace: preload("res://GameScreen/Card/images/Spades_Ace.png"),
     },
     Suit.Clubs: {
-        Number.Ace: preload("res://GameScreen/Card/images/Clubs_Ace.png"),
         Number.Two: preload("res://GameScreen/Card/images/Clubs_02.png"),
         Number.Three: preload("res://GameScreen/Card/images/Clubs_03.png"),
         Number.Four: preload("res://GameScreen/Card/images/Clubs_04.png"),
@@ -83,6 +82,7 @@ const textures = {
         Number.Jack: preload("res://GameScreen/Card/images/Clubs_Jack.png"),
         Number.Queen: preload("res://GameScreen/Card/images/Clubs_Queen.png"),
         Number.King: preload("res://GameScreen/Card/images/Clubs_King.png"),
+        Number.Ace: preload("res://GameScreen/Card/images/Clubs_Ace.png"),
     }
 }
 
@@ -109,7 +109,6 @@ static func get_number_label(number: Cards.Number) -> String:
 
 static func get_number_sigil(number: Cards.Number) -> String:
 	match number:
-		Number.Ace: return "A"
 		Number.Two: return "2"
 		Number.Three: return "3"
 		Number.Four: return "4"
@@ -122,6 +121,7 @@ static func get_number_sigil(number: Cards.Number) -> String:
 		Number.Jack: return "J"
 		Number.Queen: return "Q"
 		Number.King: return "K"
+		Number.Ace: return "A"
 
 	return "?"
 

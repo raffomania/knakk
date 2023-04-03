@@ -28,6 +28,9 @@ func _on_game_start():
 ## Start a new game in tutorial mode
 func _on_tutorial():
 	new_game.emit(true)
+	# wait for camera transition to finish
+	await get_tree().create_timer(2).timeout
+	$VBoxContainer/Buttons/Continue.visible = true
 
 
 func _on_game_over():

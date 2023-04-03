@@ -19,7 +19,7 @@ export-android:
     godot --headless --export-release "Android aab" export/android/knakk.aab
     godot --headless --export-release "Android apk" export/android/knakk.apk
 
-export: export-web export-linux export-osx
+export: export-web export-linux export-osx export-android
 
 # Upload exported files to various distribution platforms
 

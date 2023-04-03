@@ -72,7 +72,7 @@ func _on_next_button_pressed():
 	if _current_step == len(STEPS) - 1:
 		_next_button.text = "Finish Tutorial"
 		_exit_button.visible = false
-	elif _current_step == 1 or _current_step == 2:
+	elif _current_step in [1, 2]:
 		_next_button.disabled = true
 
 	if _current_step < len(STEPS):
@@ -82,6 +82,6 @@ func _on_next_button_pressed():
 
 
 func _on_action_taken(_card_type, action, _node):
-	if action == Events.Action.CHOOSE:
+	if action == Events.Action.CHOOSE and _current_step in [1, 2]:
 		_next_button.disabled = false
 		_on_next_button_pressed()

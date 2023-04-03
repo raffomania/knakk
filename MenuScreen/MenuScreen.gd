@@ -12,8 +12,6 @@ func _ready():
 	$VBoxContainer/Buttons/Credits.pressed.connect(_on_credits)
 	$VBoxContainer/Credits.back.connect(_on_credits_back)
 
-	Events.game_over.connect(_on_game_over)
-
 	$VBoxContainer/Buttons/Continue.visible = false
 
 
@@ -31,10 +29,6 @@ func _on_tutorial():
 	# wait for camera transition to finish
 	await get_tree().create_timer(2).timeout
 	$VBoxContainer/Buttons/Continue.visible = true
-
-
-func _on_game_over():
-	$VBoxContainer/Buttons/Continue.visible = false
 
 
 ## Open the credits

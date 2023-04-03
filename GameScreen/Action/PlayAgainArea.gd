@@ -73,6 +73,9 @@ func _on_receive_reward(marker: RewardMarker):
 	# Draw the RewardMarker above field and cards
 	marker.z_index = 100
 
+	var original_size = marker.size
+	await marker.tween_to_large_center()
+	marker.tween_to_size(original_size)
 	await marker.tween_to_position(global_position + Vector2(size.x * 0.5, 0))
 
 	var tween = create_tween()

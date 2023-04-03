@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://dk13nxba6ktn5"]
+[gd_scene load_steps=30 format=3 uid="uid://dk13nxba6ktn5"]
 
 [ext_resource type="PackedScene" path="res://GameScreen/Hand.tscn" id="1_56rkn"]
 [ext_resource type="PackedScene" path="res://GameScreen/Turns/Turns.tscn" id="2_j64vv"]
@@ -23,6 +23,7 @@
 [ext_resource type="Script" path="res://CheatCodes.gd" id="20_7c6at"]
 [ext_resource type="Texture2D" uid="uid://bo45gs8f4tja8" path="res://GameScreen/Action/Elements_Hexagon_Fill25_purple_L.png" id="22_6r0mw"]
 [ext_resource type="Texture2D" uid="uid://bnkivayuvgpl2" path="res://GameScreen/Action/Elements_Hexagon_Fill25_pink_L.png" id="23_ma24w"]
+[ext_resource type="Script" path="res://GameScreen/GameOverBox.gd" id="24_cjn0f"]
 
 [sub_resource type="InputEventAction" id="InputEventAction_natam"]
 action = &"ui_cancel"
@@ -470,3 +471,54 @@ visible = false
 
 [node name="CheatCodes" type="Node" parent="."]
 script = ExtResource("20_7c6at")
+
+[node name="GameOverBox" type="Control" parent="." node_paths=PackedStringArray("score")]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -758.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("24_cjn0f")
+score = NodePath("../TopBar/Score")
+
+[node name="ScoreBox" type="VBoxContainer" parent="GameOverBox"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 571.0
+grow_horizontal = 2
+alignment = 1
+
+[node name="Label2" type="Label" parent="GameOverBox/ScoreBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "Game Over!"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="GameOverBox/ScoreBox"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 100
+text = "Your Score:"
+horizontal_alignment = 1
+
+[node name="FinalScorePosition" type="Control" parent="GameOverBox/ScoreBox"]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Reward" parent="GameOverBox/ScoreBox/FinalScorePosition" instance=ExtResource("4_bwyhj")]
+custom_minimum_size = Vector2(210, 210)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -105.0
+offset_right = 105.0
+offset_bottom = 210.0
+grow_horizontal = 2
+pivot_offset = Vector2(105, 105)

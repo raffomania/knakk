@@ -74,10 +74,7 @@ func _on_resize():
 	($Label as Label).add_theme_font_size_override("font_size", floor(size.x * 0.5))
 
 
-## Animate the marker to move to the given position in a cool arc motion.
-## Used when a slot is filled and the reward is added to the score or bonus areas.
-func tween_to_position(global_target: Vector2):
-	var original_size = size
+func tween_to_large_center():
 	var center_highlight_size = size * 3
 	var center_position = Util.get_camera_bounds().get_center() - center_highlight_size / 2
 
@@ -89,6 +86,20 @@ func tween_to_position(global_target: Vector2):
 	scale_tween.tween_property(self, "scale", Vector2(0, 1), .2).set_ease(Tween.EASE_IN)
 	scale_tween.tween_property(self, "scale", Vector2.ONE, .4).set_ease(Tween.EASE_OUT)
 
+	await tween.finished
+
+
+## Animate the marker to move to the given position in a cool arc motion.
+## Used when a slot is filled and the reward is added to the score or bonus areas.
+func tween_to_position(global_target: Vector2):
+	var tween = create_tween().set_trans(Tween.TRANS_EXPO)
 	tween.tween_property(self, "global_position", global_target, .5).set_ease(Tween.EASE_IN)
-	tween.parallel().tween_property(self, "size", original_size, .4).set_ease(Tween.EASE_IN)
+
+	await tween.finished
+
+
+func tween_to_size(target_size: Vector2):
+	var tween = create_tween().set_trans(Tween.TRANS_EXPO)
+	tween.parallel().tween_property(self, "size", target_size, .4).set_ease(Tween.EASE_IN)
+
 	await tween.finished

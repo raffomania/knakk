@@ -7,25 +7,8 @@ const GAME_SCENE = preload("res://GameScreen/GameScreen.tscn")
 
 
 func _ready():
-	Events.game_over.connect(_on_game_over)
 	$MenuScreen.continue_game.connect(_on_continue_game)
 	$MenuScreen.new_game.connect(_on_new_game)
-	$GameOverScreen.new_game.connect(func(): _on_new_game(false))
-
-func _on_game_over():
-	await get_tree().create_timer(.8).timeout
-
-	# Move to game over screen
-	await camera.go_to_game_over_screen()
-
-	# Remember score for later
-	var score = $GameScreen/TopBar/Score.score
-
-	_reset_game()
-
-	# Play score animation
-	await get_tree().create_timer(0.5).timeout
-	$GameOverScreen.animate_score(score)
 
 
 func _on_new_game(with_tutorial: bool):
@@ -34,8 +17,6 @@ func _on_new_game(with_tutorial: bool):
 	Events.new_game.emit(with_tutorial)
 
 	await camera.go_to_game_screen()
-
-	$GameOverScreen.reset()
 
 
 func _on_menu_button_pressed():

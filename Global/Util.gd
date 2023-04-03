@@ -1,6 +1,6 @@
 extends Node2D
 
-func get_camera_bounds():
+func get_camera_bounds() -> Rect2:
 	# Get the canvas transform
 	var ctrans = get_canvas_transform()
 

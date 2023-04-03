@@ -13,6 +13,8 @@ func _ready():
 	$GameOverScreen.new_game.connect(func(): _on_new_game(false))
 
 func _on_game_over():
+	await get_tree().create_timer(.8).timeout
+
 	# Move to game over screen
 	await camera.go_to_game_over_screen()
 

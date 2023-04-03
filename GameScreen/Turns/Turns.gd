@@ -17,6 +17,4 @@ func _on_round_complete():
 	current_round += 1
 
 	if current_round > 3:
-		await get_tree().create_timer(.8).timeout
-
 		Events.game_over.emit()

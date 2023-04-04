@@ -13,6 +13,8 @@ func _ready():
 	$ScoreBox/Buttons/PlayAgain.pressed.connect(_on_play_again)
 	$ScoreBox/Buttons/Share.pressed.connect(_on_share_result)
 	Events.game_over.connect(_on_game_over)
+	if OS.get_name() == "Web":
+		$ScoreBox/Buttons/Share.modulate = Color.TRANSPARENT
 
 
 func _on_game_over():

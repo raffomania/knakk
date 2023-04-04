@@ -40,10 +40,12 @@ func _on_share_result():
 	var image = get_viewport().get_texture().get_image()
 	_toggle_buttons_visible(true)
 	var timestamp = Time.get_datetime_dict_from_system()
-	var userdir = OS.get_user_data_dir()
+	var userdir = OS.get_system_dir(OS.SYSTEM_DIR_DOCUMENTS)
 	var filename = userdir + "/screenshot_" + str(timestamp.year) + "-" + str(timestamp.month) + "-" + str(timestamp.day) + "_" + str(timestamp.hour) + "-" + str(timestamp.minute) + "-" + str(timestamp.second) + ".png"
+	print("saving ", filename)
 	var result = image.save_png(filename)
 	if result != OK:
 		printerr("Error saving screenshot:", result)
+		return
 
 	OS.shell_open(filename)

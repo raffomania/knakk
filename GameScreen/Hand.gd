@@ -24,22 +24,12 @@ func _ready():
 	_err = Events.game_over.connect(_game_over)
 
 	await get_tree().create_timer(1.2).timeout
-	redraw_hand()
+	refill_hand()
 
 
-## Discard the current hand and draw a new one
-## Since this is a coroutine and the hand may get freed while running it,
-## godot may log errors mentioning that it tried to continue this coroutine but
-## the hand instance was gone.
-## This should be fixed with https://github.com/godotengine/godot/pull/65910
-func redraw_hand():
-	await clear()
-
-	# Give the user a little break to notice that cards have disappeared 
-	# before drawing new ones
-	await get_tree().create_timer(0.3).timeout
-	
-	for _i in range(0,3):
+## Fill up the hand to three cards
+func refill_hand():
+	for _i in range(len(get_children()),3):
 		await draw_card(_deck.draw_card())
 
 
@@ -161,15 +151,11 @@ func _on_take_action(_card_type: Array, action: Events.Action, card_node: Card):
 			if _play_again_count > 0:
 				_play_again_count -= 1
 			else:
-				# Prevent player from selecting any other cards
-				for card in get_children():
-					card.is_played = true
-
 				await get_tree().create_timer(1).timeout
 
 				Events.turn_complete.emit()
 
-				await redraw_hand()
+				await refill_hand()
 			
 	if action == Events.Action.SKIP_ROUND:
 		for every_card_node in get_children():
@@ -191,7 +177,8 @@ func _on_take_action(_card_type: Array, action: Events.Action, card_node: Card):
 		_cards_played_this_turn = 0
 		_play_again_count = 0
 		Events.turn_complete.emit()
-		await redraw_hand()
+		await clear()
+		await refill_hand()
 
 
 

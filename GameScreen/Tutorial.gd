@@ -2,23 +2,26 @@ extends CanvasLayer
 
 const STEPS := [
 	"""Welcome to knakk!
-In this game, you play cards to fill slots.
-Each filled slot will reward you with points or bonuses. 
-The goal is to get the highest possible score!""",
-	"""To pick a slot to fill, you play two cards.
-The first card determines the [b]suit[/b] [img height=60]res://GameScreen/Suit/Clubs.png[/img] [img height=60]res://GameScreen/Suit/Diamonds.png[/img] [img height=60]res://GameScreen/Suit/Spades.png[/img] [img height=60]res://GameScreen/Suit/Hearts.png[/img].
-Each suit has has its own group of slots on the board above.
+
+In this game, you play cards to fill slots for points or bonuses. 
+The goal is to reach the highest possible score!""",
+	"""You fill a slot by playing two cards.
+The first card's [b]suit[/b] [img height=60]res://GameScreen/Suit/Clubs.png[/img] [img height=60]res://GameScreen/Suit/Diamonds.png[/img] [img height=60]res://GameScreen/Suit/Spades.png[/img] [img height=60]res://GameScreen/Suit/Hearts.png[/img] selects a group of slots on the board above.
 
 You can drag a card upwards to play it. [b]Try it now![/b]
 """,
-"""Your next card's [b]number[/b] determines the slot you're going to fill.
-This time, only the number matters, and the card's suit will be ignored.
+"""You've selected a suit!
+
+Next, pick a [b]number[/b]. 
+A matching slot is selected automatically.
 
 Try picking a number now!
 """,
-	"""Each suit area has its own rules.
-[img height=60]res://GameScreen/Suit/Clubs.png[/img]: Filled from left to right, with [b]each number higher than the previous one[/b].
-[img height=60]res://GameScreen/Suit/Diamonds.png[/img]: Starting from the top left corner, numbers need to [b]fit the range[/b] on each slot.""",
+	"""The numbers you play need to match the slot's rules:
+[img height=60]res://GameScreen/Suit/Clubs.png[/img]: Filled from left to right. 
+[b]Each number has to be higher than the previous one[/b].
+[img height=60]res://GameScreen/Suit/Diamonds.png[/img]: Filled from the top left, following the arrows. 
+Numbers need to [b]fit the range[/b] on each slot.""",
 	"""[img height=60]res://GameScreen/Suit/Spades.png[/img]: Filled in any order. 
 Each slot needs [b]exactly the number[/b] it shows. You get a reward for each row or column you fill.
 [img height=60]res://GameScreen/Suit/Hearts.png[/img]: Filled from left to right. 

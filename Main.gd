@@ -34,3 +34,4 @@ func _reset_game():
 	var game_node = GAME_SCENE.instantiate()
 	add_child(game_node)
 	$GameScreen/TopBar/MenuButton.pressed.connect(_on_menu_button_pressed)
+	$GameScreen/GameOverBox.play_again.connect(func(): _on_new_game(false))

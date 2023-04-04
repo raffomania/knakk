@@ -30,19 +30,20 @@ func set_score(value: int):
 	$Reward.reward = Reward.Points.new(score)
 
 
-func animate_final_score(final_position: Vector2):
+func animate_final_score(final_position: Vector2, target_size: Vector2):
 	$Reward.animation_speed = 2.0
+
 	$Reward.reward = Reward.Points.new(0)
 	await get_tree().create_timer(.8).timeout
 	var duration = score / 20.0
 	await $Reward.tween_to_large_center()
 	var tween = create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 	tween.tween_method(set_score, 0, score, duration)
-
 	await tween.finished
 	await get_tree().create_timer(.3).timeout
 
-	await $Reward.tween_to_position(final_position - Vector2($Reward.size.x / 2, 0))
+	$Reward.tween_to_size(target_size)
+	await $Reward.tween_to_position(final_position - target_size / 2)
 
 	$Reward.animation_speed = 1.0
 

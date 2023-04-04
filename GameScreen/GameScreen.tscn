@@ -486,8 +486,10 @@ score = NodePath("../TopBar/Score")
 
 [node name="ScoreBox" type="VBoxContainer" parent="GameOverBox"]
 layout_mode = 1
-anchors_preset = 10
+anchors_preset = -1
 anchor_right = 1.0
+offset_left = 50.0
+offset_right = -50.0
 offset_bottom = 571.0
 grow_horizontal = 2
 alignment = 1
@@ -505,20 +507,30 @@ theme_override_font_sizes/font_size = 100
 text = "Your Score:"
 horizontal_alignment = 1
 
-[node name="FinalScorePosition" type="Control" parent="GameOverBox/ScoreBox"]
-custom_minimum_size = Vector2(0, 300)
+[node name="Buttons" type="HBoxContainer" parent="GameOverBox/ScoreBox"]
+layout_mode = 2
+alignment = 1
+
+[node name="PlayAgain" type="Button" parent="GameOverBox/ScoreBox/Buttons"]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+text = "Play Again"
+
+[node name="Score" type="CenterContainer" parent="GameOverBox/ScoreBox/Buttons"]
+custom_minimum_size = Vector2(300, 300)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Reward" parent="GameOverBox/ScoreBox/FinalScorePosition" instance=ExtResource("4_bwyhj")]
-custom_minimum_size = Vector2(210, 210)
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -105.0
-offset_right = 105.0
-offset_bottom = 210.0
-grow_horizontal = 2
-pivot_offset = Vector2(105, 105)
+[node name="Reward" parent="GameOverBox/ScoreBox/Buttons/Score" instance=ExtResource("4_bwyhj")]
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 2
+
+[node name="Share" type="Button" parent="GameOverBox/ScoreBox/Buttons"]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+text = "Share Result"

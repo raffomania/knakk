@@ -38,6 +38,9 @@ func clear():
 		await child.animate_disappear()
 		child.queue_free()
 
+	# Wait for last card to get cleared
+	await get_tree().process_frame
+
 
 func _round_complete():
 	_deck.reset()

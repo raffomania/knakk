@@ -13,7 +13,8 @@ func _unhandled_input(event):
 		Events.round_complete.emit()
 
 	if event.is_action_released("reset_hand"):
-		$'../Hand'.redraw_hand()
+		await $'../Hand'.clear()
+		$'../Hand'.refill_hand()
 
 	if event.is_action_released("add_redraw_bonus"):
 		var marker: RewardMarker = REWARD_MARKER_SCENE.instantiate()

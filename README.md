@@ -1,4 +1,4 @@
-![knakk logo](Branding/small_logo.png)
+![knakk logo](Branding/Play%20Store/Play%20Store%20Banner.png)
 <br/>
 [<img alt="Get it on Google Play" src="Branding/Play%20Store/en_badge_web_generic.png" height="60px" />](https://play.google.com/store/apps/details?id=org.godotengine.knakk)
 [<img alt="Available on itch.io" src="Branding/itch-badge.svg" height="60px" />](https://raffomania.itch.io/knakk)

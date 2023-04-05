@@ -1,9 +1,14 @@
-[gd_scene load_steps=8 format=3 uid="uid://cftjpyo1jqxfa"]
+[gd_scene load_steps=11 format=3 uid="uid://cftjpyo1jqxfa"]
 
 [ext_resource type="Script" path="res://Global/Camera.gd" id="1_5jlkv"]
 [ext_resource type="Script" path="res://Main.gd" id="1_os57m"]
 [ext_resource type="PackedScene" uid="uid://dk13nxba6ktn5" path="res://GameScreen/GameScreen.tscn" id="3_w0hn2"]
+[ext_resource type="Texture2D" uid="uid://dcrdv22hcl58p" path="res://Branding/small_logo.png" id="3_xs27c"]
 [ext_resource type="PackedScene" uid="uid://bgdux7kjr61q1" path="res://MenuScreen/MenuScreen.tscn" id="5_r8sk6"]
+[ext_resource type="Shader" path="res://DarkMode.gdshader" id="5_yr21n"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7u446"]
+shader = ExtResource("5_yr21n")
 
 [sub_resource type="Animation" id="Animation_v032t"]
 length = 0.001
@@ -85,6 +90,19 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 script = ExtResource("1_os57m")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 5
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_7u446")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("3_xs27c")
 
 [node name="Camera" type="Camera2D" parent="."]
 position = Vector2(547, 1228)

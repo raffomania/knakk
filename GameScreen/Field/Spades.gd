@@ -127,15 +127,15 @@ func play_number(number: Cards.Number) -> Slot:
 	# Reset highlights
 	highlight_options([])
 
-	var marker = _get_reward_for_column(slot_position.x)
-	if is_instance_valid(marker):
-		Events.receive_reward.emit(marker)
+	var col_marker = _get_reward_for_column(slot_position.x)
+	if is_instance_valid(col_marker):
+		Events.receive_reward.emit(col_marker)
 
 		queue_redraw()
 
-	marker = _get_reward_for_row(slot_position)
-	if is_instance_valid(marker):
-		Events.receive_reward.emit(marker)
+	var row_marker = _get_reward_for_row(slot_position)
+	if is_instance_valid(row_marker):
+		Events.receive_reward.emit(row_marker)
 
 		queue_redraw()
 

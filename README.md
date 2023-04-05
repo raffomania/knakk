@@ -1,6 +1,6 @@
 ![knakk logo](Branding/small_logo.png)
-[![Get it on Google Play](Branding/Play%20Store/en_badge_web_generic.png)](https://play.google.com/store/apps/details?id=org.godotengine.knakk)
-[![Available on itch.io](Branding/itch-badge.svg)](https://raffomania.itch.io/knakk)
+[<img alt="Get it on Google Play" src="Branding/Play%20Store/en_badge_web_generic.png" width="150px" />](https://play.google.com/store/apps/details?id=org.godotengine.knakk)
+[<img alt="Available on itch.io" src="Branding/itch-badge.svg" width="150px" />](https://raffomania.itch.io/knakk)
 
 *A draw-and-write card game for mobile phones*
 

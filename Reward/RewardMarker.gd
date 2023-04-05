@@ -75,6 +75,7 @@ func _on_resize():
 
 
 func tween_to_large_center():
+	z_index = 500
 	var center_highlight_size = size * 3
 	var center_position = Util.get_camera_bounds().get_center() - center_highlight_size / 2
 

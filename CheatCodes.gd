@@ -33,6 +33,16 @@ func _unhandled_input(event):
 	if event.is_action_pressed("toggle_debug_view"):
 		$'../Deck'.visible = not $'../Deck'.visible
 
+	if event.is_action_pressed("screenshot"):
+		var image = get_viewport().get_texture().get_image()
+		var timestamp = Time.get_datetime_dict_from_system()
+		var userdir = OS.get_system_dir(OS.SYSTEM_DIR_DOCUMENTS)
+		var filename = userdir + "/screenshot_" + str(timestamp.year) + "-" + str(timestamp.month) + "-" + str(timestamp.day) + "_" + str(timestamp.hour) + "-" + str(timestamp.minute) + "-" + str(timestamp.second) + ".png"
+		print("saving ", filename)
+		var result = image.save_png(filename)
+		if result != OK:
+			printerr("Error saving screenshot:", result)
+
 func random_reward_color():
 	var colors = [ColorPalette.RED, ColorPalette.BLUE]
 	return colors[randi() % colors.size()]

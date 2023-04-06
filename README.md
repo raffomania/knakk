@@ -1,9 +1,9 @@
-![knakk logo](Branding/Play%20Store/Play%20Store%20Banner.png)
+![knakk logo](Branding/wide_logo.png)
 <br/>
 [<img alt="Get it on Google Play" src="Branding/Play%20Store/en_badge_web_generic.png" height="60px" />](https://play.google.com/store/apps/details?id=org.godotengine.knakk)
 [<img alt="Available on itch.io" src="Branding/itch-badge.svg" height="60px" />](https://raffomania.itch.io/knakk)
 
-*A draw-and-write card game for mobile phones*
+Perfect your strategy and test your luck in knakk - the relaxed flip-and-write game that challenges you to master the art of card play and strategic slot-filling!
 
 ## 👟 Downloading and Running
 

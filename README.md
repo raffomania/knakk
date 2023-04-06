@@ -12,7 +12,7 @@ You can **get the released game** [on itch.io](https://raffomania.itch.io/knakk)
 To **get the source code**, you have multiple options:
 
 - Clone the repository using git (Recommended): You will need [git LFS](https://git-lfs.com/) to download large assets. After setting it up, you can clone the repository like any other.
-- Download the source archive using GitHub's `Download ZIP` button.
+- Download the source archive as a [zip file from GitHub](https://github.com/raffomania/knakk/archive/refs/heads/main.zip).
 
 ## 📖 Topics Covered in the Code
 

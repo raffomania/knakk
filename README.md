@@ -110,6 +110,13 @@ There are a couple good usage examples of coroutines:
 - Implement a landscape layout: Use Godot's UI features to make the controls automatically resize and reflow depending on different window aspect ratios.
 - Implement a highscore system: Use the filesystem abstraction to save, load and show highscores of previous games.
 
+## FAQ
+
+### Why Is the Release Keystore Checked into the Repo?
+
+This repository uses [git-crypt](https://github.com/AGWA/git-crypt) to encrypt both the keystore and the `export_presets.cfg` file. This way, the file contents remain private. 
+**Do not add your release keystore or export_presets.cfg file to your git repository** without encrypting or adding them to your .gitignore!
+
 ## License
 
 Where not specified otherwise, this project is licensed under the terms of the [MIT License](MIT.txt).

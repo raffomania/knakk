@@ -117,7 +117,7 @@ There are a couple good usage examples of coroutines:
 This repository uses [git-crypt](https://github.com/AGWA/git-crypt) to encrypt both the keystore and the `export_presets.cfg` file. This way, the file contents remain private. 
 **Do not add your release keystore or export_presets.cfg file to your git repository** without encrypting or adding them to your .gitignore!
 
-### What is the status of the project?
+### What Is the Status of the Project?
 
 As of April 2023, knakk has reached version 1.0 and is playable and polished. We'll keep adding features, our plans for this are outlined in [the roadmap](https://github.com/users/raffomania/projects/1/views/1).
 

@@ -27,7 +27,7 @@ func _on_receive_reward(marker: RewardMarker):
 ## the spades area are completed in a single move.
 func _process_reward_queue():
 
-	if reward_queue.front() == null or reward_animation_running:
+	if reward_queue.is_empty() or reward_animation_running:
 		return
 
 	var marker = reward_queue.pop_front()

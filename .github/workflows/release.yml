@@ -1,9 +1,11 @@
 env:
-    GODOT_VERSION: "4.0"
+    GODOT_VERSION: "4.0.2"
     GODOT_BUILD: "stable"
 
 on:
-    - push
+    push:
+        branches:
+            - main
 
 jobs:
     release:
@@ -11,101 +13,161 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v3
+              with:
+                  lfs: true
 
-            # - name: Set up JDK
-            #   uses: actions/setup-java@v3
-            #   with:
-            #       java-version: 11
-            #       distribution: temurin
+            - name: Checkout LFS objects
+              run: git lfs checkout
 
-            # - name: Setup Android SDK
-            #   uses: android-actions/setup-android@v2
+            - name: Set up JDK
+              uses: actions/setup-java@v3
+              with:
+                  java-version: 11
+                  distribution: temurin
 
-            # - name: Set up Android keystore
-            #   run: |
-            #       keytool -keyalg RSA -genkeypair -alias knakk_debug -keypass android -keystore debug.keystore -storepass android -dname "CN=Android Debug,O=Android,C=US" -validity 9999 -deststoretype pkcs12
-            #       sed 's@keystore/debug=".*"@keystore/debug="debug.keystore"@g' -i export_presets.cfg
-            #       sed 's@keystore/debug_password=".*"@keystore/debug_password="android"@g' -i export_presets.cfg
-            #       sed 's@keystore/debug_user=".*"@keystore/debug_user="knakk_debug"@g' -i export_presets.cfg
-            #       echo ${{ secrets.KEYSTORE_BASE64 }} | base64 --decode > release.keystore
-            #       sed 's@keystore/release=".*"@keystore/release="release.keystore"@g' -i export_presets.cfg
-            #       sed 's@keystore/release_password=".*"@keystore/release_password="'${{ secrets.KEYSTORE_PASSWORD }}'"@g' -i export_presets.cfg
-            #       sed 's@keystore/release_user=".*"@keystore/release_user="'${{ secrets.KEYSTORE_USER }}'"@g' -i export_presets.cfg
+            - name: Setup Android SDK
+              uses: android-actions/setup-android@v2
 
-            # - name: export game
-            #   uses: firebelley/godot-export@v4.7.0
-            #   with:
-            #       godot_executable_download_url: https://downloads.tuxfamily.org/godotengine/${{ env.GODOT_VERSION }}/Godot_v${{ env.GODOT_VERSION }}-${{ env.GODOT_BUILD }}_linux.x86_64.zip
-            #       godot_export_templates_download_url: https://downloads.tuxfamily.org/godotengine/${{ env.GODOT_VERSION }}/Godot_v${{ env.GODOT_VERSION }}-${{ env.GODOT_BUILD }}_export_templates.tpz
-            #       relative_project_path: ./
-            #       use_preset_export_path: true
-            #       use_godot_4: true
+            - name: Unlock secrets
+              uses: sliteteam/github-action-git-crypt-unlock@1.2.0
+              env:
+                  GIT_CRYPT_KEY: ${{ secrets.GIT_CRYPT_KEY }}
 
-            # - name: get tag from version
-            #   id: tag_version
-            #   run: |
-            #       echo "TAG_VERSION=$GITHUB_REF_NAME" >> $GITHUB_OUTPUT
+            - name: export game
+              uses: firebelley/godot-export@v4.7.0
+              with:
+                  godot_executable_download_url: https://downloads.tuxfamily.org/godotengine/${{ env.GODOT_VERSION }}/Godot_v${{ env.GODOT_VERSION }}-${{ env.GODOT_BUILD }}_linux.x86_64.zip
+                  godot_export_templates_download_url: https://downloads.tuxfamily.org/godotengine/${{ env.GODOT_VERSION }}/Godot_v${{ env.GODOT_VERSION }}-${{ env.GODOT_BUILD }}_export_templates.tpz
+                  relative_project_path: ./
+                  use_preset_export_path: true
+                  use_godot_4: true
+                  archive_output: true
 
-            # - name: debug stuff
-            #   run: |
-            #       tree export
+            - name: Check that build was successful
+              run: |
+                  tree export
+                  [[ -f "export/android/Android apk.zip" ]] || (echo "android build not found"; exit 1)
+                  [[ -f export/linux/LinuxX11.zip ]] || (echo "linux build not found"; exit 1)
+                  [[ -f export/osx/OSX.zip ]] || (echo "osx build not found"; exit 1)
+                  [[ -f export/web/Web.zip ]] || (echo "web build not found"; exit 1)
+                  [[ -f "export/windows/Windows Desktop.zip" ]] || (echo "windows build not found"; exit 1)
 
-            # - name: Upload APK to release
-            #   uses: svenstaro/upload-release-action@v2
-            #   with:
-            #       file: export/android/**/*
-            #       file_glob: true
-            #       overwrite: true
+            - name: get tag from version
+              id: tag_version
+              run: |
+                  echo "TAG_VERSION=$GITHUB_REF_NAME" >> $GITHUB_OUTPUT
 
-            # - name: Publish to Netlify
-            #   uses: netlify/actions/cli@master
-            #   with:
-            #       args: deploy --dir=export/web --prod
-            #   env:
-            #       NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-            #       NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-            #   if: github.ref_type == 'tag'
+            - name: Upload macOs build to release
+              uses: svenstaro/upload-release-action@v2
+              with:
+                  file: "export/osx/OSX.zip"
+                  asset_name: knakk-osx.zip
+                  overwrite: true
 
-            # - name: Upload android build to itch.io
-            #   uses: yeslayla/butler-publish-itchio-action@v1.0.3
-            #   env:
-            #       BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
-            #       CHANNEL: android
-            #       ITCH_GAME: knakk
-            #       ITCH_USER: raffomania
-            #       PACKAGE: export/android/knakk.apk
-            #       VERSION: ${{ steps.tag_version.outputs.tag_version }}
-            #   if: github.ref_type == 'tag'
+            - name: Upload linux build to release
+              uses: svenstaro/upload-release-action@v2
+              with:
+                  file: export/linux/LinuxX11.zip
+                  asset_name: knakk-linux.zip
+                  overwrite: true
 
-            # - name: Upload linux build to itch.io
-            #   uses: yeslayla/butler-publish-itchio-action@v1.0.3
-            #   env:
-            #       BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
-            #       CHANNEL: linux
-            #       ITCH_GAME: knakk
-            #       ITCH_USER: raffomania
-            #       PACKAGE: export/linux
-            #       VERSION: ${{ steps.tag_version.outputs.tag_version }}
-            #   if: github.ref_type == 'tag'
+            - name: Upload windows build to release
+              uses: svenstaro/upload-release-action@v2
+              with:
+                  file: "export/windows/Windows Desktop.zip"
+                  asset_name: knakk-windows.zip
+                  overwrite: true
 
-            # - name: Upload web build to itch.io
-            #   uses: yeslayla/butler-publish-itchio-action@v1.0.3
-            #   env:
-            #       BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
-            #       CHANNEL: web
-            #       ITCH_GAME: knakk
-            #       ITCH_USER: raffomania
-            #       PACKAGE: export/web
-            #       VERSION: ${{ steps.tag_version.outputs.tag_version }}
-            #   if: github.ref_type == 'tag'
+            - name: Upload android build to release
+              uses: svenstaro/upload-release-action@v2
+              with:
+                  file: "export/android/Android apk.zip"
+                  asset_name: knakk-android.zip
+                  overwrite: true
 
-            # - name: Upload osx build to itch.io
-            #   uses: yeslayla/butler-publish-itchio-action@v1.0.3
-            #   env:
-            #       BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
-            #       CHANNEL: osx
-            #       ITCH_GAME: knakk
-            #       ITCH_USER: raffomania
-            #       PACKAGE: export/osx
-            #       VERSION: ${{ steps.tag_version.outputs.tag_version }}
-            #   if: github.ref_type == 'tag'
+            - name: Upload web build to release
+              uses: svenstaro/upload-release-action@v2
+              with:
+                  file: "export/web/Web.zip"
+                  asset_name: knakk-web.zip
+                  overwrite: true
+
+            - name: Unzip web build for netlify
+              working-directory: export/web
+              run: |
+                  unzip Web.zip -d Web
+                  tree .
+
+            - name: Publish to Netlify Preview
+              uses: netlify/actions/cli@master
+              with:
+                  args: deploy --dir=export/web/Web
+              env:
+                  NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+                  NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+
+            # ---- Commands below run for released versions only
+
+            - name: Publish to Netlify Production
+              uses: netlify/actions/cli@master
+              with:
+                  args: deploy --dir=export/web/Web --prod
+              env:
+                  NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+                  NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+              if: github.ref_type == 'tag'
+
+            - name: Upload android build to itch.io
+              uses: yeslayla/butler-publish-itchio-action@v1.0.3
+              env:
+                  BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
+                  CHANNEL: android
+                  ITCH_GAME: knakk
+                  ITCH_USER: raffomania
+                  PACKAGE: "export/android/Android apk.zip"
+                  VERSION: ${{ steps.tag_version.outputs.tag_version }}
+              if: github.ref_type == 'tag'
+
+            - name: Upload linux build to itch.io
+              uses: yeslayla/butler-publish-itchio-action@v1.0.3
+              env:
+                  BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
+                  CHANNEL: linux
+                  ITCH_GAME: knakk
+                  ITCH_USER: raffomania
+                  PACKAGE: export/linux/LinuxX11.zip
+                  VERSION: ${{ steps.tag_version.outputs.tag_version }}
+              if: github.ref_type == 'tag'
+
+            - name: Upload windows build to itch.io
+              uses: yeslayla/butler-publish-itchio-action@v1.0.3
+              env:
+                  BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
+                  CHANNEL: windows
+                  ITCH_GAME: knakk
+                  ITCH_USER: raffomania
+                  PACKAGE: "export/windows/Windows Desktop.zip"
+                  VERSION: ${{ steps.tag_version.outputs.tag_version }}
+              if: github.ref_type == 'tag'
+
+            - name: Upload web build to itch.io
+              uses: yeslayla/butler-publish-itchio-action@v1.0.3
+              env:
+                  BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
+                  CHANNEL: web
+                  ITCH_GAME: knakk
+                  ITCH_USER: raffomania
+                  PACKAGE: export/web/Web.zip
+                  VERSION: ${{ steps.tag_version.outputs.tag_version }}
+              if: github.ref_type == 'tag'
+
+            - name: Upload osx build to itch.io
+              uses: yeslayla/butler-publish-itchio-action@v1.0.3
+              env:
+                  BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
+                  CHANNEL: osx
+                  ITCH_GAME: knakk
+                  ITCH_USER: raffomania
+                  PACKAGE: export/osx/OSX.zip
+                  VERSION: ${{ steps.tag_version.outputs.tag_version }}
+              if: github.ref_type == 'tag'

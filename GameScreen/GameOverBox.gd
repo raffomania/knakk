@@ -6,25 +6,23 @@ extends Control
 signal play_again
 
 func _ready():
-	# Use modulate instead of `visible` to preserve
-	# the position of the `FinalScorePosition` node
-	modulate = Color.TRANSPARENT
-	$ScoreBox/Buttons/Score/Reward.visible = false
+	visible = false
+	$Score/Reward.visible = false
 	$ScoreBox/Buttons/PlayAgain.pressed.connect(_on_play_again)
 	$ScoreBox/Buttons/Share.pressed.connect(_on_share_result)
 	Events.game_over.connect(_on_game_over)
 	if OS.get_name() == "Web":
-		$ScoreBox/Buttons/Share.modulate = Color.TRANSPARENT
+		$ScoreBox/Buttons/Share.visible = false
 
 
 func _on_game_over():
 	await get_tree().create_timer(1).timeout
-	var position_node = $ScoreBox/Buttons/Score/Reward
-	var score_position = position_node.global_position + position_node.size / 2
-	var target_size = $ScoreBox/Buttons/Score/Reward.size
+	var position_node = $Score/Reward
+	var target_size = position_node.size
+	var score_position = position_node.global_position + target_size / 2
 	await score.animate_final_score(score_position, target_size)
 
-	modulate = Color.WHITE
+	visible = true
 
 
 func _on_play_again():

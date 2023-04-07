@@ -484,6 +484,20 @@ grow_vertical = 0
 script = ExtResource("24_cjn0f")
 score = NodePath("../TopBar/Score")
 
+[node name="Score" type="CenterContainer" parent="GameOverBox"]
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 2
+offset_left = 390.0
+offset_top = 296.0
+offset_right = 690.0
+offset_bottom = 596.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Reward" parent="GameOverBox/Score" instance=ExtResource("4_bwyhj")]
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 2
+
 [node name="ScoreBox" type="VBoxContainer" parent="GameOverBox"]
 layout_mode = 1
 anchors_preset = -1
@@ -507,6 +521,10 @@ theme_override_font_sizes/font_size = 100
 text = "Your Score:"
 horizontal_alignment = 1
 
+[node name="Spacer" type="Control" parent="GameOverBox/ScoreBox"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
 [node name="Buttons" type="HBoxContainer" parent="GameOverBox/ScoreBox"]
 layout_mode = 2
 alignment = 1
@@ -518,15 +536,9 @@ size_flags_horizontal = 3
 size_flags_vertical = 4
 text = "Play Again"
 
-[node name="Score" type="CenterContainer" parent="GameOverBox/ScoreBox/Buttons"]
-custom_minimum_size = Vector2(300, 300)
+[node name="Spacer" type="Control" parent="GameOverBox/ScoreBox/Buttons"]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="Reward" parent="GameOverBox/ScoreBox/Buttons/Score" instance=ExtResource("4_bwyhj")]
-custom_minimum_size = Vector2(300, 300)
-layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="Share" type="Button" parent="GameOverBox/ScoreBox/Buttons"]
 custom_minimum_size = Vector2(0, 120)

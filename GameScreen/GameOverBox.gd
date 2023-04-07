@@ -16,7 +16,7 @@ func _ready():
 
 
 func _on_game_over():
-	await get_tree().create_timer(1).timeout
+	await get_tree().create_timer(1.2).timeout
 	var position_node = $Score/Reward
 	var target_size = position_node.size
 	var score_position = position_node.global_position + target_size / 2

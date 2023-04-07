@@ -312,6 +312,7 @@ func _dim_card_image(dimmed: bool):
 ## If that's the case, the player has to discard their hand and move on to the
 ## next round.
 ## This method detects when this shoud happen.
+## TODO move this to Hand.gd to get rid of the `Events.card_types_in_hand` usage
 func _need_to_skip_round() -> bool:
 	var skip_round = true
 

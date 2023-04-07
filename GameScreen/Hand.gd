@@ -34,6 +34,10 @@ func refill_hand():
 
 
 func clear():
+	# Disable playing for all remaining cards
+	for child in get_children():
+		child.is_played = true
+
 	for child in get_children():
 		await child.animate_disappear()
 		child.queue_free()
@@ -154,11 +158,17 @@ func _on_take_action(_card_type: Array, action: Events.Action, card_node: Card):
 			if _play_again_count > 0:
 				_play_again_count -= 1
 			else:
+				for child in get_children():
+					child.is_played = true
+
 				await get_tree().create_timer(1).timeout
 
 				Events.turn_complete.emit()
 
 				await refill_hand()
+
+				for child in get_children():
+					child.is_played = false
 			
 	if action == Events.Action.SKIP_ROUND:
 		for every_card_node in get_children():

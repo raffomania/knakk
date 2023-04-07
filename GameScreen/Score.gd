@@ -59,8 +59,8 @@ func set_score(value: int):
 func animate_final_score(final_position: Vector2, target_size: Vector2):
 	$Reward.animation_speed = 2.0
 
-	$Reward.reward = Reward.Points.new(0)
 	await get_tree().create_timer(.8).timeout
+	$Reward.reward = Reward.Points.new(0)
 	var duration = score / 20.0
 	await $Reward.tween_to_large_center()
 	var tween = create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)

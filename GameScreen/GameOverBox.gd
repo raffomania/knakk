@@ -18,6 +18,7 @@ func _ready():
 
 
 func _on_game_over():
+	await get_tree().create_timer(1).timeout
 	var position_node = $ScoreBox/Buttons/Score/Reward
 	var score_position = position_node.global_position + position_node.size / 2
 	var target_size = $ScoreBox/Buttons/Score/Reward.size

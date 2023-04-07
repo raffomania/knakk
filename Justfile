@@ -4,14 +4,21 @@ export-web:
     rm -rf export/web
     mkdir -p export/web
     godot --headless --export-release "Web" export/web/index.html 
+
 export-linux:
     rm -rf export/linux
     mkdir -p export/linux
     godot --headless --export-release "Linux/X11" export/linux/knakk.x86_64 
+
 export-osx:
     rm -rf export/osx
     mkdir -p export/osx
     godot --headless --export-release "OSX" export/osx/knakk.app
+
+export-windows:
+    rm -rf export/windows
+    mkdir -p export/windows
+    godot --headless --export-release "Windows Desktop" export/windows/knakk.exe
 
 export-android:
     rm -rf export/android
@@ -31,6 +38,9 @@ release-linux: export-linux
 
 release-osx: export-osx
     butler push export/osx raffomania/knakk:osx
+
+release-windows: export-windows
+    butler push export/windows raffomania/knakk:windows
 
 release-android: export-android
     butler push export/android/knakk.apk raffomania/knakk:android

@@ -17,6 +17,7 @@ run/max_fps=60
 boot_splash/bg_color=Color(0.996078, 0.996078, 0.996078, 1)
 boot_splash/show_image=false
 config/icon="res://Branding/Icon.png"
+config/windows_native_icon="res://Branding/Icon.ico"
 
 [autoload]
 

@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://MenuScreen/Credits.gd" id="1_8pfgn"]
 
 [node name="Credits" type="VBoxContainer"]
-anchors_preset = -1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
@@ -16,7 +16,7 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 bbcode_enabled = true
-text = "knakk was designed and developed by [url=https://www.rafa.ee]Rafael Epplée[/url] as a learning resource for [url=https://www.hoou.de/]Hamburg Open Online University[/url].
+text = "knakk was designed and developed by [url=https://www.rafa.ee]Rafael Epplée[/url] as a demo project for a [url=https://www.hoou.de/]Hamburg Open Online University[/url] course on game development using Godot.
 
 Where not specified otherwise, knakk is licensed under the MIT license.
 

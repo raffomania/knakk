@@ -7,7 +7,7 @@ Perfect your strategy and test your luck in knakk - the relaxed flip-and-write g
 
 ## 👟 Downloading and Running
 
-You can **get the released game** [on itch.io](https://raffomania.itch.io/knakk) and [on Google Play](https://play.google.com/store/apps/details?id=org.godotengine.knakk).
+You can [play in your browser](https://knakk-game.netlify.app/) or **get the released game** [on itch.io](https://raffomania.itch.io/knakk) and [on Google Play](https://play.google.com/store/apps/details?id=org.godotengine.knakk).
 
 To **get the source code**, you have multiple options:
 

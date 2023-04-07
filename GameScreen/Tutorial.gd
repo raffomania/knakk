@@ -6,18 +6,18 @@ const STEPS := [
 In this game, you play cards to fill slots for points or bonuses. 
 The goal is to reach the highest possible score!""",
 	"""You fill a slot by playing two cards.
-The first card's [b]suit[/b] [img height=60]res://GameScreen/Suit/Clubs.png[/img] [img height=60]res://GameScreen/Suit/Diamonds.png[/img] [img height=60]res://GameScreen/Suit/Spades.png[/img] [img height=60]res://GameScreen/Suit/Hearts.png[/img] selects a group of slots on the board above.
+The first card's [b]suit[/b] [img height=60]res://GameScreen/Suit/Clubs.png[/img] [img height=60]res://GameScreen/Suit/Diamonds.png[/img] [img height=60]res://GameScreen/Suit/Spades.png[/img] [img height=60]res://GameScreen/Suit/Hearts.png[/img] selects a suit on the board above.
 
 You can drag a card upwards to play it. [b]Try it now![/b]
 """,
 """You've selected a suit!
 
-Next, pick a [b]number[/b]. 
+Next, pick a [b]number[/b] to put into that suit.
 A matching slot is selected automatically.
 
 Try picking a number now!
 """,
-	"""The numbers you play need to match the slot's rules:
+	"""You can only play numbers that match the slot's rules:
 [img height=60]res://GameScreen/Suit/Clubs.png[/img]: Filled from left to right. 
 [b]Each number has to be higher than the previous one[/b].
 [img height=60]res://GameScreen/Suit/Diamonds.png[/img]: Filled from the top left, following the arrows. 
@@ -27,7 +27,7 @@ Each slot needs [b]exactly the number[/b] it shows. You get a reward for each ro
 [img height=60]res://GameScreen/Suit/Hearts.png[/img]: Filled from left to right. 
 Each slot needs a number [b]higher or equal[/b] to the one it shows.""",
 	"""The turn indicator boxes at the top show how many turns you've played.
-After each turn, you get a new hand with three new cards.
+After each turn, your hand is topped up to 3 cards.
 After five turns, the deck is refilled and shuffled.
 After fifteen turns, the game is over.""",
 	"""Some slots will reward you with bonuses.

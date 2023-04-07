@@ -1,8 +1,20 @@
-![knakk logo](Branding/small_logo.png)
+![knakk logo](Branding/wide_logo.png)
+<br/>
+[<img alt="Get it on Google Play" src="Branding/Play%20Store/en_badge_web_generic.png" height="60px" />](https://play.google.com/store/apps/details?id=org.godotengine.knakk)
+[<img alt="Available on itch.io" src="Branding/itch-badge.svg" height="60px" />](https://raffomania.itch.io/knakk)
 
-*A draw-and-write card game for mobile phones*
+Perfect your strategy and test your luck in knakk - the relaxed flip-and-write game that challenges you to master the art of card play and strategic slot-filling!
 
-## 📖 Reading the Code
+## 👟 Downloading and Running
+
+You can **get the released game** [on itch.io](https://raffomania.itch.io/knakk) and [on Google Play](https://play.google.com/store/apps/details?id=org.godotengine.knakk).
+
+To **get the source code**, you have multiple options:
+
+- Clone the repository using git (Recommended): You will need [Git LFS](https://git-lfs.com/) to download large assets. After setting it up, you can clone the repository like any other.
+- Download the source archive as a [zip file from GitHub](https://github.com/raffomania/knakk/archive/refs/heads/main.zip).
+
+## 📖 Topics Covered in the Code
 
 This game contains many examples that show you how to use Godot's built-in features to build a game. Here is an overview of topics covered and where to find code relevant to each of them.
 
@@ -32,7 +44,7 @@ Tweens are used in two situations:
 - We don't know the start or end values of an animation in advance. For an example of this, see the `shrink_to_played_size` method in [`Card.gd`](GameScreen/Card/Card.gd). It animates the card's rotation to a random value.
 - It's a super simple animation that is more convenient to create with a short line of code. See the `visualize_interaction_state` method in [`Card.gd`](GameScreen/Card/Card.gd) for an example. It sets the card's scale and rotation to constant values but uses a tween to smoothly transition to those values.
 
-#### 🔧 Manual frame-by-frame animation
+#### 🔧 Manual Frame-by-Frame Animation
 
 When cards move around on the board, their movement is smoothed. This is not implemented using a tween but a custom movement step in the `_process` method.
 This is to have precise control over the speed and smoothing curve of the movement, and to avoid creating a new tween object every frame when users drag a card.
@@ -70,7 +82,7 @@ The drag-and-drop mechanic in [`Card.gd`](GameScreen/Card/Card.gd) works by capt
 I noticed that there can be a slight pause between a touch start event and a subsequent touch movement, causing a dragged card to "jump" between its original position and the position indicated by the user's finger.
 To prevent that jump, cards always interpolate between their current and their target position, resulting in a quick smooth motion.
 
-### 🖊 Code style
+### 🖊 Code Style
 
 The code mostly follows the [Official GDScript Style Guide](https://docs.godotengine.org/en/latest/tutorials/scripting/gdscript/gdscript_styleguide.html) and the [GDQuest GDScript Style Guide](https://www.gdquest.com/docs/guidelines/best-practices/godot-gdscript/).
 
@@ -93,10 +105,21 @@ There are a couple good usage examples of coroutines:
 - [`Card.gd`](GameScreen/Card/Card.gd) uses coroutines to wait for tweens to finish
 - [`MenuScreen.gd`](MenuScreen/MenuScreen.gd), [`Tutorial.gd`](GameScreen/Tutorial.gd) and [`NewRoundAnimation.gd`](GameScreen/NewRoundAnimation.gd) use coroutines to wait for a specified amount of time before doing something
 
-## 🎯 Tasks left for the reader
+## 🎯 Tasks Left for the Reader
 
 - Implement a landscape layout: Use Godot's UI features to make the controls automatically resize and reflow depending on different window aspect ratios.
 - Implement a highscore system: Use the filesystem abstraction to save, load and show highscores of previous games.
+
+## FAQ
+
+### Why Is the Release Keystore Checked into the Repo?
+
+This repository uses [git-crypt](https://github.com/AGWA/git-crypt) to encrypt both the keystore and the `export_presets.cfg` file. This way, the file contents remain private. 
+**Do not add your release keystore or export_presets.cfg file to your git repository** without encrypting or adding them to your .gitignore!
+
+### What Is the Status of the Project?
+
+As of April 2023, knakk has reached version 1.0 and is playable and polished. We'll keep adding features, our plans for this are outlined in [the roadmap](https://github.com/users/raffomania/projects/1/views/1).
 
 ## License
 

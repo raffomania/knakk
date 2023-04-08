@@ -62,6 +62,7 @@ jobs:
               with:
                   file: "export/osx/OSX.zip"
                   asset_name: knakk-osx.zip
+                  prerelease: true
                   overwrite: true
 
             - name: Upload linux build to release
@@ -69,6 +70,7 @@ jobs:
               with:
                   file: export/linux/LinuxX11.zip
                   asset_name: knakk-linux.zip
+                  prerelease: true
                   overwrite: true
 
             - name: Upload windows build to release
@@ -76,6 +78,7 @@ jobs:
               with:
                   file: "export/windows/Windows Desktop.zip"
                   asset_name: knakk-windows.zip
+                  prerelease: true
                   overwrite: true
 
             - name: Upload android build to release
@@ -83,6 +86,7 @@ jobs:
               with:
                   file: "export/android/Android apk.zip"
                   asset_name: knakk-android.zip
+                  prerelease: true
                   overwrite: true
 
             - name: Upload web build to release
@@ -90,6 +94,7 @@ jobs:
               with:
                   file: "export/web/Web.zip"
                   asset_name: knakk-web.zip
+                  prerelease: true
                   overwrite: true
 
             - name: Unzip web build for netlify

@@ -26,7 +26,7 @@ export-android:
     godot --headless --export-release "Android aab" export/android/knakk.aab
     godot --headless --export-release "Android apk" export/android/knakk.apk
 
-export: export-web export-linux export-osx export-android
+export: export-web export-linux export-osx export-windows export-android
 
 # Upload exported files to various distribution platforms
 
@@ -45,7 +45,7 @@ release-windows: export-windows
 release-android: export-android
     butler push export/android/knakk.apk raffomania/knakk:android
 
-release: release-web release-linux release-osx release-android
+release: release-web release-linux release-osx release-windows release-android 
 
 generate-card-images:
     fd png$ GameScreen/Card/source_images -x magick convert {} -resize 295x410 -background transparent -gravity center -extent 295x410 GameScreen/Card/images/{/}

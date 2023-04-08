@@ -99,9 +99,8 @@ jobs:
                   tree .
 
             - name: Publish to Netlify Preview
-              uses: netlify/actions/cli@master
-              with:
-                  args: deploy --dir=export/web/Web
+              run: |
+                  npx netlify deploy --dir=export/web/Web
               env:
                   NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
                   NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
@@ -109,9 +108,8 @@ jobs:
             # ---- Commands below run for released versions only
 
             - name: Publish to Netlify Production
-              uses: netlify/actions/cli@master
-              with:
-                  args: deploy --dir=export/web/Web --prod
+              run: |
+                  npx netlify deploy --dir=export/web/Web --prod
               env:
                   NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
                   NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}

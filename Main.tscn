@@ -93,6 +93,7 @@ script = ExtResource("1_os57m")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 5
+visible = false
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
 material = SubResource("ShaderMaterial_7u446")

@@ -1,16 +1,10 @@
 [gd_resource type="Theme" load_steps=7 format=3 uid="uid://cnmy8s7h1qby8"]
 
 [ext_resource type="FontFile" uid="uid://8lo5awqmuhq" path="res://Fonts/Dosis-Medium.ttf" id="1_guvjk"]
+[ext_resource type="StyleBox" uid="uid://df32wfbcjejng" path="res://theme/button_style_box_normal.tres" id="1_hpsm6"]
 [ext_resource type="FontFile" uid="uid://dlbna5qf0660q" path="res://Fonts/Dosis-Bold.ttf" id="1_lpect"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6btep"]
-bg_color = Color(0.47451, 0.419608, 0.839216, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j4g53"]
-bg_color = Color(0.423529, 0.356863, 0.843137, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v8nec"]
-bg_color = Color(0.318693, 0.2508, 0.76, 1)
+[ext_resource type="StyleBox" uid="uid://cxi3wwniqo8ib" path="res://theme/button_style_box_hover.tres" id="1_p0qyy"]
+[ext_resource type="StyleBox" uid="uid://777k8mbltyhs" path="res://theme/button_style_box_pressed.tres" id="3_px86y"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jrox1"]
 bg_color = Color(0.980392, 0.980392, 0.980392, 1)
@@ -30,9 +24,13 @@ shadow_color = Color(0, 0, 0, 0.101961)
 default_font = ExtResource("1_guvjk")
 default_font_size = 40
 Button/colors/font_color = Color(0.980392, 0.980392, 0.980392, 1)
-Button/styles/hover = SubResource("StyleBoxFlat_6btep")
-Button/styles/normal = SubResource("StyleBoxFlat_j4g53")
-Button/styles/pressed = SubResource("StyleBoxFlat_v8nec")
+Button/styles/hover = ExtResource("1_p0qyy")
+Button/styles/normal = ExtResource("1_hpsm6")
+Button/styles/pressed = ExtResource("3_px86y")
+CheckButton/styles/hover = ExtResource("1_p0qyy")
+CheckButton/styles/hover_pressed = ExtResource("1_p0qyy")
+CheckButton/styles/normal = ExtResource("1_hpsm6")
+CheckButton/styles/pressed = ExtResource("3_px86y")
 Label/colors/font_color = Color(0.0627451, 0.0627451, 0.0627451, 1)
 Panel/styles/panel = SubResource("StyleBoxFlat_jrox1")
 RichTextLabel/constants/line_separation = 5

@@ -9,8 +9,10 @@ func _ready():
 	$VBoxContainer/Buttons/Start.pressed.connect(_on_game_start)
 	$VBoxContainer/Buttons/Tutorial.pressed.connect(_on_tutorial)
 	$VBoxContainer/Buttons/Continue.pressed.connect(func(): continue_game.emit())
-	$VBoxContainer/Buttons/Credits.pressed.connect(_on_credits)
+	$VBoxContainer/Buttons/VBoxContainer/Credits.pressed.connect(_on_credits)
+	$VBoxContainer/Buttons/VBoxContainer/Settings.pressed.connect(_on_settings)
 	$VBoxContainer/Credits.back.connect(_on_credits_back)
+	$VBoxContainer/Settings/Back.pressed.connect(_on_settings_back)
 
 	$VBoxContainer/Buttons/Continue.visible = false
 
@@ -41,3 +43,14 @@ func _on_credits():
 func _on_credits_back():
 	$VBoxContainer/Buttons.visible = true
 	$VBoxContainer/Credits.visible = false
+
+## Open the settings
+func _on_settings():
+	$VBoxContainer/Buttons.visible = false
+	$VBoxContainer/Settings.visible = true
+
+
+## Close the settings
+func _on_settings_back():
+	$VBoxContainer/Buttons.visible = true
+	$VBoxContainer/Settings.visible = false

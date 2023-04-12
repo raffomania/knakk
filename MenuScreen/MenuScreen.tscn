@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://bgdux7kjr61q1"]
+[gd_scene load_steps=8 format=3 uid="uid://bgdux7kjr61q1"]
 
 [ext_resource type="Script" path="res://MenuScreen/MenuScreen.gd" id="1_3vljn"]
 [ext_resource type="Texture2D" uid="uid://bwdoqv44bdfth" path="res://Branding/logo.png" id="2_m6tur"]
 [ext_resource type="PackedScene" uid="uid://b84mtgu5e78yi" path="res://MenuScreen/Credits.tscn" id="3_3n468"]
+[ext_resource type="PackedScene" uid="uid://b8qo6tj7c30tg" path="res://MenuScreen/Settings.tscn" id="4_en1d5"]
 
 [sub_resource type="Animation" id="Animation_qpxdu"]
 resource_name = "Intro"
@@ -154,6 +155,10 @@ libraries = {
 visible = false
 layout_mode = 2
 
+[node name="Settings" parent="VBoxContainer" instance=ExtResource("4_en1d5")]
+visible = false
+layout_mode = 2
+
 [node name="Buttons" type="VBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 50
@@ -174,7 +179,18 @@ custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 text = "Play Tutorial"
 
-[node name="Credits" type="Button" parent="VBoxContainer/Buttons"]
+[node name="VBoxContainer" type="HBoxContainer" parent="VBoxContainer/Buttons"]
+layout_mode = 2
+theme_override_constants/separation = 25
+
+[node name="Credits" type="Button" parent="VBoxContainer/Buttons/VBoxContainer"]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
+size_flags_horizontal = 3
 text = "Credits"
+
+[node name="Settings" type="Button" parent="VBoxContainer/Buttons/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Settings"

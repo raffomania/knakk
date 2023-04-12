@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://b8qo6tj7c30tg"]
+
+[node name="Settings" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 50
+
+[node name="CheckBox" type="CheckButton" parent="."]
+layout_mode = 2
+text = "Dark Mode"
+
+[node name="Back" type="Button" parent="."]
+layout_mode = 2
+text = "Back"

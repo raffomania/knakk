@@ -48,4 +48,4 @@ release-android: export-android
 release: release-web release-linux release-osx release-windows release-android 
 
 generate-card-images:
-    fd png$ GameScreen/Card/source_images -x magick convert {} -resize 295x410 -background transparent -gravity center -extent 295x410 GameScreen/Card/images/{/}
+    fd png$ GameScreen/Card/source_images -x magick convert {} -resize 354x492 -background transparent -gravity center -extent 364x500 GameScreen/Card/images/{/}

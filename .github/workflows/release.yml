@@ -52,51 +52,6 @@ jobs:
                   [[ -f export/web/Web.zip ]] || (echo "web build not found"; exit 1)
                   [[ -f "export/windows/Windows Desktop.zip" ]] || (echo "windows build not found"; exit 1)
 
-            - name: get tag from version
-              id: tag_version
-              run: |
-                  echo "TAG_VERSION=$GITHUB_REF_NAME" >> $GITHUB_OUTPUT
-
-            - name: Upload macOs build to release
-              uses: svenstaro/upload-release-action@v2
-              with:
-                  file: "export/osx/OSX.zip"
-                  asset_name: knakk-osx.zip
-                  prerelease: true
-                  overwrite: true
-
-            - name: Upload linux build to release
-              uses: svenstaro/upload-release-action@v2
-              with:
-                  file: export/linux/LinuxX11.zip
-                  asset_name: knakk-linux.zip
-                  prerelease: true
-                  overwrite: true
-
-            - name: Upload windows build to release
-              uses: svenstaro/upload-release-action@v2
-              with:
-                  file: "export/windows/Windows Desktop.zip"
-                  asset_name: knakk-windows.zip
-                  prerelease: true
-                  overwrite: true
-
-            - name: Upload android build to release
-              uses: svenstaro/upload-release-action@v2
-              with:
-                  file: "export/android/Android apk.zip"
-                  asset_name: knakk-android.zip
-                  prerelease: true
-                  overwrite: true
-
-            - name: Upload web build to release
-              uses: svenstaro/upload-release-action@v2
-              with:
-                  file: "export/web/Web.zip"
-                  asset_name: knakk-web.zip
-                  prerelease: true
-                  overwrite: true
-
             - name: Unzip web build for netlify
               working-directory: export/web
               run: |
@@ -111,6 +66,56 @@ jobs:
                   NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
 
             # ---- Commands below run for released versions only
+
+            - name: get tag from version
+              id: tag_version
+              run: |
+                  echo "TAG_VERSION=$GITHUB_REF_NAME" >> $GITHUB_OUTPUT
+
+            - name: Upload macOs build to release
+              uses: svenstaro/upload-release-action@v2
+              with:
+                  file: "export/osx/OSX.zip"
+                  asset_name: knakk-osx.zip
+                  prerelease: true
+                  overwrite: true
+              if: github.ref_type == 'tag'
+
+            - name: Upload linux build to release
+              uses: svenstaro/upload-release-action@v2
+              with:
+                  file: export/linux/LinuxX11.zip
+                  asset_name: knakk-linux.zip
+                  prerelease: true
+                  overwrite: true
+              if: github.ref_type == 'tag'
+
+            - name: Upload windows build to release
+              uses: svenstaro/upload-release-action@v2
+              with:
+                  file: "export/windows/Windows Desktop.zip"
+                  asset_name: knakk-windows.zip
+                  prerelease: true
+                  overwrite: true
+              if: github.ref_type == 'tag'
+
+            - name: Upload android build to release
+              uses: svenstaro/upload-release-action@v2
+              with:
+                  file: "export/android/Android apk.zip"
+                  asset_name: knakk-android.zip
+                  prerelease: true
+                  overwrite: true
+              if: github.ref_type == 'tag'
+
+            - name: Upload web build to release
+              uses: svenstaro/upload-release-action@v2
+              with:
+                  file: "export/web/Web.zip"
+                  asset_name: knakk-web.zip
+                  prerelease: true
+                  overwrite: true
+              if: github.ref_type == 'tag'
 
             - name: Publish to Netlify Production
               run: |

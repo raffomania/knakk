@@ -47,5 +47,15 @@ release-android: export-android
 
 release: release-web release-linux release-osx release-windows release-android 
 
+tag-version version:
+    #!/usr/bin/env sh
+    rg -q "{{version}}.*[\d-]+" CHANGELOG.md || (echo "Version or release date not found in CHANGELOG.md" && exit 1)
+    current_code=$(rg -o 'version/code=(.*)' -r '$1' export_presets.cfg | head -n 1)
+    new_code=$((current_code + 1))
+    sed -i "s,version/code=.*,version/code=${new_code}," export_presets.cfg
+    sed -i 's,version/name=".*",version/name="{{version}}",' export_presets.cfg
+    sed -i 's,application/version=".*",application/version="{{version}}",' export_presets.cfg
+    sed -i 's,application/short_version=".*",application/short_version="{{version}}",' export_presets.cfg
+
 generate-card-images:
     fd png$ GameScreen/Card/source_images -x magick convert {} -resize 354x492 -background transparent -gravity center -extent 364x500 GameScreen/Card/images/{/}

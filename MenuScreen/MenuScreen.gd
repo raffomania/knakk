@@ -3,6 +3,7 @@ extends MarginContainer
 
 signal continue_game
 signal new_game(with_tutorial: bool)
+signal settings_changed(new_settings: SettingsObject)
 
 
 func _ready():
@@ -13,6 +14,7 @@ func _ready():
 	$VBoxContainer/Buttons/VBoxContainer/Settings.pressed.connect(_on_settings)
 	$VBoxContainer/Credits.back.connect(_on_credits_back)
 	$VBoxContainer/Settings/Back.pressed.connect(_on_settings_back)
+	$VBoxContainer/Settings/DarkModeToggle.toggled.connect(_on_dark_mode_toggle)
 
 	$VBoxContainer/Buttons/Continue.visible = false
 
@@ -54,3 +56,9 @@ func _on_settings():
 func _on_settings_back():
 	$VBoxContainer/Buttons.visible = true
 	$VBoxContainer/Settings.visible = false
+
+
+func _on_dark_mode_toggle(active: bool):
+	var settings = SettingsObject.new()
+	settings.dark_mode = active
+	settings_changed.emit(settings)

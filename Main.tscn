@@ -91,10 +91,11 @@ size_flags_horizontal = 4
 size_flags_vertical = 0
 script = ExtResource("1_os57m")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="DarkModeLayer" type="CanvasLayer" parent="."]
 layer = 5
+visible = false
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+[node name="TextureRect" type="TextureRect" parent="DarkModeLayer"]
 material = SubResource("ShaderMaterial_7u446")
 anchors_preset = 15
 anchor_right = 1.0

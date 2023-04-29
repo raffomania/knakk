@@ -9,6 +9,7 @@ const GAME_SCENE = preload("res://GameScreen/GameScreen.tscn")
 func _ready():
 	$MenuScreen.continue_game.connect(_on_continue_game)
 	$MenuScreen.new_game.connect(_on_new_game)
+	$MenuScreen.settings_changed.connect(_on_settings_changed)
 
 
 func _on_new_game(with_tutorial: bool):
@@ -35,3 +36,7 @@ func _reset_game():
 	add_child(game_node)
 	$GameScreen/TopBar/MenuButton.pressed.connect(_on_menu_button_pressed)
 	$GameScreen/GameOverBox.play_again.connect(func(): _on_new_game(false))
+
+
+func _on_settings_changed(new_settings: SettingsObject):
+	$DarkModeLayer.visible = new_settings.dark_mode

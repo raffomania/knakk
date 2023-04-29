@@ -8,7 +8,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 50
 
-[node name="CheckBox" type="CheckButton" parent="."]
+[node name="DarkModeToggle" type="CheckButton" parent="."]
 layout_mode = 2
 text = "Dark Mode"
 

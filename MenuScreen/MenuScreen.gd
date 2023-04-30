@@ -5,6 +5,8 @@ signal continue_game
 signal new_game(with_tutorial: bool)
 signal settings_changed(new_settings: SettingsObject)
 
+var settings := SettingsObject.load_from_file()
+
 
 func _ready():
 	$VBoxContainer/Buttons/Start.pressed.connect(_on_game_start)
@@ -17,6 +19,10 @@ func _ready():
 	$VBoxContainer/Settings/DarkModeToggle.toggled.connect(_on_dark_mode_toggle)
 
 	$VBoxContainer/Buttons/Continue.visible = false
+
+	await get_tree().process_frame
+
+	$VBoxContainer/Settings/DarkModeToggle.button_pressed = settings.dark_mode
 
 
 ## Start a new game
@@ -59,6 +65,6 @@ func _on_settings_back():
 
 
 func _on_dark_mode_toggle(active: bool):
-	var settings = SettingsObject.new()
 	settings.dark_mode = active
+	settings.save()
 	settings_changed.emit(settings)

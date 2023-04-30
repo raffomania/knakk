@@ -15,6 +15,7 @@ vec3 hue_shift(vec3 color, float dhue) {
 void fragment() {
 	vec3 c = textureLod(screen_texture, SCREEN_UV, 0.0).rgb;
 
+	// Old way of re-mapping colors, left for future reference
 	// float luminance = c.r * 0.3 + c.g * 0.59 + c.b * 0.11;
 	// vec3 black_color = vec3(0.07, 0.06, 0.08);
 	// vec3 blackened = mix(c, black_color, smoothstep(.6, .9, luminance));

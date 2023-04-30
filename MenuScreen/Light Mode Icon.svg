@@ -1,0 +1,11 @@
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M185 130C185 162.077 159.212 188 127.5 188C95.7879 188 70 162.077 70 130C70 97.923 95.7879 72 127.5 72C159.212 72 185 97.923 185 130Z" stroke="white" stroke-width="12"/>
+<line x1="207" y1="123" x2="223" y2="123" stroke="white" stroke-width="12" stroke-linecap="round"/>
+<line x1="32" y1="123" x2="48" y2="123" stroke="white" stroke-width="12" stroke-linecap="round"/>
+<line x1="132" y1="33" x2="132" y2="50" stroke="white" stroke-width="12" stroke-linecap="round"/>
+<line x1="132" y1="206" x2="132" y2="223" stroke="white" stroke-width="12" stroke-linecap="round"/>
+<line x1="193.244" y1="180.928" x2="204.492" y2="192.177" stroke="white" stroke-width="12" stroke-linecap="round"/>
+<line x1="59.4802" y1="58.7121" x2="70.7286" y2="69.9605" stroke="white" stroke-width="12" stroke-linecap="round"/>
+<line x1="184.759" y1="68.0358" x2="196.007" y2="56.7874" stroke="white" stroke-width="12" stroke-linecap="round"/>
+<line x1="50.9949" y1="192.177" x2="62.2433" y2="180.928" stroke="white" stroke-width="12" stroke-linecap="round"/>
+</svg>

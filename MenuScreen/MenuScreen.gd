@@ -13,16 +13,14 @@ func _ready():
 	$VBoxContainer/Buttons/Tutorial.pressed.connect(_on_tutorial)
 	$VBoxContainer/Buttons/Continue.pressed.connect(func(): continue_game.emit())
 	$VBoxContainer/Buttons/VBoxContainer/Credits.pressed.connect(_on_credits)
-	$VBoxContainer/Buttons/VBoxContainer/Settings.pressed.connect(_on_settings)
 	$VBoxContainer/Credits.back.connect(_on_credits_back)
-	$VBoxContainer/Settings/Back.pressed.connect(_on_settings_back)
-	$VBoxContainer/Settings/DarkModeToggle.toggled.connect(_on_dark_mode_toggle)
+	$VBoxContainer/Buttons/DarkModeToggle.toggled.connect(_on_dark_mode_toggle)
 
 	$VBoxContainer/Buttons/Continue.visible = false
 
 	await get_tree().process_frame
 
-	$VBoxContainer/Settings/DarkModeToggle.button_pressed = settings.dark_mode
+	$VBoxContainer/Buttons/DarkModeToggle.button_pressed = settings.dark_mode
 
 
 ## Start a new game

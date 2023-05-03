@@ -26,6 +26,9 @@ func _ready():
 
 
 func _draw():
+	# Draw white background
+	draw_rect(Rect2(size * 0.075, size * 0.85), ColorPalette.WHITE)
+
 	# Draw colored outline
 	draw_texture_rect(TEXTURE, Rect2(Vector2.ZERO, size), false, color)
 

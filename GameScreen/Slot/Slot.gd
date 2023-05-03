@@ -26,7 +26,8 @@ func _ready():
 
 
 func _draw():
-	# Draw white background
+	# Draw white background to hide cards that might
+	# lie behind this
 	draw_rect(Rect2(size * 0.075, size * 0.85), ColorPalette.WHITE)
 
 	# Draw colored outline

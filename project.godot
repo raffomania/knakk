@@ -24,6 +24,10 @@ config/windows_native_icon="res://Branding/Icon.ico"
 Events="*res://Global/Events.gd"
 Util="*res://Global/Util.gd"
 
+[debug]
+
+file_logging/enable_file_logging=true
+
 [display]
 
 window/size/viewport_width=1080
@@ -32,10 +36,10 @@ window/size/mode=2
 window/size/window_width_override=540
 window/size/window_height_override=1204
 window/energy_saving/keep_screen_on=false
-window/handheld/orientation=1
-window/vsync/vsync_mode=0
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
+window/handheld/orientation=1
+window/vsync/vsync_mode=0
 
 [editor]
 

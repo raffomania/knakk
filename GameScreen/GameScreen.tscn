@@ -103,7 +103,6 @@ offset_left = -540.0
 offset_right = 540.0
 offset_bottom = 2408.0
 grow_horizontal = 2
-grow_vertical = 2
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 1

@@ -7,12 +7,20 @@ enum Screen {
 }
 
 var current_screen := Screen.MENU
+
+## Permanently add extra zoom on top of the built-in zoom
 var extra_zoom := Vector2.ONE
+## Set this instead of the original `zoom` field,
+## it will take `extra_zoom` into account
 var zoom_wrapper := zoom
+
+## Permanently add an extra offset on top of the built-in offset
 var extra_offset := Vector2.ZERO:
 	set(val):
 		extra_offset = val
 		offset = offset_wrapper + val
+## Use this instead of the original `offset` field,
+## it will take `extra_offset` into account
 var offset_wrapper := offset:
 	set(val):
 		offset_wrapper = val

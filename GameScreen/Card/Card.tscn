@@ -14,7 +14,7 @@ script = ExtResource("2_tjkck")
 
 [node name="PlayMarker" type="Sprite2D" parent="."]
 modulate = Color(0.25098, 0.176471, 0.729412, 1)
-position = Vector2(0, -225)
+position = Vector2(0, -266.304)
 rotation = -1.5708
 scale = Vector2(0.563684, 0.563684)
 texture = ExtResource("3_8riv6")
@@ -28,10 +28,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -212.5
-offset_top = -367.0
-offset_right = -82.5
-offset_bottom = -43.0
+offset_left = -247.0
+offset_top = -412.0
+offset_right = -117.0
+offset_bottom = -88.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(66.087, 162)

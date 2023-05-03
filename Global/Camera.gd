@@ -35,7 +35,10 @@ func _ready():
 	var safe_area = Rect2(DisplayServer.get_display_safe_area())
 	var screen_size = Vector2(DisplayServer.screen_get_size())
 	var relative_safe_size = safe_area.size / screen_size
-	print("safe ratio ", relative_safe_size)
+	if relative_safe_size != Vector2.ONE:
+		print("safe area ", safe_area)
+		print("screen size ", screen_size)
+		print("safe ratio ", relative_safe_size)
 	var target_scale = min(relative_safe_size.x, relative_safe_size.y)
 	extra_zoom = Vector2.ONE * target_scale
 
@@ -44,7 +47,8 @@ func _ready():
 		ProjectSettings.get("display/window/size/viewport_height"))
 	var relative_offset = (safe_area.get_center() / screen_size) - (Vector2.ONE * 0.5)
 	extra_offset = -relative_offset * logical_viewport_size / target_scale
-	print("extra offset ", extra_offset)
+	if extra_offset != Vector2.ZERO:
+		print("extra offset ", extra_offset)
 
 
 func _process(_dt):

@@ -114,8 +114,8 @@ There are a couple good usage examples of coroutines:
 
 ### Why Is the Release Keystore Checked into the Repo?
 
-This repository uses [git-crypt](https://github.com/AGWA/git-crypt) to encrypt both the keystore and the `export_presets.cfg` file. This way, the file contents remain private. 
-**Do not add your release keystore or export_presets.cfg file to your git repository** without encrypting or adding them to your .gitignore!
+This repository uses [git-crypt](https://github.com/AGWA/git-crypt) to encrypt both the keystore and the `.godot/export_credentials.cfg` file. This way, the file contents remain private. 
+**Do not add your release keystore or export_credentials.cfg file to your git repository** without encrypting or adding them to your .gitignore!
 
 ### What Is the Status of the Project?
 

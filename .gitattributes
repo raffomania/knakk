@@ -9,3 +9,4 @@
 # encrypted sensitive files
 *.keystore filter=git-crypt diff=git-crypt
 export_presets.cfg filter=git-crypt diff=git-crypt
+.godot/export_credentials.cfg filter=git-crypt diff=git-crypt

@@ -1,5 +1,7 @@
 # Godot 4+ specific ignores
-.godot/
+/.godot/*
+# Encrypted using git-crypt!
+!/.godot/export_credentials.cfg
 
 # Screencast recordings
 movie.avi

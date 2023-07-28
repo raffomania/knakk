@@ -3,7 +3,8 @@ extends CanvasLayer
 const STEPS := [
 	"""Welcome to knakk!
 
-In this game, you play cards to fill slots for points or bonuses. 
+In this game, you play cards to fill slots. 
+In return you get points and bonuses. 
 The goal is to reach the highest possible score!""",
 	"""You fill a slot by playing two cards.
 The first card's [b]suit[/b] [img height=60]res://GameScreen/Suit/Clubs.png[/img] [img height=60]res://GameScreen/Suit/Diamonds.png[/img] [img height=60]res://GameScreen/Suit/Spades.png[/img] [img height=60]res://GameScreen/Suit/Hearts.png[/img] selects a suit on the board above.

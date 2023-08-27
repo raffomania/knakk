@@ -60,6 +60,9 @@ func _on_take_action(_card_type: Array, action: Events.Action, card_node: Card):
 
 	card_node.move_to(global_position + Vector2(0, size.y / 2))
 	card_node.shrink_to_played_size()
+	await get_tree().create_timer(0.4).timeout
+	await card_node.animate_disappear()
+	card_node.queue_free()
 
 
 func _on_receive_reward(marker: RewardMarker):

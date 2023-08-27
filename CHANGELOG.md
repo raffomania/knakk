@@ -1,5 +1,11 @@
 # Changelog
 
+
+## [1.1] - unreleased
+
+- Don't show played cards on the board
+- Fill played slots with a solid color
+
 ## [1.0.2] - 2023-08-31
 
 - Resize game to evade notches and camera holes on mobile phones

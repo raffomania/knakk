@@ -103,11 +103,12 @@ func _play_suit(suit: Cards.Suit, card_node: Card):
 	var card_position = card_node.global_position
 	suit_node.add_child(card_node)
 	card_node.global_position = card_position
-	# Display card behind the suit symbol
-	card_node.z_index = -1 
 
 	suit_node.play_suit(card_node)
 	card_node.shrink_to_played_size()
+	await get_tree().create_timer(0.3).timeout
+	await card_node.animate_disappear()
+	card_node.queue_free()
 
 
 func _play_number(number: Cards.Number, card_node: Card):

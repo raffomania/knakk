@@ -54,6 +54,11 @@ func can_play(number: Cards.Number) -> bool:
 func play_suit(card_node: Card):
 	# Move card to position of the suit symbol
 	card_node.move_to(_suit_symbol.global_position + _suit_symbol.size / 2)
+	await get_tree().create_timer(0.4).timeout
+	var tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+	tween.tween_property(_suit_symbol, "modulate", ColorPalette.WHITE * 3, 0.1)
+	tween.set_ease(Tween.EASE_IN)
+	tween.tween_property(_suit_symbol, "modulate", ColorPalette.WHITE, 0.2)
 
 
 ## Mark the slot for the given number as played and

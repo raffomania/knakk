@@ -127,13 +127,11 @@ func set_card_type(new_card_type: Array):
 ## When the card is played, it is usually placed on the field somewhere.
 ## For that, animate it to shrink and rotate a little randomly.
 func shrink_to_played_size():
-	var tween = create_tween().set_parallel()
+	var tween = create_tween().set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_EXPO)
 
-	var target_scale = 120 / texture.get_size().x
+	var target_scale = 50 / texture.get_size().x
 	var _tweener = tween.tween_property(
 			self, "scale", Vector2.ONE * target_scale, 0.3)
-
-	_target_rotation = PI * 0.1 * randf_range(-1, 1)
 
 
 func animate_appear():

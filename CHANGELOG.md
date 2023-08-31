@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.0.2] - unreleased
+## [1.0.2] - 2023-08-31
 
 - Resize game to evade notches and camera holes on mobile phones
 - Make playing cards a little larger

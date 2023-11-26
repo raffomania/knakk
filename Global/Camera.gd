@@ -30,15 +30,23 @@ var offset_wrapper := offset:
 
 
 func _ready():
+	get_viewport().size_changed.connect(self.update_extra_offset)
+	update_extra_offset()
+
+
+func update_extra_offset():
 	# Use `extra_zoom` and `extra_offset` to make the 
 	# playing field fit into the safe area.
 	var safe_area = Rect2(DisplayServer.get_display_safe_area())
 	var screen_size = Vector2(DisplayServer.screen_get_size())
 	var relative_safe_size = safe_area.size / screen_size
-	if relative_safe_size != Vector2.ONE:
-		print("safe area ", safe_area)
-		print("screen size ", screen_size)
-		print("safe ratio ", relative_safe_size)
+	var is_fullscreen = DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN
+	if relative_safe_size == Vector2.ONE or not is_fullscreen:
+		return
+
+	print("safe area ", safe_area)
+	print("screen size ", screen_size)
+	print("safe ratio ", relative_safe_size)
 	var target_scale = min(relative_safe_size.x, relative_safe_size.y)
 	extra_zoom = Vector2.ONE * target_scale
 

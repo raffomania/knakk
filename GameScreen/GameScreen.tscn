@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://dk13nxba6ktn5"]
+[gd_scene load_steps=28 format=3 uid="uid://dk13nxba6ktn5"]
 
 [ext_resource type="PackedScene" path="res://GameScreen/Hand.tscn" id="1_56rkn"]
 [ext_resource type="PackedScene" path="res://GameScreen/Turns/Turns.tscn" id="2_j64vv"]
@@ -21,8 +21,6 @@
 [ext_resource type="Script" path="res://GameScreen/NewRoundAnimation.gd" id="17_hf8a0"]
 [ext_resource type="PackedScene" uid="uid://dbs1b7uqvfsfr" path="res://GameScreen/Tutorial.tscn" id="18_vn86j"]
 [ext_resource type="Script" path="res://CheatCodes.gd" id="20_7c6at"]
-[ext_resource type="Texture2D" uid="uid://bo45gs8f4tja8" path="res://GameScreen/Action/Elements_Hexagon_Fill25_purple_L.png" id="22_6r0mw"]
-[ext_resource type="Texture2D" uid="uid://bnkivayuvgpl2" path="res://GameScreen/Action/Elements_Hexagon_Fill25_pink_L.png" id="23_ma24w"]
 [ext_resource type="Script" path="res://GameScreen/GameOverBox.gd" id="24_cjn0f"]
 
 [sub_resource type="InputEventAction" id="InputEventAction_natam"]
@@ -103,69 +101,6 @@ offset_left = -540.0
 offset_right = 540.0
 offset_bottom = 2408.0
 grow_horizontal = 2
-
-[node name="Control" type="Control" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="ElementsHexagonFill25PurpleL" type="TextureRect" parent="Control"]
-modulate = Color(1, 1, 1, 0.380392)
-layout_mode = 0
-offset_left = -984.0
-offset_top = 1606.0
-offset_right = 69.0
-offset_bottom = 2591.0
-texture = ExtResource("22_6r0mw")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="ElementsHexagonFill25PurpleL4" type="TextureRect" parent="Control"]
-modulate = Color(1, 1, 1, 0.290196)
-layout_mode = 0
-offset_left = -1140.0
-offset_top = 1112.0
-offset_right = -460.0
-offset_bottom = 1720.0
-texture = ExtResource("23_ma24w")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="ElementsHexagonFill25PurpleL2" type="TextureRect" parent="Control"]
-modulate = Color(1, 1, 1, 0.615686)
-layout_mode = 0
-offset_left = 1094.0
-offset_top = 1276.0
-offset_right = 2328.0
-offset_bottom = 2422.0
-texture = ExtResource("16_a2r0m")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="ElementsHexagonFill25PurpleL3" type="TextureRect" parent="Control"]
-modulate = Color(1, 1, 1, 0.372549)
-layout_mode = 0
-offset_left = 1562.0
-offset_top = 853.0
-offset_right = 2357.0
-offset_bottom = 1585.0
-texture = ExtResource("14_5jo7a")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="ElementsHexagonFill25PurpleL5" type="TextureRect" parent="Control"]
-modulate = Color(1, 1, 1, 0.372549)
-layout_mode = 0
-offset_left = -712.0
-offset_top = 830.0
-offset_right = -420.0
-offset_bottom = 1120.0
-texture = ExtResource("14_5jo7a")
-expand_mode = 1
-stretch_mode = 5
 
 [node name="Hand" parent="." instance=ExtResource("1_56rkn")]
 position = Vector2(540, 2045)

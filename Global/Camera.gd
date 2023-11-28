@@ -37,6 +37,8 @@ func _ready():
 	get_viewport().size_changed.connect(self.update_extra_offset)
 	update_extra_offset()
 
+	animation_player.play("game_start")
+
 
 func update_extra_offset():
 	# Use `extra_zoom` and `extra_offset` to make the 

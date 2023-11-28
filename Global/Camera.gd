@@ -10,6 +10,8 @@ var current_screen := Screen.MENU
 
 ## Permanently add extra zoom on top of the built-in zoom
 var extra_zoom := Vector2.ONE
+
+@export
 ## Set this instead of the original `zoom` field,
 ## it will take `extra_zoom` into account
 var zoom_wrapper := zoom
@@ -19,6 +21,8 @@ var extra_offset := Vector2.ZERO:
 	set(val):
 		extra_offset = val
 		offset = offset_wrapper + val
+
+@export
 ## Use this instead of the original `offset` field,
 ## it will take `extra_offset` into account
 var offset_wrapper := offset:

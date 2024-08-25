@@ -1,5 +1,5 @@
 env:
-    GODOT_VERSION: "4.1.1"
+    GODOT_VERSION: "4.3"
     GODOT_BUILD: "stable"
 
 on:
@@ -7,7 +7,7 @@ on:
         branches:
             - main
         tags:
-            - '*'
+            - "*"
 
 jobs:
     release:

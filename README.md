@@ -115,7 +115,7 @@ There are a couple good usage examples of coroutines:
 1. Add an entry to `CHANGELOG.md`.
 1. Use `just tag-version $VERSION` to write the new version into the export preset configuration.
 1. Verify that the build works by running `just export`.
-1. Create a new commit: `git commit -m "Version $VERSION"`.
+1. Create a new commit: `git commit -am "Version $VERSION"`.
 1. Use `git tag $VERSION` to tag that commit with the new version.
 1. Use `git push --tags` to push the changes (including your new tag) to export and release the new version via CI.
 1. Upload the `.aab` release to the Google Play Store manually.

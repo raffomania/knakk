@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.0.4] - 2025-04-23
+
+- Update to Godot 4.4
+
 ## [1.0.3] - 2024-08-26
 
 - Update the project to use Godot 4.3

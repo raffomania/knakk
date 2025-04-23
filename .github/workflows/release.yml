@@ -30,6 +30,9 @@ jobs:
             - name: Setup Android SDK
               uses: android-actions/setup-android@v3
 
+            - name: Install netlify CLI
+              run: npm install -g netlify-cli
+
             - name: Unlock secrets
               uses: sliteteam/github-action-git-crypt-unlock@1.2.0
               env:
@@ -69,7 +72,7 @@ jobs:
 
             - name: Publish to Netlify Preview
               run: |
-                  npx netlify deploy --dir=export/web/Web
+                  netlify deploy --dir=export/web/Web
               env:
                   NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
                   NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
@@ -123,7 +126,7 @@ jobs:
 
             - name: Publish to Netlify Production
               run: |
-                  npx netlify deploy --dir=export/web/Web --prod
+                  netlify deploy --dir=export/web/Web --prod
               env:
                   NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
                   NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}

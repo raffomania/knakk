@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=3 format=3 uid="uid://dpgvxik058itk"]
 
-[ext_resource type="Script" path="res://GameScreen/Turns/Turns.gd" id="1_fbl17"]
-[ext_resource type="Script" path="res://GameScreen/Turns/Round.gd" id="2_d5yim"]
+[ext_resource type="Script" uid="uid://cat2ay414vsru" path="res://GameScreen/Turns/Turns.gd" id="1_fbl17"]
+[ext_resource type="Script" uid="uid://cr1t0tniipxdm" path="res://GameScreen/Turns/Round.gd" id="2_d5yim"]
 
 [node name="Turns" type="HBoxContainer"]
 anchors_preset = 15

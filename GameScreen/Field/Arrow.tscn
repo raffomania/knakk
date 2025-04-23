@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://wtjn0tm7x5lj"]
 
-[ext_resource type="Script" path="res://GameScreen/Field/Arrow.gd" id="1_ucqqb"]
+[ext_resource type="Script" uid="uid://clo2dsqbqweh3" path="res://GameScreen/Field/Arrow.gd" id="1_ucqqb"]
 
 [node name="Arrow" type="Control"]
 layout_mode = 3

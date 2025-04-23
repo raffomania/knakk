@@ -8,7 +8,7 @@ var completed_turns := 0:
 
 
 func _draw():
-	var line_color = ColorPalette.PURPLE.lightened(0.3)
+	var line_color = KnakkColors.PURPLE.lightened(0.3)
 
 	draw_rect(Rect2(Vector2.ZERO, size), line_color, false, 4.0)
 
@@ -17,7 +17,7 @@ func _draw():
 	
 	for i in range(0, completed_turns):
 		var padding = TURN_SIZE / 4.0
-		draw_rect(Rect2(Vector2(i * TURN_SIZE + padding, padding), Vector2(TURN_SIZE - padding * 2, TURN_SIZE - padding * 2)), ColorPalette.PURPLE.lightened(0.2), true)
+		draw_rect(Rect2(Vector2(i * TURN_SIZE + padding, padding), Vector2(TURN_SIZE - padding * 2, TURN_SIZE - padding * 2)), KnakkColors.PURPLE.lightened(0.2), true)
 
 
 func _get_minimum_size() -> Vector2:

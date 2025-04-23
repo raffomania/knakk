@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cw4v0w7vcyimy"]
 
-[ext_resource type="Script" path="res://GameScreen/Slot/Slot.gd" id="1_s8io1"]
+[ext_resource type="Script" uid="uid://cnam2wtjugpcu" path="res://GameScreen/Slot/Slot.gd" id="1_s8io1"]
 [ext_resource type="PackedScene" uid="uid://dlytt6vu2k6q2" path="res://Reward/RewardMarker.tscn" id="3_6w4dj"]
 
 [node name="Slot" type="Control"]

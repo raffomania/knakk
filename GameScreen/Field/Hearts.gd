@@ -1,6 +1,6 @@
 extends Control
 
-const COLOR := ColorPalette.RED
+const COLOR := KnakkColors.RED
 const SLOT_SCENE = preload("res://GameScreen/Slot/Slot.tscn")
 const ARROW_SCENE = preload("res://GameScreen/Field/Arrow.tscn")
 

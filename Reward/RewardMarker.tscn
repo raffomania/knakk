@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://dlytt6vu2k6q2"]
 
-[ext_resource type="Script" path="res://Reward/RewardMarker.gd" id="1_go8lb"]
+[ext_resource type="Script" uid="uid://gq0b1gmmvc1" path="res://Reward/RewardMarker.gd" id="1_go8lb"]
 [ext_resource type="FontFile" uid="uid://dlbna5qf0660q" path="res://Fonts/Dosis-Bold.ttf" id="2_j80w7"]
 
 [sub_resource type="Animation" id="Animation_77iq4"]
@@ -61,8 +61,8 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_pl5by"]
 _data = {
-"RESET": SubResource("Animation_77iq4"),
-"blink": SubResource("Animation_tct1l")
+&"RESET": SubResource("Animation_77iq4"),
+&"blink": SubResource("Animation_tct1l")
 }
 
 [node name="Reward" type="Control"]

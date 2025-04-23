@@ -2,7 +2,7 @@ extends Container
 
 const GRID_COLUMNS := 6
 const GRID_ROWS := 5
-const COLOR := ColorPalette.BLUE
+const COLOR := KnakkColors.BLUE
 
 const SLOT_SCENE = preload("res://GameScreen/Slot/Slot.tscn")
 const REWARD_MARKER_SCENE = preload("res://Reward/RewardMarker.tscn")
@@ -277,4 +277,3 @@ func _find_playable_slots(number: Cards.Number) -> Array[Vector2i]:
 				playable_slots.append(slot_position)
 	
 	return playable_slots
-	

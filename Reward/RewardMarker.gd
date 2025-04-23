@@ -34,15 +34,15 @@ func _draw():
 
 	if reward is Reward.RedrawCard:
 		var padding = size * 0.4
-		draw_texture_rect(REDRAW_TEXTURE, 
-			Rect2(Vector2.ZERO + padding / 2, size - padding), 
-			false, ColorPalette.WHITE
+		draw_texture_rect(REDRAW_TEXTURE,
+			Rect2(Vector2.ZERO + padding / 2, size - padding),
+			false, KnakkColors.WHITE
 		)
 
 func set_reward(value: Reward):
 	var points_changed = (
-		reward is Reward.Points 
-		and value is Reward.Points 
+		reward is Reward.Points
+		and value is Reward.Points
 		and reward.points != value.points
 	)
 	reward = value

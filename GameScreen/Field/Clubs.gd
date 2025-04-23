@@ -1,7 +1,7 @@
 extends Control
 
 
-const COLOR := ColorPalette.BLUE
+const COLOR := KnakkColors.BLUE
 const SLOT_SCENE = preload("res://GameScreen/Slot/Slot.tscn")
 
 ## Slots in a column list, from left to right
@@ -116,7 +116,7 @@ func _find_playable_slots(number: Cards.Number) -> Array[int]:
 		# For other slots, check their predecessor for a smaller number than the one the user wants to play
 		var previous_slot = _slots[column_index - 1]
 		if (previous_slot.has("played_number")
-			and previous_slot.played_number < number 
+			and previous_slot.played_number < number
 		):
 			return [column_index]
 

@@ -1,11 +1,11 @@
 [gd_scene load_steps=14 format=3 uid="uid://cftjpyo1jqxfa"]
 
-[ext_resource type="Script" path="res://Global/Camera.gd" id="1_5jlkv"]
-[ext_resource type="Script" path="res://Main.gd" id="1_os57m"]
+[ext_resource type="Script" uid="uid://c7ehy5prrs47f" path="res://Global/Camera.gd" id="1_5jlkv"]
+[ext_resource type="Script" uid="uid://2dc46gq58kod" path="res://Main.gd" id="1_os57m"]
 [ext_resource type="PackedScene" uid="uid://dk13nxba6ktn5" path="res://GameScreen/GameScreen.tscn" id="3_w0hn2"]
 [ext_resource type="Texture2D" uid="uid://bj7ps2v3qc77w" path="res://GameScreen/Action/Elements_Hexagon_Fill25_blue_L.png" id="5_7c4y6"]
 [ext_resource type="PackedScene" uid="uid://bgdux7kjr61q1" path="res://MenuScreen/MenuScreen.tscn" id="5_r8sk6"]
-[ext_resource type="Script" path="res://GameScreen/BackgroundHexagon.gd" id="6_bb05q"]
+[ext_resource type="Script" uid="uid://dlpgqymh3r84q" path="res://GameScreen/BackgroundHexagon.gd" id="6_bb05q"]
 [ext_resource type="Texture2D" uid="uid://bnkivayuvgpl2" path="res://GameScreen/Action/Elements_Hexagon_Fill25_pink_L.png" id="7_hsn1q"]
 [ext_resource type="Texture2D" uid="uid://bo45gs8f4tja8" path="res://GameScreen/Action/Elements_Hexagon_Fill25_purple_L.png" id="8_h2ckl"]
 [ext_resource type="Texture2D" uid="uid://e7bv46taiftm" path="res://GameScreen/Action/Elements_Hexagon_Fill25_green_L.png" id="9_nueag"]
@@ -84,9 +84,9 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_cv8xt"]
 _data = {
-"RESET": SubResource("Animation_v032t"),
-"game_start": SubResource("Animation_rusdj"),
-"menu_to_game": SubResource("Animation_sjx1b")
+&"RESET": SubResource("Animation_v032t"),
+&"game_start": SubResource("Animation_rusdj"),
+&"menu_to_game": SubResource("Animation_sjx1b")
 }
 
 [node name="Main" type="Control"]

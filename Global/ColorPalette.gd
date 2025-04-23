@@ -1,4 +1,4 @@
-class_name ColorPalette
+class_name KnakkColors
 
 
 const PURPLE := Color8(64, 45, 186)

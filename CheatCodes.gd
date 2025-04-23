@@ -44,5 +44,5 @@ func _unhandled_input(event):
 			printerr("Error saving screenshot:", result)
 
 func random_reward_color():
-	var colors = [ColorPalette.RED, ColorPalette.BLUE]
+	var colors = [KnakkColors.RED, KnakkColors.BLUE]
 	return colors[randi() % colors.size()]

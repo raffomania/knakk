@@ -28,7 +28,7 @@ func _ready():
 func _draw():
 	# Draw white background to hide cards that might
 	# lie behind this
-	draw_rect(Rect2(size * 0.075, size * 0.85), ColorPalette.WHITE)
+	draw_rect(Rect2(size * 0.075, size * 0.85), KnakkColors.WHITE)
 
 	# Draw colored outline
 	draw_texture_rect(TEXTURE, Rect2(Vector2.ZERO, size), false, color)

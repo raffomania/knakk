@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://b84mtgu5e78yi"]
 
-[ext_resource type="Script" path="res://MenuScreen/Credits.gd" id="1_8pfgn"]
+[ext_resource type="Script" uid="uid://b5d12prfxuxxj" path="res://MenuScreen/Credits.gd" id="1_8pfgn"]
 
 [node name="Credits" type="VBoxContainer"]
 anchors_preset = 15

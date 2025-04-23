@@ -1,5 +1,5 @@
 env:
-    GODOT_VERSION: "4.3"
+    GODOT_VERSION: "4.4"
     GODOT_BUILD: "stable"
 
 on:
